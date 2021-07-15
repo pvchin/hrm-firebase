@@ -48,14 +48,14 @@ export default function AllEmployeesTable() {
   const {
     editEmployeeID,
     employees_loading,
-    deleteEmployee,
+    //deleteEmployee,
     //loadEmployees,
     setEditEmployeeID,
     setIsEditingOn,
     setIsEditingOff,
     resetSingleEmployee,
     resetEmployees,
-    getSingleEmployee,
+    //getSingleEmployee,
   } = useEmployeesContext();
 
   const { loadDepartments, loadDesignations, resetTables } = useTablesContext();
