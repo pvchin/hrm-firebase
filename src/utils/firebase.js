@@ -2,7 +2,7 @@ import firebase from "firebase";
 require("dotenv").config();
 
 var firebaseConfig = {
-  apiKey: "AIzaSyB9-dAbswQoJcxQhzCvyDSZddxdaWk2gnY",
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: "hrms-appsmith.firebaseapp.com",
   projectId: "hrms-appsmith",
   storageBucket: "hrms-appsmith.appspot.com",
