@@ -98,7 +98,7 @@ const EmployeeForm = () => {
     perdiem_fee,
     empno,
   } = single_employee[0];
-  console.log("form", single_employee);
+  
   const onSubmit = (data) => {
     if (isEditing) {
       updateEmployees({ id: editEmployeeID, ...data });

@@ -11,6 +11,7 @@ import {
 //import { Alert, AlertTitle } from "@material-ui/lab";
 import { makeStyles } from "@material-ui/core/styles";
 import MenuItem from "@material-ui/core/MenuItem";
+import { useCustomToast } from "../helpers/useCustomToast";
 import { selector, useRecoilState, useRecoilValueLoadable } from "recoil";
 import { loginLevelState } from "./data/atomdata";
 import { useEmployeesContext } from "../context/employees_context";
@@ -25,6 +26,7 @@ import EmpFamily from "./EmpFamily";
 import EmpEducations from "./EmpEducations";
 import EmpExperiences from "./EmpExperiences";
 import EmpTrainings from "./EmpTrainings";
+import App from "../utils/firebase";
 
 const initial_values = {
   name: "",
@@ -53,6 +55,7 @@ const initial_values = {
 
 const EmployeeForm = () => {
   const classes = useStyles();
+  const toast = useCustomToast();
   const { employees, setFilter } = useEmployees();
   const updateEmployees = useUpdateEmployees();
   const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
@@ -96,6 +99,22 @@ const EmployeeForm = () => {
     updateEmployees({ id: editEmployeeID, ...data });
   };
 
+  const Reset_PW = () => {
+    try {
+      App.auth().sendPasswordResetEmail(email);
+      toast({
+        title: `Reset Password sent to ${email}!`,
+        status: "success",
+      });
+    } catch (error) {
+      toast({
+        title: `Fail to reset password on ${email}!`,
+        status: "warning",
+      });
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     getSingleEmployee(editEmployeeID);
   }, []);
@@ -125,6 +144,14 @@ const EmployeeForm = () => {
                 className={classes.button}
               >
                 Submit <Icon className={classes.rightIcon}>send</Icon>
+              </Button>
+              <Button
+                variant="contained"
+                color="primary"
+                className={classes.button}
+                onClick={Reset_PW}
+              >
+                Reset PW <Icon className={classes.rightIcon}>send</Icon>
               </Button>
             </div>
           </Grid>

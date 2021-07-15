@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useMemo } from "react";
-import MaterialTable from "material-table";
+import MaterialTable, { MTableToolbar } from "material-table";
 import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
+import { Button, Icon } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import CheckIcon from "@material-ui/icons/Check";
 import SearchIcon from "@material-ui/icons/Search";
+import { useCustomToast } from "../helpers/useCustomToast";
 import { useRecoilState } from "recoil";
 import { editEmployeeIdState } from "./data/atomdata";
 import { CustomDialog } from "../helpers/CustomDialog";
@@ -18,10 +20,12 @@ import { useDepartments } from "./departments/useDepartments";
 import { useDesignations } from "./designations/useDesignations";
 import { useEmployees } from "./employees/useEmployees";
 import { useDeleteEmployees } from "./employees/useDeleteEmployees";
+import App from "../utils/firebase";
 
 export default function AllEmployeesTable() {
   let history = useHistory();
   const classes = useStyles();
+  const toast = useCustomToast();
   const { designations } = useDesignations();
   const { departments } = useDepartments();
   const { employees, setEmployeeId } = useEmployees();
@@ -29,7 +33,7 @@ export default function AllEmployeesTable() {
   const deleteEmployees = useDeleteEmployees();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isAlertOpen, setIsAlertOpen] = useState(false);
-  
+
   const columns = useMemo(() => [
     {
       title: "Name",
@@ -111,10 +115,41 @@ export default function AllEmployeesTable() {
     //loadEmployees();
   };
 
+  const Reset_PW = () => {
+    employees.forEach((rec) => {
+      if (rec.tableData.checked) {
+        try {
+          if (rec.password) {
+            App.auth().createUserWithEmailAndPassword(rec.email, rec.password);
+          } else {
+            App.auth().createUserWithEmailAndPassword(rec.email, "abc123*");
+          }
+        } catch (error) {
+          console.log(error);
+        }
+        try {
+          App.auth().sendPasswordResetEmail(rec.email);
+          toast({
+            title: `Reset Password sent to ${rec.email}!`,
+            status: "success",
+          });
+        } catch (error) {
+          toast({
+            title: `Error send to  ${rec.email}!`,
+            status: "warning",
+          });
+        }
+      }
+    });
+    employees.forEach((d) => {
+      if (d.tableData) d.tableData.checked = false;
+    });
+  };
+
   if (employees_loading) {
     return <div>Loading...</div>;
   } else {
-    console.log(employees);
+    //console.log(employees);
   }
   return (
     <div className={classes.root}>
@@ -136,6 +171,7 @@ export default function AllEmployeesTable() {
             {
               icon: "edit",
               tooltip: "Edit Record",
+              position: "row",
               onClick: (event, rowData) => {
                 update_Employee(rowData);
               },
@@ -143,6 +179,7 @@ export default function AllEmployeesTable() {
             {
               icon: "delete",
               tooltip: "Delete Record",
+              position: "row",
               onClick: (event, rowData) => {
                 delete_Employee(rowData);
               },
@@ -158,11 +195,30 @@ export default function AllEmployeesTable() {
           ]}
           options={{
             filtering: true,
+            selection: true,
             headerStyle: {
               backgroundColor: "#DAAD86",
               color: "secondary",
             },
             showTitle: true,
+          }}
+          components={{
+            Toolbar: (props) => (
+              <div>
+                <MTableToolbar {...props} />
+                <div style={{ padding: "5px 10px" }}>
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    color="secondary"
+                    className={classes.button}
+                    onClick={Reset_PW}
+                  >
+                    Reset PW <Icon className={classes.rightIcon}>send</Icon>
+                  </Button>
+                </div>
+              </div>
+            ),
           }}
         />
         <CustomDialog

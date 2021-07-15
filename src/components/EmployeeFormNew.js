@@ -22,6 +22,7 @@ import { useAddEmployees } from "./employees/useAddEmployees";
 import { useUpdateEmployees } from "./employees/useUpdateEmployees";
 import { useDepartments } from "./departments/useDepartments";
 import { useDesignations } from "./designations/useDesignations";
+import App from "../utils/firebase";
 
 // import EmpFamily from "./EmpFamily";
 // import EmpEducations from "./EmpEducations";
@@ -81,6 +82,7 @@ const EmployeeFormNew = () => {
     tap_checkbox,
     tap_acno,
     scp_acno,
+    password,
     date_of_join,
     date_of_resign,
     designation,
@@ -96,7 +98,7 @@ const EmployeeFormNew = () => {
   const updateEmployees = useUpdateEmployees();
   const { designations } = useDesignations();
   const { departments } = useDepartments();
-  const [alert, setAlert] = useState(false);
+  //const [alert, setAlert] = useState(false);
   const { handleSubmit, control } = useForm();
   const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
   console.log("emplevel", loginLevel);
@@ -104,7 +106,12 @@ const EmployeeFormNew = () => {
     if (isEditing) {
       updateEmployees({ id: editEmployeeID, ...data });
     } else {
-      addEmployees({ ...data });
+      addEmployees({ password: "abc123*", ...data });
+      try {
+        App.auth().createUserWithEmailAndPassword(email, "abc123*");
+      } catch (error) {
+        console.log(error);
+      }
     }
     // setAlert(true);
     // setTimeout(() => {

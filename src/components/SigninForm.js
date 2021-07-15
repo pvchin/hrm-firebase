@@ -78,8 +78,6 @@ const SigninForm = () => {
       setEditEmployeeID(emp[0].id);
       setPassword("");
       //setStoredUser(emp[0]);
-
-      console.log("save user", loginLevel);
     }
   };
 

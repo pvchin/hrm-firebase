@@ -3,12 +3,12 @@ require("dotenv").config();
 
 var firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-  authDomain: "hrms-appsmith.firebaseapp.com",
-  projectId: "hrms-appsmith",
-  storageBucket: "hrms-appsmith.appspot.com",
-  messagingSenderId: "1075628749605",
-  appId: "1:1075628749605:web:3ee65bf3acf097eaf9e0cc",
-  measurementId: "G-EGE5ML97G5",
+  authDomain: "hrms-appsmithsutera.firebaseapp.com",
+  projectId: "hrms-appsmithsutera",
+  storageBucket: "hrms-appsmithsutera.appspot.com",
+  messagingSenderId: "659537276793",
+  appId: "1:659537276793:web:cf539909202a8b063049a8",
+  measurementId: "G-91T6Y62H1S",
 };
 
 // Initialize Firebase
