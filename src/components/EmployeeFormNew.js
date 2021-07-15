@@ -106,7 +106,7 @@ const EmployeeFormNew = () => {
     if (isEditing) {
       updateEmployees({ id: editEmployeeID, ...data });
     } else {
-      addEmployees({ password: "abc123*", ...data });
+      addEmployees({ password: "abc123*", role: 1, ...data });
       try {
         App.auth().createUserWithEmailAndPassword(email, "abc123*");
       } catch (error) {
