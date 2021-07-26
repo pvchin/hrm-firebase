@@ -1,17 +1,49 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { makeStyles } from "@material-ui/core/styles";
+
 import { useTable } from "react-table";
+import ReactWhatsapp from "react-whatsapp";
+import * as emailjs from "emailjs-com";
 import axios from "axios";
 import clsx from "clsx";
 import Table from "../helpers/TableContainer";
+import { Box, Image } from "@chakra-ui/react";
 import Paper from "@material-ui/core/Paper";
+import { Cloudinary, Transformation } from "@cloudinary/base";
+import {
+  //Image,
+  AdvancedImage,
+  accessibility,
+  responsive,
+} from "@cloudinary/react";
+// Import required actions.
+import { thumbnail, scale } from "@cloudinary/base/actions/resize";
+import { byRadius } from "@cloudinary/base/actions/roundCorners";
+import { sepia } from "@cloudinary/base/actions/effect";
+import { source } from "@cloudinary/base/actions/overlay";
+import { opacity, brightness } from "@cloudinary/base/actions/adjust";
+import { byAngle } from "@cloudinary/base/actions/rotate";
+import { format } from "@cloudinary/base/actions/delivery";
+// Import required qualifiers.
+import { face } from "@cloudinary/base/qualifiers/focusOn";
+import { focusOn } from "@cloudinary/base/qualifiers/gravity";
+import { image } from "@cloudinary/base/qualifiers/source";
+import { Position } from "@cloudinary/base/qualifiers/position";
+import { southEast } from "@cloudinary/base/qualifiers/compass";
+import { compass } from "@cloudinary/base/qualifiers/gravity";
+import { png } from "@cloudinary/base/qualifiers/format";
 
 const drawerWidth = 240;
+const SERVICE_ID = process.env.REACT_APP_EMAILJS_SERVICEID;
+const TEMPLATE_ID = "template_1y8odlq";
+const USER_ID = process.env.REACT_APP_EMAILJS_USERID;
 
 const Example = () => {
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   const [data, setData] = useState([]);
+  const myCld = new Cloudinary({ cloudName: "dlmzwvakr" });
+  const myImage = myCld.image("sample");
 
   useEffect(() => {
     axios("http://api.tvmaze.com/search/shows?q=girls")
@@ -20,6 +52,27 @@ const Example = () => {
       })
       .catch((err) => console.log(err));
   }, []);
+
+  // Apply the transformation.
+  myImage
+    .resize(thumbnail().width(150).height(150).gravity(focusOn(face()))) // Crop the image.
+    .roundCorners(byRadius(20)) // Round the corners.
+    .effect(sepia()) // Apply a sepia effect.
+    .overlay(
+      // Overlay the Cloudinary logo.
+      source(
+        image("cloudinary_icon_blue").transformation(
+          new Transformation()
+            .resize(scale(50)) // Resize the logo.
+            .adjust(opacity(60)) // Adjust the opacity of the logo.
+            .adjust(brightness(200))
+        ) // Adjust the brightness of the logo.
+      ).position(
+        new Position().gravity(compass(southEast())).offsetX(5).offsetY(5)
+      ) // Position the logo.
+    )
+    .rotate(byAngle(10)) // Rotate the result.
+    .delivery(format(png())); // Deliver as PNG. */
 
   const columns = useMemo(() => [
     {
@@ -57,14 +110,53 @@ const Example = () => {
     },
   ]);
 
+  const handleButtonClick = () => {
+    var data = {
+      to_name: "pvchin",
+      to_email: "pvchinbn@gmail.com",
+      message: "This is a reminder!!",
+    };
+    emailjs.send(SERVICE_ID, TEMPLATE_ID, data, USER_ID).then(
+      function (response) {
+        console.log(response.status, response.text);
+      },
+      function (err) {
+        console.log(err);
+      }
+    );
+  };
+
   return (
     <paper className={fixedHeightPaper} style={{ backgroundColor: "white" }}>
       <section className={classes.section}>
+        {/* <Image
+          cloudName="dlmzwvakr"
+          secure="true"
+          upload_preset="advtrade"
+          publicId="smartsecurity-ss3_d21ecw.jpg"
+        >
+          <Transformation
+            width="400"
+            height="250"
+            gravity="face"
+            crop="thumb"
+          />
+        </Image> */}
+        {/* <div>
+          <AdvancedImage cldImg={myImage} />
+        </div>{" "} */}
+
+        <Image
+          boxSize="200px"
+          src="https://res.cloudinary.com/dlmzwvakr/image/upload/v1626538637/advtrade/smartsecurity-ss3_d21ecw.jpg"
+          alt="Dan Abramov"
+        />
         <div className="App">
           <h1>
             <center>React Table Demo</center>
           </h1>
           <Table columns={columns} data={data} />
+          <button onClick={handleButtonClick}>Send Email</button>
         </div>
       </section>
     </paper>
@@ -153,13 +245,12 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   activebtn: {
-    color: "var(--clr-primary-5)",  
+    color: "var(--clr-primary-5)",
     boxShadow: "0 2px var(--clr-primary-5)",
   },
   jobinfo: {
     fontWeight: "400",
   },
-  
 }));
 
 export default Example;

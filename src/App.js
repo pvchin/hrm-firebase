@@ -4,6 +4,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 //import Switch from "@material-ui/core/Switch";
 import { theme } from "./components/theme";
+import { Loading } from "./components/app/Loading";
 // import {
 //   orange,
 //   lightBlue,
@@ -51,7 +52,7 @@ const App = () => {
       {/* <ThemeProvider theme={lightTheme}> */}
       <CssBaseline />
       <div>
-        {/* <DashboardMain /> */}
+        <Loading />
         <Main />
       </div>
       {/* <Switch checked={darkState} onChange={handleThemeChange} /> */}

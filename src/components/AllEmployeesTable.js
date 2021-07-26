@@ -156,7 +156,9 @@ export default function AllEmployeesTable() {
       <div style={{ maxWidth: "100%", paddingTop: "5px" }}>
         <MaterialTable
           columns={columns}
-          data={employees}
+          data={employees.sort((a, b) =>
+            a.name > b.name ? 1 : b.name > a.name ? -1 : 0
+          )}
           title="Employees Listing"
           icons={{
             Add: (props) => <AddIcon />,

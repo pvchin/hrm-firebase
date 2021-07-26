@@ -59,38 +59,38 @@ const PrintPayslip = ({ data, emp }) => {
     formatPrice(data.rowData.deducts_type8amt),
   ];
 
-pdfMake.fonts = {
-  Courier: {
-    normal: "Courier",
-    bold: "Courier-Bold",
-    italics: "Courier-Oblique",
-    bolditalics: "Courier-BoldOblique",
-  },
-  Helvetica: {
-    normal: "Helvetica",
-    bold: "Helvetica-Bold",
-    italics: "Helvetica-Oblique",
-    bolditalics: "Helvetica-BoldOblique",
-  },
-  Times: {
-    normal: "Times-Roman",
-    bold: "Times-Bold",
-    italics: "Times-Italic",
-    bolditalics: "Times-BoldItalic",
-  },
-  Roboto: {
-    normal: 'Roboto-Regular.ttf',
-    bold: 'Roboto-Medium.ttf',
-    italics: 'Roboto-Italic.ttf',
-    bolditalics: 'Roboto-MediumItalic.ttf'
-  },
-  Symbol: {
-    normal: "Symbol",
-  },
-  ZapfDingbats: {
-    normal: "ZapfDingbats",
-  },
-};
+  pdfMake.fonts = {
+    Courier: {
+      normal: "Courier",
+      bold: "Courier-Bold",
+      italics: "Courier-Oblique",
+      bolditalics: "Courier-BoldOblique",
+    },
+    Helvetica: {
+      normal: "Helvetica",
+      bold: "Helvetica-Bold",
+      italics: "Helvetica-Oblique",
+      bolditalics: "Helvetica-BoldOblique",
+    },
+    Times: {
+      normal: "Times-Roman",
+      bold: "Times-Bold",
+      italics: "Times-Italic",
+      bolditalics: "Times-BoldItalic",
+    },
+    Roboto: {
+      normal: "Roboto-Regular.ttf",
+      bold: "Roboto-Medium.ttf",
+      italics: "Roboto-Italic.ttf",
+      bolditalics: "Roboto-MediumItalic.ttf",
+    },
+    Symbol: {
+      normal: "Symbol",
+    },
+    ZapfDingbats: {
+      normal: "ZapfDingbats",
+    },
+  };
 
   const { vfs } = vfsFonts.pdfMake;
   pdfMake.vfs = vfs;
@@ -99,11 +99,11 @@ pdfMake.fonts = {
     pageSize: "A4",
     pageOrientation: "portrait",
     content: [
-      // {
-      //   image: "logo",
-      //   width: 200,
-      // },
-      { text: "AppSmith Sutera Sdn Bhd", style: "header" },
+      {
+        image: "logo",
+        width: 200,
+      },
+      // { text: "AppSmith Sutera Sdn Bhd", style: "header" },
       { text: subtitle + "\n", style: "subheader" },
       {
         canvas: [
@@ -346,6 +346,10 @@ pdfMake.fonts = {
     defaultStyle: {
       // alignment: 'justify'
       //font: "Helvetica",
+    },
+    images: {
+      logo: "https://res.cloudinary.com/dlmzwvakr/image/upload/v1626939253/appsmith/AppSutLogo_rakamz.jpg",
+      img1: "./AppSutLogo.jpg",
     },
   };
 
