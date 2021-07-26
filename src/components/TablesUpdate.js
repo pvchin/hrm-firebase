@@ -24,6 +24,7 @@ import UpdateAllowances from "./AllowancesTable";
 import UpdateDeductions from "./DeductionsTable";
 import UpdateDepartments from "./DepartmentsTable";
 import UpdateDesignations from "./DesignationsTable";
+import UpdateInstitutes from "./InstitutesTable";
 
 const TablesUpdate = () => {
   let history = useHistory();
@@ -53,6 +54,9 @@ const TablesUpdate = () => {
         </Grid>
         <Grid xs={12}>
           <UpdateDesignations />
+        </Grid>
+        <Grid xs={12}>
+          <UpdateInstitutes />
         </Grid>
       </Grid>
     </div>

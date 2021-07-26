@@ -63,7 +63,7 @@ const MenuListItems = () => {
         </ListItem>
       </Link>
 
-      {/* <Link to="/leave">
+      <Link to="/leave">
         <ListItem button>
           <ListItemIcon className={classes.itemIcon}>
             <FlightIcon />
@@ -73,7 +73,18 @@ const MenuListItems = () => {
             className={classes.categoryHeaderPrimary}
           />
         </ListItem>
-      </Link> */}
+      </Link>
+      <Link to="/expenses">
+        <ListItem button>
+          <ListItemIcon className={classes.itemIcon}>
+            <ShoppingCartIcon />
+          </ListItemIcon>
+          <ListItemText
+            primary="Expenses"
+            className={classes.categoryHeaderPrimary}
+          />
+        </ListItem>
+      </Link>
       {/* <Link to="/payrun">
         <ListItem button>
           <ListItemIcon className={classes.itemIcon}>
@@ -122,18 +133,6 @@ const MenuListItems = () => {
           />
         </ListItem>
       </Link>
-
-      {/* <Link to="/expenses">
-        <ListItem button>
-          <ListItemIcon className={classes.itemIcon}>
-            <ShoppingCartIcon />
-          </ListItemIcon>
-          <ListItemText
-            primary="Expenses"
-            className={classes.categoryHeaderPrimary}
-          />
-        </ListItem>
-      </Link> */}
 
       {/* <Link to="/dailyallowances">
         <ListItem button>

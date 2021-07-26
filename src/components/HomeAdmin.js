@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
+import { useHistory } from "react-router-dom";
 import { TextField, Grid, Paper, Container, Box } from "@material-ui/core";
 import CardLayout from "../helpers/CardLayout";
 import CardLayout2 from "../helpers/CardLayout2";
@@ -30,6 +31,7 @@ const drawerWidth = 240;
 const FILTERSTRING = "Pending";
 
 const EmployeeView = () => {
+  let history = useHistory()
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   const { employees } = useEmployees();
@@ -119,14 +121,20 @@ const EmployeeView = () => {
             </CardLayout2>
           </Grid>
           <Grid item xs={6} md={8} lg={6}>
-            <CardLayout2 title="">
+            <CardLayout
+              title=""
+              handleClick={() => history.push("/allemployees")}
+            >
               <WPExpiryViewAdmin />
-            </CardLayout2>
+            </CardLayout>
           </Grid>
           <Grid item xs={6} md={8} lg={6}>
-            <CardLayout2 title="">
+            <CardLayout
+              title=""
+              handleClick={() => history.push("/allemployees")}
+            >
               <TrainingsTableViewAdmin />
-            </CardLayout2>
+            </CardLayout>
           </Grid>
         </Grid>
         <Box pt={4}>

@@ -9,6 +9,7 @@ import {
   Divider,
 } from "@material-ui/core";
 //import { Alert, AlertTitle } from "@material-ui/lab";
+import CurrencyTextField from "@unicef/material-ui-currency-textfield";
 import { makeStyles } from "@material-ui/core/styles";
 import MenuItem from "@material-ui/core/MenuItem";
 import { useCustomToast } from "../helpers/useCustomToast";
@@ -30,14 +31,20 @@ import App from "../utils/firebase";
 
 const initial_values = {
   name: "",
+  birthdate: null,
+  empno: "",
   gender: "",
   ic_no: "",
   email: "",
   age: 0,
-  basic_salary: 0,
+    basic_salary: 0,
+  currency: "BND",
   bank_name: "",
   bank_acno: "",
+  nationality: "",
   address: "",
+  leave_bal: 0,
+  leave_entitled: 0,
   tap_acno: "",
   scp_acno: "",
   date_of_join: null,
@@ -69,12 +76,16 @@ const EmployeeForm = () => {
 
   const {
     name,
+    empno,
+    birthdate,
     ic_no,
     gender,
     age,
     email,
+    nationality,
     address,
     basic_salary,
+    currency,
     bank_name,
     bank_acno,
     tap_acno,
@@ -182,7 +193,31 @@ const EmployeeForm = () => {
                   }}
                   rules={{ required: "Name required" }}
                 />
-
+                <Controller
+                  name="empno"
+                  control={control}
+                  defaultValue={empno}
+                  render={({
+                    field: { onChange, value },
+                    fieldState: { error },
+                  }) => {
+                    return (
+                      <TextField
+                        label="Emp No"
+                        id="standard-empno"
+                        defaultValue={empno}
+                        name="empno"
+                        className={classes.textField}
+                        onChange={onChange}
+                        error={!!error}
+                        helperText={error ? error.message : null}
+                      />
+                    );
+                  }}
+                  //rules={{ required: "Name required" }}
+                />
+              </div>
+              <div>
                 <Controller
                   name="email"
                   control={control}
@@ -233,28 +268,28 @@ const EmployeeForm = () => {
               </div>
               <div>
                 <Controller
-                  name="gender"
+                  name="birthdate"
                   control={control}
-                  defaultValue={gender}
+                  defaultValue={birthdate}
                   render={({
                     field: { onChange, value },
                     fieldState: { error },
                   }) => {
                     return (
                       <TextField
-                        label="Gender"
-                        id="standard-gender"
-                        name="gender"
-                        defaultValue={gender}
+                        label="Birth Date"
+                        id="standard-birthdate"
+                        name="birthdate"
+                        type="date"
+                        defaultValue={birthdate}
                         className={classes.textField}
                         onChange={onChange}
                         error={!!error}
                         helperText={error ? error.message : null}
-                        select
-                      >
-                        <MenuItem value="Male">Male</MenuItem>
-                        <MenuItem value="Female">Female</MenuItem>
-                      </TextField>
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      ></TextField>
                     );
                   }}
                   //rules={{ required: "IC No required" }}
@@ -342,6 +377,58 @@ const EmployeeForm = () => {
               </div>
               <div>
                 <Controller
+                  name="nationality"
+                  control={control}
+                  defaultValue={nationality}
+                  render={({
+                    field: { onChange, value },
+                    fieldState: { error },
+                  }) => {
+                    return (
+                      <TextField
+                        label="Nationality"
+                        id="standard-nationality"
+                        name="nationality"
+                        defaultValue={nationality}
+                        className={classes.textField}
+                        onChange={onChange}
+                        error={!!error}
+                        helperText={error ? error.message : null}
+                      />
+                    );
+                  }}
+                  //rules={{ required: "IC No required" }}
+                />
+                <Controller
+                  name="gender"
+                  control={control}
+                  defaultValue={gender}
+                  render={({
+                    field: { onChange, value },
+                    fieldState: { error },
+                  }) => {
+                    return (
+                      <TextField
+                        label="Gender"
+                        id="standard-gender"
+                        name="gender"
+                        defaultValue={gender}
+                        className={classes.textField}
+                        onChange={onChange}
+                        error={!!error}
+                        helperText={error ? error.message : null}
+                        select
+                      >
+                        <MenuItem value="Male">Male</MenuItem>
+                        <MenuItem value="Female">Female</MenuItem>
+                      </TextField>
+                    );
+                  }}
+                  //rules={{ required: "IC No required" }}
+                />
+              </div>
+              <div>
+                <Controller
                   name="address"
                   control={control}
                   defaultValue={address}
@@ -379,20 +466,55 @@ const EmployeeForm = () => {
                     fieldState: { error },
                   }) => {
                     return (
-                      <TextField
+                      <CurrencyTextField
                         label="Basic Salary"
-                        type="number"
-                        id="standard-bsalary"
-                        name="basic_pay"
-                        defaultValue={basic_salary}
+                        variant="standard"
+                        value={basic_salary}
+                        currencySymbol="$"
+                        outputFormat="number"
+                        decimalCharacter="."
+                        digitGroupSeparator=","
+                        decimalPlaces="2"
                         className={classes.textField}
+                        id="standard-basicsalary"
+                        name="basic_pay"
                         //onChange={onChange}
                         onChange={(e) => {
-                          onChange(parseInt(e.target.value, 10));
+                          onChange(parseFloat(e.target.value, 10));
                         }}
                         error={!!error}
                         helperText={error ? error.message : null}
+                        inputProps={{ readOnly: true }}
                       />
+                    );
+                  }}
+                  //rules={{ required: "IC No required" }}
+                />
+                <Controller
+                  name="currency"
+                  control={control}
+                  defaultValue={currency}
+                  render={({
+                    field: { onChange, value },
+                    fieldState: { error },
+                  }) => {
+                    return (
+                      <TextField
+                        label="Currency"
+                        id="standard-currency"
+                        name="currency"
+                        defaultValue={currency}
+                        className={classes.textField}
+                        onChange={onChange}
+                        error={!!error}
+                        helperText={error ? error.message : null}
+                        inputProps={{ readOnly: true }}
+                        select
+                      >
+                        <MenuItem value="BND">BND</MenuItem>
+                        <MenuItem value="MYR">MYR</MenuItem>
+                        <MenuItem value="USD">USD</MenuItem>
+                      </TextField>
                     );
                   }}
                   //rules={{ required: "IC No required" }}
@@ -408,19 +530,25 @@ const EmployeeForm = () => {
                     fieldState: { error },
                   }) => {
                     return (
-                      <TextField
+                      <CurrencyTextField
                         label="Site Allowances Fee"
-                        type="number"
-                        id="standard-siteallows"
-                        name="siteallows_fee"
-                        defaultValue={siteallows_fee}
+                        variant="standard"
+                        value={siteallows_fee}
+                        currencySymbol="$"
+                        outputFormat="number"
+                        decimalCharacter="."
+                        digitGroupSeparator=","
+                        decimalPlaces="2"
                         className={classes.textField}
+                        id="standard-siteallowances"
+                        name="siteallows_fee"
                         //onChange={onChange}
                         onChange={(e) => {
-                          onChange(parseInt(e.target.value, 10));
+                          onChange(parseFloat(e.target.value, 10));
                         }}
                         error={!!error}
                         helperText={error ? error.message : null}
+                        inputProps={{ readOnly: true }}
                       />
                     );
                   }}
@@ -435,19 +563,25 @@ const EmployeeForm = () => {
                     fieldState: { error },
                   }) => {
                     return (
-                      <TextField
-                        label="Perdiem Fee"
-                        type="number"
+                      <CurrencyTextField
+                        label="Per Diem Fee"
+                        variant="standard"
+                        value={perdiem_fee}
+                        currencySymbol="$"
+                        outputFormat="number"
+                        decimalCharacter="."
+                        digitGroupSeparator=","
+                        decimalPlaces="2"
+                        className={classes.textField}
                         id="standard-perdiem"
                         name="perdiem_fee"
-                        defaultValue={perdiem_fee}
-                        className={classes.textField}
                         //onChange={onChange}
                         onChange={(e) => {
-                          onChange(parseInt(e.target.value, 10));
+                          onChange(parseFloat(e.target.value, 10));
                         }}
                         error={!!error}
                         helperText={error ? error.message : null}
+                        inputProps={{ readOnly: true }}
                       />
                     );
                   }}
@@ -684,6 +818,7 @@ const EmployeeForm = () => {
                         InputLabelProps={{
                           shrink: true,
                         }}
+                        inputProps={{ readOnly: true }}
                       />
                     );
                   }}
@@ -711,6 +846,7 @@ const EmployeeForm = () => {
                         InputLabelProps={{
                           shrink: true,
                         }}
+                        inputProps={{ readOnly: true }}
                       />
                     );
                   }}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
+import { useHistory} from "react-router-dom"
 import { TextField, Grid, Paper, Container, Box } from "@material-ui/core";
 import CardLayout from "../helpers/CardLayout";
 import CardLayout2 from "../helpers/CardLayout2";
@@ -29,6 +30,7 @@ const drawerWidth = 240;
 const FILTERSTRING = "Pending";
 
 const EmployeeView = () => {
+  let history = useHistory()
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
@@ -117,12 +119,12 @@ const EmployeeView = () => {
           {/* Recent Deposits */}
 
           <Grid item xs={12} md={8} lg={12}>
-            <CardLayout2
+            <CardLayout
               title="Payroll pending for approval"
-              handleClick={handlePayslipDialogOpen}
+              handleClick={()=>history.push("/batchpayslips")}
             >
               <PayslipTableViewAdmin />
-            </CardLayout2>
+            </CardLayout>
           </Grid>
           <Grid item xs={12} md={8} lg={12}>
             <CardLayout2

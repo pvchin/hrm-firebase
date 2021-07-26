@@ -4,8 +4,35 @@ import { formatPrice } from "../helpers/Utils";
 import { Divider } from "@material-ui/core";
 
 const PrintPayslip = ({ data, emp }) => {
-  const subtitle = "Payslips for the period " + data.rowData.period;
-  const { empno, address, phone } = emp[0];
+  var months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  const subtitle =
+    "Payslips for the month of " +
+    months[parseInt(data.rowData.payrun.slice(-2) - 1)] +
+    " " +
+    data.rowData.payrun.slice(0, 4);
+  const {
+    empno,
+    icno,
+    designation,
+    bank_acno,
+    bank_name,
+    tap_acno,
+    scp_acno,
+    payrun,
+  } = emp[0];
   const { name, total_allowances, total_deductions } = data.rowData;
   const totalEarnings = data.rowData.wages + data.rowData.total_allowances;
   const totalDeductions =
@@ -181,7 +208,7 @@ const PrintPayslip = ({ data, emp }) => {
         columns: [
           {
             width: 90,
-            text: "Address ",
+            text: "I/C No ",
           },
           {
             width: 20,
@@ -189,7 +216,7 @@ const PrintPayslip = ({ data, emp }) => {
           },
           {
             width: 200,
-            text: address,
+            text: icno,
           },
           {
             width: "*",
@@ -201,7 +228,7 @@ const PrintPayslip = ({ data, emp }) => {
         columns: [
           {
             width: 90,
-            text: "Phone ",
+            text: "Designation ",
           },
           {
             width: 20,
@@ -209,7 +236,67 @@ const PrintPayslip = ({ data, emp }) => {
           },
           {
             width: 200,
-            text: phone,
+            text: designation,
+          },
+          {
+            width: "*",
+            text: "",
+          },
+        ],
+      },
+      {
+        columns: [
+          {
+            width: 90,
+            text: "Bank A/C No ",
+          },
+          {
+            width: 20,
+            text: ":",
+          },
+          {
+            width: 200,
+            text: bank_acno,
+          },
+          {
+            width: "*",
+            text: "",
+          },
+        ],
+      },
+      {
+        columns: [
+          {
+            width: 90,
+            text: "TAP No ",
+          },
+          {
+            width: 20,
+            text: ":",
+          },
+          {
+            width: 200,
+            text: tap_acno,
+          },
+          {
+            width: "*",
+            text: "",
+          },
+        ],
+      },
+      {
+        columns: [
+          {
+            width: 90,
+            text: "SCP No ",
+          },
+          {
+            width: 20,
+            text: ":",
+          },
+          {
+            width: 200,
+            text: scp_acno,
           },
           {
             width: "*",

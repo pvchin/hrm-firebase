@@ -16,6 +16,7 @@ export const payrun_url = "/api/payrun";
 export const allowances_url = "/api/allowances";
 export const deductions_url = "/api/deductions";
 export const departments_url = "/api/departments";
+export const institutes_url = "/api/institutes";
 export const designations_url = "/api/designations";
 export const payslipearnings_url = "/api/payslipearnings";
 export const payslipdeductions_url = "/api/payslipdeductions";

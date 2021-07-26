@@ -27,6 +27,8 @@ const columns = [
       >
         <MenuItem value="Father">Father</MenuItem>
         <MenuItem value="Mother">Mother</MenuItem>
+        <MenuItem value="Husband">Husband</MenuItem>
+        <MenuItem value="Wife">Wife</MenuItem>
         <MenuItem value="Daughter">Daughter</MenuItem>
         <MenuItem value="Son">Son</MenuItem>
         <MenuItem value="Son-in-law">Son-in-law</MenuItem>

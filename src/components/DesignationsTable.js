@@ -41,7 +41,7 @@ export default function UpdateDesignations() {
         <MaterialTable
           columns={columns}
           data={designations}
-          title="Designatioms"
+          title="Designations"
           editable={{
             onRowAdd: (newData) =>
               new Promise((resolve, reject) => {

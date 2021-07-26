@@ -3,6 +3,7 @@ export const queryKeys = {
   singleemployee: "singleemployee",
   departments: "departments",
   designations: "designations",
+  institutes: "institutes",
   allowances: "allowances",
   deductions: "deductions",
   experiences: "experiences",
