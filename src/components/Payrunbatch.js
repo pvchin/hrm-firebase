@@ -126,6 +126,7 @@ const Payrunbatch = () => {
 
   const handleEmpButtonClick = (index) => {
     const paydata = singlebatchpayslip[index];
+    console.log("paydata", paydata)
     setFormdata({ ...paydata });
     setFormdata({ ...paydata });
     setIsCalc(true);

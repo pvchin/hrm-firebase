@@ -150,11 +150,17 @@ const Payrun = () => {
 
   const checkSelectedEmployees = (period, payrun) => {
     //console.log("payrun", payrun, period);
+    var exp = 0,
+      allows = 0,
+      tmptotalallows = 0,
+      tmptotalTAP = 0,
+      tmptotalSCP = 0,
+      tmpnettpay = 0;
     resetPayslipsData();
     employees &&
       employees.forEach((emp, index) => {
         if (emp.tableData.checked) {
-          let exp = 0;
+          exp = 0;
           if (unpaidexpenses) {
             unpaidexpenses
               .filter((r) => r.empid === emp.id)
@@ -163,7 +169,7 @@ const Payrun = () => {
                 return (exp = exp + i.amount);
               });
           }
-          let allows = 0;
+          allows = 0;
           if (unpaiddailyallows) {
             unpaiddailyallows
               .filter((r) => r.empid === emp.id)
@@ -181,12 +187,17 @@ const Payrun = () => {
             basic_salary,
             tap_acno,
             scp_acno,
+            tap_checkbox,
           } = emp;
-          const tmptotalallows = allows + exp;
-          const tmptotalTAP = Math.ceil(basic_salary * 0.05);
-          const tmptotalSCP =
-            Math.round((basic_salary + Number.EPSILON) * 0.035 * 100) / 100;
-          const tmpnettpay =
+          tmptotalallows = allows + exp;
+          tmptotalTAP = tap_checkbox ? Math.ceil(basic_salary * 0.05) : 0;
+          tmptotalSCP = tap_checkbox
+            ? Math.round((basic_salary + Number.EPSILON) * 0.035 * 100) / 100
+            : 0;
+          if (tmptotalSCP > 98) {
+            tmptotalSCP = 98;
+          }
+          tmpnettpay =
             basic_salary + tmptotalallows - tmptotalTAP - tmptotalSCP;
           const data = {
             name: name,
@@ -201,6 +212,7 @@ const Payrun = () => {
             tap_amount: tmptotalTAP,
             scp_acno: scp_acno,
             scp_amount: tmptotalSCP,
+            tap_checkbox: tap_checkbox,
             total_allowances: tmptotalallows,
             total_deductions: 0,
             empid: id,

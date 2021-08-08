@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@chakra-ui/icons": "^1.0.14",
     "@chakra-ui/react": "^1.6.5",
     "@chakra-ui/system": "^1.7.1",
     "@chakra-ui/theme": "^1.9.2",

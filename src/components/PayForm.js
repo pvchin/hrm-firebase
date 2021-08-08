@@ -4,7 +4,9 @@ import {
   ButtonGroup,
   Grid,
   Icon,
+  Checkbox,
   TextField,
+  FormControlLabel,
   Divider,
   ListSubheader,
   MenuItem,
@@ -66,6 +68,7 @@ const initial_state = [
     deducts_type7amt: 0,
     deducts_type8: "",
     deducts_type8amt: 0,
+    tap_checkbox: false,
   },
 ];
 
@@ -78,7 +81,7 @@ const PayForm = ({
   setLoadUpdatedata,
   rowindex,
   isCalc,
-  setIsCalc
+  setIsCalc,
 }) => {
   const classes = useStyles();
   const [state, setState] = useState(initial_state);
@@ -118,32 +121,41 @@ const PayForm = ({
   };
 
   const handleCalc = (e) => {
+    var totalTAP = 0,
+      totalSCP = 0,
+      nettPay = 0.0,
+      allows = 0,
+      deducts = 0;
     let data = singlebatchpayslip[rowindex];
-    const totalTAP = Math.ceil(state.wages * 0.05);
-    const totalSCP =
-      Math.round((state.wages + Number.EPSILON) * 0.035 * 100) / 100;
+    totalTAP = state.tap_checkbox ? Math.ceil(state.wages * 0.05) : 0;
+    totalSCP = state.tap_checkbox
+      ? Math.round((state.wages + Number.EPSILON) * 0.035 * 100) / 100
+      : 0;
+    if (totalSCP > 98) {
+      totalSCP = 98;
+    }
+    allows =
+      parseFloat(state.allows_type1amt) +
+      parseFloat(state.allows_type2amt) +
+      parseFloat(state.allows_type3amt) +
+      parseFloat(state.allows_type4amt) +
+      parseFloat(state.allows_type5amt) +
+      parseFloat(state.allows_type6amt) +
+      parseFloat(state.allows_type7amt) +
+      parseFloat(state.allows_type8amt);
 
-    const allows =
-      parseInt(state.allows_type1amt, 10) +
-      parseInt(state.allows_type2amt, 10) +
-      parseInt(state.allows_type3amt, 10) +
-      parseInt(state.allows_type4amt, 10) +
-      parseInt(state.allows_type5amt, 10) +
-      parseInt(state.allows_type6amt, 10) +
-      parseInt(state.allows_type7amt, 10) +
-      parseInt(state.allows_type8amt, 10);
+    deducts =
+      parseFloat(state.deducts_type1amt) +
+      parseFloat(state.deducts_type2amt) +
+      parseFloat(state.deducts_type3amt) +
+      parseFloat(state.deducts_type4amt) +
+      parseFloat(state.deducts_type5amt) +
+      parseFloat(state.deducts_type6amt) +
+      parseFloat(state.deducts_type7amt) +
+      parseFloat(state.deducts_type8amt);
 
-    const deducts =
-      parseInt(state.deducts_type1amt, 10) +
-      parseInt(state.deducts_type2amt, 10) +
-      parseInt(state.deducts_type3amt, 10) +
-      parseInt(state.deducts_type4amt, 10) +
-      parseInt(state.deducts_type5amt, 10) +
-      parseInt(state.deducts_type6amt, 10) +
-      parseInt(state.deducts_type7amt, 10) +
-      parseInt(state.deducts_type8amt, 10);
+    nettPay = state.wages - totalTAP - totalSCP + allows - deducts;
 
-    const nettPay = state.wages - totalTAP - totalSCP + allows - deducts;
     setState({
       ...state,
       total_allowances: allows,
@@ -1018,6 +1030,18 @@ const PayForm = ({
               }}
             />
           </div>
+          {/* <div>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={state.tap_checkbox}
+                  onChange={handleChange}
+                  name="tap_checkbox"
+                />
+              }
+              label="TAP/SCP Contribution"
+            />
+          </div> */}
           <div>
             <Button
               type="submit"

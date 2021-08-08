@@ -3,6 +3,7 @@ import {
   Button,
   Icon,
   TextField,
+  Checkbox,
   Paper,
   Typography,
   Select,
@@ -48,6 +49,7 @@ const initial_values = {
   scp_amount: 0,
   basic_pay: 0,
   nett_pay: 0,
+  tap_checkbox: true,
 };
 
 const PayslipForm = () => {
@@ -103,6 +105,7 @@ const PayslipForm = () => {
     scp_amount,
     basic_pay,
     nett_pay,
+    tap_checkbox,
   } = single_payslip;
 
   useEffect(async () => {
@@ -129,9 +132,13 @@ const PayslipForm = () => {
   };
 
   const calc_totals = () => {
-    const totalTAP = Math.ceil(basic_pay * 0.05);
-    const totalSCP =
-      Math.round((basic_pay + Number.EPSILON) * 0.035 * 100) / 100;
+    let totalTAP = 0;
+    let totalSCP = 0;
+    if (tap_checkbox) {
+      totalTAP = Math.ceil(basic_pay * 0.05);
+      totalSCP = Math.round((basic_pay + Number.EPSILON) * 0.035 * 100) / 100;
+    }
+    console.log("calc", totalTAP, totalSCP)
     const totalEarnings = payslipearnings.reduce(
       (a, v) => (a = a + v.amount),
       0

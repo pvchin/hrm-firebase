@@ -50,6 +50,7 @@ const SigninForm = () => {
           email: row.email,
           password: row.password,
           role: role,
+          level: row.role,
           leave_bal: row.leave_bal,
           siteallows_fee: row.siteallows_fee,
           perdiem_fee: row.perdiem_fee,
@@ -59,26 +60,56 @@ const SigninForm = () => {
 
     if (!emp.length) {
       toast({
-        title: "Invalid email!",
+        title: "This email is not existed!",
         status: "warning",
       });
-    } else {
-      setLoginLevel({
-        ...loginLevel,
-        loginUser: emp[0].name,
-        loginUserId: emp[0].id,
-        loginLevel: role,
-        loginEmail: email,
-        login: true,
-        leave_bal: emp[0].leave_bal,
-        siteallows_fee: emp[0].siteallows_fee,
-        perdiem_fee: emp[0].perdiem_fee,
-        reporting_to: emp[0].reporting_to,
-      });
-      setEditEmployeeID(emp[0].id);
-      setPassword("");
-      //setStoredUser(emp[0]);
+      return null;
     }
+    console.log("sigin", role, emp[0].level);
+    if (role === "Admin" && emp[0].level < 2) {
+      toast({
+        title: "You have no authorisation to access!",
+        status: "warning",
+      });
+      return null;
+    }
+    if (role === "Admin" && emp[0].level < 2) {
+      toast({
+        title: "You have no authorisation to access!",
+        status: "warning",
+      });
+      return null;
+    }
+    if (role === "AdminManager" && emp[0].level < 3) {
+      toast({
+        title: "You have no authorisation to access!",
+        status: "warning",
+      });
+      return null;
+    }
+    if (role === "Manager" && emp[0].level < 4) {
+      toast({
+        title: "You have no authorisation to access!",
+        status: "warning",
+      });
+      return null;
+    }
+
+    setLoginLevel({
+      ...loginLevel,
+      loginUser: emp[0].name,
+      loginUserId: emp[0].id,
+      loginLevel: role,
+      loginEmail: email,
+      login: true,
+      leave_bal: emp[0].leave_bal,
+      siteallows_fee: emp[0].siteallows_fee,
+      perdiem_fee: emp[0].perdiem_fee,
+      reporting_to: emp[0].reporting_to,
+    });
+    setEditEmployeeID(emp[0].id);
+    setPassword("");
+    //setStoredUser(emp[0]);
   };
 
   // const handleStaffClick = (e) => {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-
+import { useCustomToast } from "../helpers/useCustomToast";
 import { useTable } from "react-table";
 import ReactWhatsapp from "react-whatsapp";
 import * as emailjs from "emailjs-com";
@@ -40,10 +40,12 @@ const USER_ID = process.env.REACT_APP_EMAILJS_USERID;
 
 const Example = () => {
   const classes = useStyles();
+  const toast = useCustomToast();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   const [data, setData] = useState([]);
   const myCld = new Cloudinary({ cloudName: "dlmzwvakr" });
   const myImage = myCld.image("sample");
+  const [emailstatus, setEmailStatus] = useState("");
 
   useEffect(() => {
     axios("http://api.tvmaze.com/search/shows?q=girls")
@@ -115,15 +117,27 @@ const Example = () => {
       to_name: "pvchin",
       to_email: "pvchinbn@gmail.com",
       message: "This is a reminder!!",
+      cc_to: "pvchinbn@yahoo.com",
     };
+
     emailjs.send(SERVICE_ID, TEMPLATE_ID, data, USER_ID).then(
       function (response) {
         console.log(response.status, response.text);
+        setEmailStatus("success");
+        
       },
       function (err) {
         console.log(err);
+        setEmailStatus("failure");
       }
     );
+    console.log("email", emailstatus)
+    if (emailstatus === "success") {
+       toast({
+         title: "Invalid email or password!",
+         status: "warning",
+       });
+    } 
   };
 
   return (

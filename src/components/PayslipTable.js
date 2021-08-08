@@ -9,6 +9,7 @@ import CheckIcon from "@material-ui/icons/Check";
 import SearchIcon from "@material-ui/icons/Search";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import BuildOutlinedIcon from "@material-ui/icons/BuildOutlined";
+import { useCustomToast } from "../helpers/useCustomToast";
 import { useHistory, Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { payrunState, payrunIdState, payrunStatusState } from "./data/atomdata";
@@ -16,8 +17,8 @@ import { usePayslipsContext } from "../context/payslips_context";
 import { useExpensesContext } from "../context/expenses_context";
 import { useDailyAllowancesContext } from "../context/dailyallowances_context";
 import { AlertDialog } from "../helpers/AlertDialog";
-import { usePayrun } from "./payrun/usePayrun"
-
+import { usePayrun } from "./payrun/usePayrun";
+import { useDeletePayrun } from "./payrun/useDeletePayrun";
 
 const FILTERSTRING = "Pending";
 
@@ -44,8 +45,10 @@ const columns = [
 
 export default function PayslipTable() {
   let history = useHistory();
+  const toast = useCustomToast();
   const classes = useStyles();
-  const { payrun } = usePayrun()
+  const { payrun } = usePayrun();
+  const deletePayrun = useDeletePayrun();
   const [input, setInput] = useRecoilState(payrunState);
   const [isLoadInput, setIsLoadInput] = useState(false);
   const [isAlertOpen, setIsAlertOpen] = useState(false);
@@ -70,14 +73,14 @@ export default function PayslipTable() {
     setIsPayslipEditingOn,
     single_payslip,
     setPayslipPeriod,
-    deletePayrun,
+    //deletePayrun,
     deletePayslip,
     pending_payslips,
     loadPendingPayslips,
   } = usePayslipsContext();
 
   useEffect(() => {
-    getPayrun();
+    //getPayrun();
     // loadPendingPayslips(FILTERSTRING);
   }, []);
 
@@ -169,9 +172,6 @@ export default function PayslipTable() {
         deletePayslip(rec.id);
       }
     });
-    //delete allows batch
-    deletePayrun(id);
-    getPayrun();
 
     //unpaid expenses
     periodexpenses.forEach((rec) => {
@@ -179,6 +179,14 @@ export default function PayslipTable() {
         updateExpense({ id: rec.id, payrun: "" });
       }
     });
+
+    //delete allows batch
+    deletePayrun(id);
+    toast({
+      title: `Payroll Batch being deleted!`,
+      status: "warning",
+    });
+    //getPayrun();
   };
 
   if (payrun_loading) {
@@ -197,7 +205,7 @@ export default function PayslipTable() {
   }
   return (
     <div className={classes.root}>
-       <div style={{ maxWidth: "100%", paddingTop: "5px" }}>
+      <div style={{ maxWidth: "100%", paddingTop: "5px" }}>
         <MaterialTable
           columns={columns}
           data={payrun}
