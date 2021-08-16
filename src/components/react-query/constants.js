@@ -10,6 +10,7 @@ export const queryKeys = {
   educations: "educations",
   leaves: "leaves",
   expenses: "expenses",
+  expenses_payrun: "expenses_payrun",
   payslips: "payslips",
   payrun: "payrun",
   trainings: "trainings",
@@ -17,4 +18,5 @@ export const queryKeys = {
   dailyallows: "dailyallowances",
   dailyallowsdetls: "dailyallowsdetls",
   user: "user",
+  currency: "currency",
 };

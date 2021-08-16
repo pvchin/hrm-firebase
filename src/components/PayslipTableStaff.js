@@ -65,16 +65,20 @@ export default function PayslipTable() {
     payslip_period,
     payslip_endmonthdate,
   } = usePayslipsContext();
-
+  console.log("payslipstable", payslips)
   const exportPdfTable = ({ data, emp }) => {
-    PrintPayslip({data, emp});
+    PrintPayslip({ data, emp });
   };
 
   const print_Payslip = async (data) => {
-    const { empid} = data.rowData
-    const emp = employees.filter((f) => f.id === empid).map((r) => { return { ...r }})
-    exportPdfTable({ data, emp })
-  }
+    const { empid } = data.rowData;
+    const emp = employees
+      .filter((f) => f.id === empid)
+      .map((r) => {
+        return { ...r };
+      });
+    exportPdfTable({ data, emp });
+  };
 
   const update_Payslip = async (data) => {
     const { id } = data;
@@ -101,7 +105,6 @@ export default function PayslipTable() {
   };
 
   useEffect(() => {
-    console.log("paytable");
     setFilter(loginLevel.loginUserId);
   }, []);
 

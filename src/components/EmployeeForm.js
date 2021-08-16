@@ -11,6 +11,7 @@ import {
   Checkbox,
   MenuItem,
 } from "@material-ui/core";
+import currency from "currency.js"
 import CurrencyTextField from "@unicef/material-ui-currency-textfield";
 import { makeStyles } from "@material-ui/core/styles";
 import { useEmployeesContext } from "../context/employees_context";
@@ -24,6 +25,7 @@ import { useAddEmployees } from "./employees/useAddEmployees";
 import { useUpdateEmployees } from "./employees/useUpdateEmployees";
 import { useDepartments } from "./departments/useDepartments";
 import { useDesignations } from "./designations/useDesignations";
+import { useCurrency } from "./currency/useCurrency";
 import EmpFamily from "./EmpFamily";
 import EmpEducations from "./EmpEducations";
 import EmpExperiences from "./EmpExperiences";
@@ -41,7 +43,7 @@ const initial_values = {
   leave_bal: 0,
   leave_entitled: 0,
   basic_salary: 0,
-  currency: "BND",
+  salary_currency: "BND",
   bank_name: "",
   bank_acno: "",
   tap_checkbox: true,
@@ -65,10 +67,12 @@ const EmployeeForm = () => {
   const { employees, employeeId, setEmployeeId } = useEmployees();
   const addEmployees = useAddEmployees();
   const updateEmployees = useUpdateEmployees();
+  //const currencyRate = useCurrency()
   const { designations } = useDesignations();
   const { departments } = useDepartments();
+  const [empage, setEmpage] = useState(0);
   const [empId, setEmpId] = useRecoilState(editEmployeeIdState);
-  const { handleSubmit, control } = useForm();
+  const { handleSubmit, control, setValue, register } = useForm();
   const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
   const { isEditing, editEmployeeID } = useEmployeesContext();
   const single_employee = employees
@@ -88,7 +92,7 @@ const EmployeeForm = () => {
     leave_bal,
     leave_entitled,
     basic_salary,
-    currency,
+    salary_currency,
     bank_name,
     bank_acno,
     tap_checkbox,
@@ -107,14 +111,29 @@ const EmployeeForm = () => {
     empno,
   } = single_employee[0];
 
+  const calculateAge = (dob) => {
+    var today = new Date();
+    var birthDate = new Date(dob);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    return age;
+  };
+
   const onSubmit = (data) => {
-   
     if (isEditing) {
       updateEmployees({ id: editEmployeeID, ...data });
     } else {
       addEmployees({ ...data });
     }
   };
+
+  useEffect(() => {
+   let age = calculateAge(birthdate);
+   setEmpage(age);
+  },[])
 
   if (!employees) {
     return <h2>Loading ...</h2>;
@@ -257,7 +276,13 @@ const EmployeeForm = () => {
                         type="date"
                         defaultValue={birthdate}
                         className={classes.textField}
-                        onChange={onChange}
+                        //onChange={onChange}
+                        onChange={(e) => {
+                           onChange(e.target.value);
+                          let age = calculateAge(e.target.value);
+                          console.log("emp", birthdate, age);
+                          setEmpage(age);
+                        }}
                         error={!!error}
                         helperText={error ? error.message : null}
                         InputLabelProps={{
@@ -272,7 +297,7 @@ const EmployeeForm = () => {
                 <Controller
                   name="age"
                   control={control}
-                  defaultValue={age}
+                  defaultValue={empage}
                   render={({
                     field: { onChange, value },
                     fieldState: { error },
@@ -282,8 +307,9 @@ const EmployeeForm = () => {
                         label="Age"
                         type="number"
                         id="standard-age"
-                        name="age"
-                        defaultValue={age}
+                        name="empage"
+                        //defaultValue={age}
+                        value={empage}
                         className={classes.textField}
                         //onChange={onChange}
                         onChange={(e) => {
@@ -291,6 +317,7 @@ const EmployeeForm = () => {
                         }}
                         error={!!error}
                         helperText={error ? error.message : null}
+                        inputProps={{ readOnly: true }}
                       />
                     );
                   }}
@@ -445,16 +472,16 @@ const EmployeeForm = () => {
                           variant="standard"
                           value={basic_salary}
                           currencySymbol="$"
-                          outputFormat="number"
+                          outputFormat="string"
                           decimalCharacter="."
                           digitGroupSeparator=","
                           decimalPlaces="2"
                           className={classes.textField}
                           id="standard-basicsalary"
-                          name="basic_pay"
+                          name="basic_salary"
                           //onChange={onChange}
                           onChange={(e) => {
-                            onChange(parseFloat(e.target.value, 10));
+                            onChange(parseFloat(currency(e.target.value), 10));
                           }}
                           error={!!error}
                           helperText={error ? error.message : null}
@@ -466,9 +493,9 @@ const EmployeeForm = () => {
                 )}
                 {loginLevel.loginLevel !== "Admin" && (
                   <Controller
-                    name="currency"
+                    name="salary_currency"
                     control={control}
-                    defaultValue={currency}
+                    defaultValue={salary_currency}
                     render={({
                       field: { onChange, value },
                       fieldState: { error },
@@ -477,8 +504,8 @@ const EmployeeForm = () => {
                         <TextField
                           label="Currency"
                           id="standard-currency"
-                          name="currency"
-                          defaultValue={currency}
+                          name="salary_currency"
+                          defaultValue={salary_currency}
                           className={classes.textField}
                           onChange={onChange}
                           error={!!error}
@@ -486,8 +513,8 @@ const EmployeeForm = () => {
                           select
                         >
                           <MenuItem value="BND">BND</MenuItem>
-                          <MenuItem value="MYR">MYR</MenuItem>
                           <MenuItem value="USD">USD</MenuItem>
+                          <MenuItem value="MYR">MYR</MenuItem>
                         </TextField>
                       );
                     }}
@@ -520,7 +547,7 @@ const EmployeeForm = () => {
                           name="siteallows_fee"
                           //onChange={onChange}
                           onChange={(e) => {
-                            onChange(parseFloat(e.target.value, 10));
+                            onChange(parseFloat(currency(e.target.value), 10));
                           }}
                           error={!!error}
                           helperText={error ? error.message : null}
@@ -554,7 +581,7 @@ const EmployeeForm = () => {
                           name="perdiem_fee"
                           //onChange={onChange}
                           onChange={(e) => {
-                            onChange(parseFloat(e.target.value, 10));
+                            onChange(parseFloat(currency(e.target.value), 10));
                           }}
                           error={!!error}
                           helperText={error ? error.message : null}
@@ -813,7 +840,9 @@ const EmployeeForm = () => {
                         type="numeric"
                         defaultValue={leave_entitled}
                         className={classes.textField}
-                        onChange={onChange}
+                        onChange={(e) =>
+                          onChange(parseFloat(e.target.value, 10))
+                        }
                         error={!!error}
                         helperText={error ? error.message : null}
                         InputLabelProps={{
@@ -840,7 +869,9 @@ const EmployeeForm = () => {
                         type="numeric"
                         defaultValue={leave_bal}
                         className={classes.textField}
-                        onChange={onChange}
+                        onChange={(e) =>
+                          onChange(parseFloat(e.target.value, 10))
+                        }
                         error={!!error}
                         helperText={error ? error.message : null}
                         InputLabelProps={{

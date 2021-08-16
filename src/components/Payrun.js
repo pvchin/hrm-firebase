@@ -12,6 +12,28 @@ import {
   Divider,
   TextField,
 } from "@material-ui/core";
+import {
+  Box,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
+} from "@chakra-ui/react";
+import {
+  Input,
+  InputGroup,
+  InputLeftAddon,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
+  Stack,
+} from "@chakra-ui/react";
 import { useRecoilState } from "recoil";
 
 import { useEmployeesContext } from "../context/employees_context";
@@ -19,6 +41,10 @@ import { usePayslipsContext } from "../context/payslips_context";
 import { useExpensesContext } from "../context/expenses_context";
 import { useDailyAllowancesContext } from "../context/dailyallowances_context";
 import { payrunState, payrunIdState } from "./data/atomdata";
+import { usePayrun } from "./payrun/usePayrun";
+import { useCurrency } from "./currency/useCurrency";
+import { useExpenses } from "./expenses/useExpenses";
+import UpdateCurrency from "./CurrencyTable";
 
 //const drawerWidth = 240;
 
@@ -56,6 +82,10 @@ const Payrun = () => {
 
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+  //const { payrun } = usePayrun();
+  const { currency } = useCurrency();
+  //const { expenses, setPayrunId } = useExpensesPayrun();
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const [loadPaybatch, setLoadPaybatch] = useState(false);
   const { loadEmployees, employees } = useEmployeesContext();
   const { loadUnpaidExpenses, expenses, unpaidexpenses, updateExpense } =
@@ -152,10 +182,12 @@ const Payrun = () => {
     //console.log("payrun", payrun, period);
     var exp = 0,
       allows = 0,
+      tmpbasicsalary = 0,
       tmptotalallows = 0,
       tmptotalTAP = 0,
       tmptotalSCP = 0,
       tmpnettpay = 0;
+
     resetPayslipsData();
     employees &&
       employees.forEach((emp, index) => {
@@ -185,26 +217,40 @@ const Payrun = () => {
             bank_name,
             bank_acno,
             basic_salary,
+            salary_currency,
             tap_acno,
             scp_acno,
             tap_checkbox,
           } = emp;
+
+          tmpbasicsalary = basic_salary;
+
+          if (salary_currency === "USD") {
+            var table = currency
+              .filter((r) => r.currency === "USD")
+              .map((rec) => {
+                return { ...rec };
+              });
+            tmpbasicsalary = basic_salary * table[0].rate;
+            console.log("USD", table, basic_salary, tmpbasicsalary);
+          }
+
           tmptotalallows = allows + exp;
-          tmptotalTAP = tap_checkbox ? Math.ceil(basic_salary * 0.05) : 0;
+          tmptotalTAP = tap_checkbox ? Math.ceil(tmpbasicsalary * 0.05) : 0;
           tmptotalSCP = tap_checkbox
-            ? Math.round((basic_salary + Number.EPSILON) * 0.035 * 100) / 100
+            ? Math.round((tmpbasicsalary + Number.EPSILON) * 0.035 * 100) / 100
             : 0;
           if (tmptotalSCP > 98) {
             tmptotalSCP = 98;
           }
           tmpnettpay =
-            basic_salary + tmptotalallows - tmptotalTAP - tmptotalSCP;
+            tmpbasicsalary + tmptotalallows - tmptotalTAP - tmptotalSCP;
           const data = {
             name: name,
             period: period,
             pay_date: input.pay_date,
             payrun: payrun,
-            wages: basic_salary,
+            wages: tmpbasicsalary,
             nett_pay: tmpnettpay,
             bank_name: bank_name,
             bank_acno: bank_acno,
@@ -440,25 +486,38 @@ const Payrun = () => {
                   />
                 </div>
                 <div>
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                    className={classes.button}
-                  >
-                    Submit <Icon className={classes.rightIcon}>send</Icon>
-                  </Button>
-                  {alert && !isPayrunExist && (
+                  <div>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      className={classes.button}
+                      onClick={onOpen}
+                    >
+                      Currency Exchange Table
+                    </Button>
+                  </div>
+                  <div>
                     <Button
                       type="submit"
                       variant="contained"
                       color="primary"
                       className={classes.button}
-                      onClick={handleNext}
                     >
-                      Next <Icon className={classes.rightIcon}>send</Icon>
+                      Submit <Icon className={classes.rightIcon}>send</Icon>
                     </Button>
-                  )}
+
+                    {alert && !isPayrunExist && (
+                      <Button
+                        type="submit"
+                        variant="contained"
+                        color="primary"
+                        className={classes.button}
+                        onClick={handleNext}
+                      >
+                        Next <Icon className={classes.rightIcon}>send</Icon>
+                      </Button>
+                    )}
+                  </div>
                 </div>
                 <div>
                   {alert && !isPayrunExist && !singlebatch_payslip_loading && (
@@ -505,6 +564,34 @@ const Payrun = () => {
             />
           </Grid>
         </Grid>
+        <Modal isOpen={isOpen} onClose={onClose}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Currency Table</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              <Box>
+                <UpdateCurrency />
+                {/* <Stack spacing={4}>
+                  <InputGroup>
+                    <InputLeftAddon children="USD" />
+                    <Input type="text" placeholder="USD Rate" />
+                  </InputGroup>
+                  <InputGroup>
+                    <InputLeftAddon children="MYR" />
+                    <Input type="text" placeholder="MYR Rate" />
+                  </InputGroup>
+                </Stack> */}
+              </Box>
+            </ModalBody>
+
+            <ModalFooter>
+              <Button colorScheme="blue" mr={3} onClick={onClose}>
+                Close
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
       </section>
     </Paper>
   );

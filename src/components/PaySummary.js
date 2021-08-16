@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import ReactToPrint, { useReactToPrint } from "react-to-print";
+import currency from "currency.js"
 import PrintPaySummary from "./PrintPaySummary";
 import { Heading, Text } from "@chakra-ui/react";
 import MaterialTable from "material-table";
@@ -31,6 +32,18 @@ const columns = [
   {
     title: "SCP Amount",
     field: "scp_amount",
+    editable: "never",
+    type: "currency",
+  },
+  {
+    title: "Site Allowances",
+    field: "allows_type1amt",
+    editable: "never",
+    type: "currency",
+  },
+  {
+    title: "Expenses Claims",
+    field: "allows_type2amt",
     editable: "never",
     type: "currency",
   },
@@ -87,11 +100,15 @@ const PaySummary = ({ singlebatchpayslip }) => {
     const totalwages = data.reduce((acc, item) => {
       return acc + item.wages;
     }, 0);
+    const totalsitesallows = data.reduce((acc, item) => {
+      return acc + item.allows_type1amt;
+    }, 0);
+    const totalexpclaims = data.reduce((acc, item) => {
+      return acc + item.allows_type2amt;
+    }, 0);
     const totalallows = data.reduce((acc, item) => {
       return (
         acc +
-        item.allows_type1amt +
-        item.allows_type2amt +
         item.allows_type3amt +
         item.allows_type4amt +
         item.allows_type5amt +
@@ -126,6 +143,8 @@ const PaySummary = ({ singlebatchpayslip }) => {
       totalscp: totalscp,
       totalallows: totalallows,
       totaldeducts: totaldeducts,
+      totalsitesallows: totalsitesallows,
+      totalexpensesclaims: totalexpclaims,
     });
     payrun
       .filter((r) => r.payrun === payslip_period)
@@ -139,6 +158,8 @@ const PaySummary = ({ singlebatchpayslip }) => {
           totalscp: totalscp,
           totalallows: totalallows,
           totaldeducts: totaldeducts,
+          totalsitesallows: totalsitesallows,
+          totalexpensesclaims: totalexpclaims,
         });
       });
     console.log("payrundata", payrundata);
@@ -168,7 +189,9 @@ const PaySummary = ({ singlebatchpayslip }) => {
       {/* <div style={{ display: "none" }}> */}
       <div>
         <div>
-          <button onClick={() => exportPdfTable()}>Print PDF this out!</button>
+          <button onClick={() => exportPdfTable()}>
+            Print Payroll Summary Report!
+          </button>
         </div>
         {/* <div>
           <div style={{ display: "none" }}>
@@ -300,7 +323,7 @@ const PaySummary = ({ singlebatchpayslip }) => {
                 name="paytotal"
                 variant="filled"
                 type="number"
-                value={payrundata.totalpayroll}
+                value={currency(payrundata.totalpayroll)}
                 style={{ width: "100%" }}
                 InputLabelProps={{
                   shrink: true,
@@ -341,7 +364,7 @@ const PaySummary = ({ singlebatchpayslip }) => {
         <Grid container direction="row" style={{ border: "1px solid white" }}>
           <Grid
             item
-            sm={2}
+            sm={3}
             align="center"
             style={{ border: "1px solid white" }}
           >
@@ -351,7 +374,7 @@ const PaySummary = ({ singlebatchpayslip }) => {
                 name="totalwages"
                 variant="filled"
                 type="currency"
-                value={payrundata.totalwages}
+                value={currency(payrundata.totalwages)}
                 style={{ width: "100%" }}
                 InputLabelProps={{
                   shrink: true,
@@ -364,7 +387,7 @@ const PaySummary = ({ singlebatchpayslip }) => {
           </Grid>
           <Grid
             item
-            sm={2}
+            sm={3}
             align="center"
             style={{ border: "1px solid white" }}
           >
@@ -374,7 +397,7 @@ const PaySummary = ({ singlebatchpayslip }) => {
                 name="totaltap"
                 variant="filled"
                 type="currency"
-                value={payrundata.totaltap}
+                value={currency(payrundata.totaltap)}
                 style={{ width: "100%" }}
                 InputLabelProps={{
                   shrink: true,
@@ -387,7 +410,7 @@ const PaySummary = ({ singlebatchpayslip }) => {
           </Grid>
           <Grid
             item
-            sm={2}
+            sm={3}
             align="center"
             style={{ border: "1px solid white" }}
           >
@@ -397,7 +420,7 @@ const PaySummary = ({ singlebatchpayslip }) => {
                 name="totalscp"
                 variant="filled"
                 type="currency"
-                value={payrundata.totalscp}
+                value={currency(payrundata.totalscp)}
                 style={{ width: "100%" }}
                 InputLabelProps={{
                   shrink: true,
@@ -410,7 +433,53 @@ const PaySummary = ({ singlebatchpayslip }) => {
           </Grid>
           <Grid
             item
-            sm={2}
+            sm={3}
+            align="center"
+            style={{ border: "1px solid white" }}
+          >
+            <div>
+              <TextField
+                label="Total Sites Allows"
+                name="totalsitesallows"
+                variant="filled"
+                type="currency"
+                value={currency(payrundata.totalsitesallows)}
+                style={{ width: "100%" }}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                InputProps={{
+                  readOnly: true,
+                }}
+              />
+            </div>
+          </Grid>
+          <Grid
+            item
+            sm={3}
+            align="center"
+            style={{ border: "1px solid white" }}
+          >
+            <div>
+              <TextField
+                label="Total Expenses Claims"
+                name="totalsitesallows"
+                variant="filled"
+                type="currency"
+                value={currency(payrundata.totalexpensesclaims)}
+                style={{ width: "100%" }}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                InputProps={{
+                  readOnly: true,
+                }}
+              />
+            </div>
+          </Grid>
+          <Grid
+            item
+            sm={3}
             align="center"
             style={{ border: "1px solid white" }}
           >
@@ -420,7 +489,7 @@ const PaySummary = ({ singlebatchpayslip }) => {
                 name="totalallows"
                 variant="filled"
                 type="currency"
-                value={payrundata.totalallows}
+                value={currency(payrundata.totalallows)}
                 style={{ width: "100%" }}
                 InputLabelProps={{
                   shrink: true,
@@ -433,7 +502,7 @@ const PaySummary = ({ singlebatchpayslip }) => {
           </Grid>
           <Grid
             item
-            sm={2}
+            sm={3}
             align="center"
             style={{ border: "1px solid white" }}
           >
@@ -443,7 +512,7 @@ const PaySummary = ({ singlebatchpayslip }) => {
                 name="totaldeducts"
                 variant="filled"
                 type="currency"
-                value={payrundata.totaldeducts}
+                value={currency(payrundata.totaldeducts)}
                 style={{ width: "100%" }}
                 InputLabelProps={{
                   shrink: true,
@@ -456,7 +525,7 @@ const PaySummary = ({ singlebatchpayslip }) => {
           </Grid>
           <Grid
             item
-            sm={2}
+            sm={3}
             align="center"
             style={{ border: "1px solid white" }}
           >
@@ -466,7 +535,7 @@ const PaySummary = ({ singlebatchpayslip }) => {
                 name="totalpayroll"
                 variant="filled"
                 type="currency"
-                value={payrundata.totalpayroll}
+                value={currency(payrundata.totalpayroll)}
                 style={{ width: "100%" }}
                 InputLabelProps={{
                   shrink: true,

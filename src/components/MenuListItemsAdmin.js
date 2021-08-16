@@ -95,7 +95,7 @@ const MenuListItems = () => {
         </ListItem>
       </Link>
 
-      <Link to="/example">
+      {/* <Link to="/example">
         <ListItem button>
           <ListItemIcon className={classes.itemIcon}>
             <LayersIcon />
@@ -105,7 +105,7 @@ const MenuListItems = () => {
             className={classes.categoryHeaderPrimary}
           />
         </ListItem>
-      </Link>
+      </Link> */}
       
       {/* <ListItem button onClick={handleClickTable}>
         <ListItemIcon className={classes.itemIcon}>

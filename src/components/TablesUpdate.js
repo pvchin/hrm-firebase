@@ -15,9 +15,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import { useHistory, Link } from "react-router-dom";
 
 import { useDepartments } from "./departments/useDepartments";
-import { useDesignations } from "./designations/useDesignations"
+import { useDesignations } from "./designations/useDesignations";
 import { useAllowances } from "./allowances/useAllowances";
 import { useDeductions } from "./deductions/useDeductions";
+import { useCurrency } from "./currency/useCurrency";
 
 import { useTablesContext } from "../context/tables_context";
 import UpdateAllowances from "./AllowancesTable";
@@ -25,6 +26,7 @@ import UpdateDeductions from "./DeductionsTable";
 import UpdateDepartments from "./DepartmentsTable";
 import UpdateDesignations from "./DesignationsTable";
 import UpdateInstitutes from "./InstitutesTable";
+import UpdateCurrency from "./CurrencyTable";
 
 const TablesUpdate = () => {
   let history = useHistory();
@@ -32,8 +34,8 @@ const TablesUpdate = () => {
   const departments = useDepartments();
   const deductions = useDeductions();
   const allowances = useAllowances();
-  
-  
+  const currency = useCurrency();
+
   return (
     <div>
       <Grid container alignItems="center" className={classes.grid}>
@@ -57,6 +59,9 @@ const TablesUpdate = () => {
         </Grid>
         <Grid xs={12}>
           <UpdateInstitutes />
+        </Grid>
+        <Grid xs={12}>
+          <UpdateCurrency />
         </Grid>
       </Grid>
     </div>

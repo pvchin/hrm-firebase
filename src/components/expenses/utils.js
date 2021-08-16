@@ -6,3 +6,12 @@ export function filterByEmpId(expenses, empId) {
       return { ...r };
     });
 }
+
+export function filterByPayrun(expenses, payrun) {
+  // eslint-disable-next-line array-callback-return
+  return expenses
+    .filter((item) => item.payrun === payrun)
+    .map((r) => {
+      return { ...r };
+    });
+}

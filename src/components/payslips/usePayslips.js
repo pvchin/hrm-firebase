@@ -7,7 +7,7 @@ import axios from "axios";
 import { queryKeys } from "../react-query/constants";
 
 async function getPayslips(empid) {
-  const { data } = await axios.get(`${payslips_url}?fv=${empid}`);
+  const { data } = await axios.get(`${payslips_url}?em=${empid}`);
   //const { data } = await axios.get(`${payslips_url}`);
   return data;
 }

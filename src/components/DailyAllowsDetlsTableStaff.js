@@ -38,12 +38,12 @@ const columns = [
       />
     ),
   },
-  { title: "District", field: "district" },
+  // { title: "District", field: "district" },
   { title: "Operation Type", field: "typeoperation" },
   { title: "Client", field: "client" },
   { title: "Location/Rig", field: "location" },
   { title: "Ticket No/Job No", field: "jobno" },
-  { title: "Crew Operation", field: "crewoperation" },
+  { title: "Operation Role", field: "crewoperation" },
   {
     title: "Job Bonus",
     field: "jobbonus",
@@ -312,7 +312,7 @@ export default function DailyAllowsDetlsTableStaff() {
                 <div>
                   <MTableToolbar {...props} />
                   <div style={{ padding: "5px 10px" }}>
-                    <Button
+                    {/* <Button
                       type="submit"
                       variant="contained"
                       color="secondary"
@@ -320,7 +320,7 @@ export default function DailyAllowsDetlsTableStaff() {
                       onClick={(e) => delete_AllowsDetls(e)}
                     >
                       delete
-                    </Button>
+                    </Button> */}
                     {/* <Button
                     type="submit"
                     variant="contained"

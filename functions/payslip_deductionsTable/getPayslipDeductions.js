@@ -8,10 +8,10 @@ module.exports = async (event) => {
   try {
     if (id) {
       const payslipdeductions = await table.find(id);
-      const formattedPayslipDeductions = {
-        id: payslipdeduction.id,
-        ...payslipdeduction.fields,
-      };
+      const formattedPayslipDeductions = payslipdeductions.map((rec) => ({
+        id: rec.id,
+        ...rec.fields,
+      }));
       if (payslipdeductions.error) {
         return {
           statusCode: 404,
@@ -22,7 +22,7 @@ module.exports = async (event) => {
       return formattedReturn(200, formattedPayslipDeductions);
     }
   } catch (error) {
-    console.error(err);
+    console.error(error);
     return formattedReturn(500, {});
   }
   try {
@@ -44,7 +44,7 @@ module.exports = async (event) => {
       return formattedReturn(200, formattedPayslipDeductions);
     }
   } catch (error) {
-    console.error(err);
+    console.error(error);
     return formattedReturn(500, {});
   }
   try {

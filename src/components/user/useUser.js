@@ -5,8 +5,9 @@ import { queryKeys } from "../react-query/constants";
 import { clearStoredUser, getStoredUser, setStoredUser } from "../user-storage";
 
 async function getUser(user) {
-  if (!user) return null;
-  return user;
+  return getStoredUser()
+  //if (!user) return null;
+  //return user;
   //   const data = employees
   //     .filter((f) => f.email === user)
   //     .map((r) => {
@@ -24,7 +25,7 @@ async function getUser(user) {
 export function useUser() {
   const [user, setUser] = useState(getStoredUser() || null);
   const queryClient = useQueryClient();
-
+  console.log("useUser", user)
   useQuery(queryKeys.user, () => getUser(user), {
     enabled: !!user,
     onSuccess: (data) => setUser(data),

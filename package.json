@@ -21,6 +21,7 @@
     "apollo-boost": "^0.4.9",
     "axios": "^0.21.1",
     "clsx": "^1.1.1",
+    "currency.js": "^2.0.4",
     "date-fns": "^2.22.1",
     "dayjs": "^1.10.6",
     "dotenv": "^9.0.2",

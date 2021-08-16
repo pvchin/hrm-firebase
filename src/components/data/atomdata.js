@@ -108,6 +108,8 @@ export const payrunState = atom({
     totalallows: 0,
     totaldeducts: 0,
     totalpayroll: 0,
+    totalsitesallows: 0,
+    totalexpensesclaims: 0,
     status: "",
   },
 });

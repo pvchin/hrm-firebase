@@ -15,7 +15,7 @@ import { Alert } from "@material-ui/lab";
 import { makeStyles } from "@material-ui/core/styles";
 import MenuItem from "@material-ui/core/MenuItem";
 import { useEmployeesContext } from "../context/employees_context";
-import { Controller, useForm } from "react-hook-form";
+import { Controller, useForm, setValue } from "react-hook-form";
 import { useRecoilState } from "recoil";
 import { loginLevelState } from "./data/atomdata";
 import { useAddEmployees } from "./employees/useAddEmployees";
@@ -39,7 +39,7 @@ const initial_values = {
   address: "",
   nationality: "",
   basic_salary: 0,
-  currency: "BND",
+  salary_currency: "BND",
   bank_name: "",
   bank_acno: "",
   tap_checkbox: true,
@@ -47,8 +47,8 @@ const initial_values = {
   scp_acno: "",
   date_of_join: null,
   date_of_resign: null,
-  leave_bal:0,
-  leave_entitled:0,
+  leave_bal: 0,
+  leave_entitled: 0,
   designation: "",
   department: "",
   passportno: "",
@@ -82,7 +82,7 @@ const EmployeeFormNew = () => {
     address,
     nationality,
     basic_salary,
-    currency,
+    salary_currency,
     bank_name,
     bank_acno,
     tap_checkbox,
@@ -106,10 +106,23 @@ const EmployeeFormNew = () => {
   const updateEmployees = useUpdateEmployees();
   const { designations } = useDesignations();
   const { departments } = useDepartments();
+  const [empage, setEmpage] = useState(0);
   //const [alert, setAlert] = useState(false);
   const { handleSubmit, control } = useForm();
   const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
   console.log("emplevel", loginLevel);
+
+  const calculateAge = (dob) => {
+    var today = new Date();
+    var birthDate = new Date(dob);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    return age;
+  };
+
   const onSubmit = (data) => {
     if (isEditing) {
       updateEmployees({ id: editEmployeeID, ...data });
@@ -250,7 +263,13 @@ const EmployeeFormNew = () => {
                         type="date"
                         defaultValue={birthdate}
                         className={classes.textField}
-                        onChange={onChange}
+                        //onChange={onChange}
+                        onChange={(e) => {
+                          onChange(parseInt(e.target.value, 10));
+                          let age = calculateAge(e.target.value);
+                          console.log("emp", birthdate, age);
+                          setEmpage(age);
+                        }}
                         error={!!error}
                         helperText={error ? error.message : null}
                         InputLabelProps={{
@@ -265,7 +284,7 @@ const EmployeeFormNew = () => {
                 <Controller
                   name="age"
                   control={control}
-                  defaultValue={age}
+                  defaultValue={empage}
                   render={({
                     field: { onChange, value },
                     fieldState: { error },
@@ -274,9 +293,9 @@ const EmployeeFormNew = () => {
                       <TextField
                         label="Age"
                         type="number"
-                        id="standard-number"
-                        name="age"
-                        defaultValue={age}
+                        id="standard-number-age"
+                        name="empage"
+                        value={empage}
                         className={classes.textField}
                         //onChange={onChange}
                         onChange={(e) => {
@@ -454,9 +473,9 @@ const EmployeeFormNew = () => {
                 )}
                 {loginLevel.loginLevel !== "Admin" && (
                   <Controller
-                    name="currency"
+                    name="salary_currency"
                     control={control}
-                    defaultValue={currency}
+                    defaultValue={salary_currency}
                     render={({
                       field: { onChange, value },
                       fieldState: { error },
@@ -465,8 +484,8 @@ const EmployeeFormNew = () => {
                         <TextField
                           label="Currency"
                           id="standard-currency"
-                          name="currency"
-                          defaultValue={currency}
+                          name="salary_currency"
+                          defaultValue={salary_currency}
                           className={classes.textField}
                           //onChange={onChange}
                           onChange={(e) => {

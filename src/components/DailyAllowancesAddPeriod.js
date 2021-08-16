@@ -164,7 +164,7 @@ const DailyAllowancesAddPeriod = ({ handleDialogClose }) => {
           justify="center"
           style={{ border: "1px solid white" }}
         >
-          <Heading color="blue" style={{ padding: 10 }}>
+          <Heading as="h2" size="lg" color="blue" p={5}>
             Build Site Allowances
           </Heading>
         </Grid>
@@ -234,6 +234,8 @@ const DailyAllowancesAddPeriod = ({ handleDialogClose }) => {
                     shrink: true,
                   }}
                 ></TextField>
+              </div>
+              <div style={{ display: "flex", flexDirection: "row" }}>
                 <TextField
                   label="To Date"
                   variant="filled"
@@ -264,7 +266,7 @@ const DailyAllowancesAddPeriod = ({ handleDialogClose }) => {
                 <TextField
                   label="Manager"
                   variant="filled"
-                  //required
+                  required
                   style={{ width: "100%" }}
                   name="manager"
                   value={input.manager}
@@ -273,7 +275,7 @@ const DailyAllowancesAddPeriod = ({ handleDialogClose }) => {
                 ></TextField>
               </div>
               <div style={{ display: "flex", flexDirection: "row" }}>
-                <TextField
+                {/* <TextField
                   label="District"
                   variant="filled"
                   //required
@@ -282,11 +284,11 @@ const DailyAllowancesAddPeriod = ({ handleDialogClose }) => {
                   name="district"
                   className={classes.textField}
                   onChange={(e) => handleChange(e)}
-                ></TextField>
+                ></TextField> */}
                 <TextField
                   label="Location/Rig"
                   variant="filled"
-                  //required
+                  required
                   value={input.location}
                   style={{ width: "100%" }}
                   name="location"
@@ -298,17 +300,19 @@ const DailyAllowancesAddPeriod = ({ handleDialogClose }) => {
                 <TextField
                   label="Operation Type"
                   variant="filled"
-                  //required
+                  required
                   value={input.typeoperation}
                   style={{ width: "100%" }}
                   name="typeoperation"
                   className={classes.textField}
                   onChange={(e) => handleChange(e)}
                 ></TextField>
+              </div>
+              <div style={{ display: "flex", flexDirection: "row" }}>
                 <TextField
                   label="Client"
                   variant="filled"
-                  //required
+                  required
                   value={input.client}
                   style={{ width: "100%" }}
                   name="client"
@@ -320,17 +324,19 @@ const DailyAllowancesAddPeriod = ({ handleDialogClose }) => {
                 <TextField
                   label="Ticket No/Job No"
                   variant="filled"
-                  //required
+                  required
                   value={input.jobno}
                   style={{ width: "100%" }}
                   name="jobno"
                   className={classes.textField}
                   onChange={(e) => handleChange(e)}
                 ></TextField>
+              </div>
+              <div style={{ display: "flex", flexDirection: "row" }}>
                 <TextField
-                  label="Crew Operation"
+                  label="Operation Role"
                   variant="filled"
-                  //required
+                  required
                   value={input.creqoperation}
                   style={{ width: "100%" }}
                   name="crewoperation"
@@ -426,7 +432,7 @@ const useStyles = makeStyles((theme) => ({
     height: 800,
   },
   paper: {
-    padding: theme.spacing(10),
+    padding: theme.spacing(0),
     // display: "flex",
     display: "flex",
     overflow: "auto",

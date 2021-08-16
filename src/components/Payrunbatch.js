@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useReactToPrint } from "react-to-print";
-import { Heading, Text} from "@chakra-ui/react"
+import { Heading, Text } from "@chakra-ui/react";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import { useHistory } from "react-router-dom";
@@ -96,22 +96,17 @@ const Payrunbatch = () => {
 
   const handleSavePayrun = () => {
     // eslint-disable-next-line no-lone-blocks
-    {
-      payrun
-        .filter((r) => r.payrun === payslip_period)
-        .map((rec) => {
-          //update payrun
-          return updatePayrun({
-            id: rec.id,
-            totalpayroll: payrundata.totalpayroll,
-            totalwages: payrundata.totalwages,
-            totaltap: payrundata.totaltap,
-            totalscp: payrundata.totalscp,
-            totalallows: payrundata.totalallows,
-            totaldeducts: payrundata.totaldeducts,
-          });
-        });
-    }
+    updatePayrun({
+      id: payrunId,
+      totalpayroll: payrundata.totalpayroll,
+      totalwages: payrundata.totalwages,
+      totaltap: payrundata.totaltap,
+      totalscp: payrundata.totalscp,
+      totalallows: payrundata.totalallows,
+      totaldeducts: payrundata.totaldeducts,
+      totalsitesallows: payrundata.totalsitesallows,
+      totalexpensesclaims: payrundata.totalexpensesclaims,
+    });
   };
 
   const handleVerifyPayslips = (e) => {
@@ -126,7 +121,7 @@ const Payrunbatch = () => {
 
   const handleEmpButtonClick = (index) => {
     const paydata = singlebatchpayslip[index];
-    console.log("paydata", paydata)
+    console.log("paydata", paydata);
     setFormdata({ ...paydata });
     setFormdata({ ...paydata });
     setIsCalc(true);

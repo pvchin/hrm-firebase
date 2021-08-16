@@ -23,6 +23,14 @@ const PrintPDFTest = ({ singlebatchpayslip }) => {
     const amount = formatPrice(r.scp_amount);
     return amount;
   });
+  const sitesallowsamt = singlebatchpayslip.map((r) => {
+    const amount = formatPrice(r.allows_type1amt);
+    return amount;
+  });
+  const expclaimsamt = singlebatchpayslip.map((r) => {
+    const amount = formatPrice(r.allows_type2amt);
+    return amount;
+  });
   const allowsamt = singlebatchpayslip.map((r) => {
     const amount = formatPrice(r.total_allowances);
     return amount;
@@ -43,6 +51,12 @@ const PrintPDFTest = ({ singlebatchpayslip }) => {
   }, 0);
   const totalscp = singlebatchpayslip.reduce((acc, item) => {
     return acc + item.scp_amount;
+  }, 0);
+  const totalsitesallows = singlebatchpayslip.reduce((acc, item) => {
+    return acc + item.allows_type1amt;
+  }, 0);
+  const totalexpclaims = singlebatchpayslip.reduce((acc, item) => {
+    return acc + item.allows_type2amt;
   }, 0);
   const totalallows = singlebatchpayslip.reduce((acc, item) => {
     return acc + item.total_allowances;
@@ -66,13 +80,15 @@ const PrintPDFTest = ({ singlebatchpayslip }) => {
       {
         style: "tableExample",
         table: {
-          widths: [150, 80, 80, 80, 80, 80, 80],
+          widths: [150, 65, 65, 65, 65, 65, 65, 65, 65],
           body: [
             [
               "Name",
               { alignment: "right", text: "Wages" },
               { alignment: "right", text: "TAP Amount" },
               { alignment: "right", text: "SCP Amount" },
+              { alignment: "right", text: "Site Allowances" },
+              { alignment: "right", text: "Expenses Claims" },
               { alignment: "right", text: "Allowances" },
               { alignment: "right", text: "Deductions" },
               { alignment: "right", text: "Nett Pay" },
@@ -82,7 +98,7 @@ const PrintPDFTest = ({ singlebatchpayslip }) => {
                 stack: [
                   {
                     type: "none",
-                    fontSize: 12,
+                    fontSize: 10,
                     ul: names,
                   },
                 ],
@@ -91,7 +107,7 @@ const PrintPDFTest = ({ singlebatchpayslip }) => {
                 stack: [
                   {
                     type: "none",
-                    fontSize: 12,
+                    fontSize: 10,
                     alignment: "right",
                     ul: wages,
                   },
@@ -101,7 +117,7 @@ const PrintPDFTest = ({ singlebatchpayslip }) => {
                 stack: [
                   {
                     type: "none",
-                    fontSize: 12,
+                    fontSize: 10,
                     alignment: "right",
                     ul: tapamount,
                   },
@@ -112,7 +128,7 @@ const PrintPDFTest = ({ singlebatchpayslip }) => {
                 stack: [
                   {
                     type: "none",
-                    fontSize: 12,
+                    fontSize: 10,
                     alignment: "right",
                     ul: scpamount,
                   },
@@ -122,7 +138,27 @@ const PrintPDFTest = ({ singlebatchpayslip }) => {
                 stack: [
                   {
                     type: "none",
-                    fontSize: 12,
+                    fontSize: 10,
+                    alignment: "right",
+                    ul: sitesallowsamt,
+                  },
+                ],
+              },
+              {
+                stack: [
+                  {
+                    type: "none",
+                    fontSize: 10,
+                    alignment: "right",
+                    ul: expclaimsamt,
+                  },
+                ],
+              },
+              {
+                stack: [
+                  {
+                    type: "none",
+                    fontSize: 10,
                     alignment: "right",
                     ul: allowsamt,
                   },
@@ -132,7 +168,7 @@ const PrintPDFTest = ({ singlebatchpayslip }) => {
                 stack: [
                   {
                     type: "none",
-                    fontSize: 12,
+                    fontSize: 10,
                     alignment: "right",
                     ul: deductsamt,
                   },
@@ -142,7 +178,7 @@ const PrintPDFTest = ({ singlebatchpayslip }) => {
                 stack: [
                   {
                     type: "none",
-                    fontSize: 12,
+                    fontSize: 10,
                     alignment: "right",
                     ul: nettpay,
                   },
@@ -154,6 +190,8 @@ const PrintPDFTest = ({ singlebatchpayslip }) => {
               { alignment: "right", text: formatPrice(totalwages) },
               { alignment: "right", text: formatPrice(totaltap) },
               { alignment: "right", text: formatPrice(totalscp) },
+              { alignment: "right", text: formatPrice(totalsitesallows) },
+              { alignment: "right", text: formatPrice(totalexpclaims) },
               { alignment: "right", text: formatPrice(totalallows) },
               { alignment: "right", text: formatPrice(totaldeducts) },
               { alignment: "right", text: formatPrice(totalnettpay) },

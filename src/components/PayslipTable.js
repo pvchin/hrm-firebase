@@ -18,7 +18,12 @@ import { useExpensesContext } from "../context/expenses_context";
 import { useDailyAllowancesContext } from "../context/dailyallowances_context";
 import { AlertDialog } from "../helpers/AlertDialog";
 import { usePayrun } from "./payrun/usePayrun";
+import { usePayslipsBatch } from "./payslips/usePayslipsBatch";
 import { useDeletePayrun } from "./payrun/useDeletePayrun";
+import { useExpenses } from "./expenses/useExpenses";
+import { useUpdateExpenses } from "./expenses/useUpdateExpenses";
+import { useDailyAllows } from "./dailyallows/useDailyAllows";
+import { useUpdateDailyAllows } from "./dailyallows/useUpdateDailyAllows";
 
 const FILTERSTRING = "Pending";
 
@@ -48,7 +53,12 @@ export default function PayslipTable() {
   const toast = useCustomToast();
   const classes = useStyles();
   const { payrun } = usePayrun();
+  const { payslips } = usePayslipsBatch();
+  const { expenses, setExpPayrunId } = useExpenses();
+  const { dailyallows } = useDailyAllows();
+  const updateExpenses = useUpdateExpenses();
   const deletePayrun = useDeletePayrun();
+  const updateDailyAllows = useUpdateDailyAllows();
   const [input, setInput] = useRecoilState(payrunState);
   const [isLoadInput, setIsLoadInput] = useState(false);
   const [isAlertOpen, setIsAlertOpen] = useState(false);
@@ -79,16 +89,11 @@ export default function PayslipTable() {
     loadPendingPayslips,
   } = usePayslipsContext();
 
-  useEffect(() => {
-    //getPayrun();
-    // loadPendingPayslips(FILTERSTRING);
-  }, []);
-
-  useEffect(() => {
-    if (single_payslip.payrun) {
-      console.log("single_payslip", single_payslip);
-    }
-  }, [single_payslip]);
+  // useEffect(() => {
+  //   if (single_payslip.payrun) {
+  //     console.log("single_payslip", single_payslip);
+  //   }
+  // }, [single_payslip]);
 
   const handleAlertOpen = () => {
     setIsAlertOpen(true);
@@ -154,8 +159,8 @@ export default function PayslipTable() {
   const delete_Payslip = (data) => {
     const { id, payrun } = data;
     setDeletestate({ id: id, payrun: payrun });
-    loadPeriodExpenses(payrun);
-    getSingleBatchDailyAllowance(payrun);
+    //loadPeriodExpenses(payrun);
+    //getSingleBatchDailyAllowance(payrun);
     handleAlertOpen();
   };
 
@@ -164,23 +169,30 @@ export default function PayslipTable() {
     const { id, payrun } = deletestate;
 
     //load period expenses
-    loadPeriodExpenses(payrun);
+    //loadPeriodExpenses(payrun);
 
     //delete allows detls
-    pending_payslips.forEach((rec) => {
+    payslips.forEach((rec) => {
       if (rec.payrun === payrun) {
         deletePayslip(rec.id);
       }
     });
 
     //unpaid expenses
-    periodexpenses.forEach((rec) => {
+    expenses.forEach((rec) => {
       if (rec.payrun === payrun) {
-        updateExpense({ id: rec.id, payrun: "" });
+        updateExpenses({ id: rec.id, payrun: "" });
       }
     });
 
-    //delete allows batch
+    //delete dailyallows
+    dailyallows.forEach((rec) => {
+      if (rec.payrun === payrun) {
+        updateDailyAllows({ id: rec.id, payrun: "" });
+      }
+    });
+
+    //delete payrun
     deletePayrun(id);
     toast({
       title: `Payroll Batch being deleted!`,

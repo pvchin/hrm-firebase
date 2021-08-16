@@ -7,10 +7,10 @@ module.exports = async (event) => {
 
   if (id) {
     const payslipitems = await table.find(id);
-    const formattedPayslipitems = {
-      id: payslipitem.id,
-      ...payslipitem.fields,
-    };
+    const formattedPayslipitems = payslipitems.map((rec) => ({
+      id: rec.id,
+      ...rec.fields,
+    }));
     if (payslipitems.error) {
       return {
         statusCode: 404,
@@ -24,7 +24,7 @@ module.exports = async (event) => {
       .select({
         // filterByFormula: 'AND(period="2021-02")',
         // filterByFormula: 'AND(empid="rec1rEYb2ZrHRgiTE",period="2021-02")',
-        filterByFormula: `period ='${fv}'` ,
+        filterByFormula: `period ='${fv}'`,
       })
       .firstPage();
     const formattedPayslipitems = payslipitems.map((item) => ({

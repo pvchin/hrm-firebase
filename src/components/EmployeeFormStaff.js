@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState,useEffect } from "react";
 import {
   Button,
   Icon,
@@ -37,8 +37,8 @@ const initial_values = {
   ic_no: "",
   email: "",
   age: 0,
-    basic_salary: 0,
-  currency: "BND",
+  basic_salary: 0,
+  salary_currency: "BND",
   bank_name: "",
   bank_acno: "",
   nationality: "",
@@ -65,6 +65,7 @@ const EmployeeForm = () => {
   const toast = useCustomToast();
   const { employees, setFilter } = useEmployees();
   const updateEmployees = useUpdateEmployees();
+  const [empage, setEmpage] = useState(0);
   const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
   const {
     isEditing,
@@ -85,7 +86,7 @@ const EmployeeForm = () => {
     nationality,
     address,
     basic_salary,
-    currency,
+    salary_currency,
     bank_name,
     bank_acno,
     tap_acno,
@@ -126,8 +127,24 @@ const EmployeeForm = () => {
     }
   };
 
+  const calculateAge = (dob) => {
+    var today = new Date();
+    var birthDate = new Date(dob);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    return age;
+  };
+
   useEffect(() => {
     getSingleEmployee(editEmployeeID);
+  }, []);
+
+  useEffect(() => {
+    let age = calculateAge(birthdate);
+    setEmpage(age);
   }, []);
 
   if (single_employee_loading) {
@@ -283,7 +300,12 @@ const EmployeeForm = () => {
                         type="date"
                         defaultValue={birthdate}
                         className={classes.textField}
-                        onChange={onChange}
+                        onChange={(e) => {
+                          onChange(e.target.value);
+                          let age = calculateAge(e.target.value);
+                          console.log("emp", birthdate, age);
+                          setEmpage(age);
+                        }}
                         error={!!error}
                         helperText={error ? error.message : null}
                         InputLabelProps={{
@@ -298,7 +320,7 @@ const EmployeeForm = () => {
                 <Controller
                   name="age"
                   control={control}
-                  defaultValue={age}
+                  //defaultValue={age}
                   render={({
                     field: { onChange, value },
                     fieldState: { error },
@@ -309,7 +331,7 @@ const EmployeeForm = () => {
                         type="number"
                         id="standard-age"
                         name="age"
-                        defaultValue={age}
+                        value={empage}
                         className={classes.textField}
                         //onChange={onChange}
                         onChange={(e) => {
@@ -317,6 +339,7 @@ const EmployeeForm = () => {
                         }}
                         error={!!error}
                         helperText={error ? error.message : null}
+                        inputProps={{ readOnly: true }}
                       />
                     );
                   }}
@@ -491,9 +514,9 @@ const EmployeeForm = () => {
                   //rules={{ required: "IC No required" }}
                 />
                 <Controller
-                  name="currency"
+                  name="salary_currency"
                   control={control}
-                  defaultValue={currency}
+                  defaultValue={salary_currency}
                   render={({
                     field: { onChange, value },
                     fieldState: { error },
@@ -502,8 +525,8 @@ const EmployeeForm = () => {
                       <TextField
                         label="Currency"
                         id="standard-currency"
-                        name="currency"
-                        defaultValue={currency}
+                        name="salary_currency"
+                        defaultValue={salary_currency}
                         className={classes.textField}
                         onChange={onChange}
                         error={!!error}

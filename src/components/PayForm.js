@@ -14,6 +14,8 @@ import {
   NativeSelect,
   InputLabel,
 } from "@material-ui/core";
+import currency from "currency.js";
+import CurrencyTextField from "@unicef/material-ui-currency-textfield";
 import { Heading, Text } from "@chakra-ui/react";
 import { Autocomplete } from "@material-ui/lab";
 import { makeStyles } from "@material-ui/core/styles";
@@ -125,7 +127,9 @@ const PayForm = ({
       totalSCP = 0,
       nettPay = 0.0,
       allows = 0,
-      deducts = 0;
+      deducts = 0,
+      siteallows = 0,
+      expsclaims = 0;
     let data = singlebatchpayslip[rowindex];
     totalTAP = state.tap_checkbox ? Math.ceil(state.wages * 0.05) : 0;
     totalSCP = state.tap_checkbox
@@ -134,9 +138,9 @@ const PayForm = ({
     if (totalSCP > 98) {
       totalSCP = 98;
     }
+    siteallows = parseFloat(state.allows_type1amt);
+    expsclaims = parseFloat(state.allows_type2amt);
     allows =
-      parseFloat(state.allows_type1amt) +
-      parseFloat(state.allows_type2amt) +
       parseFloat(state.allows_type3amt) +
       parseFloat(state.allows_type4amt) +
       parseFloat(state.allows_type5amt) +
@@ -154,7 +158,14 @@ const PayForm = ({
       parseFloat(state.deducts_type7amt) +
       parseFloat(state.deducts_type8amt);
 
-    nettPay = state.wages - totalTAP - totalSCP + allows - deducts;
+    nettPay =
+      state.wages +
+      siteallows +
+      expsclaims -
+      totalTAP -
+      totalSCP +
+      allows -
+      deducts;
 
     setState({
       ...state,
@@ -189,6 +200,7 @@ const PayForm = ({
         <Grid item sm={4} align="center" style={{ border: "1px solid white" }}>
           <Text as="u" fontSize="md">
             Summary
+             ({state.name})
           </Text>
         </Grid>
       </Grid>
@@ -560,6 +572,7 @@ const PayForm = ({
                 >
                   Deduction
                 </InputLabel>
+
                 <NativeSelect
                   name="deducts_type1"
                   value={state.deducts_type1}
@@ -924,9 +937,9 @@ const PayForm = ({
           </Grid>
         </Grid>
         <Grid item sm={4} align="center" style={{ border: "1px solid white" }}>
-          <div>
+          {/* <div>
             <h3>{state.name}</h3>
-          </div>
+          </div> */}
           <Divider variant="fullWidth" className={classes.divider} />
           <div>
             <TextField
@@ -934,7 +947,7 @@ const PayForm = ({
               name="wages"
               variant="filled"
               type="number"
-              value={state.wages}
+              value={currency(state.wages)}
               onChange={handleChange}
               style={{ width: "100%" }}
               InputLabelProps={{
@@ -951,7 +964,24 @@ const PayForm = ({
               name="tap_amount"
               variant="filled"
               type="number"
-              value={state.tap_amount}
+              value={currency(state.tap_amount)}
+              onChange={handleChange}
+              style={{ width: "100%" }}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              InputProps={{
+                readOnly: true,
+              }}
+            />
+            {/* </div>
+          <div> */}
+            <TextField
+              label="SCP Amount"
+              name="scp_amount"
+              variant="filled"
+              type="number"
+              value={currency(state.scp_amount)}
               onChange={handleChange}
               style={{ width: "100%" }}
               InputLabelProps={{
@@ -964,11 +994,28 @@ const PayForm = ({
           </div>
           <div>
             <TextField
-              label="SCP Amounut"
-              name="scp_amount"
+              label="Site Allowances"
+              name="siteallows"
               variant="filled"
               type="number"
-              value={state.scp_amount}
+              value={currency(state.allows_type1amt)}
+              onChange={handleChange}
+              style={{ width: "100%" }}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              InputProps={{
+                readOnly: true,
+              }}
+            />
+          </div>
+          <div>
+            <TextField
+              label="Expenses Claims"
+              name="expclaims"
+              variant="filled"
+              type="number"
+              value={currency(state.allows_type2amt)}
               onChange={handleChange}
               style={{ width: "100%" }}
               InputLabelProps={{
@@ -985,7 +1032,7 @@ const PayForm = ({
               name="total_allowances"
               variant="filled"
               type="number"
-              value={state.total_allowances}
+              value={currency(state.total_allowances)}
               onChange={handleChange}
               style={{ width: "100%" }}
               InputLabelProps={{
@@ -1002,7 +1049,7 @@ const PayForm = ({
               name="total_deductions"
               variant="filled"
               type="number"
-              value={state.total_deductions}
+              value={currency(state.total_deductions)}
               onChange={handleChange}
               style={{ width: "100%" }}
               InputLabelProps={{
@@ -1012,6 +1059,22 @@ const PayForm = ({
                 readOnly: true,
               }}
             />
+            {/* <CurrencyTextField
+              label="Total Deductions"
+              variant="standard"
+              value={state.total_deductions}
+              currencySymbol="$"
+              outputFormat="string"
+              decimalCharacter="."
+              digitGroupSeparator=","
+              decimalPlaces="2"
+              className={classes.textField}
+              id="standard-totaldeductions"
+              name="total_deductions"
+              InputProps={{
+                readOnly: true,
+              }}
+            /> */}
           </div>
           <div>
             <TextField
@@ -1019,7 +1082,7 @@ const PayForm = ({
               name="nett_pay"
               variant="filled"
               type="number"
-              value={state.nett_pay}
+              value={currency(state.nett_pay)}
               onChange={handleChange}
               style={{ width: "100%" }}
               InputLabelProps={{

@@ -19,13 +19,15 @@ const PrintPayslip = ({ data, emp }) => {
     "December",
   ];
   const subtitle =
-    "Payslips for the month of " +
+    "Payslip for the month of " +
     months[parseInt(data.rowData.payrun.slice(-2) - 1)] +
     " " +
     data.rowData.payrun.slice(0, 4);
+  const footer =
+    "This is computer generated report so no signature is required";
   const {
     empno,
-    icno,
+    ic_no,
     designation,
     bank_acno,
     bank_name,
@@ -216,7 +218,7 @@ const PrintPayslip = ({ data, emp }) => {
           },
           {
             width: 200,
-            text: icno,
+            text: ic_no,
           },
           {
             width: "*",
@@ -399,6 +401,7 @@ const PrintPayslip = ({ data, emp }) => {
       //     ],
       //   },
       // },
+      { text: footer + "\n", style: "footer" },
     ],
     styles: {
       header: {
