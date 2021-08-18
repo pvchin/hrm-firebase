@@ -61,7 +61,7 @@ const DailyAllowancesAddPeriod = ({ handleDialogClose }) => {
 
   const periodExists = (data) => {
     return dailyallows.some(function (el) {
-      return el.period === data;
+      return el.period === data && el.empid === loginLevel.loginUserId;
     });
   };
 

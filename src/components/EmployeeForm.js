@@ -11,7 +11,8 @@ import {
   Checkbox,
   MenuItem,
 } from "@material-ui/core";
-import currency from "currency.js"
+import currency from "currency.js";
+import { useBoolean } from "@chakra-ui/hooks";
 import CurrencyTextField from "@unicef/material-ui-currency-textfield";
 import { makeStyles } from "@material-ui/core/styles";
 import { useEmployeesContext } from "../context/employees_context";
@@ -71,6 +72,7 @@ const EmployeeForm = () => {
   const { designations } = useDesignations();
   const { departments } = useDepartments();
   const [empage, setEmpage] = useState(0);
+  const [checktap, setCheckTap] = useState(false);
   const [empId, setEmpId] = useRecoilState(editEmployeeIdState);
   const { handleSubmit, control, setValue, register } = useForm();
   const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
@@ -128,12 +130,14 @@ const EmployeeForm = () => {
     } else {
       addEmployees({ ...data });
     }
+    
   };
 
   useEffect(() => {
-   let age = calculateAge(birthdate);
-   setEmpage(age);
-  },[])
+    let age = calculateAge(birthdate);
+    setEmpage(age);
+    setCheckTap(tap_checkbox)
+  }, []);
 
   if (!employees) {
     return <h2>Loading ...</h2>;
@@ -278,7 +282,7 @@ const EmployeeForm = () => {
                         className={classes.textField}
                         //onChange={onChange}
                         onChange={(e) => {
-                           onChange(e.target.value);
+                          onChange(e.target.value);
                           let age = calculateAge(e.target.value);
                           console.log("emp", birthdate, age);
                           setEmpage(age);
@@ -604,9 +608,18 @@ const EmployeeForm = () => {
                       <FormControlLabel
                         control={
                           <Checkbox
-                            checked={tap_checkbox}
-                            onChange={onChange}
                             name="tap_checkbox"
+                            defaultValue={tap_checkbox}
+                            checked={checktap}
+                            type="checkbox"
+                            onChange={(e) => {
+                              console.log("tap", !e.target.checked)
+                              onChange(
+                                (e.target.checked)
+                              );
+                              setCheckTap(e.target.checked);
+                            }}
+
                           />
                         }
                         label="TAP/SCP Contribution"

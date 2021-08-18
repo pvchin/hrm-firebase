@@ -22,16 +22,15 @@ import { CustomDialog } from "../helpers/CustomDialog";
 import { useDailyAllowancesContext } from "../context/dailyallowances_context";
 import DailyAllowancesAddPeriod from "./DailyAllowancesAddPeriod";
 import DailyAllowsDetlsTableStaff from "./DailyAllowsDetlsTableStaff";
-import { useDailyAllows } from "./dailyallows/useDailyAllows"
+import { useDailyAllows } from "./dailyallows/useDailyAllows";
 import { useAddDailyAllows } from "./dailyallows/useAddDailyAllows";
 import { useUpdateDailyAllows } from "./dailyallows/useUpdateDailyAllows";
 import { useDeleteDailyAllows } from "./dailyallows/useDeleteDailyAllows";
 
-
 export default function DailyAllowancesTableStaff() {
   let history = useHistory();
   const classes = useStyles();
-  const { dailyallows, setFilter } = useDailyAllows()
+  const { dailyallows, setFilter } = useDailyAllows();
   const addDailyAllows = useAddDailyAllows();
   const updateDailyAllows = useUpdateDailyAllows();
   const deleteDailyAllows = useDeleteDailyAllows();
@@ -124,7 +123,7 @@ export default function DailyAllowancesTableStaff() {
     const { id, empid, period, no_of_days, amount } = data;
 
     loadEmpDailyAllowsDetls(empid, period);
-   
+
     setAllows_period(period);
     setAllows_empid(empid);
     setAllowsdataId(id);
@@ -165,7 +164,6 @@ export default function DailyAllowancesTableStaff() {
     setIsAllowsDetlDialogOpen(false);
   };
 
-  
   useEffect(() => {
     setFilter(loginLevel.loginUserId);
   }, []);

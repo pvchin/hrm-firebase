@@ -24,6 +24,7 @@ import { CustomDialog } from "../helpers/CustomDialog";
 import { useDailyAllowancesContext } from "../context/dailyallowances_context";
 //import { useEmployeesContext } from "../context/employees_context";
 import DailyAllowsDetlsTable from "./DailyAllowsDetlsTable";
+import { useDailyAllows } from "./dailyallows/useDailyAllows";
 
 const columns = [
   {
@@ -45,6 +46,7 @@ export default function DailyAllowancesTable() {
   const [tmpallowsdata, setTmpallowsdata] = useState([]);
   const allows_period = useRecoilValue(allowsPeriodState);
   const allows_empid = useRecoilValue(empidState);
+  const { dailyallows, setFilter} = useDailyAllows();
   const [allowsdata, setAllowsdata] = useRecoilState(allowsDataState);
   const setEmpID = useSetRecoilState(empidState);
   const title = `Site Allowances (${allows_period})`;
@@ -63,6 +65,8 @@ export default function DailyAllowancesTable() {
   useEffect(() => {
     getSingleBatchDailyAllowance(allows_period);
   }, []);
+
+  
 
   const update_DailyAllowance = async (data) => {
     const { empid, period } = data;

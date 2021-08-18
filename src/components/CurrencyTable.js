@@ -31,7 +31,9 @@ export default function UpdateCurrency() {
   };
 
   const add_Currency = (data) => {
-    addCurrency(data);
+    const { rate, ...fields } = data;
+    const ratevalue = parseFloat(rate);
+    addCurrency({ rate: ratevalue, ...fields });
   };
 
   const delete_Currency = (data) => {
@@ -58,7 +60,6 @@ export default function UpdateCurrency() {
               new Promise((resolve, reject) => {
                 setTimeout(() => {
                   update_Currency(newData);
-
                   resolve();
                 }, 1000);
               }),

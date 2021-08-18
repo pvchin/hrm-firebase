@@ -11,6 +11,7 @@ import {
   Icon,
   Divider,
   TextField,
+  
 } from "@material-ui/core";
 import {
   Box,
@@ -21,6 +22,7 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
+  Select,
   useDisclosure,
 } from "@chakra-ui/react";
 import {
@@ -176,6 +178,13 @@ const Payrun = () => {
       setAlert(true);
       setLoadPaybatch(true);
     }
+  };
+
+  const selectAllEmployees = () => {
+    employees &&
+      employees.forEach((emp) => {
+        emp.tableData.checked = true;
+      });
   };
 
   const checkSelectedEmployees = (period, payrun) => {
@@ -406,10 +415,10 @@ const Payrun = () => {
                     name="payfreq"
                     value={input.payfreq}
                     onChange={(e) => handleChange(e)}
-                    // select
+                    Select
                   >
                     {/* <MenuItem value="Weekly">Weekly</MenuItem> */}
-                    {/* <MenuItem value="Monthly">Monthly</MenuItem> */}
+                    <option value="Monthly">Monthly</option>
                   </TextField>
                 </div>
                 {/* <div>
@@ -549,17 +558,21 @@ const Payrun = () => {
             <MaterialTable
               columns={columns}
               data={employees}
-              title="Payrun History"
+              title="Employee Listing"
               options={{
                 filtering: false,
                 search: false,
-                toolbar: false,
+                toolbar: true,
                 selection: true,
+                pageSize: 10,
                 headerStyle: {
                   backgroundColor: "#daad86",
                   color: "primary",
                 },
-                showTitle: false,
+                showTitle:true,
+                // selectionProps: rowData => {
+                //   rowData.tableData.checked = true
+                // }
               }}
             />
           </Grid>

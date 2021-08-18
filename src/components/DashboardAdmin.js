@@ -118,6 +118,9 @@ export default function DashboardAdmin() {
             <Route exact path="/error">
               <Error />
             </Route>
+            <Route exact path="/leave">
+              <Leave />
+            </Route>
             {/* <Route
               exact
               path="/employees/:empId"
