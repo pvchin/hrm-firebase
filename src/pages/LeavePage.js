@@ -7,7 +7,7 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 
 import { headLeaveTableCells } from "../utils/constants";
-import LeaveTable from "../components/LeaveTable";
+import LeaveTableAdmin from "../components/LeaveTableAdmin";
 
 const drawerWidth = 240;
 
@@ -24,7 +24,10 @@ const LeavePage = () => {
             <Grid item xs={12}>
               <Paper className={fixedHeightPaper}>
                 <div>
-                  <LeaveTable title="Leaves" headCells={headLeaveTableCells} />
+                  <LeaveTableAdmin
+                    title="Leaves"
+                    headCells={headLeaveTableCells}
+                  />
                 </div>
               </Paper>
             </Grid>

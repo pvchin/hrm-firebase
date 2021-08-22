@@ -1,19 +1,32 @@
 import React, { useState, useEffect } from "react";
-import MaterialTable, { MTableToolbar } from "material-table";
-import { TextField, MenuItem, Button, Icon } from "@material-ui/core";
+import MaterialTable from "material-table";
+import { TextField, MenuItem } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { useRecoilState } from "recoil";
-import { loginLevelState } from "./data/atomdata";
 import AddIcon from "@material-ui/icons/Add";
+import VisibilityIcon from "@material-ui/icons/Visibility";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import CheckIcon from "@material-ui/icons/Check";
 import SearchIcon from "@material-ui/icons/Search";
-import LeaveForm from "./LeaveForm";
+import LeaveFormAdmin from "./LeaveFormAdmin";
 import { CustomDialog } from "../helpers/CustomDialog";
 import { AlertDialog } from "../helpers/AlertDialog";
 import { useLeavesContext } from "../context/leaves_context";
 import { useEmployeesContext } from "../context/employees_context";
+import { useLeaves } from "./leaves/useLeaves";
+import { useAddLeaves } from "./leaves/useAddLeaves";
+import { useDeleteLeaves } from "./leaves/useDeleteLeaves";
+import { useUpdateLeaves } from "./leaves/useUpdateLeaves";
+
+const initial_form = {
+  name: "",
+  to_date: "",
+  from_date: "",
+  reason: "",
+  status: "Pending",
+  no_of_days: 0,
+  leave_bal: 0,
+};
 
 const columns = [
   {
@@ -38,38 +51,23 @@ const columns = [
   {
     title: "Leave Balance",
     field: "leave_bal",
+    type: "numeric",
     editable: "never",
-    cellStyle: {
-      width: 10,
-      maxWidth: 10,
-    },
   },
   {
-    title: "Days",
+    title: "No of Days",
     field: "no_of_days",
+    type: "numeric",
     editable: "never",
-    cellStyle: {
-      width: 10,
-      maxWidth: 10,
-    },
   },
   {
     title: "Reason",
     field: "reason",
     editable: "never",
-    cellStyle: {
-      width: 10,
-      maxWidth: 10,
-    },
   },
   {
     title: "Status",
     field: "status",
-    editable: "never",
-    cellStyle: {
-      width: 50,
-      maxWidth: 50,
-    },
     editComponent: (props) => (
       <TextField
         //defaultValue={props.value || null}
@@ -87,118 +85,82 @@ const columns = [
   },
 ];
 
-export default function LeaveTable({
-  leavesdata,
-  setLeavesdata,
-  handleDialogClose,
-}) {
+export default function LeaveTable() {
   const classes = useStyles();
-  const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
+  const { leaves, filter, setFilter, setLeaveId } = useLeaves();
+  const updateLeaves = useUpdateLeaves();
+  const addLeaves = useAddLeaves();
+  const deleteLeaves = useDeleteLeaves();
+  const [formdata, setFormdata] = useState(initial_form);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isAlertOpen, setIsAlertOpen] = useState(false);
-
+  const { loadEmployees } = useEmployeesContext();
   const {
+    // leaves,
     editLeaveID,
-    updateLeave,
+    leaves_loading,
     deleteLeave,
     loadLeaves,
-    update_leave_error,
+    getSingleLeave,
+    setEditLeaveID,
+    setIsLeaveEditingOn,
+    setIsLeaveEditingOff,
+    resetSingleLeave,
   } = useLeavesContext();
 
-  const { employees, updateEmployee, update_employee_error } =
-    useEmployeesContext();
+  useEffect(() => {
+    setLeaveId(editLeaveID);
+  }, []);
 
-  // useEffect(() => {
-  //   loadLeaves();
-  // }, []);
+  const update_Leave = async (data) => {
+    const { id } = data;
+    setFormdata({ ...data });
+    setEditLeaveID(id);
+    setIsLeaveEditingOn();
+    getSingleLeave(id);
+    handleDialogOpen();
+    //history.push("/singleleave");
+  };
 
-  const handleLeaveFormDialogOpen = () => {
+  const add_Leave = async (data) => {
+    // const { id } = data;
+    setFormdata({ ...data });
+    resetSingleLeave();
+    setEditLeaveID("");
+    setIsLeaveEditingOff();
+    handleDialogOpen();
+    //history.push("/singleleave");
+  };
+
+  const delete_Leave = (data) => {
+    const { id } = data;
+    setEditLeaveID(id);
+    handleAlertOpen();
+    //deleteLeave(id);
+    //loadLeaves();
+  };
+
+  const handleDialogOpen = () => {
     setIsDialogOpen(true);
   };
 
-  const handleLeaveFormDialogClose = () => {
+  const handleDialogClose = () => {
     setIsDialogOpen(false);
-    loadLeaves();
   };
 
-  const handleLeaveFormAlertOpen = () => {
+  const handleAlertOpen = () => {
     setIsAlertOpen(true);
   };
 
-  const handleLeaveFormAlertClose = () => {
+  const handleAlertClose = () => {
     setIsAlertOpen(false);
   };
 
-  const handleLeaveFormOnDeleteConfirm = () => {
+  const handleOnDeleteConfirm = () => {
     const id = editLeaveID;
-    deleteLeave(id);
-    loadLeaves();
+    deleteLeaves(id);
   };
 
-  const Approve_LeaveData = () => {
-    leavesdata.forEach((rec) => {
-      if (rec.tableData.checked) {
-        updateLeave({ id: rec.id, status: "Approve" });
-        //update leavesdata
-        if (!update_leave_error) {
-          const recdata = leavesdata.filter((r) => r.id === rec.id);
-          recdata[0].status = "Approve";
-
-          // update leave bal
-          console.log("leave", rec.empid, employees);
-          const empleavebal = employees
-            .filter((r) => r.id === rec.empid)
-            .map((item) => {
-              return item.leave_bal;
-            });
-          const leavebal = empleavebal - rec.no_of_days;
-          updateEmployee({ id: rec.empid, leave_bal: leavebal });
-        }
-      }
-    });
-    leavesdata.forEach((d) => {
-      if (d.tableData) d.tableData.checked = false;
-    });
-  };
-
-  const Reject_LeaveData = () => {
-    leavesdata.forEach((rec) => {
-      if (rec.tableData.checked) {
-        updateLeave({ id: rec.id, status: "Reject" });
-        //update leavesdata
-        if (!update_leave_error) {
-          const recdata = leavesdata.filter((r) => r.id === rec.id);
-          recdata[0].status = "Reject";
-        }
-      }
-    });
-    leavesdata.forEach((d) => {
-      if (d.tableData) d.tableData.checked = false;
-    });
-  };
-
-  const Save_LeaveData = () => {
-    leavesdata.forEach((data) => {
-      const { id } = data;
-      if (id) {
-        const { id, rec_id, tableData, ...fields } = data;
-        updateLeave({ id, ...fields });
-      }
-    });
-
-    handleDialogClose();
-  };
-
-  // if (expenses_loading) {
-  //   return (
-
-  // if (leaves_loading) {
-  //   return (
-  //     <div>
-  //       <h2>Loading...Leaves</h2>
-  //     </div>
-  //   );
-  // }
   return (
     <div className={classes.root}>
       {/* <h1>Expenses Claims Application</h1> */}
@@ -206,90 +168,68 @@ export default function LeaveTable({
       <div style={{ maxWidth: "100%", paddingTop: "5px" }}>
         <MaterialTable
           columns={columns}
-          data={leavesdata}
+          data={leaves}
           title="Leave Application"
           icons={{
             Add: (props) => <AddIcon />,
-            Edit: (props) => <EditIcon />,
+            Edit: (props) => <AddIcon />,
+            View: (props) => <VisibilityIcon />,
             Delete: (props) => <DeleteIcon />,
             Clear: (props) => <DeleteIcon />,
             Check: (props) => <CheckIcon />,
             Search: (props) => <SearchIcon />,
             ResetSearch: (props) => <DeleteIcon />,
           }}
-          // editable={{
-          //   onRowUpdate: (newData, oldData) =>
-          //     new Promise((resolve, reject) => {
-          //       setTimeout(() => {
-          //         const dataUpdate = [...leavesdata];
-          //         const index = oldData.tableData.id;
-          //         dataUpdate[index] = newData;
-          //         setLeavesdata([...dataUpdate]);
-          //         //approve_Expense(newData);
-
-          //         resolve();
-          //       }, 1000);
-          //     }),
-          // }}
+          actions={[
+            {
+              icon: ()=><VisibilityIcon />,
+              tooltip: "Edit Record",
+              onClick: (event, rowData) => {
+                update_Leave(rowData);
+              },
+            },
+            // {
+            //   icon: "delete",
+            //   tooltip: "Delete Record",
+            //   onClick: (event, rowData) => {
+            //     delete_Leave(rowData);
+            //   },
+            // },
+            {
+              icon: "add",
+              tooltip: "Add Record",
+              isFreeAction: true,
+              onClick: (event, rowData) => {
+                add_Leave(rowData);
+              },
+            },
+          ]}
           options={{
             filtering: true,
-            selection: true,
             headerStyle: {
-              backgroundColor: "orange",
+              backgroundColor: "secondary",
               color: "primary",
             },
             showTitle: true,
           }}
-          components={{
-            Toolbar: (props) => (
-              <div>
-                <MTableToolbar {...props} />
-                <div style={{ padding: "5px 10px" }}>
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    color="secondary"
-                    className={classes.button}
-                    onClick={Approve_LeaveData}
-                  >
-                    Approve
-                  </Button>
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    color="secondary"
-                    className={classes.button}
-                    onClick={Reject_LeaveData}
-                  >
-                    Reject
-                  </Button>
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    color="secondary"
-                    className={classes.button}
-                    onClick={Save_LeaveData}
-                  >
-                    Update <Icon className={classes.rightIcon}>send</Icon>
-                  </Button>
-                </div>
-              </div>
-            ),
-          }}
         />
         <CustomDialog
           isOpen={isDialogOpen}
-          handleClose={handleLeaveFormDialogClose}
+          handleClose={handleDialogClose}
           title=""
           showButton={true}
           isFullscree={false}
         >
-          <LeaveForm handleDialogClose={handleLeaveFormDialogClose} />
+          <LeaveFormAdmin
+            formdata={formdata}
+            setFormdata={setFormdata}
+            handleDialogClose={handleDialogClose}
+          />
         </CustomDialog>
 
         <AlertDialog
-          handleClose={handleLeaveFormAlertClose}
-          onConfirm={handleLeaveFormOnDeleteConfirm}
+          handleClose={handleAlertClose}
+          onConfirm={handleOnDeleteConfirm}
           isOpen={isAlertOpen}
           title="Delete Expenses"
         >
@@ -303,8 +243,5 @@ export default function LeaveTable({
 const useStyles = makeStyles((theme) => ({
   root: {
     padding: 0,
-  },
-  button: {
-    margin: theme.spacing(1),
   },
 }));

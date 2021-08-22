@@ -15,7 +15,7 @@ export const queryKeys = {
   payrun: "payrun",
   trainings: "trainings",
   family: "family",
-  dailyallows: "dailyallowances",
+  dailyallows: "dailyallows",
   dailyallowsdetls: "dailyallowsdetls",
   user: "user",
   currency: "currency",

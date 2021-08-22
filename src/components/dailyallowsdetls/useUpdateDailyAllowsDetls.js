@@ -19,7 +19,7 @@ export function useUpdateDailyAllowsDetls(data) {
     onSuccess: () => {
       queryClient.invalidateQueries("dailyallowsdetls");
       toast({
-        title: "Site Allowance daily record being updated!",
+        title: "Site Allowance daily details record being updated!",
         status: "success",
       });
     },

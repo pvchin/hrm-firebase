@@ -122,8 +122,7 @@ export default function LeaveTableStaff() {
 
   const add_Leave = async (data) => {
     // const { id } = data;
-    //setEditLeaveID("");
-    setFormdata(initial_form);
+    setEditLeaveID("");
     setFormdata(initial_form);
     setIsLeaveEditingOff();
     handleDialogOpen();
@@ -161,7 +160,7 @@ export default function LeaveTableStaff() {
     const id = editLeaveID;
     deleteLeaves(id);
   };
-  
+
   return (
     <div className={classes.root}>
       {/* <h1>Expenses Claims Application</h1> */}

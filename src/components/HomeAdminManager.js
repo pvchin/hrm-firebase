@@ -15,7 +15,7 @@ import { useExpensesContext } from "../context/expenses_context";
 import { usePayslipsContext } from "../context/payslips_context";
 import { useDailyAllowancesContext } from "../context/dailyallowances_context";
 import LeaveTableView from "./LeaveTableView";
-import LeaveTableAdmin from "./LeaveTableAdmin";
+import LeaveTableAdmin from "./LeaveTableManager";
 import ExpenseTableView from "./ExpenseTableView";
 import ExpenseTableAdmin from "./ExpenseTableAdmin";
 import PayslipTableViewAdmin from "./PayslipTableViewAdmin";
@@ -50,6 +50,7 @@ const EmployeeView = () => {
   const { payslips, payrun, getPayrun } = usePayslipsContext();
   const { dailyallowances, loadPendingDailyAllowances, loadUnpaidDailyAllows } =
     useDailyAllowancesContext();
+  
   const handleLeaveDialogOpen = () => {
     setLeavesdata([]);
     setLeavesdata([...leaves]);

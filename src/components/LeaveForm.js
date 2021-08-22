@@ -7,17 +7,22 @@ import {
   Typography,
   Divider,
 } from "@material-ui/core";
+import * as emailjs from "emailjs-com";
 import { useRecoilState } from "recoil";
 import { loginLevelState } from "./data/atomdata";
 import { makeStyles } from "@material-ui/core/styles";
-import MenuItem from "@material-ui/core/MenuItem";
-import { useEmployeesContext } from "../context/employees_context";
+import { useCustomToast } from "../helpers/useCustomToast";
+import { useEmployees } from "./employees/useEmployees";
 import { useLeavesContext } from "../context/leaves_context";
 import { Controller, useForm } from "react-hook-form";
 import { useLeaves } from "./leaves/useLeaves";
 import { useAddLeaves } from "./leaves/useAddLeaves";
 import { useDeleteLeaves } from "./leaves/useDeleteLeaves";
 import { useUpdateLeaves } from "./leaves/useUpdateLeaves";
+
+const SERVICE_ID = process.env.REACT_APP_EMAILJS_SERVICEID;
+const TEMPLATE_ID = "template_1y8odlq";
+const USER_ID = process.env.REACT_APP_EMAILJS_USERID;
 
 const initial_state = {
   name: "",
@@ -31,6 +36,8 @@ const initial_state = {
 
 const LeaveForm = ({ formdata, setFormdata, handleDialogClose }) => {
   const classes = useStyles();
+  const toast = useCustomToast();
+  const { employees } = useEmployees();
   const { leaves, filter, setFilter, setLeaveId } = useLeaves();
   const updateLeaves = useUpdateLeaves();
   const addLeaves = useAddLeaves();
@@ -38,14 +45,43 @@ const LeaveForm = ({ formdata, setFormdata, handleDialogClose }) => {
   const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
   const { handleSubmit, control } = useForm();
   const initialValues = Object.values(initial_state).join("");
-  const { isLeaveEditing, editLeaveID } =
-    useLeavesContext();
+  const { isLeaveEditing, editLeaveID } = useLeavesContext();
+
+  const handleSentEmail = (data) => {
+    const { from_date, to_date } = data;
+    //console.log("leave form", loginLevel);
+    var emaildata = {
+      to_name: loginLevel.loginUser,
+      to_email: loginLevel.loginEmail,
+      message: `Your leave application from ${from_date} to ${to_date} has been successfully submitted for approval`,
+      cc_to: loginLevel.reporting_email,
+    };
+
+    emailjs.send(SERVICE_ID, TEMPLATE_ID, emaildata, USER_ID).then(
+      function (response) {
+        console.log(response.status, response.text);
+        toast({
+          title: `Email has sent successfully to ${emaildata.to_email}!`,
+          status: "success",
+        });
+      },
+      function (err) {
+        console.log(err);
+        toast({
+          title: `Email has fail to send to ${emaildata.to_email}!`,
+          status: "warning",
+        });
+      }
+    );
+  };
 
   const onSubmit = (data) => {
+    console.log("leave", data);
     if (isLeaveEditing) {
       updateLeaves({ id: editLeaveID, ...data });
     } else {
       addLeaves({ ...data, empid: loginLevel.loginUserId });
+      handleSentEmail(data);
     }
 
     //history.push("/leave");
@@ -82,8 +118,8 @@ const LeaveForm = ({ formdata, setFormdata, handleDialogClose }) => {
                     label="Name"
                     id="margin-normal"
                     name="name"
-                    defaultValue={loginLevel.loginUser}
                     //value={value}
+                    defaultValue={loginLevel.loginUser}
                     className={classes.textField}
                     onChange={(e) => {
                       console.log(e.target.value);

@@ -4,6 +4,7 @@ import MaterialTable, { MTableToolbar } from "material-table";
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField, Icon, Button, MenuItem } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
+import { useCustomToast } from "../helpers/useCustomToast";
 import { useSetRecoilState, useRecoilValue, useRecoilState } from "recoil";
 import {
   allowsPeriodState,
@@ -13,6 +14,7 @@ import {
   empidState,
   loginLevelState,
 } from "./data/atomdata";
+import { AlertDialog } from "../helpers/AlertDialog";
 import AddIcon from "@material-ui/icons/Add";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -26,18 +28,25 @@ import { useDailyAllows } from "./dailyallows/useDailyAllows";
 import { useAddDailyAllows } from "./dailyallows/useAddDailyAllows";
 import { useUpdateDailyAllows } from "./dailyallows/useUpdateDailyAllows";
 import { useDeleteDailyAllows } from "./dailyallows/useDeleteDailyAllows";
+import { useDeleteDailyAllowsDetls } from "./dailyallowsdetls/useDeleteDailyAllowsDetls";
+import { useDailyAllowsDetls } from "./dailyallowsdetls/useDailyAllowsDetls";
 
 export default function DailyAllowancesTableStaff() {
   let history = useHistory();
   const classes = useStyles();
+  const toast = useCustomToast();
   const { dailyallows, setFilter } = useDailyAllows();
+  const { dailyallowsdetls, setDailyAllowsDetlsId, setDailyAllowsDetlsFilter } =
+    useDailyAllowsDetls();
   const addDailyAllows = useAddDailyAllows();
   const updateDailyAllows = useUpdateDailyAllows();
   const deleteDailyAllows = useDeleteDailyAllows();
+  const deleteDailyAllowsDetls = useDeleteDailyAllowsDetls();
   const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
   const [isAddPeriodDialogOpen, setIsAddPeriodDialogOpen] = useState(false);
   const [tmpallowsdata, setTmpallowsdata] = useState([]);
   const [allowsdata, setAllowsdata] = useRecoilState(allowsDataState);
+  const [isAlertOpen, setIsAlertOpen] = useState(false);
   const [allowsDetlsdata, setAllowsDetlsdata] =
     useRecoilState(allowsDataDetlsState);
   const [allows_period, setAllows_period] = useRecoilState(allowsPeriodState);
@@ -45,11 +54,14 @@ export default function DailyAllowancesTableStaff() {
   const [allowsdataId, setAllowsdataId] = useState(allowsDataIdState);
   const [toLoad, settoLoad] = useState(true);
   const [error, setError] = useState("");
+  const [deletestate, setDeletestate] = useState({
+    id: "",
+    period: "",
+    empid: "",
+  });
   const [isAllowsDetlDialogOpen, setIsAllowsDetlDialogOpen] = useState(false);
   const title = `Site Allowances`;
   const {
-    dailyallowances,
-    dailyallowsdetls,
     loadEmpDailyAllowances,
     loadEmpDailyAllowsDetls,
     dailyallowances_loading,
@@ -108,14 +120,13 @@ export default function DailyAllowancesTableStaff() {
   ];
 
   const Save_DailyAllowancesData = () => {
-    dailyallowances.forEach((data) => {
+    dailyallows.forEach((data) => {
       const { id } = data;
       if (id) {
         const { id, rec_id, tableData, ...fields } = data;
         updateDailyAllowance({ id, ...fields });
       }
     });
-
     //handleDialogClose();
   };
 
@@ -143,6 +154,42 @@ export default function DailyAllowancesTableStaff() {
     history.push("/singledailyallowsdetlstable");
   };
 
+  const delete_SiteAllows = (data) => {
+    const { id, period, empid } = data;
+    setDeletestate({ id: id, period: period, empid: empid });
+    handleAlertOpen();
+  };
+
+  const handleAlertOpen = () => {
+    setIsAlertOpen(true);
+  };
+
+  const handleAlertClose = () => {
+    setIsAlertOpen(false);
+  };
+
+  const handleOnDeleteConfirm = (data) => {
+    const { id, period, empid } = deletestate;
+
+    //delete allows detls
+    console.log("allowsdetls", dailyallowsdetls);
+    dailyallowsdetls
+      .filter((f) => f.empid === empid)
+      .forEach((rec) => {
+        console.log("del", period, empid, rec);
+        if (rec.period === period && rec.empid === empid) {
+          console.log("del id", rec.id);
+          deleteDailyAllowsDetls({ id: rec.id });
+        }
+      });
+    //delete daily allows
+    deleteDailyAllows(id);
+    // toast({
+    //   title: `Site Allowances has been successfully deleted!`,
+    //   status: "warning",
+    // });
+  };
+
   const add_SiteAllowsPeriod = () => {
     handleAddPeriodDialogOpen();
   };
@@ -166,6 +213,7 @@ export default function DailyAllowancesTableStaff() {
 
   useEffect(() => {
     setFilter(loginLevel.loginUserId);
+    setDailyAllowsDetlsId(loginLevel.loginUserId);
   }, []);
 
   return (
@@ -215,6 +263,14 @@ export default function DailyAllowancesTableStaff() {
                 update_SiteAllowsDetl(rowData);
               },
             }),
+            // (rowData) => ({
+            //   disabled: rowData.status !== "Pending",
+            //   icon: "delete",
+            //   tooltip: "Delete Record",
+            //   onClick: (event, rowData) => {
+            //     delete_SiteAllows(rowData);
+            //   },
+            // }),
           ]}
           options={{
             filtering: true,
@@ -270,6 +326,16 @@ export default function DailyAllowancesTableStaff() {
               handleDialogClose={handleAllowsDetlDialogClose}
             />
           </CustomDialog>
+        </div>
+        <div>
+          <AlertDialog
+            handleClose={handleAlertClose}
+            onConfirm={handleOnDeleteConfirm}
+            isOpen={isAlertOpen}
+            title="Delete Payslip Batch"
+          >
+            <h2>Are you sure you want to delete ?</h2>
+          </AlertDialog>
         </div>
       </div>
     </div>

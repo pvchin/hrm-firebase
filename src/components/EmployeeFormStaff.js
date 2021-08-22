@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Button,
   Icon,
@@ -58,6 +58,7 @@ const initial_values = {
   siteallows_fee: 0,
   perdiem_fee: 0,
   reporting_to: "",
+  reporting_email:"",
 };
 
 const EmployeeForm = () => {
@@ -66,6 +67,7 @@ const EmployeeForm = () => {
   const { employees, setFilter } = useEmployees();
   const updateEmployees = useUpdateEmployees();
   const [empage, setEmpage] = useState(0);
+  const [reportemail, setReportEmail] = useState("");
   const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
   const {
     isEditing,
@@ -104,8 +106,18 @@ const EmployeeForm = () => {
     siteallows_fee,
     perdiem_fee,
     reporting_to,
+    reporting_email,
   } = single_employee || initial_values;
   const { handleSubmit, control } = useForm();
+
+  const handleReportingTo = (name) => {
+    const emp = employees
+      .filter((f) => f.name === name)
+      .map((r) => {
+        return { ...r };
+      });
+    setReportEmail(emp[0].email);
+  };
 
   const onSubmit = (data) => {
     updateEmployees({ id: editEmployeeID, ...data });
@@ -145,6 +157,7 @@ const EmployeeForm = () => {
   useEffect(() => {
     let age = calculateAge(birthdate);
     setEmpage(age);
+    setReportEmail(reporting_email)
   }, []);
 
   if (single_employee_loading) {
@@ -919,6 +932,70 @@ const EmployeeForm = () => {
                         error={!!error}
                         helperText={error ? error.message : null}
                       />
+                    );
+                  }}
+                  //rules={{ required: "Email is required" }}
+                />
+              </div>
+              <div>
+                <Controller
+                  name="reporting_to"
+                  control={control}
+                  defaultValue={reporting_to}
+                  render={({
+                    field: { onChange, value },
+                    fieldState: { error },
+                  }) => {
+                    return (
+                      <TextField
+                        label="Reporting To"
+                        id="standard-reportingto"
+                        name="reporting_to"
+                        defaultValue={reporting_to}
+                        className={classes.textField}
+                        onChange={(e) => {
+                          onChange(e.target.value);
+                          handleReportingTo(e.target.value);
+                        }}
+                        error={!!error}
+                        helperText={error ? error.message : null}
+                        select
+                      >
+                        <MenuItem value="">None</MenuItem>
+                        {employees &&
+                          employees.map((r) => {
+                            return <MenuItem value={r.name}>{r.name}</MenuItem>;
+                          })}
+                      </TextField>
+                    );
+                  }}
+                  //rules={{ required: "Email is required" }}
+                />
+                <Controller
+                  name="reporting_email"
+                  control={control}
+                  defaultValue={reportemail}
+                  render={({
+                    field: { onChange, value },
+                    fieldState: { error },
+                  }) => {
+                    return (
+                      <TextField
+                        label="Reporting Email"
+                        id="standard-reportingemail"
+                        name="reporting_email"
+                        value={reportemail}
+                        className={classes.textField}
+                        onChange={onChange}
+                        error={!!error}
+                        helperText={error ? error.message : null}
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                        InputProps={{
+                          readOnly: true,
+                        }}
+                      ></TextField>
                     );
                   }}
                   //rules={{ required: "Email is required" }}

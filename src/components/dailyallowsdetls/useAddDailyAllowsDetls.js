@@ -16,10 +16,10 @@ export function useAddDailyAllowsDetls(data) {
   const { mutate } = useMutation((data) => addDailyAllowsDetls(data), {
     onSuccess: () => {
       queryClient.invalidateQueries("dailyallowsdetls");
-    //   toast({
-    //     title: "Site Allowance daily record being added!",
-    //     status: "success",
-    //   });
+      // toast({
+      //   title: "Site Allowance daily details record being added!",
+      //   status: "success",
+      // });
     },
   });
 

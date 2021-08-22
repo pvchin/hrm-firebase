@@ -1,10 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import clsx from "clsx"; 
-import { Heading } from "@chakra-ui/react";
+import clsx from "clsx";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 import MaterialTable from "material-table";
-import { Grid, List, ListItem, ListItemText } from "@material-ui/core";
+import {
+  Box,
+  Grid,
+  Heading,
+  GridItem,
+  Icon,
+  IconButton,
+  Stack,
+  Spacer,
+} from "@chakra-ui/react";
+import { EditIcon, ViewIcon } from "@chakra-ui/icons";
+import { List, ListItem, ListItemText } from "@material-ui/core";
 import { selector, useRecoilState, useRecoilValueLoadable } from "recoil";
 import { loginLevelState } from "./data/atomdata";
 import { useEmployeesContext } from "../context/employees_context";
@@ -30,6 +41,7 @@ const drawerWidth = 240;
 
 const LeaveTableViewStaff = () => {
   const classes = useStyles();
+  const history = useHistory();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   const { leaves, filter, setFilter, setLeaveId } = useLeaves();
   const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
@@ -38,37 +50,47 @@ const LeaveTableViewStaff = () => {
   //const ExpensesDetails = useRecoilValueLoadable(fetchExpensesDetails);
   //const { state, contents } = ExpensesDetails;
   const { editEmployeeID } = useEmployeesContext();
-  const { leaves_loading, leaves_error, loadEmpLeaves } =
-    useLeavesContext();
+  const { leaves_loading, leaves_error, loadEmpLeaves } = useLeavesContext();
 
   useEffect(() => {
     setFilter(loginLevel.loginUserId);
   }, []);
 
-  
   return (
     <List className={classes.root}>
-  
       <Grid container direction="row">
-        <Heading as="h4" size="md">Leaves Schedule</Heading>
+        <Stack direction="row">
+          <Heading as="h4" size="md">
+            Leaves Schedule
+          </Heading>
+          <Spacer />
+          <IconButton
+            // variant="outline"
+            size="md"
+            aria-label="Edit"
+            icon={<EditIcon />}
+            onClick={() => history.push("/leave")}
+          />
+        </Stack>
+
         {leaves
           .filter((i) => i.status === "Pending")
           .map((row) => {
             return (
-              <ListItem key={row.id}>
-                <Grid item sm={3} align="center">
-                  <ListItemText>{row.from_date}</ListItemText>
-                </Grid>
-                <Grid item sm={3} align="center">
-                  <ListItemText>{row.to_date}</ListItemText>
-                </Grid>
-                <Grid item sm={3} align="center">
-                  <ListItemText>{row.reason}</ListItemText>
-                </Grid>
-                <Grid item sm={3} align="center">
-                  <ListItemText>{row.status}</ListItemText>
-                </Grid>
-              </ListItem>
+              <Grid templateColumns="repeat(12, 1fr)" gap={3} p={1}>
+                <GridItem colSpan={3}>
+                  <Box w="100%">{row.from_date}</Box>
+                </GridItem>
+                <GridItem colSpan={3}>
+                  <Box w="100%">{row.to_date}</Box>
+                </GridItem>
+                <GridItem colSpan={3}>
+                  <Box w="100%">{row.reason}</Box>
+                </GridItem>
+                <GridItem colSpan={3}>
+                  <Box w="100%">{row.status}</Box>
+                </GridItem>
+              </Grid>
             );
           })}
       </Grid>

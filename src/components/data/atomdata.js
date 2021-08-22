@@ -12,6 +12,7 @@ export const loginLevelState = atom({
     siteallows_fee: 0,
     perdiem_fee: 0,
     reporting_to: "",
+    reporting_email: "",
   },
 });
 

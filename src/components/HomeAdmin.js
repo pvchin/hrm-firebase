@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import { useHistory } from "react-router-dom";
-import { TextField, Grid, Paper, Container, Box } from "@material-ui/core";
+import { Box,Stack } from "@chakra-ui/react";
+import { TextField, Grid, Paper, Container } from "@material-ui/core";
 import CardLayout from "../helpers/CardLayout";
 import CardLayout2 from "../helpers/CardLayout2";
 import CardLayout3 from "../helpers/CardLayout3";
@@ -16,7 +17,7 @@ import { useExpensesContext } from "../context/expenses_context";
 import { usePayslipsContext } from "../context/payslips_context";
 import { useDailyAllowancesContext } from "../context/dailyallowances_context";
 import LeaveTableViewAdmin from "./LeaveTableViewAdmin";
-import LeaveTableAdmin from "./LeaveTableAdmin";
+import LeaveTableAdmin from "./LeaveTableManager";
 //import ExpenseTableView from "./ExpenseTableView";
 import ExpenseTableAdmin from "./ExpenseTableAdmin";
 //import PayslipTableView from "./PayslipTableView";
@@ -31,7 +32,7 @@ const drawerWidth = 240;
 const FILTERSTRING = "Pending";
 
 const EmployeeView = () => {
-  let history = useHistory()
+  let history = useHistory();
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   const { employees } = useEmployees();
@@ -51,7 +52,7 @@ const EmployeeView = () => {
   const { payslips, loadPendingPayslips } = usePayslipsContext();
   const { dailyallowances, loadPendingDailyAllowances } =
     useDailyAllowancesContext();
-  
+
   const handleLeaveDialogOpen = () => {
     setLeavesdata([]);
     setLeavesdata([...leaves]);
@@ -104,39 +105,25 @@ const EmployeeView = () => {
         <h3>Dashboard</h3> */}
       </div>
       <Container maxWidth="lg" className={classes.container}>
-        <Grid container spacing={3}>
-          {/* Chart */}
-          <Grid item xs={12} md={8} lg={12}>
-            {/* <Paper className={fixedHeightPaper}>
-              <div>Chart</div>
-            </Paper> */}
-            {/* <CardLayout3 title="">
-             <h2>Chart</h2>
-            </CardLayout3> */}
-          </Grid>
-          {/* Recent Deposits */}
-          <Grid item xs={6} md={8} lg={6}>
-            <CardLayout2 title="">
-              <LeaveTableViewAdmin />
-            </CardLayout2>
-          </Grid>
-          <Grid item xs={6} md={8} lg={6}>
-            <CardLayout
-              title=""
-              handleClick={() => history.push("/allemployees")}
-            >
-              <WPExpiryViewAdmin />
-            </CardLayout>
-          </Grid>
-          <Grid item xs={6} md={8} lg={6}>
-            <CardLayout
-              title=""
-              handleClick={() => history.push("/allemployees")}
-            >
-              <TrainingsTableViewAdmin />
-            </CardLayout>
-          </Grid>
-        </Grid>
+        
+          <Stack direction="column">
+            <Box>
+              <CardLayout2>
+                <LeaveTableViewAdmin />
+              </CardLayout2>
+            </Box>
+            <Box>
+              <CardLayout2>
+                <WPExpiryViewAdmin />
+              </CardLayout2>
+            </Box>
+            <Box>
+              <CardLayout2>
+                <TrainingsTableViewAdmin />
+              </CardLayout2>
+            </Box>
+          </Stack>
+        
         <Box pt={4}>
           <Copyright />
         </Box>

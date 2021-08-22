@@ -7,7 +7,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import CheckIcon from "@material-ui/icons/Check";
 import SearchIcon from "@material-ui/icons/Search";
-import LeaveForm from "./LeaveForm";
+import LeaveFormAdmin from "./LeaveFormAdmin";
 import { CustomDialog } from "../helpers/CustomDialog";
 import { AlertDialog } from "../helpers/AlertDialog";
 import { useLeavesContext } from "../context/leaves_context";
@@ -16,6 +16,16 @@ import { useLeaves } from "./leaves/useLeaves";
 import { useAddLeaves } from "./leaves/useAddLeaves";
 import { useDeleteLeaves } from "./leaves/useDeleteLeaves";
 import { useUpdateLeaves } from "./leaves/useUpdateLeaves";
+
+const initial_form = {
+  name: "",
+  to_date: "",
+  from_date: "",
+  reason: "",
+  status: "Pending",
+  no_of_days: 0,
+  leave_bal: 0,
+};
 
 const columns = [
   {
@@ -80,6 +90,7 @@ export default function LeaveTable() {
   const updateLeaves = useUpdateLeaves();
   const addLeaves = useAddLeaves();
   const deleteLeaves = useDeleteLeaves();
+  const [formdata, setFormdata] = useState(initial_form);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   const { loadEmployees } = useEmployeesContext();
@@ -102,6 +113,7 @@ export default function LeaveTable() {
 
   const update_Leave = async (data) => {
     const { id } = data;
+    setFormdata({ ...data });
     setEditLeaveID(id);
     setIsLeaveEditingOn();
     getSingleLeave(id);
@@ -111,6 +123,7 @@ export default function LeaveTable() {
 
   const add_Leave = async (data) => {
     // const { id } = data;
+    setFormdata({ ...data });
     resetSingleLeave();
     setEditLeaveID("");
     setIsLeaveEditingOff();
@@ -173,13 +186,13 @@ export default function LeaveTable() {
                 update_Leave(rowData);
               },
             },
-            {
-              icon: "delete",
-              tooltip: "Delete Record",
-              onClick: (event, rowData) => {
-                delete_Leave(rowData);
-              },
-            },
+            // {
+            //   icon: "delete",
+            //   tooltip: "Delete Record",
+            //   onClick: (event, rowData) => {
+            //     delete_Leave(rowData);
+            //   },
+            // },
             {
               icon: "add",
               tooltip: "Add Record",
@@ -205,7 +218,11 @@ export default function LeaveTable() {
           showButton={true}
           isFullscree={false}
         >
-          <LeaveForm handleDialogClose={handleDialogClose} />
+          <LeaveFormAdmin
+            formdata={formdata}
+            setFormdata={setFormdata}
+            handleDialogClose={handleDialogClose}
+          />
         </CustomDialog>
 
         <AlertDialog

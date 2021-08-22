@@ -55,10 +55,11 @@ const SigninForm = () => {
           siteallows_fee: row.siteallows_fee,
           perdiem_fee: row.perdiem_fee,
           reporting_to: row.reporting_to,
+          reporting_email: row.reporting_email,
         };
       });
     if (email === "admin@abc.com") {
-      setRole(role)
+      setRole(role);
       setLoginLevel({
         ...loginLevel,
         loginUser: "Admin",
@@ -70,6 +71,7 @@ const SigninForm = () => {
         siteallows_fee: 0,
         perdiem_fee: 0,
         reporting_to: "",
+        reporting_email: "",
       });
       setEditEmployeeID("111");
       return null;
@@ -123,6 +125,7 @@ const SigninForm = () => {
       siteallows_fee: emp[0].siteallows_fee,
       perdiem_fee: emp[0].perdiem_fee,
       reporting_to: emp[0].reporting_to,
+      reporting_email: emp[0].reporting_email,
     });
     setEditEmployeeID(emp[0].id);
     setPassword("");

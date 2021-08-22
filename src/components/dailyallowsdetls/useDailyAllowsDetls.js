@@ -7,29 +7,34 @@ import axios from "axios";
 import { queryKeys } from "../react-query/constants";
 
 async function getDailyAllowsDetls(empid) {
-  //const { data } = await axios.get(`${leaves_url}?fv=${empid}`);
-  const { data } = await axios.get(`${dailyallowsdetls_url}`);
+  const { data } = await axios.get(`${dailyallowsdetls_url}?em=${empid}`);
+  //const { data } = await axios.get(`${dailyallowsdetls_url}`);
   return data;
 }
 
 export function useDailyAllowsDetls(empid) {
-  const [filter, setFilter] = useState("all");
+  const [dailyAllowsDetlsfilter, setDailyAllowsDetlsFilter] = useState("all");
   const [dailyAllowsDetlsId, setDailyAllowsDetlsId] = useState("");
 
   const selectFn = useCallback(
-    (unfiltered) => filterByEmpId(unfiltered, filter),
-    [filter]
+    (unfiltered) => filterByEmpId(unfiltered, dailyAllowsDetlsfilter),
+    [dailyAllowsDetlsfilter]
   );
 
   const fallback = [];
   const { data: dailyallowsdetls = fallback } = useQuery(
     //[queryKeys.leaves, { leaveId }],
-    queryKeys.dailyallows,
+    queryKeys.dailyallowsdetls,
     () => getDailyAllowsDetls(dailyAllowsDetlsId),
     {
-      select: filter !== "all" ? selectFn : undefined,
+      select: dailyAllowsDetlsfilter !== "all" ? selectFn : undefined,
     }
   );
 
-  return { dailyallowsdetls, filter, setFilter, setDailyAllowsDetlsId };
+  return {
+    dailyallowsdetls,
+    dailyAllowsDetlsfilter,
+    setDailyAllowsDetlsFilter,
+    setDailyAllowsDetlsId,
+  };
 }

@@ -61,6 +61,8 @@ const initial_values = {
   siteallows_fee: 0,
   perdiem_fee: 0,
   empno: "",
+  reporting_to: "",
+  reporting_email: "",
 };
 
 const EmployeeForm = () => {
@@ -71,6 +73,7 @@ const EmployeeForm = () => {
   //const currencyRate = useCurrency()
   const { designations } = useDesignations();
   const { departments } = useDepartments();
+  const [reportemail, setReportEmail] = useState("");
   const [empage, setEmpage] = useState(0);
   const [checktap, setCheckTap] = useState(false);
   const [empId, setEmpId] = useRecoilState(editEmployeeIdState);
@@ -111,6 +114,8 @@ const EmployeeForm = () => {
     siteallows_fee,
     perdiem_fee,
     empno,
+    reporting_to,
+    reporting_email,
   } = single_employee[0];
 
   const calculateAge = (dob) => {
@@ -124,19 +129,32 @@ const EmployeeForm = () => {
     return age;
   };
 
+  const handleReportingTo = (name) => {
+    const emp = employees
+      .filter((f) => f.name === name)
+      .map((r) => {
+        return { ...r };
+      });
+    setReportEmail(emp[0].email);
+  };
+
   const onSubmit = (data) => {
     if (isEditing) {
-      updateEmployees({ id: editEmployeeID, ...data });
+      updateEmployees({
+        id: editEmployeeID,
+        ...data,
+        reporting_email: reportemail,
+      });
     } else {
-      addEmployees({ ...data });
+      addEmployees({ ...data, reporting_email: reportemail });
     }
-    
   };
 
   useEffect(() => {
     let age = calculateAge(birthdate);
     setEmpage(age);
-    setCheckTap(tap_checkbox)
+    setCheckTap(tap_checkbox);
+    setReportEmail(reporting_email);
   }, []);
 
   if (!employees) {
@@ -613,13 +631,10 @@ const EmployeeForm = () => {
                             checked={checktap}
                             type="checkbox"
                             onChange={(e) => {
-                              console.log("tap", !e.target.checked)
-                              onChange(
-                                (e.target.checked)
-                              );
+                              console.log("tap", !e.target.checked);
+                              onChange(e.target.checked);
                               setCheckTap(e.target.checked);
                             }}
-
                           />
                         }
                         label="TAP/SCP Contribution"
@@ -953,6 +968,70 @@ const EmployeeForm = () => {
                             return <MenuItem value={r.name}>{r.name}</MenuItem>;
                           })}
                       </TextField>
+                    );
+                  }}
+                  //rules={{ required: "Email is required" }}
+                />
+              </div>
+              <div>
+                <Controller
+                  name="reporting_to"
+                  control={control}
+                  defaultValue={reporting_to}
+                  render={({
+                    field: { onChange, value },
+                    fieldState: { error },
+                  }) => {
+                    return (
+                      <TextField
+                        label="Reporting To"
+                        id="standard-reportingto"
+                        name="reporting_to"
+                        defaultValue={reporting_to}
+                        className={classes.textField}
+                        onChange={(e) => {
+                          onChange(e.target.value);
+                          handleReportingTo(e.target.value);
+                        }}
+                        error={!!error}
+                        helperText={error ? error.message : null}
+                        select
+                      >
+                        <MenuItem value="">None</MenuItem>
+                        {employees &&
+                          employees.map((r) => {
+                            return <MenuItem value={r.name}>{r.name}</MenuItem>;
+                          })}
+                      </TextField>
+                    );
+                  }}
+                  //rules={{ required: "Email is required" }}
+                />
+                <Controller
+                  name="reporting_email"
+                  control={control}
+                  defaultValue={reportemail}
+                  render={({
+                    field: { onChange, value },
+                    fieldState: { error },
+                  }) => {
+                    return (
+                      <TextField
+                        label="Reporting Email"
+                        id="standard-reportingemail"
+                        name="reporting_email"
+                        value={reportemail}
+                        className={classes.textField}
+                        onChange={onChange}
+                        error={!!error}
+                        helperText={error ? error.message : null}
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                        InputProps={{
+                          readOnly: true,
+                        }}
+                      ></TextField>
                     );
                   }}
                   //rules={{ required: "Email is required" }}

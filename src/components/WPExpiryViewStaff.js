@@ -2,10 +2,21 @@ import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import axios from "axios";
-import { Heading } from "@chakra-ui/react";
+import {
+  Box,
+  Grid,
+  GridItem,
+  Icon,
+  Heading,
+  IconButton,
+  Spacer,
+  Stack,
+} from "@chakra-ui/react";
+import { EditIcon, EmailIcon, ViewIcon } from "@chakra-ui/icons";
+import { useHistory } from "react-router-dom";
 import { differenceInDays, addDays } from "date-fns";
 import { useRecoilState } from "recoil";
-import { Grid, List, ListItem, ListItemText } from "@material-ui/core";
+import { List, ListItem, ListItemText } from "@material-ui/core";
 import { loginLevelState } from "./data/atomdata";
 import { useEmployees } from "./employees/useEmployees";
 import { useUser } from "./user/useUser";
@@ -34,6 +45,7 @@ const columns = [
 
 const WPExpiryViewStaff = () => {
   const classes = useStyles();
+  const history = useHistory()
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   const { employees, setFilter } = useEmployees();
   const { user } = useUser();
@@ -48,9 +60,19 @@ const WPExpiryViewStaff = () => {
   return (
     <List className={classes.root}>
       <Grid container direction="row">
-        <Heading as="h4" size="md">
-          Work Permit Expiry Within 90 days
-        </Heading>
+        <Stack direction="row">
+          <Heading as="h4" size="md">
+            Work Permit Expiry Within 90 days
+          </Heading>
+          <Spacer />
+          <IconButton
+            // variant="outline"
+            size="md"
+            aria-label="Edit"
+            icon={<EditIcon />}
+            onClick={() => history.push("/singleemployee")}
+          />
+        </Stack>
         {employees
           .filter(
             (i) =>
@@ -61,14 +83,24 @@ const WPExpiryViewStaff = () => {
           )
           .map((row) => {
             return (
-              <ListItem key={row.id}>
-                <Grid item sm={4} align="center">
-                  <ListItemText>{row.workpermitno}</ListItemText>
-                </Grid>
-                <Grid item sm={4} align="center">
-                  <ListItemText>{row.workpermit_expirydate}</ListItemText>
-                </Grid>
-              </ListItem>
+              <Grid templateColumns="repeat(6, 1fr)" gap={3} p={1}>
+                
+                <GridItem colSpan={3}>
+                  <Box w="100%">{row.workpermitno}</Box>
+                </GridItem>
+               
+                <GridItem colSpan={3}>
+                  <Box w="100%">{row.workpermit_expirydate}</Box>
+                </GridItem>
+              </Grid>
+              // <ListItem key={row.id}>
+              //   <Grid item sm={4} align="center">
+              //     <ListItemText>{row.workpermitno}</ListItemText>
+              //   </Grid>
+              //   <Grid item sm={4} align="center">
+              //     <ListItemText>{row.workpermit_expirydate}</ListItemText>
+              //   </Grid>
+              // </ListItem>
             );
           })}
       </Grid>

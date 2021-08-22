@@ -18,6 +18,7 @@ import { useEmployeesContext } from "../context/employees_context";
 import { Controller, useForm, setValue } from "react-hook-form";
 import { useRecoilState } from "recoil";
 import { loginLevelState } from "./data/atomdata";
+import { useEmployees } from "./employees/useEmployees";
 import { useAddEmployees } from "./employees/useAddEmployees";
 import { useUpdateEmployees } from "./employees/useUpdateEmployees";
 import { useDepartments } from "./departments/useDepartments";
@@ -60,6 +61,8 @@ const initial_values = {
   role: 1,
   password: "abc123*",
   empno: "",
+  reporting_to: "",
+  reporting_email: "",
 };
 
 const EmployeeFormNew = () => {
@@ -101,12 +104,17 @@ const EmployeeFormNew = () => {
     workpermit_expirydate,
     siteallows_fee,
     perdiem_fee,
+    reporting_to,
+    reporting_email,
   } = single_employee || initial_values;
   const addEmployees = useAddEmployees();
   const updateEmployees = useUpdateEmployees();
+  const { employees } = useEmployees();
   const { designations } = useDesignations();
   const { departments } = useDepartments();
   const [empage, setEmpage] = useState(0);
+  const [reportemail, setReportEmail] = useState("");
+  const [checktap, setCheckTap] = useState(false);
   //const [alert, setAlert] = useState(false);
   const { handleSubmit, control } = useForm();
   const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
@@ -121,6 +129,15 @@ const EmployeeFormNew = () => {
       age--;
     }
     return age;
+  };
+
+  const handleReportingTo = (name) => {
+    const emp = employees
+      .filter((f) => f.name === name)
+      .map((r) => {
+        return { ...r };
+      });
+    setReportEmail(emp[0].email);
   };
 
   const onSubmit = (data) => {
@@ -904,6 +921,67 @@ const EmployeeFormNew = () => {
                             return <MenuItem value={r.name}>{r.name}</MenuItem>;
                           })}
                       </TextField>
+                    );
+                  }}
+                  //rules={{ required: "Email is required" }}
+                />
+              </div>
+              <div>
+                <Controller
+                  name="reporting_to"
+                  control={control}
+                  defaultValue={reporting_to}
+                  render={({
+                    field: { onChange, value },
+                    fieldState: { error },
+                  }) => {
+                    return (
+                      <TextField
+                        label="Reporting To"
+                        id="standard-reportingto"
+                        name="reporting_to"
+                        defaultValue={reporting_to}
+                        className={classes.textField}
+                        onChange={(e) => {
+                          onChange(e.target.value);
+                          handleReportingTo(e.target.value);
+                        }}
+                        error={!!error}
+                        helperText={error ? error.message : null}
+                        select
+                      >
+                        <MenuItem value="">None</MenuItem>
+                        {employees &&
+                          employees.map((r) => {
+                            return <MenuItem value={r.name}>{r.name}</MenuItem>;
+                          })}
+                      </TextField>
+                    );
+                  }}
+                  //rules={{ required: "Email is required" }}
+                />
+                <Controller
+                  name="reporting_email"
+                  control={control}
+                  defaultValue={reportemail}
+                  render={({
+                    field: { onChange, value },
+                    fieldState: { error },
+                  }) => {
+                    return (
+                      <TextField
+                        label="Reporting Email"
+                        id="standard-reportingemail"
+                        name="reporting_email"
+                        value={reportemail}
+                        className={classes.textField}
+                        onChange={onChange}
+                        error={!!error}
+                        helperText={error ? error.message : null}
+                        InputProps={{
+                          readOnly: true,
+                        }}
+                      ></TextField>
                     );
                   }}
                   //rules={{ required: "Email is required" }}

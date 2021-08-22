@@ -2,15 +2,21 @@ import React from "react";
 import { Button, Icon, TextField, Paper, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useRecoilState } from "recoil";
+import * as emailjs from "emailjs-com";
 import { loginLevelState } from "./data/atomdata";
 import MenuItem from "@material-ui/core/MenuItem";
 import { useEmployeesContext } from "../context/employees_context";
 import { useExpensesContext } from "../context/expenses_context";
 import { Controller, useForm } from "react-hook-form";
+import { useCustomToast } from "../helpers/useCustomToast";
 import { useExpenses } from "./expenses/useExpenses";
 import { useAddExpenses } from "./expenses/useAddExpenses";
 import { useDeleteExpenses } from "./expenses/useDeleteExpenses";
 import { useUpdateExpenses } from "./expenses/useUpdateExpenses";
+
+const SERVICE_ID = process.env.REACT_APP_EMAILJS_SERVICEID;
+const TEMPLATE_ID = "template_1y8odlq";
+const USER_ID = process.env.REACT_APP_EMAILJS_USERID;
 
 const initial_values = {
   name: "",
@@ -25,16 +31,42 @@ const initial_values = {
 
 const ExpenseForm = ({ formdata, setFormdata, handleDialogClose }) => {
   const classes = useStyles();
+  const toast = useCustomToast();
   const { expenses, filter, setFilter, setExpenseId } = useExpenses();
   const updateExpenses = useUpdateExpenses();
   const addExpenses = useAddExpenses();
   const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
-  const {
-    isExpenseEditing,
-    editExpenseID,
-  } = useExpensesContext();
+  const { isExpenseEditing, editExpenseID } = useExpensesContext();
 
   const { handleSubmit, control } = useForm();
+
+  const handleSentEmail = (data) => {
+    const { date } = data;
+    //console.log("expense form", loginLevel);
+    var emaildata = {
+      to_name: loginLevel.loginUser,
+      to_email: loginLevel.loginEmail,
+      message: `Your expenses claim application dated on ${date} has been successfully submitted for approval`,
+      cc_to: loginLevel.reporting_email,
+    };
+
+    emailjs.send(SERVICE_ID, TEMPLATE_ID, emaildata, USER_ID).then(
+      function (response) {
+        console.log(response.status, response.text);
+        toast({
+          title: `Email has sent successfully to ${emaildata.to_email}!`,
+          status: "success",
+        });
+      },
+      function (err) {
+        console.log(err);
+        toast({
+          title: `Email has fail to send to ${emaildata.to_email}!`,
+          status: "warning",
+        });
+      }
+    );
+  };
 
   const onSubmit = (data, e) => {
     e.preventDefault();
@@ -42,6 +74,7 @@ const ExpenseForm = ({ formdata, setFormdata, handleDialogClose }) => {
       updateExpenses({ id: editExpenseID, ...data });
     } else {
       addExpenses({ empid: loginLevel.loginUserId, ...data });
+      handleSentEmail(data);
     }
 
     handleDialogClose();

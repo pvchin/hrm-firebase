@@ -14,9 +14,9 @@ import { useExpensesContext } from "../context/expenses_context";
 import { usePayslipsContext } from "../context/payslips_context";
 import { useDailyAllowancesContext } from "../context/dailyallowances_context";
 import LeaveTableView from "./LeaveTableView";
-import LeaveTableAdmin from "./LeaveTableAdmin";
+import LeaveTableManager from "./LeaveTableManager";
 import ExpenseTableView from "./ExpenseTableView";
-import ExpenseTableAdmin from "./ExpenseTableAdmin";
+import ExpenseTableManager from "./ExpenseTableManager";
 import PayslipTableViewAdmin from "./PayslipTableViewAdmin Copy";
 import PayslipTableAdmin from "./PayslipTableAdmin";
 import DailyAllowancesTableView from "./DailyAllowancesTableView";
@@ -47,7 +47,7 @@ const EmployeeView = () => {
   const { batchpayslips, loadPendingPayslips } = usePayslipsContext();
   const { dailyallowances, loadPendingDailyAllowances } =
     useDailyAllowancesContext();
-  
+
   const handleLeaveDialogOpen = () => {
     setLeavesdata([]);
     setLeavesdata([...leaves]);
@@ -101,26 +101,14 @@ const EmployeeView = () => {
       </div>
       <Container maxWidth="lg" className={classes.container}>
         <Grid container spacing={3}>
-          {/* Chart */}
-          {/* <Grid item xs={12} md={8} lg={12}>
-            <Paper className={fixedHeightPaper}>
-              <div>Chart</div>
-            </Paper> */}
-          {/* <CardLayout3 title="">
-             <h2>Chart</h2>
+          <Grid item xs={12} md={8} lg={12}>
+            <CardLayout3
+              title="Leaves pending for approval"
+              handleClick={handleLeaveDialogOpen}
+            >
+              <LeaveTableView />
             </CardLayout3>
-          </Grid> */}
-          {/* Recent Deposits */}
-          {/* <Grid item xs={6} md={8} lg={6}>
-            <CardLayout3 title="Staffs Onleave within 30 Days">
-              <OnLeavesView />
-            </CardLayout3>
-          </Grid> */}
-          {/* <Grid item xs={6} md={8} lg={6}>
-            <CardLayout3 title="Work Permit Expiry within 90 Days">
-              <WPExpiryView />
-            </CardLayout3>
-          </Grid> */}
+          </Grid>
           <Grid item xs={12} md={8} lg={12}>
             <CardLayout3
               title="Expenses pending for approval"
@@ -137,15 +125,6 @@ const EmployeeView = () => {
               <DailyAllowancesTableView />
             </CardLayout3>
           </Grid>
-          <Grid item xs={12} md={8} lg={12}>
-            <CardLayout3
-              title="Leaves pending for approval"
-              handleClick={handleLeaveDialogOpen}
-            >
-              <LeaveTableView />
-            </CardLayout3>
-          </Grid>
-          {/* Recent Orders */}
 
           <Grid item xs={12} md={8} lg={12}>
             <CardLayout3
@@ -167,7 +146,7 @@ const EmployeeView = () => {
           isFullscreen={false}
           isFullwidth={false}
         >
-          <LeaveTableAdmin
+          <LeaveTableManager
             setLeavesdata={setLeavesdata}
             leavesdata={leavesdata}
             handleDialogClose={handleLeaveDialogClose}
@@ -181,7 +160,7 @@ const EmployeeView = () => {
           isFullscreen={false}
           isFullwidth={false}
         >
-          <ExpenseTableAdmin
+          <ExpenseTableManager
             setExpensesdata={setExpensesdata}
             expensesdata={expensesdata}
             handleDialogClose={handleExpenseDialogClose}

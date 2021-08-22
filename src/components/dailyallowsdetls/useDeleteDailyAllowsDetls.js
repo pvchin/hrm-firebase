@@ -17,7 +17,7 @@ export function useDeleteDailyAllowsDetls(data) {
     onSuccess: () => {
       queryClient.invalidateQueries("dailyallowsdetls");
       toast({
-        title: "Site Allowance daily record being deleted!",
+        title: "Site Allowance daily details record being deleted!",
         status: "warning",
       });
     },

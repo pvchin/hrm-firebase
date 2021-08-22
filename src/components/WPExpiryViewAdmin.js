@@ -3,12 +3,23 @@ import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import axios from "axios";
 import * as emailjs from "emailjs-com";
-import { Heading, IconButton } from "@chakra-ui/react";
-import { EmailIcon } from "@chakra-ui/icons";
+import {
+  Box,
+  Grid,
+  GridItem,
+  Icon,
+  Heading,
+  IconButton,
+  Spacer,
+  Stack,
+} from "@chakra-ui/react";
+import { EditIcon, EmailIcon, ViewIcon } from "@chakra-ui/icons";
 import { differenceInDays, addDays } from "date-fns";
+import { useHistory } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { Grid, List, ListItem, ListItemText } from "@material-ui/core";
+import { List, ListItem, ListItemText } from "@material-ui/core";
 import { loginLevelState } from "./data/atomdata";
+import { useEmployeesContext } from "../context/employees_context";
 import { useEmployees } from "./employees/useEmployees";
 import { useUser } from "./user/useUser";
 import { useCustomToast } from "../helpers/useCustomToast";
@@ -41,13 +52,26 @@ const columns = [
 const WPExpiryViewAdmin = () => {
   const classes = useStyles();
   const toast = useCustomToast();
+  const history = useHistory();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-  const { employees, setFilter } = useEmployees();
+  const { employees, setFilter, setEmployeeId } = useEmployees();
   const [emaildata, setEmailData] = useState([]);
   const { user } = useUser();
   const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
   const [userdata, setUserdata] = useState([]);
   const today = Date().toLocaleString();
+  const {
+    editEmployeeID,
+    employees_loading,
+    //deleteEmployee,
+    //loadEmployees,
+    setEditEmployeeID,
+    setIsEditingOn,
+    setIsEditingOff,
+    resetSingleEmployee,
+    resetEmployees,
+    //getSingleEmployee,
+  } = useEmployeesContext();
   const emp = employees.filter(
     (i) =>
       differenceInDays(new Date(i.workpermit_expirydate), new Date(today)) < 90
@@ -80,6 +104,16 @@ const WPExpiryViewAdmin = () => {
     );
   };
 
+  const handleOnClick = (id) => {
+    resetSingleEmployee();
+    resetEmployees();
+    setEditEmployeeID(id);
+    setIsEditingOn();
+    setEmployeeId(id);
+
+    history.push("/singleemployee");
+  };
+
   // useEffect(() => {
   //   setFilter(user.id);
   // }, []);
@@ -87,7 +121,7 @@ const WPExpiryViewAdmin = () => {
   return (
     <List className={classes.root}>
       <Grid container direction="row">
-        <Heading as="h4" size="md">
+        {/* <Heading as="h4" size="md">
           Work Permit Expiry Within 90 days
           <IconButton
             variant="outline"
@@ -100,20 +134,54 @@ const WPExpiryViewAdmin = () => {
             s={5}
             onClick={() => handleEmailButtonClick()}
           />
-        </Heading>
+        </Heading> */}
+        <Stack direction="row">
+          <Heading as="h4" size="md">
+            Work Permit Expiry Within 90 days
+          </Heading>
+          <Spacer />
+          <IconButton
+            // variant="outline"
+            size="md"
+            aria-label="Edit"
+            icon={<EditIcon />}
+            onClick={() => history.push("/allemployees")}
+          />
+        </Stack>
         {emp.map((row) => {
           return (
-            <ListItem key={row.id}>
-              <Grid item sm={4} align="center">
-                <ListItemText>{row.name}</ListItemText>
-              </Grid>
-              <Grid item sm={4} align="center">
-                <ListItemText>{row.workpermitno}</ListItemText>
-              </Grid>
-              <Grid item sm={4} align="center">
-                <ListItemText>{row.workpermit_expirydate}</ListItemText>
-              </Grid>
-            </ListItem>
+            <Grid templateColumns="repeat(13, 1fr)" gap={3} p={1}>
+              <GridItem colSpan={1}>
+                <Box w="100%">
+                  <IconButton
+                    size="sm"
+                    aria-label="Edit"
+                    icon={<ViewIcon />}
+                    onClick={()=>handleOnClick(row.id)}
+                  />
+                </Box>
+              </GridItem>
+              <GridItem colSpan={3}>
+                <Box w="100%">{row.name}</Box>
+              </GridItem>
+              <GridItem colSpan={3}>
+                <Box w="100%">{row.workpermitno}</Box>
+              </GridItem>
+              <GridItem colSpan={3}>
+                <Box w="100%">{row.workpermit_expirydate}</Box>
+              </GridItem>
+            </Grid>
+            // <ListItem key={row.id}>
+            //   <Grid item sm={4} align="center">
+            //     <ListItemText>{row.name}</ListItemText>
+            //   </Grid>
+            //   <Grid item sm={4} align="center">
+            //     <ListItemText>{row.workpermitno}</ListItemText>
+            //   </Grid>
+            //   <Grid item sm={4} align="center">
+            //     <ListItemText>{row.workpermit_expirydate}</ListItemText>
+            //   </Grid>
+            // </ListItem>
           );
         })}
       </Grid>
