@@ -111,6 +111,7 @@ const Payrun = () => {
   const [error, setError] = useState(false);
   const [errornoselect, setErrornoselect] = useState(false);
   const [isPayrunExist, setIsPayrunExist] = useState(false);
+  const [isSubmit, setIsSubmit] = useState(false);
 
   useEffect(() => {
     if (!payrun_loading) {
@@ -170,6 +171,7 @@ const Payrun = () => {
     if (isExist) {
       //console.log("exist");
       setIsPayrunExist(true);
+      setIsSubmit(false)
       setAlert(true);
     } else {
       //console.log("add");
@@ -177,6 +179,7 @@ const Payrun = () => {
       add_Payrun(period, payrundata);
       setIsPayrunExist(false);
       setAlert(true);
+      setIsSubmit(true)
       setLoadPaybatch(true);
     }
   };
@@ -568,6 +571,7 @@ const Payrun = () => {
                       color="primary"
                       className={classes.button}
                       onClick={onOpen}
+                      disabled={isSubmit}
                     >
                       Currency Exchange Table
                     </Button>
