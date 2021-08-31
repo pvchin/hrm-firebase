@@ -56,7 +56,7 @@ const PrintPDFTest = ({ singlebatchpayslip }) => {
     return acc + item.site_allows_bnd;
   }, 0);
   const totalexpclaims = singlebatchpayslip.reduce((acc, item) => {
-    return acc + item.allows_expenses_claims_bnd;
+    return acc + item.expenses_claims_bnd;
   }, 0);
   const totalallows = singlebatchpayslip.reduce((acc, item) => {
     return acc + item.total_allowances_bnd;

@@ -17,7 +17,7 @@ import LeaveTableView from "./LeaveTableView";
 import LeaveTableManager from "./LeaveTableManager";
 import ExpenseTableView from "./ExpenseTableView";
 import ExpenseTableManager from "./ExpenseTableManager";
-import PayslipTableViewAdmin from "./PayslipTableViewAdmin Copy";
+import PayslipTableViewManager from "./PayslipTableViewManager";
 import PayslipTableAdmin from "./PayslipTableAdmin";
 import DailyAllowancesTableView from "./DailyAllowancesTableView";
 import DailyAllowancesTableAdmin from "./DailyAllowancesTableAdmin";
@@ -131,7 +131,7 @@ const EmployeeView = () => {
               title="Payroll pending for approval"
               handleClick={handlePayslipDialogOpen}
             >
-              <PayslipTableViewAdmin />
+              <PayslipTableViewManager />
             </CardLayout3>
           </Grid>
         </Grid>

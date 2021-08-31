@@ -47,7 +47,19 @@ const columns = [
     editable: "never",
   },
   {
-    title: "Earnings",
+    title: "Site Allowances",
+    field: "totalsitesallows",
+    type: "currency",
+    editable: "never",
+  },
+  {
+    title: "Expenses Claims",
+    field: "totalexpensesclaims",
+    type: "currency",
+    editable: "never",
+  },
+  {
+    title: "Allowances",
     field: "totalallows",
     type: "currency",
     editable: "never",

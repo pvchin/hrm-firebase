@@ -33,12 +33,12 @@ const columns = [
     type: "date",
     dateSetting: { locale: "en-GB" },
   },
-  {
-    title: "Pay Date",
-    field: "pay_date",
-    type: "date",
-    dateSetting: { locale: "en-GB" },
-  },
+  // {
+  //   title: "Pay Date",
+  //   field: "pay_date",
+  //   type: "date",
+  //   dateSetting: { locale: "en-GB" },
+  // },
   { title: "Total Wages", field: "totalwages", type: "currency" },
   { title: "TAP Amount", field: "totaltap", type: "currency" },
   { title: "SCP Amount", field: "totalscp", type: "currency" },
