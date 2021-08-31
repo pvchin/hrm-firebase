@@ -55,7 +55,7 @@ const DailyAllowancesAddPeriod = ({ handleDialogClose }) => {
       jobbonus: loginLevel.siteallows_fee,
       perdiem: loginLevel.perdiem_fee,
       manager: loginLevel.reporting_to,
-      clieng: "",
+      client: "",
     });
   }, []);
 
@@ -88,7 +88,7 @@ const DailyAllowancesAddPeriod = ({ handleDialogClose }) => {
 
     let amount = 0;
     for (let i = 0; i <= diffInDays; i++) {
-      amount = amount + input.jobbonus + input.perdiem;
+      amount = amount + Number(input.jobbonus) + Number(input.perdiem);
       const data = addDays(new Date(input.fromdate), i);
       addDailyAllowsDetls({
         empid: loginLevel.loginUserId,

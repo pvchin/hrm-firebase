@@ -12,6 +12,7 @@ import CheckIcon from "@material-ui/icons/Check";
 import SearchIcon from "@material-ui/icons/Search";
 import CheckCircleOutlineOutlinedIcon from "@material-ui/icons/CheckCircleOutlineOutlined";
 import ExpenseForm from "./ExpenseForm";
+import { useCustomToast } from "../helpers/useCustomToast";
 import { useExpensesContext } from "../context/expenses_context";
 import { useEmployeesContext } from "../context/employees_context";
 import { CustomDialog } from "../helpers/CustomDialog";
@@ -68,6 +69,7 @@ const columns = [
 
 export default function ExpenseTable() {
   const classes = useStyles();
+  const toast = useCustomToast();
   const [isLoad, setIsLoad] = useState(false);
   const { expenses, filter, setFilter, setExpenseId } = useExpenses();
   const updateExpenses = useUpdateExpenses();
@@ -111,6 +113,7 @@ export default function ExpenseTable() {
     setEditExpenseID(id);
     setIsExpenseEditingOn();
     handleDialogOpen();
+
     // history.push("/singleexpense");
   };
 

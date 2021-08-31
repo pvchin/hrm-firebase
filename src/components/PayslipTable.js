@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import MaterialTable, { MTableToolbar } from "material-table";
 import { makeStyles } from "@material-ui/core/styles";
-import { Button, Icon } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import CheckIcon from "@material-ui/icons/Check";
 import SearchIcon from "@material-ui/icons/Search";
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import BuildOutlinedIcon from "@material-ui/icons/BuildOutlined";
 import { useCustomToast } from "../helpers/useCustomToast";
 import { useHistory, Link } from "react-router-dom";
@@ -20,15 +18,15 @@ import { AlertDialog } from "../helpers/AlertDialog";
 import { usePayrun } from "./payrun/usePayrun";
 import { usePayslipsBatch } from "./payslips/usePayslipsBatch";
 import { useDeletePayrun } from "./payrun/useDeletePayrun";
-import { useExpenses } from "./expenses/useExpenses";
+import { useExpensesPayrun } from "./expenses/useExpensesPayrun";
 import { useUpdateExpenses } from "./expenses/useUpdateExpenses";
-import { useDailyAllows } from "./dailyallows/useDailyAllows";
+import { useDailyAllowsBatch } from "./dailyallows/useDailyAllowsBatch";
 import { useUpdateDailyAllows } from "./dailyallows/useUpdateDailyAllows";
 
 const FILTERSTRING = "Pending";
 
 const columns = [
-  { title: "Period", field: "period" },
+  // { title: "Period", field: "period" },
   {
     title: "Payrun Batch",
     field: "payrun",
@@ -41,9 +39,13 @@ const columns = [
     type: "date",
     dateSetting: { locale: "en-GB" },
   },
-  // { title: "Total Wages", field: "totalwages", type: "currency" },
-  // { title: "Total Allowances", field: "totalallowances", type: "currency" },
-  // { title: "Total Deductions", field: "totaldeductions", type: "currency" },
+  { title: "Total Wages", field: "totalwages", type: "currency" },
+  { title: "TAP Amount", field: "totaltap", type: "currency" },
+  { title: "SCP Amount", field: "totalscp", type: "currency" },
+  { title: "Site Allowances", field: "totalsitesallows", type: "currency" },
+  { title: "Expenses Claims", field: "totalexpensesclaims", type: "currency" },
+  { title: "Total Allowances", field: "totalallows", type: "currency" },
+  { title: "Total Deductions", field: "totaldeducts", type: "currency" },
   { title: "Total Payroll", field: "totalpayroll", type: "currency" },
   { title: "Status", field: "status" },
 ];
@@ -53,9 +55,9 @@ export default function PayslipTable() {
   const toast = useCustomToast();
   const classes = useStyles();
   const { payrun } = usePayrun();
-  const { payslips } = usePayslipsBatch();
-  const { expenses, setExpPayrunId } = useExpenses();
-  const { dailyallows } = useDailyAllows();
+  const { payslipsbatch, psbpayrunId, setPSBPayrunId } = usePayslipsBatch();
+  const { expensespayrun, setExpPayrunId } = useExpensesPayrun();
+  const { dailyallowsbatch, setDailyAllowsPayrunId } = useDailyAllowsBatch();
   const updateExpenses = useUpdateExpenses();
   const deletePayrun = useDeletePayrun();
   const updateDailyAllows = useUpdateDailyAllows();
@@ -139,12 +141,12 @@ export default function PayslipTable() {
       totalallows: data.totalallows,
       totaldeducts: data.totaldeducts,
       totalpayroll: data.totalpayroll,
+      status: data.status,
     });
     console.log("payrun", input);
   };
 
   const update_Payslip = async (data) => {
-    console.log("data", data);
     const { id, payrun } = data;
     setPayrunId(id);
     setPayrunStatus(data.status);
@@ -152,13 +154,15 @@ export default function PayslipTable() {
     setEditPayslipID(id);
     setIsPayslipEditingOn();
     getSinglePayslip(id);
-
     history.push("/payrunbatch");
   };
 
   const delete_Payslip = (data) => {
     const { id, payrun } = data;
     setDeletestate({ id: id, payrun: payrun });
+    setPSBPayrunId(payrun);
+    setExpPayrunId(payrun);
+    setDailyAllowsPayrunId(payrun);
     //loadPeriodExpenses(payrun);
     //getSingleBatchDailyAllowance(payrun);
     handleAlertOpen();
@@ -172,21 +176,21 @@ export default function PayslipTable() {
     //loadPeriodExpenses(payrun);
 
     //delete allows detls
-    payslips.forEach((rec) => {
+    payslipsbatch.forEach((rec) => {
       if (rec.payrun === payrun) {
         deletePayslip(rec.id);
       }
     });
 
     //unpaid expenses
-    expenses.forEach((rec) => {
+    expensespayrun.forEach((rec) => {
       if (rec.payrun === payrun) {
         updateExpenses({ id: rec.id, payrun: "" });
       }
     });
 
     //delete dailyallows
-    dailyallows.forEach((rec) => {
+    dailyallowsbatch.forEach((rec) => {
       if (rec.payrun === payrun) {
         updateDailyAllows({ id: rec.id, payrun: "" });
       }

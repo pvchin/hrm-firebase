@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import clsx from "clsx";
 import MaterialTable, { MTableToolbar } from "material-table";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, Icon, TextField, MenuItem } from "@material-ui/core";
@@ -6,6 +7,8 @@ import { useEmployeesContext } from "../context/employees_context";
 import { useTablesContext } from "../context/tables_context";
 import { useEmployees } from "./employees/useEmployees";
 import { useUpdateEmployees } from "./employees/useUpdateEmployees";
+
+const drawerWidth = 240;
 
 const columns = [
   {
@@ -32,6 +35,7 @@ const columns = [
 
 export default function UserAccessTable() {
   const classes = useStyles();
+  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   const { employees } = useEmployees();
   const updateEmployees = useUpdateEmployees();
   const { editEmployeeID } = useEmployeesContext();
@@ -42,42 +46,45 @@ export default function UserAccessTable() {
   };
 
   return (
-    <div className={classes.root}>
-      <div style={{ maxWidth: "100%", paddingTop: "5px" }}>
-        <MaterialTable
-          columns={columns}
-          data={employees}
-          title="User Access Table"
-          editable={{
-            onRowUpdate: (newData, oldData) =>
-              new Promise((resolve, reject) => {
-                setTimeout(() => {
-                  const dataUpdate = [...employees];
-                  const index = oldData.tableData.id;
-                  dataUpdate[index] = newData;
-                  update_rec(newData);
+    <div className={fixedHeightPaper}>
+      <div className={classes.root}>
+        <div style={{ maxWidth: "100%", paddingTop: "5px" }}>
+          <MaterialTable
+            columns={columns}
+            data={employees}
+            title="User Access Table"
+            editable={{
+              onRowUpdate: (newData, oldData) =>
+                new Promise((resolve, reject) => {
+                  setTimeout(() => {
+                    const dataUpdate = [...employees];
+                    const index = oldData.tableData.id;
+                    dataUpdate[index] = newData;
+                    update_rec(newData);
 
-                  resolve();
-                }, 1000);
-              }),
-          }}
-          options={{
-            filtering: true,
-            headerStyle: {
-              backgroundColor: "orange",
-              color: "primary",
-            },
-            showTitle: true,
-          }}
-          components={{
-            Toolbar: (props) => (
-              <div>
-                <MTableToolbar {...props} />
-                <div style={{ padding: "5px 10px" }}></div>
-              </div>
-            ),
-          }}
-        />
+                    resolve();
+                  }, 1000);
+                }),
+            }}
+            options={{
+              filtering: true,
+              pageSize: 10,
+              headerStyle: {
+                backgroundColor: "orange",
+                color: "primary",
+              },
+              showTitle: true,
+            }}
+            components={{
+              Toolbar: (props) => (
+                <div>
+                  <MTableToolbar {...props} />
+                  <div style={{ padding: "5px 10px" }}></div>
+                </div>
+              ),
+            }}
+          />
+        </div>
       </div>
     </div>
   );
@@ -85,6 +92,83 @@ export default function UserAccessTable() {
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    padding: 0,
+    display: "flex",
+  },
+  toolbar: {
+    paddingRight: 24, // keep right padding when drawer closed
+  },
+  toolbarIcon: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "flex-end",
+    padding: "0 8px",
+    ...theme.mixins.toolbar,
+  },
+  appBar: {
+    zIndex: theme.zIndex.drawer + 1,
+    transition: theme.transitions.create(["width", "margin"], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+  },
+  appBarShift: {
+    marginLeft: drawerWidth,
+    width: `calc(100% - ${drawerWidth}px)`,
+    transition: theme.transitions.create(["width", "margin"], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
+  menuButton: {
+    marginRight: 36,
+  },
+  menuButtonHidden: {
+    display: "none",
+  },
+  title: {
+    flexGrow: 1,
+  },
+  drawerPaper: {
+    position: "relative",
+    whiteSpace: "nowrap",
+    width: drawerWidth,
+    transition: theme.transitions.create("width", {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
+  drawerPaperClose: {
+    overflowX: "hidden",
+    transition: theme.transitions.create("width", {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    width: theme.spacing(7),
+    [theme.breakpoints.up("sm")]: {
+      width: theme.spacing(9),
+    },
+  },
+  appBarSpacer: theme.mixins.toolbar,
+  content: {
+    flexGrow: 1,
+    height: "100vh",
+    overflow: "auto",
+  },
+  container: {
+    paddingTop: theme.spacing(9),
+    paddingBottom: theme.spacing(4),
+    border: "1px solid",
+  },
+  paper: {
+    padding: theme.spacing(2),
+    // display: "flex",
+    display: "flex",
+    overflow: "auto",
+    flexDirection: "column",
+    border: "1px solid",
+    width: "100%",
+  },
+  fixedHeight: {
+    height: 800,
   },
 }));

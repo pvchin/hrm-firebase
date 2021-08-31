@@ -13,23 +13,23 @@ async function getExpensesPayrun(payrun) {
 }
 
 export function useExpensesPayrun(payrun) {
-  const [filter, setFilter] = useState("all");
+  const [expfilter, setExpFilter] = useState("all");
   const [exppayrunId, setExpPayrunId] = useState("");
 
   const selectFn = useCallback(
-    (unfiltered) => filterByPayrun(unfiltered, filter),
-    [filter]
+    (unfiltered) => filterByPayrun(unfiltered, expfilter),
+    [expfilter]
   );
 
   const fallback = [];
-  const { data: expenses = fallback } = useQuery(
-    //[queryKeys.leaves, { leaveId }],
-    queryKeys.expenses_payrun,
+  const { data: expensespayrun = fallback } = useQuery(
+    [queryKeys.expensespayrun, exppayrunId],
+    //queryKeys.expenses_payrun,
     () => getExpensesPayrun(exppayrunId),
     {
-      select: filter !== "all" ? selectFn : undefined,
+      select: expfilter !== "all" ? selectFn : undefined,
     }
   );
 
-  return { expenses, filter, setFilter, setExpPayrunId };
+  return { expensespayrun, expfilter, setExpFilter, setExpPayrunId };
 }

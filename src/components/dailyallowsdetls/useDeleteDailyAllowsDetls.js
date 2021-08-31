@@ -16,10 +16,10 @@ export function useDeleteDailyAllowsDetls(data) {
   const { mutate } = useMutation((data) => deleteDailyAllowsDetls(data), {
     onSuccess: () => {
       queryClient.invalidateQueries("dailyallowsdetls");
-      toast({
-        title: "Site Allowance daily details record being deleted!",
-        status: "warning",
-      });
+      // toast({
+      //   title: "Site Allowance daily details record being deleted!",
+      //   status: "warning",
+      // });
     },
   });
 

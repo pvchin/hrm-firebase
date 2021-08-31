@@ -510,7 +510,12 @@ const EmployeeFormNew = () => {
                           }}
                           error={!!error}
                           helperText={error ? error.message : null}
-                        />
+                          select
+                        >
+                          <MenuItem value="BND">BND</MenuItem>
+                          <MenuItem value="USD">USD</MenuItem>
+                          <MenuItem value="MYR">MYR</MenuItem>
+                        </TextField>
                       );
                     }}
                     //rules={{ required: "IC No required" }}

@@ -99,6 +99,7 @@ export default function DailyAllowancesTableStaff() {
       editable: "never",
     },
     { title: "Amount", field: "amount", type: "currency", editable: "never" },
+    { title: "Status", field: "status", editable: "never" },
     // {
     //   title: "Status",
     //   field: "status",
@@ -179,7 +180,7 @@ export default function DailyAllowancesTableStaff() {
         console.log("del", period, empid, rec);
         if (rec.period === period && rec.empid === empid) {
           console.log("del id", rec.id);
-          deleteDailyAllowsDetls({ id: rec.id });
+          deleteDailyAllowsDetls(rec.id);
         }
       });
     //delete daily allows
@@ -263,14 +264,14 @@ export default function DailyAllowancesTableStaff() {
                 update_SiteAllowsDetl(rowData);
               },
             }),
-            // (rowData) => ({
-            //   disabled: rowData.status !== "Pending",
-            //   icon: "delete",
-            //   tooltip: "Delete Record",
-            //   onClick: (event, rowData) => {
-            //     delete_SiteAllows(rowData);
-            //   },
-            // }),
+            (rowData) => ({
+              disabled: rowData.status !== "Pending",
+              icon: "delete",
+              tooltip: "Delete Record",
+              onClick: (event, rowData) => {
+                delete_SiteAllows(rowData);
+              },
+            }),
           ]}
           options={{
             filtering: true,

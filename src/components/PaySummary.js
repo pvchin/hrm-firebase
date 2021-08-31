@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import ReactToPrint, { useReactToPrint } from "react-to-print";
-import currency from "currency.js"
+import currency from "currency.js";
 import PrintPaySummary from "./PrintPaySummary";
 import { Heading, Text } from "@chakra-ui/react";
 import MaterialTable from "material-table";
@@ -19,49 +19,49 @@ const columns = [
   },
   {
     title: "Wages",
-    field: "wages",
+    field: "wages_bnd",
     editable: "never",
     type: "currency",
   },
   {
     title: "TAP Amount",
-    field: "tap_amount",
+    field: "tap_amount_bnd",
     editable: "never",
     type: "currency",
   },
   {
     title: "SCP Amount",
-    field: "scp_amount",
+    field: "scp_amount_bnd",
     editable: "never",
     type: "currency",
   },
   {
     title: "Site Allowances",
-    field: "allows_type1amt",
+    field: "site_allows_bnd",
     editable: "never",
     type: "currency",
   },
   {
     title: "Expenses Claims",
-    field: "allows_type2amt",
+    field: "expenses_claims_bnd",
     editable: "never",
     type: "currency",
   },
   {
     title: "Allowances",
-    field: "total_allowancws",
+    field: "total_allowances_bnd",
     editable: "never",
     type: "currency",
   },
   {
     title: "Deductions",
-    field: "total_deductions",
+    field: "total_deductions_bnd",
     editable: "never",
     type: "currency",
   },
   {
     title: "Nett Pay",
-    field: "nett_pay",
+    field: "nett_pay_bnd",
     editable: "never",
     type: "currency",
   },
@@ -98,43 +98,30 @@ const PaySummary = ({ singlebatchpayslip }) => {
   const handleCalcTotals = () => {
     const data = singlebatchpayslip;
     const totalwages = data.reduce((acc, item) => {
-      return acc + item.wages;
+      return acc + item.wages_bnd;
     }, 0);
     const totalsitesallows = data.reduce((acc, item) => {
-      return acc + item.allows_type1amt;
+      return acc + item.site_allows_bnd;
     }, 0);
     const totalexpclaims = data.reduce((acc, item) => {
-      return acc + item.allows_type2amt;
+      return acc + item.expenses_claims_bnd;
     }, 0);
     const totalallows = data.reduce((acc, item) => {
-      return (
-        acc +
-        item.allows_type3amt +
-        item.allows_type4amt +
-        item.allows_type5amt +
-        item.allows_type6amt +
-        item.allows_type7amt +
-        item.allows_type8amt
-      );
+      return acc + item.total_allowances_bnd;
     }, 0);
     const totaldeducts = data.reduce((acc, item) => {
-      return (
-        acc +
-        item.deducts_type1amt +
-        item.deducts_type2amt +
-        item.deducts_type3amt +
-        item.deducts_type4amt +
-        item.deducts_type5amt +
-        item.deducts_type6amt +
-        item.deducts_type7amt +
-        item.deducts_type8amt
-      );
+      return acc + item.total_deductions_bnd;
     }, 0);
-    const totaltap = Math.ceil(totalwages * 0.05);
-    const totalscp =
-      Math.round((totalwages + Number.EPSILON) * 0.035 * 100) / 100;
-    const totalpayroll =
-      totalwages + totalallows - totaltap - totalscp - totaldeducts;
+    const totaltap = data.reduce((acc, item) => {
+      return acc + item.tap_amount_bnd;
+    }, 0);
+    const totalscp = data.reduce((acc, item) => {
+      return acc + item.scp_amount_bnd;
+    }, 0);
+    const totalpayroll = data.reduce((acc, item) => {
+      return acc + item.nett_pay_bnd;
+    }, 0);
+
     setPayrundata({
       ...payrundata,
       totalpayroll: totalpayroll,
@@ -162,16 +149,16 @@ const PaySummary = ({ singlebatchpayslip }) => {
           totalexpensesclaims: totalexpclaims,
         });
       });
-    console.log("payrundata", payrundata);
-    console.log(
-      "totals",
-      totalpayroll,
-      totalwages,
-      totaltap,
-      totalscp,
-      totalallows,
-      totaldeducts
-    );
+    // console.log("payrundata", payrundata);
+    // console.log(
+    //   "totals",
+    //   totalpayroll,
+    //   totalwages,
+    //   totaltap,
+    //   totalscp,
+    //   totalallows,
+    //   totaldeducts
+    // );
   };
 
   const handleSaveCalcTotals = (e) => {
@@ -188,11 +175,11 @@ const PaySummary = ({ singlebatchpayslip }) => {
     <div>
       {/* <div style={{ display: "none" }}> */}
       <div>
-        <div>
+        {/* <div style={{ border: "1px solid black" }} align="center">
           <button onClick={() => exportPdfTable()}>
-            Print Payroll Summary Report!
+            <Heading size="sm">Print Payroll Summary Report!</Heading>
           </button>
-        </div>
+        </div> */}
         {/* <div>
           <div style={{ display: "none" }}>
             <ComponentToPrint ref={componentRef} />
@@ -203,10 +190,10 @@ const PaySummary = ({ singlebatchpayslip }) => {
       <form>
         <Grid container direction="row" style={{ border: "1px solid black" }}>
           <Grid
-            item
-            sm={12}
-            align="center"
-            style={{ border: "1px solid black" }}
+            // item
+            // sm={12}
+            // align="center"
+            // style={{ border: "1px solid black" }}
           >
             <div>
               {/* <Button
@@ -219,7 +206,7 @@ const PaySummary = ({ singlebatchpayslip }) => {
             >
               Save <Icon className={classes.rightIcon}>send</Icon>
             </Button> */}
-              <h2>Summary</h2>
+              {/* <Heading size="sm">Summary</Heading> */}
               {/* <Button
                 type="submit"
                 variant="contained"
@@ -300,7 +287,7 @@ const PaySummary = ({ singlebatchpayslip }) => {
                 label="Status"
                 name="status"
                 variant="filled"
-                value={payrunstatus}
+                value={payrundata.status}
                 style={{ width: "100%" }}
                 InputLabelProps={{
                   shrink: true,
@@ -443,7 +430,7 @@ const PaySummary = ({ singlebatchpayslip }) => {
                 name="totalsitesallows"
                 variant="filled"
                 type="currency"
-                value={currency(payrundata.totalsitesallows)}
+                value={currency(payrundata.totalsiteallows)}
                 style={{ width: "100%" }}
                 InputLabelProps={{
                   shrink: true,

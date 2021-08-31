@@ -140,13 +140,13 @@ export default function DailyAllowancesTable() {
                 update_DailyAllowance(rowData);
               },
             },
-            // {
-            //   icon: "delete",
-            //   tooltip: "Delete Record",
-            //   onClick: (event, rowData) => {
-            //     delete_DailyAllowance(rowData);
-            //   },
-            // },
+            {
+              icon: "delete",
+              tooltip: "Delete Record",
+              onClick: (event, rowData) => {
+                delete_DailyAllowance(rowData);
+              },
+            },
             {
               icon: "add",
               tooltip: "Add Record",

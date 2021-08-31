@@ -14,7 +14,7 @@ import {
   allowsDataIdState,
 } from "./data/atomdata";
 import { useDailyAllowancesContext } from "../context/dailyallowances_context";
-import { useDailyAllowsDetls } from "./dailyallowsdetls/useDailyAllowsDetls"
+import { useDailyAllowsDetls } from "./dailyallowsdetls/useDailyAllowsDetls";
 import { useAddDailyAllowsDetls } from "./dailyallowsdetls/useAddDailyAllowsDetls";
 import { useUpdateDailyAllowsDetls } from "./dailyallowsdetls/useUpdateDailyAllowsDetls";
 import { useDeleteDailyAllowsDetls } from "./dailyallowsdetls/useDeleteDailyAllowsDetls";
@@ -77,7 +77,7 @@ export default function DailyAllowsDetlsTableStaff() {
   let history = useHistory();
   const classes = useStyles();
   //const { dailyallowsdetls } = useDailyAllowsDetls()
-  const addDailyAllowsDetls = useAddDailyAllowsDetls()
+  const addDailyAllowsDetls = useAddDailyAllowsDetls();
   const updateDailyAllowsDetls = useUpdateDailyAllowsDetls();
   const deleteDailyAllowsDetls = useDeleteDailyAllowsDetls();
 
@@ -190,16 +190,25 @@ export default function DailyAllowsDetlsTableStaff() {
   //   console.log("delete allowsdetls", dailyallowsdetls);
   // };
 
-  const handle_refresh = () => {
-    //  getSingleBatchDailyAllowsDetl(allows_empid, allows_period);
-  };
+  // const handle_refresh = () => {
+  //   //  getSingleBatchDailyAllowsDetl(allows_empid, allows_period);
+  // };
 
   const handle_calc = () => {
+    
     const totbonus = dailyallowsdetls.reduce((acc, item) => {
-      return acc + item.jobbonus;
+      if (isNaN(item.jobbonus)) {
+        return acc;
+      } else {
+        return acc + item.jobbonus;
+      }
     }, 0);
     const totdiem = dailyallowsdetls.reduce((acc, item) => {
-      return acc + item.perdiem;
+      if (isNaN(item.perdiem)) {
+        return acc;
+      } else {
+        return acc + item.perdiem;
+      }
     }, 0);
     const totdays = dailyallowsdetls.reduce((acc, item) => {
       return acc + 1;
@@ -285,22 +294,22 @@ export default function DailyAllowsDetlsTableStaff() {
                     resolve();
                   }, 1000);
                 }),
-              // onRowDelete: (oldData) =>
-              //   new Promise((resolve, reject) => {
-              //     setTimeout(() => {
-              //       //const dataDelete = [...allowsDetlsTable];
-              //       const index = oldData.tableData.id;
-              //       //dataDelete.splice(index, 1);
-              //       //setAllowsDetlsTable([...dataDelete]);
+              onRowDelete: (oldData) =>
+                new Promise((resolve, reject) => {
+                  setTimeout(() => {
+                    //const dataDelete = [...allowsDetlsTable];
+                    const index = oldData.tableData.id;
+                    //dataDelete.splice(index, 1);
+                    //setAllowsDetlsTable([...dataDelete]);
 
-              //       resolve();
-              //     }, 1000);
-              //   }),
+                    resolve();
+                  }, 1000);
+                }),
             }}
             options={{
               filtering: true,
               selection: true,
-               pageSize:10,
+              pageSize: 10,
               headerStyle: {
                 backgroundColor: "orange",
                 color: "primary",

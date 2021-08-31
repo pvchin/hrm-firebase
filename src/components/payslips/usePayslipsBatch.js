@@ -14,7 +14,7 @@ async function getPayslips(payrun) {
 
 export function usePayslipsBatch(payrun) {
   const [filter, setFilter] = useState("all");
-  const [payrunId, setPayrunId] = useState("");
+  const [psbpayrunId, setPSBPayrunId] = useState("");
 
   const selectFn = useCallback(
     (unfiltered) => filterByPayrun(unfiltered, filter),
@@ -22,14 +22,14 @@ export function usePayslipsBatch(payrun) {
   );
 
   const fallback = [];
-  const { data: payslips = fallback } = useQuery(
-    //[queryKeys.leaves, { leaveId }],
-    queryKeys.payslips,
-    () => getPayslips(payrunId),
+  const { data: payslipsbatch = fallback } = useQuery(
+    [queryKeys.payslipsbatch, psbpayrunId],
+    //queryKeys.payslips,
+    () => getPayslips(psbpayrunId),
     {
       select: filter !== "all" ? selectFn : undefined,
     }
   );
 
-  return { payslips, filter, setFilter, setPayrunId };
+  return { payslipsbatch, filter, setFilter, setPSBPayrunId };
 }

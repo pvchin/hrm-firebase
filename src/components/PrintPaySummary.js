@@ -12,60 +12,60 @@ const PrintPDFTest = ({ singlebatchpayslip }) => {
     return r.name;
   });
   const wages = singlebatchpayslip.map((r) => {
-    const amount = formatPrice(r.wages);
+    const amount = formatPrice(r.wages_bnd);
     return amount;
   });
   const tapamount = singlebatchpayslip.map((r) => {
-    const amount = formatPrice(r.tap_amount);
+    const amount = formatPrice(r.tap_amount_bnd);
     return amount;
   });
   const scpamount = singlebatchpayslip.map((r) => {
-    const amount = formatPrice(r.scp_amount);
+    const amount = formatPrice(r.scp_amount_bnd);
     return amount;
   });
   const sitesallowsamt = singlebatchpayslip.map((r) => {
-    const amount = formatPrice(r.allows_type1amt);
+    const amount = formatPrice(r.site_allows_bnd);
     return amount;
   });
   const expclaimsamt = singlebatchpayslip.map((r) => {
-    const amount = formatPrice(r.allows_type2amt);
+    const amount = formatPrice(r.expenses_claims_bnd);
     return amount;
   });
   const allowsamt = singlebatchpayslip.map((r) => {
-    const amount = formatPrice(r.total_allowances);
+    const amount = formatPrice(r.total_allowances_bnd);
     return amount;
   });
   const deductsamt = singlebatchpayslip.map((r) => {
-    const amount = formatPrice(r.total_deductions);
+    const amount = formatPrice(r.total_deductions_bnd);
     return amount;
   });
   const nettpay = singlebatchpayslip.map((r) => {
-    const amount = formatPrice(r.nett_pay);
+    const amount = formatPrice(r.nett_pay_bnd);
     return amount;
   });
   const totalwages = singlebatchpayslip.reduce((acc, item) => {
-    return acc + item.wages;
+    return acc + item.wages_bnd;
   }, 0);
   const totaltap = singlebatchpayslip.reduce((acc, item) => {
-    return acc + item.tap_amount;
+    return acc + item.tap_amount_bnd;
   }, 0);
   const totalscp = singlebatchpayslip.reduce((acc, item) => {
-    return acc + item.scp_amount;
+    return acc + item.scp_amount_bnd;
   }, 0);
   const totalsitesallows = singlebatchpayslip.reduce((acc, item) => {
-    return acc + item.allows_type1amt;
+    return acc + item.site_allows_bnd;
   }, 0);
   const totalexpclaims = singlebatchpayslip.reduce((acc, item) => {
-    return acc + item.allows_type2amt;
+    return acc + item.allows_expenses_claims_bnd;
   }, 0);
   const totalallows = singlebatchpayslip.reduce((acc, item) => {
-    return acc + item.total_allowances;
+    return acc + item.total_allowances_bnd;
   }, 0);
   const totaldeducts = singlebatchpayslip.reduce((acc, item) => {
-    return acc + item.total_deductions;
+    return acc + item.total_deductions_bnd;
   }, 0);
   const totalnettpay = singlebatchpayslip.reduce((acc, item) => {
-    return acc + item.nett_pay;
+    return acc + item.nett_pay_bnd;
   }, 0);
   const { vfs } = vfsFonts.pdfMake;
   pdfMake.vfs = vfs;
@@ -256,7 +256,7 @@ const PrintPDFTest = ({ singlebatchpayslip }) => {
         margin: [0, 10, 0, 5],
       },
       footer: {
-        fontSize: 9,
+        fontSize: 8,
         bold: true,
         margin: [0, 10, 0, 5],
       },

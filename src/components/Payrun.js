@@ -11,7 +11,6 @@ import {
   Icon,
   Divider,
   TextField,
-  
 } from "@material-ui/core";
 import {
   Box,
@@ -47,6 +46,7 @@ import { usePayrun } from "./payrun/usePayrun";
 import { useCurrency } from "./currency/useCurrency";
 import { useExpenses } from "./expenses/useExpenses";
 import UpdateCurrency from "./CurrencyTable";
+import { usePayslipsBatch } from "./payslips/usePayslipsBatch";
 
 //const drawerWidth = 240;
 
@@ -85,6 +85,7 @@ const Payrun = () => {
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   //const { payrun } = usePayrun();
+  const { payslipsbatch, psbpayrunId, setPSBPayrunId } = usePayslipsBatch();
   const { currency } = useCurrency();
   //const { expenses, setPayrunId } = useExpensesPayrun();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -161,7 +162,7 @@ const Payrun = () => {
       formatDate(input.fromdate) + " - " + formatDate(input.todate);
     const payrundata =
       input.fromdate.substring(0, 4) + "-" + input.fromdate.substring(5, 7);
-    setInput({ ...input, period: period, payrun: payrundata });
+    setInput({ ...input, period: period, payrun: payrundata, status:"Pending" });
     formatPayrun();
     setPayslipPeriod(payrundata);
     const isExist = payrunExists(payrundata);
@@ -172,19 +173,12 @@ const Payrun = () => {
       setAlert(true);
     } else {
       //console.log("add");
-      add_Payrun(period, payrundata);
       checkSelectedEmployees(period, payrundata);
+      add_Payrun(period, payrundata);
       setIsPayrunExist(false);
       setAlert(true);
       setLoadPaybatch(true);
     }
-  };
-
-  const selectAllEmployees = () => {
-    employees &&
-      employees.forEach((emp) => {
-        emp.tableData.checked = true;
-      });
   };
 
   const checkSelectedEmployees = (period, payrun) => {
@@ -195,11 +189,37 @@ const Payrun = () => {
       tmptotalallows = 0,
       tmptotalTAP = 0,
       tmptotalSCP = 0,
-      tmpnettpay = 0;
+      tmpsiteallows = 0,
+      tmpexpsclaims = 0,
+      tmpnettpay = 0,
+      tmpcurrrate = 0,
+      tmpbasicsalarybnd = 0,
+      tmptotalallowsbnd = 0,
+      tmptotalTAPbnd = 0,
+      tmptotalSCPbnd = 0,
+      tmpsiteallowsbnd = 0,
+      tmpexpsclaimsbnd = 0,
+      tmpnettpaybnd = 0;
 
     resetPayslipsData();
     employees &&
       employees.forEach((emp, index) => {
+        exp = 0;
+        allows = 0;
+        tmpbasicsalary = 0;
+        tmptotalallows = 0;
+        tmptotalTAP = 0;
+        tmptotalSCP = 0;
+        tmpnettpay = 0;
+        tmpcurrrate = 0;
+        tmpbasicsalarybnd = 0;
+        tmptotalallowsbnd = 0;
+        tmptotalTAPbnd = 0;
+        tmpsiteallowsbnd = 0;
+        tmpexpsclaimsbnd = 0;
+        tmptotalSCPbnd = 0;
+        tmpnettpaybnd = 0;
+
         if (emp.tableData.checked) {
           exp = 0;
           if (unpaidexpenses) {
@@ -234,17 +254,19 @@ const Payrun = () => {
 
           tmpbasicsalary = basic_salary;
 
-          if (salary_currency === "USD") {
-            var table = currency
-              .filter((r) => r.currency === "USD")
+          if (salary_currency && salary_currency !== "BND") {
+            const table = currency
+              .filter((r) => r.currency === salary_currency)
               .map((rec) => {
                 return { ...rec };
               });
-            tmpbasicsalary = basic_salary * table[0].rate;
-            console.log("USD", table, basic_salary, tmpbasicsalary);
+            tmpcurrrate = table[0].rate;
+          } else {
+            tmpcurrrate = 1;
           }
 
-          tmptotalallows = allows + exp;
+          //console.log("USD", table, basic_salary, tmpbasicsalary);
+          //tmptotalallows = allows + exp;
           tmptotalTAP = tap_checkbox ? Math.ceil(tmpbasicsalary * 0.05) : 0;
           tmptotalSCP = tap_checkbox
             ? Math.round((tmpbasicsalary + Number.EPSILON) * 0.035 * 100) / 100
@@ -253,23 +275,49 @@ const Payrun = () => {
             tmptotalSCP = 98;
           }
           tmpnettpay =
-            tmpbasicsalary + tmptotalallows - tmptotalTAP - tmptotalSCP;
+            tmpbasicsalary +
+            allows +
+            exp +
+            tmptotalallows -
+            tmptotalTAP -
+            tmptotalSCP;
+
+          tmpbasicsalarybnd =
+            Math.round((basic_salary + Number.EPSILON) * tmpcurrrate * 100) /
+            100;
+
+          tmptotalTAPbnd =
+            Math.round((tmptotalTAP + Number.EPSILON) * tmpcurrrate * 100) /
+            100;
+          tmptotalSCPbnd =
+            Math.round((tmptotalSCP + Number.EPSILON) * tmpcurrrate * 100) /
+            100;
+          tmpnettpaybnd =
+            Math.round((tmpnettpay + Number.EPSILON) * tmpcurrrate * 100) / 100;
+          tmpsiteallowsbnd =
+            Math.round((allows + Number.EPSILON) * tmpcurrrate * 100) / 100;
+          tmpexpsclaimsbnd =
+            Math.round((exp + Number.EPSILON) * tmpcurrrate * 100) / 100;
+
+          tmpnettpaybnd =
+            tmpbasicsalarybnd +
+            tmpsiteallowsbnd +
+            tmpexpsclaimsbnd -
+            tmptotalTAPbnd -
+            tmptotalSCPbnd;
+
           const data = {
             name: name,
             period: period,
             pay_date: input.pay_date,
             payrun: payrun,
-            wages: tmpbasicsalary,
-            nett_pay: tmpnettpay,
             bank_name: bank_name,
             bank_acno: bank_acno,
+            salary_currency: salary_currency ? salary_currency : "BND",
+            currency_rate: tmpcurrrate,
             tap_acno: tap_acno,
-            tap_amount: tmptotalTAP,
             scp_acno: scp_acno,
-            scp_amount: tmptotalSCP,
             tap_checkbox: tap_checkbox,
-            total_allowances: tmptotalallows,
-            total_deductions: 0,
             empid: id,
             status: "Pending",
             allows_type1: "Site Allowances",
@@ -304,6 +352,24 @@ const Payrun = () => {
             deducts_type7amt: 0,
             deducts_type8: " ",
             deducts_type8amt: 0,
+
+            wages: tmpbasicsalary,
+            tap_amount: tmptotalTAP,
+            scp_amount: tmptotalSCP,
+            total_allowances: tmptotalallows,
+            total_deductions: 0,
+            site_allows: allows,
+            expenses_claims: exp,
+            nett_pay: tmpnettpay,
+
+            wages_bnd: tmpbasicsalarybnd,
+            site_allows_bnd: tmpsiteallowsbnd,
+            expenses_claims_bnd: tmpexpsclaimsbnd,
+            total_allowances_bnd: tmptotalallowsbnd,
+            total_deductions_bnd: 0,
+            tap_amount_bnd: tmptotalTAPbnd,
+            scp_amount_bnd: tmptotalSCPbnd,
+            nett_pay_bnd: tmpnettpaybnd,
           };
           addPayslip({ ...data });
         }
@@ -311,6 +377,7 @@ const Payrun = () => {
   };
 
   const handleNext = () => {
+    
     history.push("/payrunbatch");
   };
 
@@ -569,7 +636,7 @@ const Payrun = () => {
                   backgroundColor: "#daad86",
                   color: "primary",
                 },
-                showTitle:true,
+                showTitle: true,
                 // selectionProps: rowData => {
                 //   rowData.tableData.checked = true
                 // }

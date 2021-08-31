@@ -18,7 +18,7 @@ const Payslips = () => {
     <div>
       <CssBaseline />
       <div className={classes.appBarSpacer}>
-        <Container maxWidth="lg" className={classes.container}>
+        <Container maxWidth="xl" className={classes.container}>
           <Grid container spacing={3}>
             {/* <Grid item xs={12} md={8} lg={9}> */}
             <Grid item xs={12}>
@@ -103,14 +103,15 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: theme.spacing(9),
     paddingBottom: theme.spacing(4),
     border: "1px solid",
+    width: "100%"
   },
   paper: {
-    padding: theme.spacing(2),
+    padding: theme.spacing(1),
     // display: "flex",
     display: "flex",
     overflow: "auto",
     flexDirection: "column",
-    border: "1px solid",
+    border: "1px solid ",
     width: "100%",
   },
   fixedHeight: {
