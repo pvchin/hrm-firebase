@@ -1,6 +1,6 @@
 import pdfMake from "pdfmake/build/pdfmake";
 import vfsFonts from "pdfmake/build/vfs_fonts";
-import { formatPrice } from "../helpers/Utils";
+import { formatPriceZero } from "../helpers/Utils";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { payrunState } from "./data/atomdata";
 import { usePayslipsContext } from "../context/payslips_context";
@@ -8,39 +8,42 @@ import { usePayslipsContext } from "../context/payslips_context";
 const PrintPDFTest = ({ singlebatchpayslip }) => {
   const period = singlebatchpayslip[0].period;
   const subtitle = `Payroll Summary for the period  ${period}`;
+  const items = singlebatchpayslip.map((r) => {
+    return { name: r.name, wages: r.wages_bnd };
+  });
   const names = singlebatchpayslip.map((r) => {
     return r.name;
   });
   const wages = singlebatchpayslip.map((r) => {
-    const amount = formatPrice(r.wages_bnd);
+    const amount = formatPriceZero(r.wages_bnd);
     return amount;
   });
   const tapamount = singlebatchpayslip.map((r) => {
-    const amount = formatPrice(r.tap_amount_bnd);
+    const amount = formatPriceZero(r.tap_amount_bnd);
     return amount;
   });
   const scpamount = singlebatchpayslip.map((r) => {
-    const amount = formatPrice(r.scp_amount_bnd);
+    const amount = formatPriceZero(r.scp_amount_bnd);
     return amount;
   });
   const sitesallowsamt = singlebatchpayslip.map((r) => {
-    const amount = formatPrice(r.site_allows_bnd);
+    const amount = formatPriceZero(r.site_allows_bnd);
     return amount;
   });
   const expclaimsamt = singlebatchpayslip.map((r) => {
-    const amount = formatPrice(r.expenses_claims_bnd);
+    const amount = formatPriceZero(r.expenses_claims_bnd);
     return amount;
   });
   const allowsamt = singlebatchpayslip.map((r) => {
-    const amount = formatPrice(r.total_allowances_bnd);
+    const amount = formatPriceZero(r.total_allowances_bnd);
     return amount;
   });
   const deductsamt = singlebatchpayslip.map((r) => {
-    const amount = formatPrice(r.total_deductions_bnd);
+    const amount = formatPriceZero(r.total_deductions_bnd);
     return amount;
   });
   const nettpay = singlebatchpayslip.map((r) => {
-    const amount = formatPrice(r.nett_pay_bnd);
+    const amount = formatPriceZero(r.nett_pay_bnd);
     return amount;
   });
   const totalwages = singlebatchpayslip.reduce((acc, item) => {
@@ -201,42 +204,42 @@ const PrintPDFTest = ({ singlebatchpayslip }) => {
               "",
               {
                 alignment: "right",
-                text: formatPrice(totalwages),
+                text: formatPriceZero(totalwages),
                 style: "footer",
               },
               {
                 alignment: "right",
-                text: formatPrice(totaltap),
+                text: formatPriceZero(totaltap),
                 style: "footer",
               },
               {
                 alignment: "right",
-                text: formatPrice(totalscp),
+                text: formatPriceZero(totalscp),
                 style: "footer",
               },
               {
                 alignment: "right",
-                text: formatPrice(totalsitesallows),
+                text: formatPriceZero(totalsitesallows),
                 style: "footer",
               },
               {
                 alignment: "right",
-                text: formatPrice(totalexpclaims),
+                text: formatPriceZero(totalexpclaims),
                 style: "footer",
               },
               {
                 alignment: "right",
-                text: formatPrice(totalallows),
+                text: formatPriceZero(totalallows),
                 style: "footer",
               },
               {
                 alignment: "right",
-                text: formatPrice(totaldeducts),
+                text: formatPriceZero(totaldeducts),
                 style: "footer",
               },
               {
                 alignment: "right",
-                text: formatPrice(totalnettpay),
+                text: formatPriceZero(totalnettpay),
                 style: "footer",
               },
             ],

@@ -1,6 +1,6 @@
 import pdfMake from "pdfmake/build/pdfmake";
 import vfsFonts from "pdfmake/build/vfs_fonts";
-import { formatPrice } from "../helpers/Utils";
+import { formatPrice, formatPriceZero } from "../helpers/Utils";
 import { Divider } from "@material-ui/core";
 
 const PrintPayslip = ({ data, emp }) => {
@@ -35,16 +35,20 @@ const PrintPayslip = ({ data, emp }) => {
     scp_acno,
     payrun,
   } = emp[0];
-  const { name, total_allowances, total_deductions } = data.rowData;
-  const totalEarnings = data.rowData.wages + data.rowData.total_allowances;
+  const { name, total_allowances_bnd, total_deductions_bnd } = data.rowData;
+  const totalEarnings =
+    data.rowData.wages_bnd +
+    data.rowData.site_allows_bnd +
+    data.rowData.expenses_claims_bnd +
+    data.rowData.total_allowances_bnd;
   const totalDeductions =
-    data.rowData.tap_amount +
-    data.rowData.scp_amount +
-    data.rowData.total_deductions;
+    data.rowData.tap_amount_bnd +
+    data.rowData.scp_amount_bnd +
+    data.rowData.total_deductions_bnd;
   const earningsdesp = [
     "Wages",
-    data.rowData.allows_type1,
-    data.rowData.allows_type2,
+    data.rowData.site_allows_bnd === 0 ? "" : data.rowData.allows_type1,
+    data.rowData.expenses_claims_bnd === 0 ? "" : data.rowData.allows_type2,
     data.rowData.allows_type3,
     data.rowData.allows_type4,
     data.rowData.allows_type5,
@@ -53,19 +57,59 @@ const PrintPayslip = ({ data, emp }) => {
     data.rowData.allows_type8,
   ];
   const earningsamt = [
-    formatPrice(data.rowData.wages),
-    formatPrice(data.rowData.allows_type1amt),
-    formatPrice(data.rowData.allows_type2amt),
-    formatPrice(data.rowData.allows_type3amt),
-    formatPrice(data.rowData.allows_type4amt),
-    formatPrice(data.rowData.allows_type5amt),
-    formatPrice(data.rowData.allows_type6amt),
-    formatPrice(data.rowData.allows_type7amt),
-    formatPrice(data.rowData.allows_type8amt),
+    formatPrice(data.rowData.wages_bnd),
+    data.rowData.site_allows_bnd === 0
+      ? ""
+      : formatPrice(data.rowData.site_allows_bnd),
+    data.rowData.expenses_claims_bnd === 0
+      ? ""
+      : formatPrice(data.rowData.expenses_claims_bnd),
+    formatPrice(
+      Math.round(
+        (data.rowData.allows_type3amt + Number.EPSILON) *
+          data.rowData.currency_rate *
+          100
+      ) / 100
+    ),
+    formatPrice(
+      Math.round(
+        (data.rowData.allows_type4amt + Number.EPSILON) *
+          data.rowData.currency_rate *
+          100
+      ) / 100
+    ),
+    formatPrice(
+      Math.round(
+        (data.rowData.allows_type5amt + Number.EPSILON) *
+          data.rowData.currency_rate *
+          100
+      ) / 100
+    ),
+    formatPrice(
+      Math.round(
+        (data.rowData.allows_type6amt + Number.EPSILON) *
+          data.rowData.currency_rate *
+          100
+      ) / 100
+    ),
+    formatPrice(
+      Math.round(
+        (data.rowData.allows_type7amt + Number.EPSILON) *
+          data.rowData.currency_rate *
+          100
+      ) / 100
+    ),
+    formatPrice(
+      Math.round(
+        (data.rowData.allows_type8amt + Number.EPSILON) *
+          data.rowData.currency_rate *
+          100
+      ) / 100
+    ),
   ];
   const deductionsdesp = [
-    "TAP Amount",
-    "SCP Amount",
+    data.rowData.tap_amount_bnd === 0 ? "" : "TAP Amount",
+    data.rowData.scp_amount_bnd === 0 ? "" : "SCP Amount",
     data.rowData.deducts_type1,
     data.rowData.deducts_type2,
     data.rowData.deducts_type3,
@@ -76,16 +120,64 @@ const PrintPayslip = ({ data, emp }) => {
     data.rowData.deducts_type8,
   ];
   const deductionsamt = [
-    formatPrice(parseInt(data.rowData.tap_amount, 10)),
-    formatPrice(parseInt(data.rowData.scp_amount, 10)),
-    formatPrice(data.rowData.deducts_type1amt),
-    formatPrice(data.rowData.deducts_type2amt),
-    formatPrice(data.rowData.deducts_type3amt),
-    formatPrice(data.rowData.deducts_type4amt),
-    formatPrice(data.rowData.deducts_type5amt),
-    formatPrice(data.rowData.deducts_type6amt),
-    formatPrice(data.rowData.deducts_type7amt),
-    formatPrice(data.rowData.deducts_type8amt),
+    formatPrice(parseInt(data.rowData.tap_amount_bnd, 10)),
+    formatPrice(parseInt(data.rowData.scp_amount_bnd, 10)),
+    formatPrice(
+      Math.round(
+        (data.rowData.deducts_type1amt + Number.EPSILON) *
+          data.rowData.currency_rate *
+          100
+      ) / 100
+    ),
+    formatPrice(
+      Math.round(
+        (data.rowData.deducts_type2amt + Number.EPSILON) *
+          data.rowData.currency_rate *
+          100
+      ) / 100
+    ),
+    formatPrice(
+      Math.round(
+        (data.rowData.deducts_type3amt + Number.EPSILON) *
+          data.rowData.currency_rate *
+          100
+      ) / 100
+    ),
+    formatPrice(
+      Math.round(
+        (data.rowData.deducts_type4amt + Number.EPSILON) *
+          data.rowData.currency_rate *
+          100
+      ) / 100
+    ),
+    formatPrice(
+      Math.round(
+        (data.rowData.deducts_type5amt + Number.EPSILON) *
+          data.rowData.currency_rate *
+          100
+      ) / 100
+    ),
+    formatPrice(
+      Math.round(
+        (data.rowData.deducts_type6amt + Number.EPSILON) *
+          data.rowData.currency_rate *
+          100
+      ) / 100
+    ),
+    formatPrice(
+      Math.round(
+        (data.rowData.deducts_type7amt + Number.EPSILON) *
+          data.rowData.currency_rate *
+          100
+      ) / 100
+    ),
+    formatPrice(
+      Math.round(
+        (data.rowData.allows_type8amt + Number.EPSILON) *
+          data.rowData.currency_rate *
+          100
+      ) / 100
+    ),
   ];
 
   pdfMake.fonts = {
@@ -378,7 +470,7 @@ const PrintPayslip = ({ data, emp }) => {
               { alignment: "left", text: "Total Earnings" },
               { alignment: "right", text: formatPrice(totalEarnings) },
               { alignment: "left", text: "Total Deductions" },
-              { alignment: "right", text: formatPrice(totalDeductions) },
+              { alignment: "right", text: formatPriceZero(totalDeductions) },
             ],
             [
               { alignment: "left", text: "" },
