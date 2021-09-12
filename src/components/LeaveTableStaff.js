@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import MaterialTable, { MTableToolbar } from "material-table";
 import { TextField, MenuItem, Button, Icon } from "@material-ui/core";
-import { Alert } from "@material-ui/lab";
 import { makeStyles } from "@material-ui/core/styles";
 import { useRecoilState } from "recoil";
 import { loginLevelState } from "./data/atomdata";
@@ -12,13 +11,15 @@ import CheckIcon from "@material-ui/icons/Check";
 import SearchIcon from "@material-ui/icons/Search";
 import LeaveForm from "./LeaveForm";
 import { CustomDialog } from "../helpers/CustomDialog";
-import { AlertDialog } from "../helpers/AlertDialog";
+import { AlertDialogBox } from "../helpers/AlertDialogBox";
+import CustomAlertDialog  from "../helpers/CustomAlertDialog"
 import { useLeavesContext } from "../context/leaves_context";
 import { useEmployeesContext } from "../context/employees_context";
 import { useLeaves } from "./leaves/useLeaves";
 import { useAddLeaves } from "./leaves/useAddLeaves";
 import { useDeleteLeaves } from "./leaves/useDeleteLeaves";
 import { useUpdateLeaves } from "./leaves/useUpdateLeaves";
+import { Heading } from "@chakra-ui/react";
 
 const initial_form = {
   name: "",
@@ -87,6 +88,35 @@ const columns = [
   },
 ];
 
+// const AlertBox = ({ isOpen, onClose, cancelRef, heading, children }) => {
+//   return (
+//     <AlertDialog
+//       isOpen={isOpen}
+//       leastDestructiveRef={cancelRef}
+//       onClose={onClose}
+//     >
+//       <AlertDialogOverlay>
+//         <AlertDialogContent>
+//           <AlertDialogHeader fontSize="lg" fontWeight="bold">
+//             {heading}
+//           </AlertDialogHeader>
+
+//           <AlertDialogBody>{children}</AlertDialogBody>
+
+//           <AlertDialogFooter>
+//             <Button ref={cancelRef} onClick={onClose}>
+//               Cancel
+//             </Button>
+//             <Button colorScheme="red" onClick={onClose} ml={3}>
+//               Delete
+//             </Button>
+//           </AlertDialogFooter>
+//         </AlertDialogContent>
+//       </AlertDialogOverlay>
+//     </AlertDialog>
+//   );
+// };
+
 export default function LeaveTableStaff() {
   const classes = useStyles();
   const { leaves, filter, setFilter, setLeaveId } = useLeaves();
@@ -105,6 +135,9 @@ export default function LeaveTableStaff() {
     setIsLeaveEditingOn,
     setIsLeaveEditingOff,
   } = useLeavesContext();
+  const [isOpen, setIsOpen] = React.useState(false);
+  const onClose = () => setIsOpen(false);
+  const cancelRef = React.useRef();
 
   useEffect(() => {
     setFilter(loginLevel.loginUserId);
@@ -132,7 +165,8 @@ export default function LeaveTableStaff() {
   const delete_Leave = (data) => {
     const { id } = data;
     setEditLeaveID(id);
-    handleAlertOpen();
+    setIsAlertOpen(true);
+    //handleAlertOpen();
     //deleteLeave(id);
     //loadLeaves();
   };
@@ -260,14 +294,23 @@ export default function LeaveTableStaff() {
           />
         </CustomDialog>
 
-        <AlertDialog
-          handleClose={handleAlertClose}
-          onConfirm={handleOnDeleteConfirm}
+        <CustomAlertDialog
           isOpen={isAlertOpen}
-          title="Delete Expenses"
+          cancelRef={cancelRef}
+          onClose={handleAlertClose}
+          onConfirm={handleOnDeleteConfirm}
+          title="DELETE"
         >
-          <h2>Are you sure you want to delete ?</h2>
-        </AlertDialog>
+          <Heading size="sm">Are you sure you want to delete ?</Heading>
+        </CustomAlertDialog>
+        {/* <AlertBox
+          isOpen={isOpen}
+          leastDestructiveRef={cancelRef}
+          onClose={() => onClose()}
+          heading="DELETE"
+        >
+          <h2>Are you sure you want to delete?</h2>
+        </AlertBox> */}
       </div>
     </div>
   );

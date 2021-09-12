@@ -17,7 +17,6 @@ export const queryKeys = {
   trainings: "trainings",
   family: "family",
   dailyallows: "dailyallows",
-  dailyallowsbatch: "dailyallowsbatch",
   dailyallowsdetls: "dailyallowsdetls",
   user: "user",
   currency: "currency",

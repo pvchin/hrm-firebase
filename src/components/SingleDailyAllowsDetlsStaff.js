@@ -45,11 +45,11 @@ const SingleDailyAllowsDetlsStaff = ({ title }) => {
             {/* <Grid item xs={12} md={8} lg={9}> */}
             <Grid item xs={12}>
               <Paper className={fixedHeightPaper}>
-                <Link to="/batchdailyallowances">
+                {/* <Link to="/batchdailyallowances">
                   <div>
                     <ArrowBackIcon fontSize="large" color="primary" />
                   </div>
-                </Link>
+                </Link> */}
                 <div>
                   {/* <ToolbarHeader title={title} /> */}
                  

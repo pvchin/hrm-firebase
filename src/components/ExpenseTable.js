@@ -12,7 +12,7 @@ import ExpenseForm from "./ExpenseForm";
 import { useExpensesContext } from "../context/expenses_context";
 import { useEmployeesContext } from "../context/employees_context";
 import { CustomDialog } from "../helpers/CustomDialog";
-import { AlertDialog } from "../helpers/AlertDialog";
+import { AlertDialogBox } from "../helpers/AlertDialogBox";
 
 const columns = [
   { title: "Name", field: "name", editable: "never" },
@@ -242,14 +242,14 @@ if (!expensesdata) {
           <ExpenseForm handleDialogClose={handleDialogClose} />
         </CustomDialog>
 
-        <AlertDialog
-          handleClose={handleAlertClose}
+        <AlertDialogBox
+          onClose={handleAlertClose}
           onConfirm={handleOnDeleteConfirm}
           isOpen={isAlertOpen}
           title="Delete Expenses"
         >
           <h2>Are you sure you want to delete ?</h2>
-        </AlertDialog>
+        </AlertDialogBox>
       </div>
     </div>
   );

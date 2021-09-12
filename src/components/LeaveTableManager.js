@@ -13,7 +13,7 @@ import CheckIcon from "@material-ui/icons/Check";
 import SearchIcon from "@material-ui/icons/Search";
 import LeaveForm from "./LeaveForm";
 import { CustomDialog } from "../helpers/CustomDialog";
-import { AlertDialog } from "../helpers/AlertDialog";
+import { AlertDialogBox } from "../helpers/AlertDialogBox";
 import { useLeavesContext } from "../context/leaves_context";
 import { useEmployeesContext } from "../context/employees_context";
 import { useEmployees } from "./employees/useEmployees";
@@ -333,14 +333,14 @@ export default function LeaveTable({
           <LeaveForm handleDialogClose={handleLeaveFormDialogClose} />
         </CustomDialog>
 
-        <AlertDialog
-          handleClose={handleLeaveFormAlertClose}
+        <AlertDialogBox
+          onClose={handleLeaveFormAlertClose}
           onConfirm={handleLeaveFormOnDeleteConfirm}
           isOpen={isAlertOpen}
           title="Delete Expenses"
         >
           <h2>Are you sure you want to delete ?</h2>
-        </AlertDialog>
+        </AlertDialogBox>
       </div>
     </div>
   );

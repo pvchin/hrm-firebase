@@ -14,7 +14,7 @@ import { payrunState, payrunIdState, payrunStatusState } from "./data/atomdata";
 import { usePayslipsContext } from "../context/payslips_context";
 import { useExpensesContext } from "../context/expenses_context";
 import { useDailyAllowancesContext } from "../context/dailyallowances_context";
-import { AlertDialog } from "../helpers/AlertDialog";
+import { AlertDialogBox } from "../helpers/AlertDialogBox";
 import { usePayrun } from "./payrun/usePayrun";
 import { usePayslipsBatch } from "./payslips/usePayslipsBatch";
 import { useDeletePayrun } from "./payrun/useDeletePayrun";
@@ -57,7 +57,7 @@ export default function PayslipTable() {
   const { payrun } = usePayrun();
   const { payslipsbatch, psbpayrunId, setPSBPayrunId } = usePayslipsBatch();
   const { expensespayrun, setExpPayrunId } = useExpensesPayrun();
-  const { dailyallowsbatch, setDailyAllowsPayrunId } = useDailyAllowsBatch();
+  const { dailyallows, setDailyAllowsPayrunId } = useDailyAllowsBatch();
   const updateExpenses = useUpdateExpenses();
   const deletePayrun = useDeletePayrun();
   const updateDailyAllows = useUpdateDailyAllows();
@@ -176,21 +176,23 @@ export default function PayslipTable() {
     //loadPeriodExpenses(payrun);
 
     //delete allows detls
-    payslipsbatch.forEach((rec) => {
-      if (rec.payrun === payrun) {
-        deletePayslip(rec.id);
-      }
-    });
+    payslipsbatch &&
+      payslipsbatch.forEach((rec) => {
+        if (rec.payrun === payrun) {
+          deletePayslip(rec.id);
+        }
+      });
 
     //unpaid expenses
-    expensespayrun.forEach((rec) => {
-      if (rec.payrun === payrun) {
-        updateExpenses({ id: rec.id, payrun: "" });
-      }
-    });
+    expensespayrun &&
+      expensespayrun.forEach((rec) => {
+        if (rec.payrun === payrun) {
+          updateExpenses({ id: rec.id, payrun: "" });
+        }
+      });
 
     //delete dailyallows
-    dailyallowsbatch.forEach((rec) => {
+    dailyallows && dailyallows.forEach((rec) => {
       if (rec.payrun === payrun) {
         updateDailyAllows({ id: rec.id, payrun: "" });
       }
@@ -294,14 +296,14 @@ export default function PayslipTable() {
             ),
           }}
         />
-        <AlertDialog
-          handleClose={handleAlertClose}
+        <AlertDialogBox
+          onClose={handleAlertClose}
           onConfirm={handleOnDeleteConfirm}
           isOpen={isAlertOpen}
           title="Delete Payslip Batch"
         >
           <h2>Are you sure you want to delete ?</h2>
-        </AlertDialog>
+        </AlertDialogBox>
       </div>
     </div>
   );

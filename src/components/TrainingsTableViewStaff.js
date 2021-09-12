@@ -38,7 +38,7 @@ const TrainingsTableViewStaff = () => {
 
   return (
     <List className={classes.root}>
-      <Grid container direction="row">
+      <Grid direction="row">
         <Stack direction="row">
           <Heading as="h4" size="md">
             Trainings Schedule Expiry Within 90 days

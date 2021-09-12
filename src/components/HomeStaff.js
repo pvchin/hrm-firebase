@@ -107,7 +107,7 @@ const HomeStaff = () => {
   useEffect(() => {
     setEditEmployeeID(loginLevel.loginUserId);
     setIsEditingOn();
-  });
+  },[]);
 
   return (
     <div>

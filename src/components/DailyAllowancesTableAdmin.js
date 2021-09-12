@@ -26,7 +26,7 @@ import { useDailyAllowancesContext } from "../context/dailyallowances_context";
 //import { useEmployeesContext } from "../context/employees_context";
 import DailyAllowsDetlsTable from "./DailyAllowsDetlsTable";
 
-const FILTERSTRING = "Pending";
+const FILTERSTRING = "Submitted";
 
 const columns = [
   {

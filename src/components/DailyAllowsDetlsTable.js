@@ -18,6 +18,8 @@ import {
 } from "./data/atomdata";
 import { fetchDailyAllowsDetlsSelector } from "./data/selectordata";
 import { useDailyAllowancesContext } from "../context/dailyallowances_context";
+import { useDailyAllowsDetlsBatch } from "./dailyallowsdetls/useDailyAllowsDetlsBatch";
+import { useDailyAllows } from "./dailyallows/useDailyAllows";
 
 const columns = [
   {
@@ -81,6 +83,12 @@ export default function DailyAllowsDetlsTable() {
   const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
   const allows_period = useRecoilValue(allowsPeriodState);
   const allows_empid = useRecoilValue(empidState);
+  const { dailyallows, dailyAllowsId, setDailyAllowsId } = useDailyAllows();
+  const {
+    useDailyAllowsDetlsBatch,
+    setDailyAllowsDetlsId,
+    setDailyAllowsDetlsPeriod,
+  } = useDailyAllowsDetlsBatch();
   const {
     dailyallowsdetls,
     addDailyAllowsDetl,
@@ -88,16 +96,22 @@ export default function DailyAllowsDetlsTable() {
     updateDailyAllowsDetl,
     deleteDailyAllowsDetl,
     getSingleBatchDailyAllowsDetl,
-    singlebatch_dailyallowsdetl,
+    //singlebatch_dailyallowsdetl,
     singlebatch_dailyallowsdetl_loading,
     dailyallowance_period,
     single_dailyallowance,
     editDailyAllowanceID,
   } = useDailyAllowancesContext();
 
+  // useEffect(() => {
+  //   getSingleBatchDailyAllowsDetl(allows_empid, allows_period);
+  // }, []);
+
   useEffect(() => {
-    getSingleBatchDailyAllowsDetl(allows_empid, allows_period);
-  }, []);
+    setDailyAllowsId(allows_empid);
+    setDailyAllowsDetlsPeriod(allows_period);
+    setDailyAllowsDetlsId(allows_empid);
+  }, [allows_period, allows_empid]);
 
   // const add_DailyAllowsDetl = async (data) => {
   //   console.log("add", data);
@@ -121,13 +135,7 @@ export default function DailyAllowsDetlsTable() {
   //   );
   // };
 
-  if (singlebatch_dailyallowsdetl_loading) {
-    return (
-      <div>
-        <h2>Loading.... daily site allowances</h2>
-      </div>
-    );
-  }
+  
   return (
     <div className={classes.root}>
       {/* <h1>Expenses Claims Application</h1> */}
@@ -135,8 +143,8 @@ export default function DailyAllowsDetlsTable() {
       <div style={{ maxWidth: "75%", paddingTop: "5px" }}>
         <MaterialTable
           columns={columns}
-          data={singlebatch_dailyallowsdetl}
-          title="Daily Allowances Details"
+          data={dailyallowsdetls}
+          title="Site Allowances Details"
           editable={{
             onRowAdd: (newData) =>
               new Promise((resolve, reject) => {
@@ -148,7 +156,7 @@ export default function DailyAllowsDetlsTable() {
             onRowUpdate: (newData, oldData) =>
               new Promise((resolve, reject) => {
                 setTimeout(() => {
-                  const dataUpdate = [...singlebatch_dailyallowsdetl];
+                  const dataUpdate = [...dailyallowsdetls];
                   const index = oldData.tableData.id;
                   dataUpdate[index] = newData;
                   //setAllowsDetlsTable([...dataUpdate]);
@@ -156,17 +164,17 @@ export default function DailyAllowsDetlsTable() {
                   resolve();
                 }, 1000);
               }),
-            onRowDelete: (oldData) =>
-              new Promise((resolve, reject) => {
-                setTimeout(() => {
-                  //const dataDelete = [...allowsDetlsTable];
-                  const index = oldData.tableData.id;
-                  //dataDelete.splice(index, 1);
-                  //setAllowsDetlsTable([...dataDelete]);
+            // onRowDelete: (oldData) =>
+            //   new Promise((resolve, reject) => {
+            //     setTimeout(() => {
+            //       //const dataDelete = [...allowsDetlsTable];
+            //       const index = oldData.tableData.id;
+            //       //dataDelete.splice(index, 1);
+            //       //setAllowsDetlsTable([...dataDelete]);
 
-                  resolve();
-                }, 1000);
-              }),
+            //       resolve();
+            //     }, 1000);
+            //   }),
           }}
           options={{
             filtering: true,

@@ -41,19 +41,18 @@ const columns = [
   { title: "Status", field: "status" },
 ];
 
-const fetchExpensesDetails = selector({
-  key: "fetchExpensesDetailsSelector",
-  get: async ({ get }) => {
-    try {
-      const { data } = await axios.get(expenses_url);
-      const wpexpirydata = data;
+// const fetchExpensesDetails = selector({
+//   key: "fetchExpensesDetailsSelector",
+//   get: async ({ get }) => {
+//     try {
+//       const { data } = await axios.get(expenses_url);
 
-      return data;
-    } catch (error) {
-      throw error;
-    }
-  },
-});
+//       return data;
+//     } catch (error) {
+//       throw error;
+//     }
+//   },
+// });
 
 const ExpenseTableViewStaff = () => {
   const classes = useStyles();
@@ -63,8 +62,8 @@ const ExpenseTableViewStaff = () => {
   const { expenses, filter, setFilter, setExpenseId } = useExpenses();
   const [userdata, setUserdata] = useState([]);
   //const [userdata, setUserdata] = useRecoilState(userdatastate);
-  const ExpensesDetails = useRecoilValueLoadable(fetchExpensesDetails);
-  const { state, contents } = ExpensesDetails;
+  // const ExpensesDetails = useRecoilValueLoadable(fetchExpensesDetails);
+  // const { state, contents } = ExpensesDetails;
   const { expenses_loading, expenses_error, loadEmpExpenses } =
     useExpensesContext();
 
@@ -74,7 +73,7 @@ const ExpenseTableViewStaff = () => {
 
   return (
     <List className={classes.root}>
-      <Grid container direction="row">
+      <Grid direction="row">
         <Stack direction="row">
           <Heading as="h4" size="md">
             Expenses Claims (Pending)
@@ -95,7 +94,12 @@ const ExpenseTableViewStaff = () => {
           .filter((i) => i.status === "Pending")
           .map((row) => {
             return (
-              <Grid templateColumns="repeat(15, 1fr)" gap={3} p={1}>
+              <Grid
+                key={row.id}
+                templateColumns="repeat(15, 1fr)"
+                gap={3}
+                p={1}
+              >
                 <GridItem colSpan={3}>
                   <Box w="100%">{row.name}</Box>
                 </GridItem>

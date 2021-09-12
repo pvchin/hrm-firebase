@@ -12,7 +12,7 @@ import ExpenseForm from "./ExpenseForm";
 import { useExpensesContext } from "../context/expenses_context";
 import { useEmployeesContext } from "../context/employees_context";
 import { CustomDialog } from "../helpers/CustomDialog";
-import { AlertDialog } from "../helpers/AlertDialog";
+import { AlertDialogBox } from "../helpers/AlertDialogBox";
 
 const FILTERSTRING = "Pending";
 
@@ -257,14 +257,14 @@ export default function ExpenseTable({
           <ExpenseForm handleDialogClose={handleExpenseFormDialogClose} />
         </CustomDialog>
 
-        <AlertDialog
-          handleClose={handleExpenseFormAlertClose}
+        <AlertDialogBox
+          onClose={handleExpenseFormAlertClose}
           onConfirm={handleExpenseFormOnDeleteConfirm}
           isOpen={isAlertOpen}
           title="Delete Expenses"
         >
           <h2>Are you sure you want to delete ?</h2>
-        </AlertDialog>
+        </AlertDialogBox>
       </div>
     </div>
   );

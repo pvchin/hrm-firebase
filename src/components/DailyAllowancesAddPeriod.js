@@ -86,8 +86,10 @@ const DailyAllowancesAddPeriod = ({ handleDialogClose }) => {
       new Date(input.fromdate)
     );
 
-    let amount = 0;
+    let amount = 0, jobbonus=0, perdiem=0;
     for (let i = 0; i <= diffInDays; i++) {
+      jobbonus = jobbonus + Number(input.jobbonus);
+      perdiem = perdiem + Number(input.perdiem);
       amount = amount + Number(input.jobbonus) + Number(input.perdiem);
       const data = addDays(new Date(input.fromdate), i);
       addDailyAllowsDetls({
@@ -114,8 +116,10 @@ const DailyAllowancesAddPeriod = ({ handleDialogClose }) => {
       name: loginLevel.loginUser,
       empid: loginLevel.loginUserId,
       status: "Pending",
-      no_of_days: diffInDays,
+      no_of_days: diffInDays+1,
       amount: amount,
+      totaljobbonus: jobbonus,
+      totalperdiem: perdiem,
     });
 
     // dailyallowances.push({

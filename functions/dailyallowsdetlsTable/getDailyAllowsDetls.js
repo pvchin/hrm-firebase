@@ -2,7 +2,7 @@ const { table } = require("./airtable-dailyallowsdetls");
 const formattedReturn = require("../formattedReturn");
 
 module.exports = async (event) => {
-  const { id, fi, fv, em, period } = event.queryStringParameters;
+  const { id, fi, fv, em, pe } = event.queryStringParameters;
   // const { id, filterValue, filterField } = event.queryStringParameters;
   // console.log(filterValue, filterField);
 
@@ -39,23 +39,22 @@ module.exports = async (event) => {
     return formattedReturn(200, formattedDailyAllowsDetls);
   }
 
-if (em) {
-  const dailyallowsdetls = await table
-    .select({
-      view: "sortedview",
-      // filterByFormula: 'AND(period="2021-02")',
-      // filterByFormula: 'AND(empid="rec1rEYb2ZrHRgiTE",period="2021-02")',
-      filterByFormula: `empid = '${em}'`,
-    })
-    .firstPage();
-  const formattedDailyAllowsDetls = dailyallowsdetls.map((e) => ({
-    id: e.id,
-    ...e.fields,
-  }));
+  if (em) {
+    const dailyallowsdetls = await table
+      .select({
+        view: "sortedview",
+        // filterByFormula: 'AND(period="2021-02")',
+        // filterByFormula: 'AND(empid="rec1rEYb2ZrHRgiTE",period="2021-02")',
+        filterByFormula: `empid = '${em}'`,
+      })
+      .firstPage();
+    const formattedDailyAllowsDetls = dailyallowsdetls.map((e) => ({
+      id: e.id,
+      ...e.fields,
+    }));
 
-  return formattedReturn(200, formattedDailyAllowsDetls);
-}
-
+    return formattedReturn(200, formattedDailyAllowsDetls);
+  }
 
   if (fv) {
     const dailyallowsdetls = await table
@@ -63,7 +62,7 @@ if (em) {
         view: "sortedview",
         // filterByFormula: 'AND(period="2021-02")',
         // filterByFormula: 'AND(empid="rec1rEYb2ZrHRgiTE",period="2021-02")',
-        filterByFormula: `AND(empid="${fv}",period="${period}")`,
+        filterByFormula: `AND(empid="${fv}",period="${pe}")`,
       })
       .firstPage();
     const formattedDailyAllowsDetls = dailyallowsdetls.map((e) => ({

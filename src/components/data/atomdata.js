@@ -156,3 +156,13 @@ export const siteallowsState = atom({
     isdelete: false,
   },
 });
+
+export const siteallowsTotalsState = atom({
+  key: "siteallowsTotalState",
+  default: {
+    totalamount: 0,
+    totaljobbonus: 0,
+    totalperdiem: 0,
+    totaldays: 0,
+  },
+});

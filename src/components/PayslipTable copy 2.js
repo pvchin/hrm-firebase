@@ -15,7 +15,7 @@ import { payrunState, payrunIdState, payrunStatusState } from "./data/atomdata";
 import { usePayslipsContext } from "../context/payslips_context";
 import { useExpensesContext } from "../context/expenses_context";
 import { useDailyAllowancesContext } from "../context/dailyallowances_context";
-import { AlertDialog } from "../helpers/AlertDialog";
+import { AlertDialog } from "../helpers/AlertDialogBox";
 import { usePayrun } from "./payrun/usePayrun"
 
 

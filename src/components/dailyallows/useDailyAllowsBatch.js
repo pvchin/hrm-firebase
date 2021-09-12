@@ -6,8 +6,10 @@ import { filterByEmpId } from "./utils";
 import axios from "axios";
 import { queryKeys } from "../react-query/constants";
 
-async function getDailyAllows(payrunid) {
-  const { data } = await axios.get(`${dailyallowances_url}?fv=${payrunid}`);
+async function getDailyAllows(empid, period) {
+  const { data } = await axios.get(
+    `${dailyallowances_url}??em=${empid}&pe=${period}`
+  );
   //const { data } = await axios.get(`${dailyallowances_url}`);
   return data;
 }
@@ -15,6 +17,8 @@ async function getDailyAllows(payrunid) {
 export function useDailyAllowsBatch(empid) {
   const [filter, setFilter] = useState("all");
   const [dailyAllowsPayrunId, setDailyAllowsPayrunId] = useState("");
+  const [dailyAllowsEmpId, setDailyAllowsEmpId] = useState("");
+  
 
   const selectFn = useCallback(
     (unfiltered) => filterByEmpId(unfiltered, filter),
@@ -22,14 +26,21 @@ export function useDailyAllowsBatch(empid) {
   );
 
   const fallback = [];
-  const { data: dailyallowsbatch = fallback } = useQuery(
-    [queryKeys.dailyallowsbatch, dailyAllowsPayrunId],
+  const { data: dailyallows = fallback } = useQuery(
+    [queryKeys.dailyallows, dailyAllowsPayrunId, dailyAllowsEmpId],
     //queryKeys.dailyallows,
-    () => getDailyAllows(dailyAllowsPayrunId),
+    () => getDailyAllows(dailyAllowsPayrunId, dailyAllowsPayrunId),
     {
       select: filter !== "all" ? selectFn : undefined,
     }
   );
 
-  return { dailyallowsbatch, filter, setFilter, setDailyAllowsPayrunId };
+  return {
+    dailyallows,
+    filter,
+    setFilter,
+    setDailyAllowsPayrunId,
+    setDailyAllowsEmpId,
+   
+  };
 }

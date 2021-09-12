@@ -58,7 +58,7 @@ const LeaveTableViewStaff = () => {
 
   return (
     <List className={classes.root}>
-      <Grid container direction="row">
+      <Grid direction="row">
         <Stack direction="row">
           <Heading as="h4" size="md">
             Leaves Schedule
@@ -77,7 +77,12 @@ const LeaveTableViewStaff = () => {
           .filter((i) => i.status === "Pending")
           .map((row) => {
             return (
-              <Grid templateColumns="repeat(12, 1fr)" gap={3} p={1}>
+              <Grid
+                key={row.id}
+                templateColumns="repeat(12, 1fr)"
+                gap={3}
+                p={1}
+              >
                 <GridItem colSpan={3}>
                   <Box w="100%">{row.from_date}</Box>
                 </GridItem>

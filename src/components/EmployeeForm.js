@@ -935,7 +935,7 @@ const EmployeeForm = () => {
                         <MenuItem value="">None</MenuItem>
                         {designations &&
                           designations.map((r) => {
-                            return <MenuItem value={r.name}>{r.name}</MenuItem>;
+                            return <MenuItem key={r.id} value={r.name}>{r.name}</MenuItem>;
                           })}
                       </TextField>
                     );
@@ -965,7 +965,7 @@ const EmployeeForm = () => {
                         <MenuItem value="">None</MenuItem>
                         {departments &&
                           departments.map((r) => {
-                            return <MenuItem value={r.name}>{r.name}</MenuItem>;
+                            return <MenuItem key={r.id} value={r.name}>{r.name}</MenuItem>;
                           })}
                       </TextField>
                     );
@@ -1000,7 +1000,7 @@ const EmployeeForm = () => {
                         <MenuItem value="">None</MenuItem>
                         {employees &&
                           employees.map((r) => {
-                            return <MenuItem value={r.name}>{r.name}</MenuItem>;
+                            return <MenuItem key={r.id} value={r.name}>{r.name}</MenuItem>;
                           })}
                       </TextField>
                     );

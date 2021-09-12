@@ -25,7 +25,7 @@ async function getUser(user) {
 export function useUser() {
   const [user, setUser] = useState(getStoredUser() || null);
   const queryClient = useQueryClient();
-  console.log("useUser", user)
+
   useQuery(queryKeys.user, () => getUser(user), {
     enabled: !!user,
     onSuccess: (data) => setUser(data),

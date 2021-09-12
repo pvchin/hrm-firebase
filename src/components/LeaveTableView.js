@@ -9,7 +9,7 @@ import CheckIcon from "@material-ui/icons/Check";
 import SearchIcon from "@material-ui/icons/Search";
 import LeaveForm from "./LeaveForm";
 import { CustomDialog } from "../helpers/CustomDialog";
-import { AlertDialog } from "../helpers/AlertDialog";
+import { AlertDialog } from "../helpers/AlertDialogBox";
 import { useLeavesContext } from "../context/leaves_context";
 import { useEmployeesContext } from "../context/employees_context";
 

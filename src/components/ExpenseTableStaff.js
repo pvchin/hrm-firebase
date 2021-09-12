@@ -16,7 +16,7 @@ import { useCustomToast } from "../helpers/useCustomToast";
 import { useExpensesContext } from "../context/expenses_context";
 import { useEmployeesContext } from "../context/employees_context";
 import { CustomDialog } from "../helpers/CustomDialog";
-import { AlertDialog } from "../helpers/AlertDialog";
+import { AlertDialogBox } from "../helpers/AlertDialogBox";
 import { useExpenses } from "./expenses/useExpenses";
 import { useAddExpenses } from "./expenses/useAddExpenses";
 import { useDeleteExpenses } from "./expenses/useDeleteExpenses";
@@ -236,14 +236,14 @@ export default function ExpenseTable() {
           />
         </CustomDialog>
 
-        <AlertDialog
-          handleClose={handleAlertClose}
+        <AlertDialogBox
+          onClose={handleAlertClose}
           onConfirm={handleOnDeleteConfirm}
           isOpen={isAlertOpen}
           title="Delete Expenses"
         >
           <h2>Are you sure you want to delete ?</h2>
-        </AlertDialog>
+        </AlertDialogBox>
       </div>
     </div>
   );

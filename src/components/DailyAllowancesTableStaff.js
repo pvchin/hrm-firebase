@@ -14,7 +14,7 @@ import {
   empidState,
   loginLevelState,
 } from "./data/atomdata";
-import { AlertDialog } from "../helpers/AlertDialog";
+import { AlertDialogBox } from "../helpers/AlertDialogBox";
 import AddIcon from "@material-ui/icons/Add";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -35,7 +35,7 @@ export default function DailyAllowancesTableStaff() {
   let history = useHistory();
   const classes = useStyles();
   const toast = useCustomToast();
-  const { dailyallows, setFilter } = useDailyAllows();
+  const { dailyallows, dailyAllowsId, setDailyAllowsId } = useDailyAllows();
   const { dailyallowsdetls, setDailyAllowsDetlsId, setDailyAllowsDetlsFilter } =
     useDailyAllowsDetls();
   const addDailyAllows = useAddDailyAllows();
@@ -70,6 +70,10 @@ export default function DailyAllowancesTableStaff() {
     getSingleBatchDailyAllowsDetl,
   } = useDailyAllowancesContext();
 
+  useEffect(() => {
+    setDailyAllowsId(loginLevel.loginUserId);
+  }, [dailyAllowsId]);
+
   // useEffect(() => {
   //   loadEmpDailyAllowances(loginLevel.loginUserId);
   // }, [toLoad]);
@@ -96,6 +100,18 @@ export default function DailyAllowancesTableStaff() {
       title: "No Of Days",
       field: "no_of_days",
       type: "numeric",
+      editable: "never",
+    },
+    {
+      title: "Job Bonus",
+      field: "totaljobbonus",
+      type: "currency",
+      editable: "never",
+    },
+    {
+      title: "Per Diem",
+      field: "totalperdiem",
+      type: "currency",
       editable: "never",
     },
     { title: "Amount", field: "amount", type: "currency", editable: "never" },
@@ -132,7 +148,15 @@ export default function DailyAllowancesTableStaff() {
   };
 
   const update_SiteAllowsDetl = (data) => {
-    const { id, empid, period, no_of_days, amount } = data;
+    const {
+      id,
+      empid,
+      period,
+      no_of_days,
+      amount,
+      totaljobbonus,
+      totalperdiem,
+    } = data;
 
     loadEmpDailyAllowsDetls(empid, period);
 
@@ -146,6 +170,8 @@ export default function DailyAllowancesTableStaff() {
       ...allowsdata,
       id: id,
       no_of_days: no_of_days,
+      totaljobbonus: totaljobbonus,
+      totalperdiem: totalperdiem,
       amount: amount,
       period: period,
       empid: empid,
@@ -173,13 +199,12 @@ export default function DailyAllowancesTableStaff() {
     const { id, period, empid } = deletestate;
 
     //delete allows detls
-    console.log("allowsdetls", dailyallowsdetls);
+    //console.log("allowsdetls", dailyallowsdetls);
     dailyallowsdetls
       .filter((f) => f.empid === empid)
       .forEach((rec) => {
-        console.log("del", period, empid, rec);
         if (rec.period === period && rec.empid === empid) {
-          console.log("del id", rec.id);
+          //console.log("del id", rec.id);
           deleteDailyAllowsDetls(rec.id);
         }
       });
@@ -211,11 +236,6 @@ export default function DailyAllowancesTableStaff() {
     settoLoad(true);
     setIsAllowsDetlDialogOpen(false);
   };
-
-  useEffect(() => {
-    setFilter(loginLevel.loginUserId);
-    setDailyAllowsDetlsId(loginLevel.loginUserId);
-  }, []);
 
   return (
     <div className={classes.root}>
@@ -257,7 +277,8 @@ export default function DailyAllowancesTableStaff() {
               },
             },
             (rowData) => ({
-              disabled: rowData.status !== "Pending",
+              disabled:
+                rowData.status === "Approve" || rowData.status === "Submitted",
               icon: "edit",
               tooltip: "Edit Record",
               onClick: (event, rowData) => {
@@ -265,7 +286,7 @@ export default function DailyAllowancesTableStaff() {
               },
             }),
             (rowData) => ({
-              disabled: rowData.status !== "Pending",
+              disabled: rowData.status === "Approve" || rowData.status === "Submitted",
               icon: "delete",
               tooltip: "Delete Record",
               onClick: (event, rowData) => {
@@ -329,14 +350,14 @@ export default function DailyAllowancesTableStaff() {
           </CustomDialog>
         </div>
         <div>
-          <AlertDialog
-            handleClose={handleAlertClose}
+          <AlertDialogBox
+            onClose={handleAlertClose}
             onConfirm={handleOnDeleteConfirm}
             isOpen={isAlertOpen}
-            title="Delete Payslip Batch"
+            title="Delete Site Allowances Batch"
           >
             <h2>Are you sure you want to delete ?</h2>
-          </AlertDialog>
+          </AlertDialogBox>
         </div>
       </div>
     </div>

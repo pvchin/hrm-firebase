@@ -12,7 +12,7 @@ import { useCustomToast } from "../helpers/useCustomToast";
 import { useRecoilState } from "recoil";
 import { editEmployeeIdState } from "./data/atomdata";
 import { CustomDialog } from "../helpers/CustomDialog";
-import { AlertDialog } from "../helpers/AlertDialog";
+import { AlertDialogBox } from "../helpers/AlertDialogBox";
 import EmployeeView from "./EmployeeView";
 import { useEmployeesContext } from "../context/employees_context";
 import { useTablesContext } from "../context/tables_context";
@@ -234,14 +234,14 @@ export default function AllEmployeesTable() {
           <EmployeeView handleDialogClose={handleDialogClose} />
         </CustomDialog>
 
-        <AlertDialog
-          handleClose={handleAlertClose}
+        <AlertDialogBox
+          onClose={handleAlertClose}
           onConfirm={handleOnDeleteConfirm}
           isOpen={isAlertOpen}
           title="Delete Employee"
         >
           <h2>Are you sure you want to delete ?</h2>
-        </AlertDialog>
+        </AlertDialogBox>
       </div>
     </div>
   );

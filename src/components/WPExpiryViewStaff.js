@@ -45,7 +45,7 @@ const columns = [
 
 const WPExpiryViewStaff = () => {
   const classes = useStyles();
-  const history = useHistory()
+  const history = useHistory();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   const { employees, setFilter } = useEmployees();
   const { user } = useUser();
@@ -59,7 +59,7 @@ const WPExpiryViewStaff = () => {
 
   return (
     <List className={classes.root}>
-      <Grid container direction="row">
+      <Grid direction="row">
         <Stack direction="row">
           <Heading as="h4" size="md">
             Work Permit Expiry Within 90 days
@@ -83,12 +83,11 @@ const WPExpiryViewStaff = () => {
           )
           .map((row) => {
             return (
-              <Grid templateColumns="repeat(6, 1fr)" gap={3} p={1}>
-                
+              <Grid key={row.id} templateColumns="repeat(6, 1fr)" gap={3} p={1}>
                 <GridItem colSpan={3}>
                   <Box w="100%">{row.workpermitno}</Box>
                 </GridItem>
-               
+
                 <GridItem colSpan={3}>
                   <Box w="100%">{row.workpermit_expirydate}</Box>
                 </GridItem>
