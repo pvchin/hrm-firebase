@@ -181,7 +181,7 @@ export default function DailyAllowsDetlsTableStaff() {
     allowsdata[index].jobbonus = data.jobbonus;
     allowsdata[index].perdiem = data.perdiem;
     handle_tempcalc(allowsdata);
-    //save_siteallows();
+    save_siteallows();
   };
 
   const save_siteallows = () => {
@@ -360,28 +360,15 @@ export default function DailyAllowsDetlsTableStaff() {
         }, 0);
       const total = totbonus + totdiem;
 
-      const data = dailyallows
-        .filter((r) => r.period === allows_period && r.empid === allows_empid)
-        .map((rec) => {
-          return { ...rec };
+      setTimeout(() => {
+        setTotals({
+          totalamount: total,
+          totalbonus: totbonus,
+          totaldiem: totdiem,
+          totaldays: totdays,
         });
-      console.log("data", data);
-      updateDailyAllows({
-        id: data[0].id,
-        no_of_days: totdays,
-        amount: total,
-        totaljobbonus: totbonus,
-        totalperdiem: totdiem,
-      });
-      // setTimeout(() => {
-      //   setTotals({
-      //     totalamount: total,
-      //     totalbonus: totbonus,
-      //     totaldiem: totdiem,
-      //     totaldays: totdays,
-      //   });
-      // }, 3000);
-      // console.log("tempcalc", totdays, totals);
+      }, 3000);
+      console.log("tempcalc", totdays, totals);
     }
   };
 
@@ -512,7 +499,7 @@ export default function DailyAllowsDetlsTableStaff() {
                   >
                     re-fresh
                   </Button> */}
-                  {/* <Button
+                  <Button
                     type="submit"
                     variant="contained"
                     color="secondary"
@@ -529,7 +516,7 @@ export default function DailyAllowsDetlsTableStaff() {
                     onClick={(e) => save_AllowsDetls(e)}
                   >
                     Update all
-                  </Button> */}
+                  </Button>
                   <Button
                     type="submit"
                     variant="contained"
@@ -539,7 +526,7 @@ export default function DailyAllowsDetlsTableStaff() {
                   >
                     Submit <Icon className={classes.rightIcon}>send</Icon>
                   </Button>
-                  {/* <Button
+                  <Button
                     type="submit"
                     variant="contained"
                     color="secondary"
@@ -547,7 +534,7 @@ export default function DailyAllowsDetlsTableStaff() {
                     onClick={(e) => exit_AllowsDetls(e)}
                   >
                     Exit
-                  </Button> */}
+                  </Button>
 
                   <div>
                     <Grid
@@ -562,18 +549,7 @@ export default function DailyAllowsDetlsTableStaff() {
                           variant="filled"
                           style={{ width: "100%" }}
                           name="totalbonus"
-                          value={
-                            dailyallows &&
-                            dailyallows
-                              .filter(
-                                (r) =>
-                                  r.period === allows_period &&
-                                  r.empid === allows_empid
-                              )
-                              .map((rec) => {
-                                return rec.totaljobbonus;
-                              })
-                          }
+                          value={totals.totalbonus}
                           type="currency"
                           className={classes.textField}
                           InputLabelProps={{
@@ -585,18 +561,7 @@ export default function DailyAllowsDetlsTableStaff() {
                           variant="filled"
                           style={{ width: "100%" }}
                           name="totaldiem"
-                          value={
-                            dailyallows &&
-                            dailyallows
-                              .filter(
-                                (r) =>
-                                  r.period === allows_period &&
-                                  r.empid === allows_empid
-                              )
-                              .map((rec) => {
-                                return rec.totalperdiem;
-                              })
-                          }
+                          value={totals.totaldiem}
                           type="currency"
                           className={classes.textField}
                           InputLabelProps={{
@@ -609,18 +574,7 @@ export default function DailyAllowsDetlsTableStaff() {
                           variant="filled"
                           style={{ width: "100%" }}
                           name="totaldays"
-                          value={
-                            dailyallows &&
-                            dailyallows
-                              .filter(
-                                (r) =>
-                                  r.period === allows_period &&
-                                  r.empid === allows_empid
-                              )
-                              .map((rec) => {
-                                return rec.no_of_days;
-                              })
-                          }
+                          value={totals.totaldays}
                           type="numeric"
                           className={classes.textField}
                           InputLabelProps={{
@@ -632,18 +586,7 @@ export default function DailyAllowsDetlsTableStaff() {
                           variant="filled"
                           style={{ width: "100%" }}
                           name="totalamount"
-                          value={
-                            dailyallows &&
-                            dailyallows
-                              .filter(
-                                (r) =>
-                                  r.period === allows_period &&
-                                  r.empid === allows_empid
-                              )
-                              .map((rec) => {
-                                return rec.amount;
-                              })
-                          }
+                          value={totals.totalamount}
                           type="currency"
                           className={classes.textField}
                           InputLabelProps={{

@@ -192,11 +192,12 @@ export default function PayslipTable() {
       });
 
     //delete dailyallows
-    dailyallows && dailyallows.forEach((rec) => {
-      if (rec.payrun === payrun) {
-        updateDailyAllows({ id: rec.id, payrun: "" });
-      }
-    });
+    dailyallows &&
+      dailyallows.forEach((rec) => {
+        if (rec.payrun === payrun) {
+          updateDailyAllows({ id: rec.id, payrun: "" });
+        }
+      });
 
     //delete payrun
     deletePayrun(id);
@@ -240,7 +241,7 @@ export default function PayslipTable() {
           }}
           actions={[
             (rowData) => ({
-              // disabled: rowData.status !== "Pending",
+              //disabled: rowData.status !== "Pending",
               icon: "edit",
               position: "row",
               tooltip: "Edit Record",
