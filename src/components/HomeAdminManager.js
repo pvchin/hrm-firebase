@@ -778,6 +778,7 @@ const HomeAdminManager = () => {
                 <Tab>Approved</Tab>
                 <Tab>Verified</Tab>
                 <Tab>Pending</Tab>
+                <Tab>Rejected</Tab>
               </TabList>
               <TabPanels>
                 {/* <TabPanel>
@@ -797,6 +798,9 @@ const HomeAdminManager = () => {
                 </TabPanel>
                 <TabPanel>
                   <PayslipTableViewSummary status="Pending" />
+                </TabPanel>
+                <TabPanel>
+                  <PayslipTableViewSummary status="Rejected" />
                 </TabPanel>
               </TabPanels>
             </Tabs>
