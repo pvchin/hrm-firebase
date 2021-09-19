@@ -2,7 +2,18 @@ import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import { useHistory } from "react-router-dom";
-import { Box,Stack } from "@chakra-ui/react";
+import {
+  Box,
+  Divider,
+  Heading,
+  Stack,
+  SimpleGrid,
+  Tabs,
+  TabList,
+  TabPanels,
+  Tab,
+  TabPanel,
+} from "@chakra-ui/react";
 import { TextField, Grid, Paper, Container } from "@material-ui/core";
 import CardLayout from "../helpers/CardLayout";
 import CardLayout2 from "../helpers/CardLayout2";
@@ -26,6 +37,7 @@ import PayslipTableAdmin from "./PayslipTableAdmin";
 import DailyAllowancesTableAdmin from "./DailyAllowancesTableAdmin";
 import TrainingsTableViewAdmin from "./TrainingsTableViewAdmin";
 import WPExpiryViewAdmin from "./WPExpiryViewAdmin";
+import EmployeeTableLeaveView from "./EmployeeTableLeaveView";
 
 const drawerWidth = 240;
 
@@ -105,25 +117,58 @@ const EmployeeView = () => {
         <h3>Dashboard</h3> */}
       </div>
       <Container maxWidth="lg" className={classes.container}>
-        
-          <Stack direction="column">
-            <Box>
-              <CardLayout2>
-                <LeaveTableViewAdmin />
-              </CardLayout2>
-            </Box>
-            <Box>
-              <CardLayout2>
-                <WPExpiryViewAdmin />
-              </CardLayout2>
-            </Box>
-            <Box>
-              <CardLayout2>
-                <TrainingsTableViewAdmin />
-              </CardLayout2>
-            </Box>
-          </Stack>
-        
+        <Stack direction="column">
+          <Box>
+            <CardLayout2>
+              <LeaveTableViewAdmin />
+            </CardLayout2>
+          </Box>
+          <Box>
+            <CardLayout2>
+              <WPExpiryViewAdmin />
+            </CardLayout2>
+          </Box>
+          <Box>
+            <CardLayout2>
+              <TrainingsTableViewAdmin />
+            </CardLayout2>
+          </Box>
+          <Box
+            maxW="x3"
+            padding="4"
+            width="100%"
+            height="650"
+            borderColor="blue.500"
+            borderWidth="1px"
+            borderRadius="lg"
+            overflow="hidden"
+          >
+            <SimpleGrid>
+              <Box>
+                <Heading as="h2" size="lg">
+                  Employees
+                </Heading>
+              </Box>
+              <Divider />
+              <Box>
+                <Tabs>
+                  <TabList>
+                    {/* <Tab>Chart</Tab>
+                <Tab>Summary</Tab> */}
+                    <Tab>Details</Tab>
+                  </TabList>
+                  <TabPanels>
+                    <TabPanel>
+                      <EmployeeTableLeaveView />
+                    </TabPanel>
+                  </TabPanels>
+                </Tabs>
+              </Box>
+              <Divider />
+            </SimpleGrid>
+          </Box>
+        </Stack>
+
         <Box pt={4}>
           <Copyright />
         </Box>

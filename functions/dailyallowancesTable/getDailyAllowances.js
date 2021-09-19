@@ -46,7 +46,10 @@ module.exports = async (event) => {
 
   if (fi) {
     const dailyallowances = await table
-      .select({ filterByFormula: `status = '${fi}'` })
+      .select({
+        view: "sortedview",
+        filterByFormula: `status = '${fi}'`
+      })
       .firstPage();
     const formattedDailyAllowances = dailyallowances.map((dailyallowance) => ({
       id: dailyallowance.id,

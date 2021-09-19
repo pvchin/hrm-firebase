@@ -1,201 +1,810 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
-import { TextField, Grid, Paper, Container, Box } from "@material-ui/core";
+import dayjs from "dayjs";
+import {
+  Box,
+  Container,
+  Divider,
+  Grid,
+  Heading,
+  SimpleGrid,
+  Tabs,
+  TabList,
+  TabPanels,
+  Tab,
+  TabPanel,
+} from "@chakra-ui/react";
 import CardLayout from "../helpers/CardLayout";
 import CardLayout2 from "../helpers/CardLayout2";
-import CardLayout3 from "../helpers/CardLayout3";
+import CardLayout4 from "../helpers/CardLayout4";
 import Copyright from "./Copyright";
 import { CustomDialog } from "../helpers/CustomDialog";
 import { useRecoilState } from "recoil";
 import { loginLevelState } from "./data/atomdata";
-import { useLeavesContext } from "../context/leaves_context";
-import { useExpensesContext } from "../context/expenses_context";
-import { usePayslipsContext } from "../context/payslips_context";
-import { useDailyAllowancesContext } from "../context/dailyallowances_context";
-import LeaveTableView from "./LeaveTableView";
-import LeaveTableManager from "./LeaveTableManager";
-import ExpenseTableView from "./ExpenseTableView";
-import ExpenseTableManager from "./ExpenseTableManager";
-import PayslipTableViewManager from "./PayslipTableViewManager";
-import PayslipTableAdmin from "./PayslipTableAdmin";
-import DailyAllowancesTableView from "./DailyAllowancesTableView";
-import DailyAllowancesTableAdmin from "./DailyAllowancesTableAdmin";
-import OnLeavesView from "./OnLeavesView";
-import WPExpiryView from "./WPExpiryView";
+import BarChart from "../helpers/BarChart";
+import BarChartStack from "../helpers/BarChartStack";
+import EmployeeTableLeaveView from "./EmployeeTableLeaveView";
+import ExpensesTableViewSummary from "./ExpenseTableViewSummary";
+import ExpenseSummaryTableView from "./ExpensesSummaryTableView";
+import LeavesTableViewSummary from "./LeavesTableViewSummary";
+import SummaryTableView from "../helpers/SummaryTableView";
+import DailyAllowanceTableViewSummary from "./DailyAllowancesTableViewSummary";
+import PayslipTableViewSummary from "./PayslipTableViewSummary";
+import PayslipSummaryTableView from "./PayslipSummaryTableView";
+import { useExpensesPeriod } from "./expenses/useExpensesPeriod";
 
 const drawerWidth = 240;
 
 const FILTERSTRING = "Pending";
 
-const EmployeeView = () => {
+const months = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
+const monthsname = [
+  "jan",
+  "feb",
+  "mar",
+  "apr",
+  "may",
+  "jun",
+  "jul",
+  "aug",
+  "sep",
+  "oct",
+  "nov",
+  "dec",
+];
+
+const expchartdata = {
+  labels: [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ],
+  datasets: [
+    {
+      label: "Expenses",
+      backgroundColor: "rgba(75,192,192,1)",
+      borderColor: "rgba(0,0,0,1)",
+      borderWidth: 2,
+      data: [65, 59, 80, 81, 56, 50, 60, 40, 70, 60, 50, 60],
+    },
+  ],
+};
+
+const sitechartdata = {
+  labels: [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ],
+  datasets: [
+    {
+      label: "Expenses",
+      backgroundColor: "rgba(75,192,192,1)",
+      borderColor: "rgba(0,0,0,1)",
+      borderWidth: 2,
+      data: [
+        25000, 39000, 20000, 21000, 26000, 20000, 20000, 20000, 22000, 20000,
+        25000, 20000,
+      ],
+    },
+  ],
+};
+
+const paychartdata = {
+  labels: [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ],
+  datasets: [
+    {
+      label: "Expenses",
+      backgroundColor: "rgba(75,192,192,1)",
+      borderColor: "rgba(0,0,0,1)",
+      borderWidth: 2,
+      data: [
+        65000, 59000, 80000, 81000, 56000, 50000, 60000, 70000, 72000, 60000,
+        55000, 60000,
+      ],
+    },
+  ],
+};
+
+const columns = [
+  {
+    title: "January",
+    field: "jan",
+  },
+  {
+    title: "February",
+    field: "feb",
+  },
+  {
+    title: "March",
+    field: "mar",
+  },
+  {
+    title: "April",
+    field: "apr",
+  },
+  {
+    title: "May",
+    field: "may",
+  },
+  {
+    title: "June",
+    field: "jun",
+  },
+  {
+    title: "July",
+    field: "jul",
+  },
+  {
+    title: "August",
+    field: "aug",
+  },
+  {
+    title: "September",
+    field: "sep",
+  },
+  {
+    title: "October",
+    field: "oct",
+  },
+  {
+    title: "November",
+    field: "nov",
+  },
+  {
+    title: "December",
+    field: "dec",
+  },
+];
+
+const data = [
+  {
+    jan: 80,
+    feb: 90,
+    mar: 78,
+    apr: 63,
+    may: 55,
+    jun: 60,
+    jul: 55,
+    aug: 65,
+    sep: 70,
+    oct: 58,
+    nov: 60,
+    dec: 62,
+  },
+];
+
+const paysummcolumns = [
+  {
+    title: "Category",
+    field: "category",
+  },
+  {
+    title: "Jan",
+    field: "jan",
+  },
+  {
+    title: "Feb",
+    field: "feb",
+  },
+  {
+    title: "Mar",
+    field: "mar",
+  },
+  {
+    title: "Apr",
+    field: "apr",
+  },
+  {
+    title: "May",
+    field: "may",
+  },
+  {
+    title: "Jun",
+    field: "jun",
+  },
+  {
+    title: "Jul",
+    field: "jul",
+  },
+  {
+    title: "Aug",
+    field: "aug",
+  },
+  {
+    title: "Sep",
+    field: "sep",
+  },
+  {
+    title: "Oct",
+    field: "oct",
+  },
+  {
+    title: "Nov",
+    field: "nov",
+  },
+  {
+    title: "Dec",
+    field: "dec",
+  },
+];
+
+const paysummdata = [
+  {
+    category: "Basic Salary",
+    jan: 80,
+    feb: 90,
+    mar: 78,
+    apr: 63,
+    may: 55,
+    jun: 60,
+    jul: 55,
+    aug: 65,
+    sep: 70,
+    oct: 58,
+    nov: 60,
+    dec: 62,
+  },
+  {
+    category: "TAP/SCP",
+    jan: 80,
+    feb: 90,
+    mar: 78,
+    apr: 63,
+    may: 55,
+    jun: 60,
+    jul: 55,
+    aug: 65,
+    sep: 70,
+    oct: 58,
+    nov: 60,
+    dec: 62,
+  },
+  {
+    category: "Site Allowances",
+    jan: 80,
+    feb: 90,
+    mar: 78,
+    apr: 63,
+    may: 55,
+    jun: 60,
+    jul: 55,
+    aug: 65,
+    sep: 70,
+    oct: 58,
+    nov: 60,
+    dec: 62,
+  },
+  {
+    category: "Expenses Claims",
+    jan: 80,
+    feb: 90,
+    mar: 78,
+    apr: 63,
+    may: 55,
+    jun: 60,
+    jul: 55,
+    aug: 65,
+    sep: 70,
+    oct: 58,
+    nov: 60,
+    dec: 62,
+  },
+  {
+    category: "Allowances",
+    jan: 80,
+    feb: 90,
+    mar: 78,
+    apr: 63,
+    may: 55,
+    jun: 60,
+    jul: 55,
+    aug: 65,
+    sep: 70,
+    oct: 58,
+    nov: 60,
+    dec: 62,
+  },
+  {
+    category: "Deductions",
+    jan: 80,
+    feb: 90,
+    mar: 78,
+    apr: 63,
+    may: 55,
+    jun: 60,
+    jul: 55,
+    aug: 65,
+    sep: 70,
+    oct: 58,
+    nov: 60,
+    dec: 62,
+  },
+  {
+    category: "Totals",
+    jan: 80,
+    feb: 90,
+    mar: 78,
+    apr: 63,
+    may: 55,
+    jun: 60,
+    jul: 55,
+    aug: 65,
+    sep: 70,
+    oct: 58,
+    nov: 60,
+    dec: 62,
+  },
+];
+
+const initial_expdata = [
+  {
+    jan: 0,
+    feb: 0,
+    mar: 0,
+    apr: 0,
+    may: 0,
+    jun: 0,
+    jul: 0,
+    aug: 0,
+    sep: 0,
+    oct: 0,
+    nov: 0,
+    dec: 0,
+  },
+];
+
+const HomeManager = () => {
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-  const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
-  const [leavesdata, setLeavesdata] = useState([]);
-  const [isLeaveDialogOpen, setIsLeaveDialogOpen] = useState(false);
-  const [expensesdata, setExpensesdata] = useState([]);
-  const [isExpenseDialogOpen, setIsExpenseDialogOpen] = useState(false);
-  const [payslipsdata, setPayslipsdata] = useState([]);
-  const [isPayslipDialogOpen, setIsPayslipDialogOpen] = useState(false);
-  const [dailyallowancesdata, setDailyAllowancesdata] = useState([]);
-  const [isDailyAllowancesDialogOpen, setIsDailyAllowancesDialogOpen] =
-    useState(false);
+  const { expensesperiod, setExpPeriodId } = useExpensesPeriod();
+  const [expdata, setExpData] = useState(initial_expdata);
+  const currentyear = new Date().getFullYear();
+  const currentmonth = new Date().getMonth();
 
-  const { leaves, loadPendingLeaves } = useLeavesContext();
-  const { expenses, loadPendingExpenses } = useExpensesContext();
-  const { batchpayslips, loadPendingPayslips } = usePayslipsContext();
-  const { dailyallowances, loadPendingDailyAllowances } =
-    useDailyAllowancesContext();
+  // const Build_ExpData = () => {
+  //   const currentmonth = new Date().getMonth();
 
-  const handleLeaveDialogOpen = () => {
-    setLeavesdata([]);
-    setLeavesdata([...leaves]);
-    setIsLeaveDialogOpen(true);
-  };
+  //   for (var i = 1; i <= currentmonth; i++) {
+  //     expdata[i] = i;
+  //   }
+  //   console.log("date", currentyear, currentmonth, expdata);
+  // };
 
-  const handleLeaveDialogClose = () => {
-    setIsLeaveDialogOpen(false);
-    loadPendingLeaves(FILTERSTRING);
-  };
-
-  const handleExpenseDialogOpen = () => {
-    setExpensesdata([]);
-    setExpensesdata([...expenses]);
-    setIsExpenseDialogOpen(true);
-  };
-
-  const handleExpenseDialogClose = () => {
-    setIsExpenseDialogOpen(false);
-    loadPendingExpenses(FILTERSTRING);
-  };
-
-  const handlePayslipDialogOpen = () => {
-    setPayslipsdata([]);
-    //setPayslipsdata([...batchpayslips]);
-    setIsPayslipDialogOpen(true);
-  };
-
-  const handlePayslipDialogClose = () => {
-    setIsPayslipDialogOpen(false);
-    loadPendingPayslips(FILTERSTRING);
-  };
-
-  const handleDailyAllowancesDialogOpen = () => {
-    setDailyAllowancesdata([]);
-    setDailyAllowancesdata([...dailyallowances]);
-    setIsDailyAllowancesDialogOpen(true);
-  };
-
-  const handleDailyAllowancesDialogClose = () => {
-    setIsDailyAllowancesDialogOpen(false);
-    loadPendingDailyAllowances(FILTERSTRING);
-  };
+  // useEffect(() => {
+  //   Build_ExpData();
+  // }, []);
 
   return (
-    <div>
-      <div className={classes.appBarSpacer} />
-      <div style={{ paddingLeft: 50 }}>
-        {/* <h2>Welcome {loginLevel.loginUser}!</h2>
-        <h3>Dashboard</h3> */}
-      </div>
-      <Container maxWidth="lg" className={classes.container}>
-        <Grid container spacing={3}>
-          <Grid item xs={12} md={8} lg={12}>
-            <CardLayout3
-              title="Leaves pending for approval"
-              handleClick={handleLeaveDialogOpen}
-            >
-              <LeaveTableView />
-            </CardLayout3>
-          </Grid>
-          <Grid item xs={12} md={8} lg={12}>
-            <CardLayout3
-              title="Expenses pending for approval"
-              handleClick={handleExpenseDialogOpen}
-            >
-              <ExpenseTableView />
-            </CardLayout3>
-          </Grid>
-          <Grid item xs={12} md={8} lg={12}>
-            <CardLayout3
-              title="Site Allowances pending for approval"
-              handleClick={handleDailyAllowancesDialogOpen}
-            >
-              <DailyAllowancesTableView />
-            </CardLayout3>
-          </Grid>
-
-          <Grid item xs={12} md={8} lg={12}>
-            <CardLayout3
-              title="Payroll pending for approval"
-              handleClick={handlePayslipDialogOpen}
-            >
-              <PayslipTableViewManager />
-            </CardLayout3>
-          </Grid>
-        </Grid>
-        <Box pt={4}>
-          <Copyright />
-        </Box>
-        <CustomDialog
-          isOpen={isLeaveDialogOpen}
-          handleClose={handleLeaveDialogClose}
-          title=""
-          showButton={true}
-          isFullscreen={false}
-          isFullwidth={false}
-        >
-          <LeaveTableManager
-            setLeavesdata={setLeavesdata}
-            leavesdata={leavesdata}
-            handleDialogClose={handleLeaveDialogClose}
-          />
-        </CustomDialog>
-        <CustomDialog
-          isOpen={isExpenseDialogOpen}
-          handleClose={handleExpenseDialogClose}
-          title=""
-          showButton={true}
-          isFullscreen={false}
-          isFullwidth={false}
-        >
-          <ExpenseTableManager
-            setExpensesdata={setExpensesdata}
-            expensesdata={expensesdata}
-            handleDialogClose={handleExpenseDialogClose}
-          />
-        </CustomDialog>
-        <CustomDialog
-          isOpen={isPayslipDialogOpen}
-          handleClose={handlePayslipDialogClose}
-          title=""
-          showButton={true}
-          isFullscreen={true}
-          isFullwidth={false}
-        >
-          <PayslipTableAdmin
-            setPayslipsdata={setPayslipsdata}
-            payslipsdata={payslipsdata}
-            handleDialogClose={handlePayslipDialogClose}
-          />
-        </CustomDialog>
-        <CustomDialog
-          isOpen={isDailyAllowancesDialogOpen}
-          handleClose={handleDailyAllowancesDialogClose}
-          title=""
-          showButton={true}
-          isFullscreen={true}
-          isFullwidth={false}
-        >
-          <DailyAllowancesTableAdmin
-            setDailyAllowancesdata={setDailyAllowancesdata}
-            dailyallowancesdata={dailyallowancesdata}
-            handleDialogClose={handleDailyAllowancesDialogClose}
-          />
-        </CustomDialog>
-      </Container>
-    </div>
+    <Container maxW="container.xl" marginTop="100">
+      <Box
+        maxW="x3"
+        padding="4"
+        width="100%"
+        height="650"
+        borderColor="blue.500"
+        borderWidth="1px"
+        borderRadius="lg"
+        overflow="hidden"
+      >
+        <SimpleGrid>
+          <Box>
+            <Heading as="h2" size="lg">
+              Employees
+            </Heading>
+          </Box>
+          <Divider />
+          <Box>
+            <Tabs>
+              <TabList>
+                {/* <Tab>Chart</Tab>
+                <Tab>Summary</Tab> */}
+                <Tab>Details</Tab>
+              </TabList>
+              <TabPanels>
+                <TabPanel>
+                  <EmployeeTableLeaveView />
+                </TabPanel>
+              </TabPanels>
+            </Tabs>
+          </Box>
+          <Divider />
+        </SimpleGrid>
+      </Box>
+      <Box
+        maxW="x3"
+        padding="4"
+        width="100%"
+        height="500"
+        borderColor="blue.500"
+        borderWidth="1px"
+        borderRadius="lg"
+        overflow="hidden"
+      >
+        <SimpleGrid>
+          <Box>
+            <Heading as="h2" size="lg">
+              Leaves
+            </Heading>
+          </Box>
+          <Divider />
+          <Box>
+            <Tabs defaultIndex={currentmonth}>
+              <TabList>
+                {/* <Tab>Chart</Tab>
+                <Tab>Summary</Tab> */}
+                <Tab>January</Tab>
+                <Tab>February</Tab>
+                <Tab>March</Tab>
+                <Tab>April</Tab>
+                <Tab>May</Tab>
+                <Tab>June</Tab>
+                <Tab>July</Tab>
+                <Tab>August</Tab>
+                <Tab>September</Tab>
+                <Tab>October</Tab>
+                <Tab>November</Tab>
+                <Tab>December</Tab>
+              </TabList>
+              <TabPanels>
+                {/* <TabPanel>
+                  <BarChart
+                    heading="Expenses for the Month"
+                    barchartdata={expchartdata}
+                  />
+                </TabPanel>
+                <TabPanel>
+                  <SummaryTableView columns={columns} data={data} />
+                </TabPanel> */}
+                <TabPanel>
+                  <LeavesTableViewSummary year={currentyear} month={1} />
+                </TabPanel>
+                <TabPanel>
+                  <LeavesTableViewSummary year={currentyear} month={2} />
+                </TabPanel>
+                <TabPanel>
+                  <LeavesTableViewSummary year={currentyear} month={3} />
+                </TabPanel>
+                <TabPanel>
+                  <LeavesTableViewSummary year={currentyear} month={4} />
+                </TabPanel>
+                <TabPanel>
+                  <LeavesTableViewSummary year={currentyear} month={5} />
+                </TabPanel>
+                <TabPanel>
+                  <LeavesTableViewSummary year={currentyear} month={6} />
+                </TabPanel>
+                <TabPanel>
+                  <LeavesTableViewSummary year={currentyear} month={7} />
+                </TabPanel>
+                <TabPanel>
+                  <LeavesTableViewSummary year={currentyear} month={8} />
+                </TabPanel>
+                <TabPanel>
+                  <LeavesTableViewSummary year={currentyear} month={9} />
+                </TabPanel>
+                <TabPanel>
+                  <LeavesTableViewSummary year={currentyear} month={10} />
+                </TabPanel>
+                <TabPanel>
+                  <LeavesTableViewSummary year={currentyear} month={11} />
+                </TabPanel>
+                <TabPanel>
+                  <LeavesTableViewSummary year={currentyear} month={12} />
+                </TabPanel>
+              </TabPanels>
+            </Tabs>
+          </Box>
+          <Divider />
+        </SimpleGrid>
+      </Box>
+      <Box
+        maxW="x3"
+        padding="4"
+        width="100%"
+        height="500"
+        borderColor="blue.500"
+        borderWidth="1px"
+        borderRadius="lg"
+        overflow="hidden"
+      >
+        <SimpleGrid>
+          <Box>
+            <Heading as="h2" size="lg">
+              Expenses Claimed
+            </Heading>
+          </Box>
+          <Divider />
+          <Box>
+            <Tabs defaultIndex={currentmonth}>
+              <TabList>
+                {/* <Tab>Chart</Tab>
+                <Tab>Summary</Tab> */}
+                <Tab>January</Tab>
+                <Tab>February</Tab>
+                <Tab>March</Tab>
+                <Tab>April</Tab>
+                <Tab>May</Tab>
+                <Tab>June</Tab>
+                <Tab>July</Tab>
+                <Tab>August</Tab>
+                <Tab>September</Tab>
+                <Tab>October</Tab>
+                <Tab>November</Tab>
+                <Tab>December</Tab>
+              </TabList>
+              <TabPanels>
+                {/* <TabPanel>
+                  <BarChart
+                    heading="Expenses for the Month"
+                    barchartdata={expchartdata}
+                  />
+                </TabPanel>
+                <TabPanel>
+                  <ExpenseSummaryTableView year={currentyear} />
+                </TabPanel> */}
+                <TabPanel>
+                  <ExpensesTableViewSummary year={currentyear} month={1} />
+                </TabPanel>
+                <TabPanel>
+                  <ExpensesTableViewSummary year={currentyear} month={2} />
+                </TabPanel>
+                <TabPanel>
+                  <ExpensesTableViewSummary year={currentyear} month={3} />
+                </TabPanel>
+                <TabPanel>
+                  <ExpensesTableViewSummary year={currentyear} month={4} />
+                </TabPanel>
+                <TabPanel>
+                  <ExpensesTableViewSummary year={currentyear} month={5} />
+                </TabPanel>
+                <TabPanel>
+                  <ExpensesTableViewSummary year={currentyear} month={6} />
+                </TabPanel>
+                <TabPanel>
+                  <ExpensesTableViewSummary year={currentyear} month={7} />
+                </TabPanel>
+                <TabPanel>
+                  <ExpensesTableViewSummary year={currentyear} month={8} />
+                </TabPanel>
+                <TabPanel>
+                  <ExpensesTableViewSummary year={currentyear} month={9} />
+                </TabPanel>
+                <TabPanel>
+                  <ExpensesTableViewSummary year={currentyear} month={10} />
+                </TabPanel>
+                <TabPanel>
+                  <ExpensesTableViewSummary year={currentyear} month={11} />
+                </TabPanel>
+                <TabPanel>
+                  <ExpensesTableViewSummary year={currentyear} month={12} />
+                </TabPanel>
+              </TabPanels>
+            </Tabs>
+          </Box>
+          <Divider />
+        </SimpleGrid>
+      </Box>
+      <Box
+        maxW="x3"
+        padding="4"
+        width="100%"
+        height="500"
+        borderColor="blue.500"
+        borderWidth="1px"
+        borderRadius="lg"
+        overflow="hidden"
+      >
+        <SimpleGrid>
+          <Box>
+            <Heading as="h2" size="lg">
+              Site Allowances
+            </Heading>
+          </Box>
+          <Divider />
+          <Box>
+            <Tabs defaultIndex={currentmonth}>
+              <TabList>
+                {/* <Tab>Chart</Tab>
+                <Tab>Summary</Tab> */}
+                <Tab>January</Tab>
+                <Tab>February</Tab>
+                <Tab>March</Tab>
+                <Tab>April</Tab>
+                <Tab>May</Tab>
+                <Tab>June</Tab>
+                <Tab>July</Tab>
+                <Tab>August</Tab>
+                <Tab>September</Tab>
+                <Tab>October</Tab>
+                <Tab>November</Tab>
+                <Tab>December</Tab>
+              </TabList>
+              <TabPanels>
+                {/* <TabPanel>
+                  <BarChart
+                    heading="Site Allowances for the Month"
+                    barchartdata={paychartdata}
+                  />
+                </TabPanel>
+                <TabPanel>
+                  <SummaryTableView columns={columns} data={data} />
+                </TabPanel> */}
+                <TabPanel>
+                  <DailyAllowanceTableViewSummary
+                    year={currentyear}
+                    month="01"
+                  />
+                </TabPanel>
+                <TabPanel>
+                  <DailyAllowanceTableViewSummary
+                    year={currentyear}
+                    month="02"
+                  />
+                </TabPanel>
+                <TabPanel>
+                  <DailyAllowanceTableViewSummary
+                    year={currentyear}
+                    month="03"
+                  />
+                </TabPanel>
+                <TabPanel>
+                  <DailyAllowanceTableViewSummary
+                    year={currentyear}
+                    month="04"
+                  />
+                </TabPanel>
+                <TabPanel>
+                  <DailyAllowanceTableViewSummary
+                    year={currentyear}
+                    month="05"
+                  />
+                </TabPanel>
+                <TabPanel>
+                  <DailyAllowanceTableViewSummary
+                    year={currentyear}
+                    month="06"
+                  />
+                </TabPanel>
+                <TabPanel>
+                  <DailyAllowanceTableViewSummary
+                    year={currentyear}
+                    month="07"
+                  />
+                </TabPanel>
+                <TabPanel>
+                  <DailyAllowanceTableViewSummary
+                    year={currentyear}
+                    month="08"
+                  />
+                </TabPanel>
+                <TabPanel>
+                  <DailyAllowanceTableViewSummary
+                    year={currentyear}
+                    month="09"
+                  />
+                </TabPanel>
+                <TabPanel>
+                  <DailyAllowanceTableViewSummary
+                    year={currentyear}
+                    month="10"
+                  />
+                </TabPanel>
+                <TabPanel>
+                  <DailyAllowanceTableViewSummary
+                    year={currentyear}
+                    month="11"
+                  />
+                </TabPanel>
+                <TabPanel>
+                  <DailyAllowanceTableViewSummary
+                    year={currentyear}
+                    month="12"
+                  />
+                </TabPanel>
+              </TabPanels>
+            </Tabs>
+          </Box>
+          <Divider />
+        </SimpleGrid>
+      </Box>
+      <Box
+        maxW="x3"
+        padding="4"
+        width="100%"
+        height="100%"
+        borderColor="blue.500"
+        borderWidth="1px"
+        borderRadius="lg"
+        overflow="hidden"
+      >
+        <SimpleGrid>
+          <Box>
+            <Heading as="h2" size="lg">
+              Payroll
+            </Heading>
+          </Box>
+          <Divider />
+          <Box>
+            <Tabs>
+              <TabList>
+                {/* <Tab>Chart</Tab>
+                <Tab>Summary</Tab> */}
+                <Tab>Approved</Tab>
+                <Tab>Verified</Tab>
+                <Tab>Pending</Tab>
+              </TabList>
+              <TabPanels>
+                {/* <TabPanel>
+                  <BarChart
+                    heading="Payroll for the Month"
+                    barchartdata={paychartdata}
+                  />
+                </TabPanel>
+                <TabPanel>
+                  <PayslipSummaryTableView year={currentyear} status="Approved" />
+                </TabPanel> */}
+                <TabPanel>
+                  <PayslipTableViewSummary status="Approved" />
+                </TabPanel>
+                <TabPanel>
+                  <PayslipTableViewSummary status="Verified" />
+                </TabPanel>
+                <TabPanel>
+                  <PayslipTableViewSummary status="Pending" />
+                </TabPanel>
+              </TabPanels>
+            </Tabs>
+          </Box>
+          <Divider />
+        </SimpleGrid>
+      </Box>
+    </Container>
   );
 };
 
@@ -278,4 +887,4 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default EmployeeView;
+export default HomeManager;

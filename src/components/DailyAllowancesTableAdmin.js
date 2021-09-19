@@ -56,8 +56,8 @@ const columns = [
         select
       >
         <MenuItem value="Pending">Pending</MenuItem>
-        <MenuItem value="Approve">Approve</MenuItem>
-        <MenuItem value="Reject">Reject</MenuItem>
+        <MenuItem value="Approved">Approved</MenuItem>
+        <MenuItem value="Rejected">Rejected</MenuItem>
         <MenuItem value="Cancel">Cancel</MenuItem>
       </TextField>
     ),
@@ -108,11 +108,11 @@ export default function DailyAllowancesTable({
   const Approve_DailyAllowancesData = () => {
     dailyallowancesdata.forEach((rec) => {
       if (rec.tableData.checked) {
-        updateDailyAllowance({ id: rec.id, status: "Approve" });
+        updateDailyAllowance({ id: rec.id, status: "Approved" });
         //update leavesdata
         if (!update_dailyallowance_error) {
           const recdata = dailyallowancesdata.filter((r) => r.id === rec.id);
-          recdata[0].status = "Approve";
+          recdata[0].status = "Approved";
         }
       }
     });
@@ -124,11 +124,11 @@ export default function DailyAllowancesTable({
   const Reject_DailyAllowancesData = () => {
     dailyallowancesdata.forEach((rec) => {
       if (rec.tableData.checked) {
-        updateDailyAllowance({ id: rec.id, status: "Reject" });
+        updateDailyAllowance({ id: rec.id, status: "Rejected" });
         //update leavesdata
         if (!update_dailyallowance_error) {
           const recdata = dailyallowancesdata.filter((r) => r.id === rec.id);
-          recdata[0].status = "Reject";
+          recdata[0].status = "Rejected";
         }
       }
     });

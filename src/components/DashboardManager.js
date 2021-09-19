@@ -21,6 +21,7 @@ import UserAccessTable from "./UserAccessTable"
 import Login from "./LoginForm";
 import Payrun from "./Payrun"
 import Payrunbatch from "./Payrunbatch"
+import ApprovalManager from "./ApprovalManager"
 
 import {
   Home,
@@ -100,6 +101,9 @@ export default function DashboardMain() {
             </Route>
             <Route exact path="/batchpayslips">
               <BatchPayslips />
+            </Route>
+            <Route exact path="/approval">
+              <ApprovalManager />
             </Route>
             <Route exact path="/leave">
               <Leave />

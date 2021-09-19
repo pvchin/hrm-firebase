@@ -63,6 +63,18 @@ const MenuListItems = () => {
         </ListItem>
       </Link>
 
+      <Link to="/approval">
+        <ListItem button>
+          <ListItemIcon className={classes.itemIcon}>
+            <PeopleIcon />
+          </ListItemIcon>
+          <ListItemText
+            primary="Approval"
+            className={classes.categoryHeaderPrimary}
+          />
+        </ListItem>
+      </Link>
+
       {/* <Link to="/leave">
         <ListItem button>
           <ListItemIcon className={classes.itemIcon}>
@@ -86,7 +98,7 @@ const MenuListItems = () => {
           />
         </ListItem>
       </Link> */}
-      
+
       {/* <Link to="/payrun">
         <ListItem button>
           <ListItemIcon className={classes.itemIcon}>

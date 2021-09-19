@@ -278,7 +278,7 @@ export default function DailyAllowancesTableStaff() {
             },
             (rowData) => ({
               disabled:
-                rowData.status === "Approve" || rowData.status === "Submitted",
+                rowData.status === "Approved" || rowData.status === "Submitted",
               icon: "edit",
               tooltip: "Edit Record",
               onClick: (event, rowData) => {
@@ -286,7 +286,7 @@ export default function DailyAllowancesTableStaff() {
               },
             }),
             (rowData) => ({
-              disabled: rowData.status === "Approve" || rowData.status === "Submitted",
+              disabled: rowData.status === "Approved" || rowData.status === "Submitted",
               icon: "delete",
               tooltip: "Delete Record",
               onClick: (event, rowData) => {

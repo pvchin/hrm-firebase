@@ -10,7 +10,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import LeaveForm from "./LeaveForm";
 import { CustomDialog } from "../helpers/CustomDialog";
 import { AlertDialog } from "../helpers/AlertDialogBox";
-import { useExpensesContext } from "../context/expenses_context";
+import { useExpenses } from "./expenses/useExpenses";
 import { useEmployeesContext } from "../context/employees_context";
 
 const FILTERSTRING = "Pending";
@@ -37,23 +37,24 @@ export default function ExpenseTableView() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   const { loadEmployees } = useEmployeesContext();
-  const {
-    expenses,
-    addExpense,
-    expenses_loading,
-    updateExpense,
-    deleteExpense,
-    loadPendingExpenses,
-    getSingleExpense,
-    setEditExpenseID,
-    setIsExpenseEditingOn,
-    setIsExpenseEditingOff,
-    resetSingleExpense,
-  } = useExpensesContext();
+  const { expenses} = useExpenses()
+  // const {
+  //   //expenses,
+  //   addExpense,
+  //   expenses_loading,
+  //   updateExpense,
+  //   deleteExpense,
+  //   loadPendingExpenses,
+  //   getSingleExpense,
+  //   setEditExpenseID,
+  //   setIsExpenseEditingOn,
+  //   setIsExpenseEditingOff,
+  //   resetSingleExpense,
+  // } = useExpensesContext();
 
-  useEffect(() => {
-    loadPendingExpenses(FILTERSTRING);
-  }, []);
+  // useEffect(() => {
+  //   loadPendingExpenses(FILTERSTRING);
+  // }, []);
 
   const handleDialogOpen = () => {
     setIsDialogOpen(true);
@@ -61,7 +62,7 @@ export default function ExpenseTableView() {
 
   const handleDialogClose = () => {
     setIsDialogOpen(false);
-    loadPendingExpenses(FILTERSTRING);
+    //loadPendingExpenses(FILTERSTRING);
   };
 
   const handleAlertOpen = () => {
@@ -72,13 +73,7 @@ export default function ExpenseTableView() {
     setIsAlertOpen(false);
   };
 
-  if (expenses_loading) {
-    return (
-      <div>
-        <h2>Loading...Expenses</h2>
-      </div>
-    );
-  }
+  
   return (
     <div className={classes.root}>
       {/* <h1>Expenses Claims Application</h1> */}

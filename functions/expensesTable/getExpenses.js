@@ -2,7 +2,7 @@ const { table } = require("./airtable-expenses");
 const formattedReturn = require("../formattedReturn");
 
 module.exports = async (event) => {
-  const { id, fv, fi, pr } = event.queryStringParameters;
+  const { id, fv, fi, pr, m, y, sm } = event.queryStringParameters;
   // const { id, filterValue, filterField } = event.queryStringParameters;
   // console.log(filterValue, filterField);
 
@@ -20,7 +20,7 @@ module.exports = async (event) => {
   }
   if (fv) {
     const expenses = await table
-      .select({ view: "sortedview",filterByFormula: `empid = '${fv}'` })
+      .select({ view: "sortedview", filterByFormula: `empid = '${fv}'` })
       .firstPage();
     const formattedExpenses = expenses.map((expense) => ({
       id: expense.id,
@@ -32,7 +32,10 @@ module.exports = async (event) => {
 
   if (fi) {
     const expenses = await table
-      .select({ view: "sortedview",filterByFormula: `status = '${fi}'` })
+      .select({
+        view: "sortedview",
+        filterByFormula: `status = '${fi}'`,
+      })
       .firstPage();
     const formattedExpenses = expenses.map((expense) => ({
       id: expense.id,
@@ -42,17 +45,47 @@ module.exports = async (event) => {
     return formattedReturn(200, formattedExpenses);
   }
 
-   if (pr) {
-     const expenses = await table
-       .select({ view: "sortedview", filterByFormula: `payrun = '${pr}'` })
-       .firstPage();
-     const formattedExpenses = expenses.map((expense) => ({
-       id: expense.id,
-       ...expense.fields,
-     }));
+  if (pr) {
+    const expenses = await table
+      .select({ view: "sortedview", filterByFormula: `payrun = '${pr}'` })
+      .firstPage();
+    const formattedExpenses = expenses.map((expense) => ({
+      id: expense.id,
+      ...expense.fields,
+    }));
 
-     return formattedReturn(200, formattedExpenses);
-   }
+    return formattedReturn(200, formattedExpenses);
+  }
+
+  // //filterByFormula: `MONTH(date) = ${m}`
+  if (m) {
+    const expenses = await table
+      .select({
+        view: "sortedview",
+        filterByFormula: `AND(MONTH(date)=${m},YEAR(date)=${y})`,
+      })
+      .firstPage();
+    const formattedExpenses = expenses.map((expense) => ({
+      id: expense.id,
+      ...expense.fields,
+    }));
+
+    return formattedReturn(200, formattedExpenses);
+  }
+
+  if (sm) {
+    const expenses = await table
+      .select({
+        view: "summaryview",
+      })
+      .firstPage();
+    const formattedExpenses = expenses.map((expense) => ({
+      id: expense.id,
+      ...expense.fields,
+    }));
+
+    return formattedReturn(200, formattedExpenses);
+  }
 
   try {
     const expenses = await table.select().firstPage();

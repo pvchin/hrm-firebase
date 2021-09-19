@@ -132,7 +132,7 @@ export default function PayslipTableAdmin({
 
         if (!update_payrun_error) {
           const recdata = batchpayrun.filter((r) => r.id === rec.id);
-          recdata[0].status = "Approve";
+          recdata[0].status = "Approved";
         }
       }
     });
@@ -148,7 +148,7 @@ export default function PayslipTableAdmin({
         //update leavesdata
         if (!update_payrun_error) {
           const recdata = batchpayrun.filter((r) => r.id === rec.id);
-          recdata[0].status = "Reject";
+          recdata[0].status = "Rejected";
         }
       }
     });

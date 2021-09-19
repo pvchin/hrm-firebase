@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, Link } from "react-router-dom";
+import * as emailjs from "emailjs-com";
 import MaterialTable, { MTableToolbar } from "material-table";
 import { makeStyles } from "@material-ui/core/styles";
 import { useIsFetching } from "react-query";
@@ -24,6 +25,10 @@ import { useDailyAllowsDetlsBatch } from "./dailyallowsdetls/useDailyAllowsDetls
 import { useDailyAllows } from "./dailyallows/useDailyAllows";
 import { useUpdateDailyAllows } from "./dailyallows/useUpdateDailyAllows";
 import { AlertDialogBox } from "../helpers/AlertDialogBox";
+
+const SERVICE_ID = process.env.REACT_APP_EMAILJS_SERVICEID;
+const TEMPLATE_ID = "template_1y8odlq";
+const USER_ID = process.env.REACT_APP_EMAILJS_USERID;
 
 const initial_totals = [
   {
@@ -161,6 +166,34 @@ export default function DailyAllowsDetlsTableStaff() {
   //   }
   // }, [isCalc]);
 
+  const handleSentEmail = (data) => {
+    const { period } = data;
+    //console.log("expense form", loginLevel);
+    var emaildata = {
+      to_name: loginLevel.loginUser,
+      to_email: loginLevel.loginEmail,
+      message: `Your site allowances for the period ${period} has been successfully submitted for approval`,
+      cc_to: loginLevel.reporting_email,
+    };
+
+    emailjs.send(SERVICE_ID, TEMPLATE_ID, emaildata, USER_ID).then(
+      function (response) {
+        console.log(response.status, response.text);
+        toast({
+          title: `Email has sent successfully to ${emaildata.to_email}!`,
+          status: "success",
+        });
+      },
+      function (err) {
+        console.log(err);
+        toast({
+          title: `Email has fail to send to ${emaildata.to_email}!`,
+          status: "warning",
+        });
+      }
+    );
+  };
+
   const build_dailyallowsdata = () => {
     const { id, jobbonus, perdiem } = dailyallowsdetls;
     const data = dailyallowsdetls
@@ -241,6 +274,7 @@ export default function DailyAllowsDetlsTableStaff() {
       totalperdiem: totals.totaldiem,
       status: "Submitted",
     });
+    handleSentEmail(allowsdata);
     history.push("/dailyallowances");
     toast({
       title: "Site Allowances table being submitted!",

@@ -180,11 +180,11 @@ export default function LeaveTable({
   const Approve_LeaveData = () => {
     leavesdata.forEach((rec) => {
       if (rec.tableData.checked) {
-        updateLeave({ id: rec.id, status: "Approve" });
+        updateLeave({ id: rec.id, status: "Approved" });
         //update leavesdata
         if (!update_leave_error) {
           const recdata = leavesdata.filter((r) => r.id === rec.id);
-          recdata[0].status = "Approve";
+          recdata[0].status = "Approved";
 
           // update leave bal
           //console.log("leave", rec.empid, employees);
@@ -208,11 +208,11 @@ export default function LeaveTable({
   const Reject_LeaveData = () => {
     leavesdata.forEach((rec) => {
       if (rec.tableData.checked) {
-        updateLeave({ id: rec.id, status: "Reject" });
+        updateLeave({ id: rec.id, status: "Rejected" });
         //update leavesdata
         if (!update_leave_error) {
           const recdata = leavesdata.filter((r) => r.id === rec.id);
-          recdata[0].status = "Reject";
+          recdata[0].status = "Rejected";
         }
         //sent email
         handleSentEmail(rec, "Rejected");

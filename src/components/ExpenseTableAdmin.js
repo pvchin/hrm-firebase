@@ -133,11 +133,11 @@ export default function ExpenseTable({
   const Approve_ExpenseData = () => {
     expensesdata.forEach((rec) => {
       if (rec.tableData.checked) {
-        updateExpense({ id: rec.id, status: "Approve" });
+        updateExpense({ id: rec.id, status: "Approved" });
         //update leavesdata
         if (!update_expense_error) {
           const recdata = expensesdata.filter((r) => r.id === rec.id);
-          recdata[0].status = "Approve";
+          recdata[0].status = "Approved";
         }
       }
     });
@@ -149,11 +149,11 @@ export default function ExpenseTable({
   const Reject_ExpenseData = () => {
     expensesdata.forEach((rec) => {
       if (rec.tableData.checked) {
-        updateExpense({ id: rec.id, status: "Reject" });
+        updateExpense({ id: rec.id, status: "Rejected" });
         //update leavesdata
         if (!update_expense_error) {
           const recdata = expensesdata.filter((r) => r.id === rec.id);
-          recdata[0].status = "Reject";
+          recdata[0].status = "Rejected";
         }
       }
     });

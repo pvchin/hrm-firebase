@@ -80,8 +80,8 @@ const columns = [
         select
       >
         <MenuItem value="Pending">Pending</MenuItem>
-        <MenuItem value="Approve">Approve</MenuItem>
-        <MenuItem value="Reject">Reject</MenuItem>
+        <MenuItem value="Approved">Approved</MenuItem>
+        <MenuItem value="Rejected">Rejected</MenuItem>
         <MenuItem value="Cancel">Cancel</MenuItem>
       </TextField>
     ),
