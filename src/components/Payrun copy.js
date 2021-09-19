@@ -163,12 +163,7 @@ const Payrun = () => {
       formatDate(input.fromdate) + " - " + formatDate(input.todate);
     const payrundata =
       input.fromdate.substring(0, 4) + "-" + input.fromdate.substring(5, 7);
-    setInput({
-      ...input,
-      period: period,
-      payrun: payrundata,
-      status: "New",
-    });
+    setInput({ ...input, period: period, payrun: payrundata, status:"Pending" });
     formatPayrun();
     setPayslipPeriod(payrundata);
     const isExist = payrunExists(payrundata);
@@ -176,7 +171,7 @@ const Payrun = () => {
     if (isExist) {
       //console.log("exist");
       setIsPayrunExist(true);
-      setIsSubmit(false);
+      setIsSubmit(false)
       setAlert(true);
     } else {
       //console.log("add");
@@ -184,7 +179,7 @@ const Payrun = () => {
       add_Payrun(period, payrundata);
       setIsPayrunExist(false);
       setAlert(true);
-      setIsSubmit(true);
+      setIsSubmit(true)
       setLoadPaybatch(true);
     }
   };
@@ -385,6 +380,7 @@ const Payrun = () => {
   };
 
   const handleNext = () => {
+    
     history.push("/payrunbatch");
   };
 

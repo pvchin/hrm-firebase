@@ -23,6 +23,7 @@ import DailyAllowancesTableView from "./DailyAllowancesTableView";
 import DailyAllowancesTableAdmin from "./DailyAllowancesTableAdmin";
 import OnLeavesView from "./OnLeavesView";
 import WPExpiryView from "./WPExpiryView";
+import { useDailyAllowsStatus } from "./dailyallows/useDailyAllowsStatus";
 
 const drawerWidth = 240;
 
@@ -41,7 +42,7 @@ const EmployeeView = () => {
   const [dailyallowancesdata, setDailyAllowancesdata] = useState([]);
   const [isDailyAllowancesDialogOpen, setIsDailyAllowancesDialogOpen] =
     useState(false);
-
+  const { dailyallowsstatus, setDailyAllowsStatusId } = useDailyAllowsStatus();
   const { leaves, loadPendingLeaves } = useLeavesContext();
   const { expenses, loadPendingExpenses } = useExpensesContext();
   const { batchpayslips, loadPendingPayslips } = usePayslipsContext();
@@ -83,7 +84,7 @@ const EmployeeView = () => {
 
   const handleDailyAllowancesDialogOpen = () => {
     setDailyAllowancesdata([]);
-    setDailyAllowancesdata([...dailyallowances]);
+    setDailyAllowancesdata([...dailyallowsstatus]);
     setIsDailyAllowancesDialogOpen(true);
   };
 
@@ -91,6 +92,10 @@ const EmployeeView = () => {
     setIsDailyAllowancesDialogOpen(false);
     loadPendingDailyAllowances(FILTERSTRING);
   };
+
+  useEffect(() => {
+    setDailyAllowsStatusId("Submitted");
+  },[])
 
   return (
     <div>

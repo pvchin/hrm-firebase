@@ -485,18 +485,18 @@ const Payrunbatch = () => {
               <Box pt="2" pr={5} alignItems="right" align="right">
                 <Stack spacing={4} direction="row" align="center" pl={150}>
                   <Button
-                    width="500px"
+                    width="800px"
                     colorScheme="blue"
                     isDisabled={
                       payrundata.status === "Verified" ||
-                      payrundata.status === "Approve"
+                      payrundata.status === "Approved"
                         ? true
                         : false
                     }
                     onClick={(e) => handleSavePayslips(e)}
                     leftIcon={<FiSave color="white" fontSize="1.5em" />}
                   >
-                    Save
+                    Save/Exit
                   </Button>
                   <Button
                     width="500px"
@@ -512,7 +512,8 @@ const Payrunbatch = () => {
                     colorScheme="blue"
                     isDisabled={
                       payrundata.status === "Verified" ||
-                      payrundata.status === "Approve"
+                        payrundata.status === "Approved" ||
+                      payrundata.status === "New"  
                         ? true
                         : false
                     }
@@ -524,7 +525,7 @@ const Payrunbatch = () => {
                   <Button
                     width="500px"
                     colorScheme="blue"
-                    isDisabled={payrundata.status !== "Approve" ? true : false}
+                    isDisabled={payrundata.status !== "Approved" ? true : false}
                     onClick={onOpen}
                     leftIcon={<FiMail color="white" fontSize="1.5em" />}
                   >

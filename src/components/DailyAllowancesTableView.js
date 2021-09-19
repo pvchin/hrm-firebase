@@ -24,6 +24,7 @@ import { CustomDialog } from "../helpers/CustomDialog";
 import { useDailyAllowancesContext } from "../context/dailyallowances_context";
 //import { useEmployeesContext } from "../context/employees_context";
 import DailyAllowsDetlsTable from "./DailyAllowsDetlsTable";
+import { useDailyAllowsStatus } from "./dailyallows/useDailyAllowsStatus";
 
 const FILTERSTRING = "Submitted";
 
@@ -48,6 +49,7 @@ export default function DailyAllowancesTable() {
   const allows_period = useRecoilValue(allowsPeriodState);
   const allows_empid = useRecoilValue(empidState);
   const [allowsdata, setAllowsdata] = useRecoilState(allowsDataState);
+  const { dailyallowsstatus, setDailyAllowsStatusId } = useDailyAllowsStatus();
   const setEmpID = useSetRecoilState(empidState);
   const title = `Site Allowances (${allows_period})`;
   const {
@@ -65,7 +67,7 @@ export default function DailyAllowancesTable() {
   } = useDailyAllowancesContext();
 
   useEffect(() => {
-    loadPendingDailyAllowances(FILTERSTRING);
+   setDailyAllowsStatusId(FILTERSTRING);
   }, []);
 
   const handleDialogOpen = () => {
@@ -92,7 +94,7 @@ export default function DailyAllowancesTable() {
       <div style={{ maxWidth: "100%", paddingTop: "5px" }}>
         <MaterialTable
           columns={columns}
-          data={dailyallowances}
+          data={dailyallowsstatus}
           title={title}
           options={{
             filtering: false,

@@ -128,7 +128,7 @@ export default function PayslipTableAdmin({
   const Approve_PayslipData = () => {
     batchpayrun.forEach((rec) => {
       if (rec.tableData.checked) {
-        updatePayrun({ id: rec.id, status: "Approve" });
+        updatePayrun({ id: rec.id, status: "Approved" });
 
         if (!update_payrun_error) {
           const recdata = batchpayrun.filter((r) => r.id === rec.id);
@@ -144,7 +144,7 @@ export default function PayslipTableAdmin({
   const Reject_PayslipData = () => {
     batchpayrun.forEach((rec) => {
       if (rec.tableData.checked) {
-        updatePayrun({ id: rec.id, status: "Reject" });
+        updatePayrun({ id: rec.id, status: "Rejected" });
         //update leavesdata
         if (!update_payrun_error) {
           const recdata = batchpayrun.filter((r) => r.id === rec.id);

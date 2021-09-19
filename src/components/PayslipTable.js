@@ -23,6 +23,7 @@ import { useUpdateExpenses } from "./expenses/useUpdateExpenses";
 import { useDailyAllowsBatch } from "./dailyallows/useDailyAllowsBatch";
 import { useUpdateDailyAllows } from "./dailyallows/useUpdateDailyAllows";
 
+
 const FILTERSTRING = "Pending";
 
 const columns = [

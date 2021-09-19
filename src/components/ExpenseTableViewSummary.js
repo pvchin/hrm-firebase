@@ -72,7 +72,7 @@ export default function ExpenseTableView({ year, month }) {
   return (
     <div className={classes.root}>
       {/* <h1>Expenses Claims Application</h1> */}
-      Total: {totals}
+     
       <div style={{ maxWidth: "100%", paddingTop: "5px" }}>
         <MaterialTable
           columns={columns}
