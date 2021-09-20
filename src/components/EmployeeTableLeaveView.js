@@ -27,6 +27,7 @@ const columns = [
   { title: "Gender", field: "gender" },
   { title: "Designation", field: "designation" },
   { title: "Department", field: "department" },
+  { title: "Leave Entitled", field: "leave_entitled", type: "numeric" },
   { title: "Leave Balance", field: "leave_bal", type: "numeric" },
   // { title: "Email", field: "email" },
 ];
