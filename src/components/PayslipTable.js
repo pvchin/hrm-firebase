@@ -20,7 +20,7 @@ import { usePayslipsBatch } from "./payslips/usePayslipsBatch";
 import { useDeletePayrun } from "./payrun/useDeletePayrun";
 import { useExpensesPayrun } from "./expenses/useExpensesPayrun";
 import { useUpdateExpenses } from "./expenses/useUpdateExpenses";
-import { useDailyAllowsBatch } from "./dailyallows/useDailyAllowsBatch";
+import { useDailyAllowsPayrun } from "./dailyallows/useDailyAllowsPayrun";
 import { useUpdateDailyAllows } from "./dailyallows/useUpdateDailyAllows";
 
 
@@ -58,7 +58,7 @@ export default function PayslipTable() {
   const { payrun } = usePayrun();
   const { payslipsbatch, psbpayrunId, setPSBPayrunId } = usePayslipsBatch();
   const { expensespayrun, setExpPayrunId } = useExpensesPayrun();
-  const { dailyallows, setDailyAllowsPayrunId } = useDailyAllowsBatch();
+  const { dailyallowspayrun, setDailyAllowsPayrunId } = useDailyAllowsPayrun();
   const updateExpenses = useUpdateExpenses();
   const deletePayrun = useDeletePayrun();
   const updateDailyAllows = useUpdateDailyAllows();
@@ -193,8 +193,8 @@ export default function PayslipTable() {
       });
 
     //delete dailyallows
-    dailyallows &&
-      dailyallows.forEach((rec) => {
+    dailyallowspayrun &&
+      dailyallowspayrun.forEach((rec) => {
         if (rec.payrun === payrun) {
           updateDailyAllows({ id: rec.id, payrun: "" });
         }

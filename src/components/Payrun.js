@@ -36,7 +36,6 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import { useRecoilState } from "recoil";
-
 import { useEmployeesContext } from "../context/employees_context";
 import { usePayslipsContext } from "../context/payslips_context";
 import { useExpensesContext } from "../context/expenses_context";

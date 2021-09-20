@@ -2,7 +2,7 @@ const { table } = require("./airtable-dailyallowances");
 const formattedReturn = require("../formattedReturn");
 
 module.exports = async (event) => {
-  const { id, fv, fi, em, pe } = event.queryStringParameters;
+  const { id, fv, fi, em, pe, pr } = event.queryStringParameters;
   // const { id, filterValue, filterField } = event.queryStringParameters;
   // console.log(filterValue, filterField);
 
@@ -21,6 +21,7 @@ module.exports = async (event) => {
 
     return formattedReturn(200, formattedDailyAllowances);
   }
+
   if (fv) {
     const dailyallowances = await table
       .select({ view: "sortedview", filterByFormula: `period = '${fv}'` })
@@ -32,6 +33,7 @@ module.exports = async (event) => {
 
     return formattedReturn(200, formattedDailyAllowances);
   }
+
   if (em) {
     const dailyallowances = await table
       .select({ view: "sortedview", filterByFormula: `empid = '${em}'` })
@@ -75,6 +77,22 @@ module.exports = async (event) => {
 
     return formattedReturn(200, formattedDailyAllowances);
   }
+
+if (pr) {
+  const dailyallowances = await table
+    .select({
+      view: "sortedview",
+      filterByFormula: `payrun = '${pr}'`,
+    })
+    .firstPage();
+  const formattedDailyAllowances = dailyallowances.map((dailyallowance) => ({
+    id: dailyallowance.id,
+    ...dailyallowance.fields,
+  }));
+
+  return formattedReturn(200, formattedDailyAllowances);
+}
+
 
   try {
     const dailyallowances = await table.select().firstPage();

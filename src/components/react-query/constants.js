@@ -23,6 +23,7 @@ export const queryKeys = {
   dailyallows: "dailyallows",
   dailyallowsperiod: "dailyallowsperiod",
   dailyallowsstatus: "dailyallowsstatus",
+  dailyallowspayrun: "dailyallowspayrun",
   dailyallowsdetls: "dailyallowsdetls",
   user: "user",
   currency: "currency",

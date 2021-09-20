@@ -3,9 +3,9 @@ import { useReactToPrint } from "react-to-print";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import dayjs from "dayjs";
+import { useHistory} from "react-router-dom"
 import * as emailjs from "emailjs-com";
 import MaterialTable, { MTableToolbar } from "material-table";
-import { useHistory } from "react-router-dom";
 import { FiSave, FiCheckCircle, FiMail } from "react-icons/fi";
 import { useCustomToast } from "../helpers/useCustomToast";
 //import { Button} from "@material-ui/core"
@@ -333,7 +333,7 @@ const Payrunbatch = () => {
   };
 
   const handleSavePayrun = () => {
-    if (payrundata.status === "Verified" || payrundata.status === "Approve") {
+    if (payrundata.status === "Verified" || payrundata.status === "Approved") {
       toast({
         title: `This payroll batch has been ${payrundata.status}! No changes can be made!`,
         status: "warning",
@@ -344,6 +344,7 @@ const Payrunbatch = () => {
     const tmppayrun = payrun.filter((r) => r.payrun === payslip_period);
     //console.log("paysave", tmppayrun[0].id);
     // eslint-disable-next-line no-lone-blocks
+    console.log("paybatch",payrundata)
     updatePayrun({
       id: tmppayrun[0].id,
       totalpayroll: payrundata.totalpayroll,
@@ -355,6 +356,7 @@ const Payrunbatch = () => {
       totalsitesallows: payrundata.totalsitesallows,
       totalexpensesclaims: payrundata.totalexpensesclaims,
     });
+    history.push("/payslip")
   };
 
   const handleVerifyPayslips = (e) => {

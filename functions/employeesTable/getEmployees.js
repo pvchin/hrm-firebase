@@ -63,7 +63,11 @@ module.exports = async (event) => {
   }
 
   try {
-    const employees = await table.select().all();
+    const employees = await table
+      . select({
+        view: "viewEmployee",
+      })
+      .all();
     const formattedEmployees = employees.map((employee) => ({
       id: employee.id,
       ...employee.fields,
