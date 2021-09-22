@@ -22,6 +22,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { usePayslipsBatch } from "./payslips/usePayslipsBatch";
 import { useUpdatePayslips } from "./payslips/useUpdatePayslips";
 import { usePayslipsContext } from "../context/payslips_context";
+import { useAllowances } from "./allowances/useAllowances";
 
 const initial_state = [
   {
@@ -105,6 +106,7 @@ const PayForm = ({
 }) => {
   const classes = useStyles();
   const [state, setState] = useState(initial_state);
+  const { allowances } = useAllowances();
   //const { payslipsbatch, psbpayrunId, setPSBPayrunId } = usePayslipsBatch();
   //const updatePayslips = useUpdatePayslips();
   //const { singlebatchpayslip } = usePayslipsContext();

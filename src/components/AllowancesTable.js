@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import MaterialTable from "material-table";
 import { makeStyles } from "@material-ui/core/styles";
-import { useAllowances } from "./allowances/useAllowances";
-import { useUpdateAllowances } from "./allowances/useUpdateAllowances";
-import { useDeleteAllowances } from "./allowances/useDeleteAllowances";
-import { useAddAllowances } from "./allowances/useAddAllowances";
+import { usePayItems } from "./payitems/usePayItems";
+import { useUpdatePayItems } from "./payitems/useUpdatePayItems";
+import { useDeletePayItems } from "./payitems/useDeletePayItems";
+import { useAddPayItems } from "./payitems/useAddPayItems";
 
 const columns = [
   {
@@ -15,31 +15,36 @@ const columns = [
 
 export default function UpdateAllowances() {
   const classes = useStyles();
-  const { allowances } = useAllowances();
-  const updateAllowances = useUpdateAllowances();
-  const deleteAllowances = useDeleteAllowances();
-  const addAllowances = useAddAllowances();
+  const { payitems, setPayItemId } = usePayItems();
+  const updatePayItems = useUpdatePayItems();
+  const deletePayItems = useDeletePayItems();
+  const addPayItems = useAddPayItems();
 
   const update_Allowance = (data) => {
     const { id, rec_id, ...fields } = data;
-    updateAllowances({ id, ...fields });
+    updatePayItems({ id, ...fields });
   };
 
   const add_Allowance = async (data) => {
-    addAllowances(data);
+    const fields = { ...data, pay_type: "Allowances" };
+    addPayItems(fields);
   };
 
   const delete_Allowance = (data) => {
     const { id } = data;
-    deleteAllowances(id);
+    deletePayItems(id);
   };
+
+  useEffect(() => {
+    setPayItemId("Allowances");
+  }, []);
 
   return (
     <div className={classes.root}>
       <div style={{ maxWidth: "100%", paddingTop: "5px" }}>
         <MaterialTable
           columns={columns}
-          data={allowances}
+          data={payitems}
           title="Allowances"
           editable={{
             onRowAdd: (newData) =>

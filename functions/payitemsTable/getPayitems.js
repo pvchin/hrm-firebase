@@ -2,8 +2,8 @@ const { table } = require("./airtable-payitems");
 const formattedReturn = require("../formattedReturn");
 
 module.exports = async (event) => {
-  const { id } = event.queryStringParameters;
-  
+  const { id, fi } = event.queryStringParameters;
+
   if (id) {
     const payitem = await table.find(id);
     const formattedPayitems = { id: payitem.id, ...payitem.fields };
@@ -17,7 +17,18 @@ module.exports = async (event) => {
     return formattedReturn(200, formattedPayitems);
   }
 
-  
+  if (fi) {
+    const payitems = await table
+      .select({ view: "sortedview", filterByFormula: `pay_type = '${fi}'` })
+      .firstPage();
+    const formattedPayitems = payitems.map((rec) => ({
+      id: rec.id,
+      ...rec.fields,
+    }));
+
+    return formattedReturn(200, formattedPayitems);
+  }
+
   try {
     const payitems = await table.select().firstPage();
     const formattedPayitems = payitems.map((item) => ({

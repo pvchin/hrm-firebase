@@ -17,6 +17,7 @@ export const queryKeys = {
   payslips: "payslips",
   payslipsbatch: "payslipsbatch",
   payrun: "payrun",
+  payitems: "payitems",
   payrunstatus: "payrunstatus",
   trainings: "trainings",
   family: "family",

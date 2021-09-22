@@ -1,7 +1,7 @@
-export function filterByEmpId(payitems, empId) {
+export function filterByType(payitems, type) {
   // eslint-disable-next-line array-callback-return
   return payitems
-    .filter((item) => item.empid === empId)
+    .filter((item) => item.pay_type === type)
     .map((r) => {
       return { ...r };
     });
