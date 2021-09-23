@@ -194,10 +194,10 @@ const PayForm = ({
       totalSCP = 98;
     }
     siteallows = parseFloat(
-      isNaN(state.allows_type1amt) ? 0 : state.allows_type1amt
+      isNaN(state.site_allows) ? 0 : state.site_allows
     );
     expsclaims = parseFloat(
-      isNaN(state.allows_type2amt) ? 0 : state.allows_type2amt
+      isNaN(state.expenses_claims) ? 0 : state.expenses_claims
     );
 
     allows =
@@ -209,14 +209,14 @@ const PayForm = ({
       parseFloat(isNaN(state.allows_type8amt) ? 0 : state.allows_type8amt);
 
     deducts =
-      parseFloat(isNaN(state.allows_type1amt) ? 0 : state.deducts_type1amt) +
-      parseFloat(isNaN(state.allows_type2amt) ? 0 : state.deducts_type2amt) +
-      parseFloat(isNaN(state.allows_type3amt) ? 0 : state.deducts_type3amt) +
-      parseFloat(isNaN(state.allows_type4amt) ? 0 : state.deducts_type4amt) +
-      parseFloat(isNaN(state.allows_type5amt) ? 0 : state.deducts_type5amt) +
-      parseFloat(isNaN(state.allows_type6amt) ? 0 : state.deducts_type6amt) +
-      parseFloat(isNaN(state.allows_type7amt) ? 0 : state.deducts_type7amt) +
-      parseFloat(isNaN(state.allows_type8amt) ? 0 : state.deducts_type8amt);
+      parseFloat(isNaN(state.deducts_type1amt) ? 0 : state.deducts_type1amt) +
+      parseFloat(isNaN(state.deducts_type2amt) ? 0 : state.deducts_type2amt) +
+      parseFloat(isNaN(state.deducts_type3amt) ? 0 : state.deducts_type3amt) +
+      parseFloat(isNaN(state.deducts_type4amt) ? 0 : state.deducts_type4amt) +
+      parseFloat(isNaN(state.deducts_type5amt) ? 0 : state.deducts_type5amt) +
+      parseFloat(isNaN(state.deducts_type6amt) ? 0 : state.deducts_type6amt) +
+      parseFloat(isNaN(state.deducts_type7amt) ? 0 : state.deducts_type7amt) +
+      parseFloat(isNaN(state.deducts_type8amt) ? 0 : state.deducts_type8amt);
 
     allows = isNaN(allows) ? 0 : allows;
     deducts = isNaN(deducts) ? 0 : deducts;
@@ -566,10 +566,10 @@ const PayForm = ({
               <div>
                 <TextField
                   label="Amount"
-                  name="allows_type1amt"
+                  name="site_allows"
                   variant="filled"
                   type="number"
-                  value={state.allows_type1amt}
+                  value={state.site_allows}
                   onChange={handleChange}
                   style={{ width: "100%" }}
                   InputLabelProps={{
@@ -580,10 +580,10 @@ const PayForm = ({
               <div>
                 <TextField
                   label="Amount"
-                  name="allows_type2amt"
+                  name="expenses_claims"
                   variant="filled"
                   type="number"
-                  value={state.allows_type2amt}
+                  value={state.expenses_claims}
                   onChange={handleChange}
                   InputLabelProps={{
                     shrink: true,
@@ -604,6 +604,7 @@ const PayForm = ({
                   InputLabelProps={{
                     shrink: true,
                   }}
+                  errorText={""}
                 ></TextField>
               </div>
               <div>

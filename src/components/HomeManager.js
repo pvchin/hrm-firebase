@@ -24,6 +24,7 @@ import { useRecoilState } from "recoil";
 import { loginLevelState } from "./data/atomdata";
 import BarChart from "../helpers/BarChart";
 import BarChartStack from "../helpers/BarChartStack";
+
 import EmployeeTableLeaveView from "./EmployeeTableLeaveView";
 import ExpensesTableViewSummary from "./ExpenseTableViewSummary";
 import ExpenseSummaryTableView from "./ExpensesSummaryTableView";
@@ -33,6 +34,10 @@ import DailyAllowanceTableViewSummary from "./DailyAllowancesTableViewSummary";
 import PayslipTableViewSummary from "./PayslipTableViewSummary";
 import PayslipSummaryTableView from "./PayslipSummaryTableView";
 import { useExpensesPeriod } from "./expenses/useExpensesPeriod";
+
+// const LeavesTableViewSummary = React.lazy(() =>
+//   import("./LeavesTableViewSummary")
+// );
 
 const drawerWidth = 240;
 
