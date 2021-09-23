@@ -3,7 +3,7 @@ import { useReactToPrint } from "react-to-print";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import dayjs from "dayjs";
-import { useHistory} from "react-router-dom"
+import { useHistory } from "react-router-dom";
 import * as emailjs from "emailjs-com";
 import MaterialTable, { MTableToolbar } from "material-table";
 import { FiSave, FiCheckCircle, FiMail } from "react-icons/fi";
@@ -196,6 +196,7 @@ const Payrunbatch = () => {
   const [emponclick, setEmponclick] = useState(false);
   const [showSumm, setShowSumm] = useState(false);
   const [isCalc, setIsCalc] = useState(false);
+  const [isStart, setIsStart] = useState(true);
   const [isLoad, setIsLoad] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const singlebatchpayslip = payslipsbatch;
@@ -248,7 +249,7 @@ const Payrunbatch = () => {
   const handleSavePayslips = (e) => {
     e.preventDefault();
 
-    calcPayrunTotals();
+    //calcPayrunTotals();
     // eslint-disable-next-line no-lone-blocks
     {
       singlebatchpayslip.forEach((rec) => {
@@ -344,7 +345,7 @@ const Payrunbatch = () => {
     const tmppayrun = payrun.filter((r) => r.payrun === payslip_period);
     //console.log("paysave", tmppayrun[0].id);
     // eslint-disable-next-line no-lone-blocks
-    console.log("paybatch",payrundata)
+    console.log("paybatch", payrundata);
     updatePayrun({
       id: tmppayrun[0].id,
       totalpayroll: payrundata.totalpayroll,
@@ -356,7 +357,7 @@ const Payrunbatch = () => {
       totalsitesallows: payrundata.totalsitesallows,
       totalexpensesclaims: payrundata.totalexpensesclaims,
     });
-    history.push("/payslip")
+    history.push("/payslip");
   };
 
   const handleVerifyPayslips = (e) => {
@@ -514,8 +515,8 @@ const Payrunbatch = () => {
                     colorScheme="blue"
                     isDisabled={
                       payrundata.status === "Verified" ||
-                        payrundata.status === "Approved" ||
-                      payrundata.status === "New"  
+                      payrundata.status === "Approved" ||
+                      payrundata.status === "New"
                         ? true
                         : false
                     }
@@ -610,6 +611,7 @@ const Payrunbatch = () => {
                                 // ${index === value && "activebtn"}
                                 onClick={(e) => {
                                   setRowIndex(index);
+                                  setIsStart(false);
                                   handleEmpButtonClick(index);
                                 }}
                               >
@@ -636,6 +638,8 @@ const Payrunbatch = () => {
                     singlebatchpayslip={singlebatchpayslip}
                     rowindex={rowindex}
                     isCalc={isCalc}
+                    isStart={isStart}
+                    setIsStart={setIsStart}
                     setIsCalc={setIsCalc}
                   />
                 </GridItem>

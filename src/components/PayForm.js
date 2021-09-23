@@ -101,6 +101,8 @@ const PayForm = ({
   setLoadUpdatedata,
   rowindex,
   isCalc,
+  isStart,
+  setIsStart,
   setIsCalc,
   singlebatchpayslip,
 }) => {
@@ -156,6 +158,10 @@ const PayForm = ({
   };
 
   const handleCalc = (e) => {
+    //console.log("start", isStart)
+    if (isStart) {
+      return;
+    }
     if (!usePayslipsBatch) {
       return;
     }
@@ -186,6 +192,7 @@ const PayForm = ({
       return false;
     }
     wages = isNaN(state.wages) || state.wages === undefined ? 0 : state.wages;
+    console.log("Wages", wages);
     totalTAP = state.tap_checkbox ? Math.ceil(wages * 0.05) : 0;
     totalSCP = state.tap_checkbox
       ? Math.round((wages + Number.EPSILON) * 0.035 * 100) / 100
@@ -193,9 +200,7 @@ const PayForm = ({
     if (totalSCP > 98) {
       totalSCP = 98;
     }
-    siteallows = parseFloat(
-      isNaN(state.site_allows) ? 0 : state.site_allows
-    );
+    siteallows = parseFloat(isNaN(state.site_allows) ? 0 : state.site_allows);
     expsclaims = parseFloat(
       isNaN(state.expenses_claims) ? 0 : state.expenses_claims
     );
