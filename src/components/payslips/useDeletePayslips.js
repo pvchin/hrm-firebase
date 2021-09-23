@@ -16,10 +16,10 @@ export function useDeletePayslips(data) {
   const { mutate } = useMutation((data) => deletePayslips(data), {
     onSuccess: () => {
       queryClient.invalidateQueries("payslips");
-      toast({
-        title: "Payslip record being deleted!",
-        status: "warning",
-      });
+      // toast({
+      //   title: "Payslip record being deleted!",
+      //   status: "warning",
+      // });
     },
   });
 

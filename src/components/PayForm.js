@@ -602,6 +602,9 @@ const PayForm = ({
                   name="allows_type3amt"
                   variant="filled"
                   type="number"
+                  min="0"
+                  max="9999"
+                  step="any"
                   value={state.allows_type3amt}
                   onChange={(e) => {
                     handleChange(e);

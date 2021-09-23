@@ -16,10 +16,10 @@ export function useAddPayslips(data) {
   const { mutate } = useMutation((data) => addPayslips(data), {
     onSuccess: () => {
       queryClient.invalidateQueries("payslips");
-      toast({
-        title: "Payslip record being added!",
-        status: "success",
-      });
+      // toast({
+      //   title: "Payslip record being added!",
+      //   status: "success",
+      // });
     },
   });
 

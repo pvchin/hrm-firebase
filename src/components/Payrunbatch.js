@@ -197,7 +197,8 @@ const Payrunbatch = () => {
   const [showSumm, setShowSumm] = useState(false);
   const [isCalc, setIsCalc] = useState(false);
   const [isStart, setIsStart] = useState(true);
-  const [isLoad, setIsLoad] = useState(false);
+  const [isShow, setIsShow] = useState(false);
+  const [tabno, setTabno] = useState(0);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const singlebatchpayslip = payslipsbatch;
 
@@ -239,7 +240,25 @@ const Payrunbatch = () => {
 
   const handlePrintSummary = (e) => {
     e.preventDefault();
-    exportPdfTable(singlebatchpayslip);
+    if (payrundata.status === "Verified" || payrundata.status === "Approved") {
+      exportPdfTable(singlebatchpayslip);
+    } else {
+      // save individual payslips
+      saveIndividualPayslips();
+      // save payrun
+      updatePayrun({
+        id: payrunId,
+        totalpayroll: payrundata.totalpayroll,
+        totalwages: payrundata.totalwages,
+        totaltap: payrundata.totaltap,
+        totalscp: payrundata.totalscp,
+        totalallows: payrundata.totalallows,
+        totaldeducts: payrundata.totaldeducts,
+        totalsitesallows: payrundata.totalsiteallows,
+        totalexpensesclaims: payrundata.totalexpensesclaims,
+      });
+      exportPdfTable(singlebatchpayslip);
+    }
   };
 
   const exportPdfTable = (singlebatchpayslip) => {
@@ -251,17 +270,28 @@ const Payrunbatch = () => {
 
     //calcPayrunTotals();
     // eslint-disable-next-line no-lone-blocks
-    {
-      singlebatchpayslip.forEach((rec) => {
-        const { id, rec_id, tableData, ...fields } = rec;
-        updatePayslip({ id, ...fields });
-      });
-    }
+    // {
+    //   singlebatchpayslip.forEach((rec) => {
+    //     const { id, rec_id, tableData, ...fields } = rec;
+    //     updatePayslip({ id, ...fields });
+    //   });
+    // }
+    // save individual payslips
+    saveIndividualPayslips();
+
     //update payrun
     handleSavePayrun();
     toast({
       title: "Changes have been saved!",
       status: "success",
+    });
+    history.push("/payslip");
+  };
+
+  const saveIndividualPayslips = () => {
+    singlebatchpayslip.forEach((rec) => {
+      const { id, rec_id, tableData, ...fields } = rec;
+      updatePayslip({ id, ...fields });
     });
   };
 
@@ -345,7 +375,7 @@ const Payrunbatch = () => {
     const tmppayrun = payrun.filter((r) => r.payrun === payslip_period);
     //console.log("paysave", tmppayrun[0].id);
     // eslint-disable-next-line no-lone-blocks
-    console.log("paybatch", payrundata);
+    console.log("paybatch", payslip_period, payrundata);
     updatePayrun({
       id: tmppayrun[0].id,
       totalpayroll: payrundata.totalpayroll,
@@ -354,7 +384,7 @@ const Payrunbatch = () => {
       totalscp: payrundata.totalscp,
       totalallows: payrundata.totalallows,
       totaldeducts: payrundata.totaldeducts,
-      totalsitesallows: payrundata.totalsitesallows,
+      totalsitesallows: payrundata.totalsiteallows,
       totalexpensesclaims: payrundata.totalexpensesclaims,
     });
     history.push("/payslip");
@@ -364,7 +394,21 @@ const Payrunbatch = () => {
     e.preventDefault();
     setPayrundata({ ...payrundata, status: "Verified" });
     setPayrunStatus("Verified");
-    updatePayrun({ id: payrunId, status: "Verified" });
+    // save individual payslips
+    saveIndividualPayslips();
+    // save payrun
+    updatePayrun({
+      id: payrunId,
+      status: "Verified",
+      totalpayroll: payrundata.totalpayroll,
+      totalwages: payrundata.totalwages,
+      totaltap: payrundata.totaltap,
+      totalscp: payrundata.totalscp,
+      totalallows: payrundata.totalallows,
+      totaldeducts: payrundata.totaldeducts,
+      totalsitesallows: payrundata.totalsiteallows,
+      totalexpensesclaims: payrundata.totalexpensesclaims,
+    });
     toast({
       title: "Batch has been verified!",
       status: "success",
@@ -380,10 +424,20 @@ const Payrunbatch = () => {
   };
 
   const handleTabChange = (index) => {
+    setTabno(index);
     if (index === 1) {
       calcPayrunTotals();
     }
+    setIsShow(false);
   };
+
+  useEffect(() => {
+    if (tabno === 1) {
+      setIsShow(true);
+    } else {
+      setIsShow(false);
+    }
+  }, [tabno]);
 
   const SentEmailModal = () => {
     return (
@@ -492,7 +546,8 @@ const Payrunbatch = () => {
                     colorScheme="blue"
                     isDisabled={
                       payrundata.status === "Verified" ||
-                      payrundata.status === "Approved"
+                      payrundata.status === "Approved" ||
+                      !isShow
                         ? true
                         : false
                     }
@@ -502,6 +557,7 @@ const Payrunbatch = () => {
                     Save/Exit
                   </Button>
                   <Button
+                    isDisabled={!isShow}
                     width="500px"
                     colorScheme="blue"
                     onClick={(e) => handlePrintSummary(e)}
@@ -516,7 +572,8 @@ const Payrunbatch = () => {
                     isDisabled={
                       payrundata.status === "Verified" ||
                       payrundata.status === "Approved" ||
-                      payrundata.status === "New"
+                      payrundata.status === "New" ||
+                      !isShow
                         ? true
                         : false
                     }

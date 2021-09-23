@@ -133,22 +133,22 @@ const PaySummary = ({ singlebatchpayslip }) => {
       totalsitesallows: totalsitesallows,
       totalexpensesclaims: totalexpclaims,
     });
-    payrun
-      .filter((r) => r.payrun === payslip_period)
-      .map((rec) => {
-        //update payrun
-        return updatePayrun({
-          id: rec.id,
-          totalpayroll: totalpayroll,
-          totalwages: totalwages,
-          totaltap: totaltap,
-          totalscp: totalscp,
-          totalallows: totalallows,
-          totaldeducts: totaldeducts,
-          totalsitesallows: totalsitesallows,
-          totalexpensesclaims: totalexpclaims,
-        });
-      });
+    // payrun
+    //   .filter((r) => r.payrun === payslip_period)
+    //   .map((rec) => {
+    //     //update payrun
+    //     return updatePayrun({
+    //       id: rec.id,
+    //       totalpayroll: totalpayroll,
+    //       totalwages: totalwages,
+    //       totaltap: totaltap,
+    //       totalscp: totalscp,
+    //       totalallows: totalallows,
+    //       totaldeducts: totaldeducts,
+    //       totalsitesallows: totalsitesallows,
+    //       totalexpensesclaims: totalexpclaims,
+    //     });
+    //   });
     // console.log("payrundata", payrundata);
     // console.log(
     //   "totals",
