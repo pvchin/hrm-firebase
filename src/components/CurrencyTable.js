@@ -74,7 +74,7 @@ export default function UpdateCurrency() {
           options={{
             filtering: true,
             headerStyle: {
-              backgroundColor: "orange",
+              backgroundColor: "#90CDF4",
               color: "primary",
             },
             showTitle: true,

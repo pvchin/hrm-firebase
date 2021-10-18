@@ -13,6 +13,7 @@ import { Loading } from "./components/app/Loading";
 // } from "@material-ui/core/colors";
 //import DashboardMain from "./components/DashboardMain";
 import Main from "./components/Main";
+import MainMenu from "./components/MainMenu";
 
 const App = () => {
   //const [darkState, setDarkState] = useState(false);
@@ -53,7 +54,7 @@ const App = () => {
       <CssBaseline />
       <div>
         <Loading />
-        <Main />
+        <MainMenu />
       </div>
       {/* <Switch checked={darkState} onChange={handleThemeChange} /> */}
 

@@ -252,7 +252,7 @@ export default function ExpenseTable({
             filtering: true,
             selection: true,
             headerStyle: {
-              backgroundColor: "orange",
+              backgroundColor: "#90CDF4",
               color: "#FFF",
             },
             showTitle: true,

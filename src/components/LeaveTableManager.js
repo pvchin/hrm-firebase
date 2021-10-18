@@ -281,7 +281,7 @@ export default function LeaveTable({
             filtering: true,
             selection: true,
             headerStyle: {
-              backgroundColor: "orange",
+              backgroundColor: "#90CDF4",
               color: "primary",
             },
             showTitle: true,

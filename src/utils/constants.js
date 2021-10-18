@@ -192,3 +192,31 @@ export const periods = [
   { name: "2021-11", monthenddate: "2021-11-25" },
   { name: "2021-12", monthenddate: "2021-12-25" },
 ];
+
+export const links = [
+  {
+    id: 1,
+    text: "staff",
+    url: "/",
+  },
+  {
+    id: 2,
+    text: "admin",
+    url: "/about",
+  },
+  {
+    id: 3,
+    text: "admin",
+    url: "/products",
+  },
+  {
+    id: 4,
+    text: "orders",
+    url: "/userorders",
+  },
+  {
+    id: 5,
+    text: "admin",
+    url: "/admin",
+  },
+];

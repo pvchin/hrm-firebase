@@ -116,7 +116,7 @@ const EmployeeView = () => {
         {/* <h2>Welcome {loginLevel.loginUser}!</h2>
         <h3>Dashboard</h3> */}
       </div>
-      <Container maxWidth="lg" className={classes.container}>
+      <Container maxWidth="full" className={classes.container}>
         <Stack direction="column">
           <Box>
             <CardLayout2>
@@ -151,7 +151,7 @@ const EmployeeView = () => {
               </Box>
               <Divider />
               <Box>
-                <Tabs>
+                <Tabs isLazy>
                   <TabList>
                     {/* <Tab>Chart</Tab>
                 <Tab>Summary</Tab> */}

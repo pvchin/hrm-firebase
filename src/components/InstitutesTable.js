@@ -68,7 +68,7 @@ export default function UpdateInstitutes() {
           options={{
             filtering: true,
             headerStyle: {
-              backgroundColor: "orange",
+              backgroundColor: "#90CDF4",
               color: "primary",
             },
             showTitle: true,

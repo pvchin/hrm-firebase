@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import clsx from "clsx";
 import MaterialTable, { MTableToolbar } from "material-table";
 import { makeStyles } from "@material-ui/core/styles";
-import { Button, Icon, TextField, MenuItem } from "@material-ui/core";
+import { Box, Button, Icon } from "@chakra-ui/react";
 import { useEmployeesContext } from "../context/employees_context";
 import { useTablesContext } from "../context/tables_context";
 import { useEmployees } from "./employees/useEmployees";
@@ -47,8 +47,8 @@ export default function UserAccessTable() {
 
   return (
     <div className={fixedHeightPaper}>
-      <div className={classes.root}>
-        <div style={{ maxWidth: "100%", paddingTop: "5px" }}>
+      {/* <div className={classes.root}> */}
+        <Box w="100%" mt="65">
           <MaterialTable
             columns={columns}
             data={employees}
@@ -70,7 +70,7 @@ export default function UserAccessTable() {
               filtering: true,
               pageSize: 10,
               headerStyle: {
-                backgroundColor: "orange",
+                backgroundColor: "#90CDF4",
                 color: "primary",
               },
               showTitle: true,
@@ -84,8 +84,8 @@ export default function UserAccessTable() {
               ),
             }}
           />
-        </div>
-      </div>
+        </Box>
+      {/* </div> */}
     </div>
   );
 }

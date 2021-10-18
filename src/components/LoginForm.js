@@ -38,14 +38,15 @@ const LoginForm = () => {
 
   return (
     <Container className={classes.root}>
+      <SigninForm />
       {/* <Button variant="contained" color="primary" onClick={handleOpen}>
         Signin
       </Button> */}
-      <Paper variant="outlined">
+      {/* <Paper variant="outlined">
         <img src={img} alt="logo"/>
-      </Paper>
-      <Card className={classes.card}>
-        {/* <CardHeader
+      </Paper> */}
+      {/* <Card className={classes.card}> */}
+      {/* <CardHeader
           //  avatar={
           //    <Avatar aria-label="recipe" className={classes.avatar}>
           //      L
@@ -62,16 +63,16 @@ const LoginForm = () => {
             // backgroundColor: "background",
           }}
         /> */}
-        <CardActionArea>
-          {/* <CardMedia
+      {/* <CardActionArea> */}
+      {/* <CardMedia
             style={{ height: 0, paddingTop: "56.25%" }}
             // className={classes.media}
             image={img}
             title="Contemplative Reptile"
           /> */}
-          <Divider className={classes.divider} />
-          <CardContent>
-            <Typography
+      {/* <Divider className={classes.divider} /> */}
+      {/* <CardContent> */}
+      {/* <Typography
               gutterBottom
               variant="h4"
               component="h3"
@@ -79,19 +80,19 @@ const LoginForm = () => {
               style={{ textAlign: "center" }}
             >
               Login
-            </Typography>
-            <Typography
+            </Typography> */}
+      {/* <Typography
               variant="h6"
               color="textSecondary"
               component="h3"
               style={{ textAlign: "center" }}
-            >
-              {/* Access to Admin dashboard */}
-            </Typography>
-            <SigninForm />
-          </CardContent>
-        </CardActionArea>
-      </Card>
+            > */}
+      {/* Access to Admin dashboard */}
+      {/* </Typography> */}
+
+      {/* </CardContent> */}
+      {/* </CardActionArea> */}
+      {/* </Card> */}
     </Container>
   );
 };

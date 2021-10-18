@@ -421,7 +421,7 @@ const HomeAdminManager = () => {
   // }, []);
 
   return (
-    <Container maxW="container.xl" marginTop="100">
+    <Container maxW="full" marginTop="100">
       <Box
         maxW="x3"
         padding="4"
@@ -440,7 +440,7 @@ const HomeAdminManager = () => {
           </Box>
           <Divider />
           <Box>
-            <Tabs>
+            <Tabs isLazy>
               <TabList>
                 {/* <Tab>Chart</Tab>
                 <Tab>Summary</Tab> */}
@@ -474,7 +474,7 @@ const HomeAdminManager = () => {
           </Box>
           <Divider />
           <Box>
-            <Tabs defaultIndex={currentmonth}>
+            <Tabs defaultIndex={currentmonth} isLazy>
               <TabList>
                 {/* <Tab>Chart</Tab>
                 <Tab>Summary</Tab> */}
@@ -561,7 +561,7 @@ const HomeAdminManager = () => {
           </Box>
           <Divider />
           <Box>
-            <Tabs defaultIndex={currentmonth}>
+            <Tabs defaultIndex={currentmonth} isLazy>
               <TabList>
                 {/* <Tab>Chart</Tab>
                 <Tab>Summary</Tab> */}
@@ -648,7 +648,7 @@ const HomeAdminManager = () => {
           </Box>
           <Divider />
           <Box>
-            <Tabs defaultIndex={currentmonth}>
+            <Tabs defaultIndex={currentmonth} isLazy>
               <TabList>
                 {/* <Tab>Chart</Tab>
                 <Tab>Summary</Tab> */}
@@ -771,7 +771,7 @@ const HomeAdminManager = () => {
           </Box>
           <Divider />
           <Box>
-            <Tabs>
+            <Tabs isLazy>
               <TabList>
                 {/* <Tab>Chart</Tab>
                 <Tab>Summary</Tab> */}

@@ -106,7 +106,7 @@ const EmployeeView = () => {
         {/* <h2>Welcome {loginLevel.loginUser}!</h2>
         <h3>Dashboard</h3> */}
       </div>
-      <Container maxWidth="lg" className={classes.container}>
+      <Container maxWidth="full" className={classes.container}>
         <Grid container spacing={3}>
           {/* Chart */}
           <Grid item xs={12} md={8} lg={12}>

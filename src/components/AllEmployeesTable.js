@@ -199,7 +199,8 @@ export default function AllEmployeesTable() {
             filtering: true,
             selection: true,
             headerStyle: {
-              backgroundColor: "#DAAD86",
+              //backgroundColor: "#DAAD86",
+              backgroundColor: "#90CDF4",
               color: "secondary",
             },
             showTitle: true,

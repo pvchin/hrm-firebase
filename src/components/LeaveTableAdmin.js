@@ -182,7 +182,7 @@ export default function LeaveTable() {
           }}
           actions={[
             {
-              icon: ()=><VisibilityIcon />,
+              icon: () => <VisibilityIcon />,
               tooltip: "Edit Record",
               onClick: (event, rowData) => {
                 update_Leave(rowData);
@@ -207,7 +207,7 @@ export default function LeaveTable() {
           options={{
             filtering: true,
             headerStyle: {
-              backgroundColor: "secondary",
+              backgroundColor: "#90CDF4",
               color: "primary",
             },
             showTitle: true,

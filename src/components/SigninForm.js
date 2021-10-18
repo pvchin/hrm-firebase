@@ -1,7 +1,26 @@
 import React, { useState } from "react";
 //import { useHistory } from "react-router-dom";
-import { Button, TextField } from "@material-ui/core";
+//import { Button, TextField } from "@material-ui/core";
+import {
+  AspectRatio,
+  Box,
+  Button,
+  Container,
+  Divider,
+  Flex,
+  FormControl,
+  Heading,
+  Image,
+  Input,
+  InputGroup,
+  InputLeftAddon,
+  Stack,
+  HStack,
+  VStack,
+  Wrap,
+} from "@chakra-ui/react";
 import { makeStyles } from "@material-ui/core/styles";
+import { Controller, useForm } from "react-hook-form";
 import { useCustomToast } from "../helpers/useCustomToast";
 import { useEmployees } from "./employees/useEmployees";
 import { useRecoilState } from "recoil";
@@ -9,25 +28,39 @@ import { loginLevelState } from "./data/atomdata";
 import { useEmployeesContext } from "../context/employees_context";
 //import { setStoredUser } from "./user-storage";
 //import { useAuthContext } from "../context/auth_context";
+import img from "../assets/AppSutLogo.jpg";
 import App from "../utils/firebase";
+
+const initial_values = {
+  email: "",
+  password: "",
+};
 
 const SigninForm = () => {
   //let history = useHistory();
   const classes = useStyles();
   const toast = useCustomToast();
+  const field_width = "40";
   //const { currentUser } = useAuthContext();
   const { employees } = useEmployees();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
-
+  const [state, setState] = useState(initial_values);
   const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
   const { setEditEmployeeID } = useEmployeesContext();
+  const {
+    handleSubmit,
+    control,
+    register,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm({ defaultValues: state });
 
-  const handleLogin = async (event) => {
-    event.preventDefault();
-    //console.log("sigin", email, password);
-    //const { email, password } = event.target.elements;
+  const handleLogin = async (values) => {
+    //event.preventDefault();
+    //console.log("sigin", values);
+    const { email, password } = values;
     try {
       await App.auth().signInWithEmailAndPassword(email, password);
       //history.pushState("/");
@@ -59,12 +92,13 @@ const SigninForm = () => {
         };
       });
     if (email === "admin@abc.com") {
-      setRole(role);
+      //setRole(role);
+      setRole("Staff");
       setLoginLevel({
         ...loginLevel,
         loginUser: "Admin",
         loginUserId: "admin",
-        loginLevel: role,
+        loginLevel: "Staff",
         loginEmail: "admin@abc.com",
         login: true,
         leave_bal: 0,
@@ -155,67 +189,117 @@ const SigninForm = () => {
   // };
 
   return (
-    <form className={classes.root} onSubmit={handleLogin}>
-      <div style={{ textAlign: "center" }}>
-        <TextField
-          label="Email"
-          variant="filled"
-          type="email"
-          required
-          style={{ width: 350 }}
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <TextField
-          label="Password"
-          variant="filled"
-          type="password"
-          style={{ width: 350 }}
-          required
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </div>
+    <Container minH="84vh" align="center" justify="center">
+      <Stack spacing={8} mx="auto" w="xl" py={12} px={6}>
+        <Box bgColor="white">
+          <Box>
+            <AspectRatio w="400px" h="200px" ratio={1}>
+              <Wrap w="300px" h="200px" px="1rem" spacing={4} justify="center">
+                <Image
+                  src={img}
+                  alt="Logo"
+                  width="100%"
+                  display="block"
+                  fit="cover"
+                />
+              </Wrap>
+            </AspectRatio>
+          </Box>
+          <Stack align="center" py={3}>
+            <Heading size="md">Log In to Appsmiths Sutera HRMS</Heading>
+          </Stack>
+          <form onSubmit={handleSubmit(handleLogin)}>
+            <VStack
+              alignItems="flex-start"
+              px={5}
+              py={5}
+              m={5}
+              borderRadius="20"
+              border="1px solid black"
+            >
+              <FormControl>
+                <Controller
+                  control={control}
+                  name="email"
+                  //defaultValue={email}
 
-      <div style={{ textAlign: "center" }}>
-        <Button
-          type="submit"
-          variant="contained"
-          color="primary"
-          className={classes.button}
-          onClick={(e) => setRole("Staff")}
-        >
-          Staff
-        </Button>
-        <Button
-          type="submit"
-          variant="contained"
-          color="primary"
-          className={classes.button}
-          onClick={(e) => setRole("Admin")}
-        >
-          Admin
-        </Button>
-        <Button
-          type="submit"
-          variant="contained"
-          color="primary"
-          className={classes.button}
-          onClick={(e) => setRole("AdminManager")}
-        >
-          Admin Manager
-        </Button>
-        <Button
-          type="submit"
-          variant="contained"
-          color="primary"
-          className={classes.button}
-          onClick={(e) => setRole("Manager")}
-        >
-          Manager
-        </Button>
-      </div>
-    </form>
+                  render={({ field: { onChange, value, ref } }) => (
+                    <InputGroup>
+                      <HStack w="100%" py={1}>
+                        {/* <InputLeftAddon
+                          children="Email"
+                          minWidth={field_width}
+                          bgColor="gray.300"
+                        /> */}
+                        <Input
+                          name="email"
+                          value={value}
+                          //onChange={onChange}
+                          onChange={(e) => {
+                            onChange(e);
+                            setEmail(e.target.value);
+                          }}
+                          bgColor="white"
+                          //textTransform="capitalize"
+                          ref={ref}
+                          placeholder="email"
+                        />
+                      </HStack>
+                    </InputGroup>
+                  )}
+                />
+              </FormControl>
+              <Divider />
+              <FormControl>
+                <Controller
+                  control={control}
+                  name="password"
+                  //defaultValue={name}
+                  render={({ field: { onChange, value, ref } }) => (
+                    <InputGroup>
+                      <HStack w="100%" py={1}>
+                        {/* <InputLeftAddon
+                          children="Password"
+                          minWidth={field_width}
+                          bgColor="gray.300"
+                        /> */}
+                        <Input
+                          name="password"
+                          type="password"
+                          value={value}
+                          onChange={(e) => {
+                            onChange(e);
+                            setPassword(e.target.value);
+                          }}
+                          bgColor="white"
+                          //textTransform="capitalize"
+                          ref={ref}
+                          placeholder="password"
+                        />
+                      </HStack>
+                    </InputGroup>
+                  )}
+                />
+              </FormControl>
+            </VStack>
+            <HStack align="center" justify="center">
+              <Button
+                mt={1}
+                mx={5}
+                mb={5}
+                variant="solid"
+                isFullWidth
+                colorScheme="teal"
+                isLoading={isSubmitting}
+                type="submit"
+              >
+                Login
+              </Button>
+            </HStack>
+          </form>
+        </Box>
+      </Stack>
+    </Container>
   );
 };
 

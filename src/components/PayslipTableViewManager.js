@@ -123,8 +123,8 @@ export default function PayslipTableVIew() {
             search: false,
             toolbar: false,
             headerStyle: {
-              backgroundColor: "orange",
-              color: "#FFF",
+              backgroundColor: "#90CDF4",
+              color: "black",
             },
             showTitle: false,
           }}

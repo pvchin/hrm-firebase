@@ -274,8 +274,8 @@ export default function PayslipTable() {
           options={{
             filtering: true,
             headerStyle: {
-              backgroundColor: "orange",
-              color: "#FFF",
+              backgroundColor: "#90CDF4",
+              color: "black",
             },
             showTitle: true,
           }}

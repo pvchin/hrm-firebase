@@ -9,7 +9,7 @@ import {
   ListSubheader,
   Collapse,
 } from "@material-ui/core";
-
+import { Text} from "@chakra-ui/react"
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import FlightIcon from "@material-ui/icons/Flight";
 import PeopleIcon from "@material-ui/icons/People";
@@ -35,8 +35,10 @@ const MenuListItems = () => {
 
   return (
     <div className={classes.content}>
-      <ListSubheader inset className={classes.mainHeader}>
-        Manager
+      <ListSubheader align="center" className={classes.itemIcon}>
+        <Text color="blue" fontSize="21" fontWeight="bold">
+          Manager
+        </Text>
       </ListSubheader>
 
       <Link to="/">

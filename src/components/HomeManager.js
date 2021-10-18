@@ -6,9 +6,11 @@ import {
   Box,
   Container,
   Divider,
+  Flex,
   Grid,
   Heading,
   SimpleGrid,
+  Stack,
   Tabs,
   TabList,
   TabPanels,
@@ -426,78 +428,107 @@ const HomeManager = () => {
   // }, []);
 
   return (
-    <Container maxW="container.xl" marginTop="100">
-      <Box
-        maxW="x3"
-        padding="4"
-        width="100%"
-        height="650"
-        borderColor="blue.500"
-        borderWidth="1px"
-        borderRadius="lg"
-        overflow="hidden"
-      >
-        <SimpleGrid>
-          <Box>
-            <Heading as="h2" size="lg">
-              Employees
-            </Heading>
-          </Box>
-          <Divider />
-          <Box>
-            <Tabs>
-              <TabList>
-                {/* <Tab>Chart</Tab>
-                <Tab>Summary</Tab> */}
-                <Tab>Details</Tab>
-              </TabList>
-              <TabPanels>
-                <TabPanel>
-                  <EmployeeTableLeaveView />
-                </TabPanel>
-              </TabPanels>
-            </Tabs>
-          </Box>
-          <Divider />
-        </SimpleGrid>
-      </Box>
-      <Box
-        maxW="x3"
-        padding="4"
-        width="100%"
-        height="500"
-        borderColor="blue.500"
-        borderWidth="1px"
-        borderRadius="lg"
-        overflow="hidden"
-      >
-        <SimpleGrid>
-          <Box>
-            <Heading as="h2" size="lg">
-              Leaves
-            </Heading>
-          </Box>
-          <Divider />
-          <Box>
-            <Tabs defaultIndex={currentmonth}>
-              <TabList>
-                {/* <Tab>Chart</Tab>
-                <Tab>Summary</Tab> */}
-                <Tab>January</Tab>
-                <Tab>February</Tab>
-                <Tab>March</Tab>
-                <Tab>April</Tab>
-                <Tab>May</Tab>
-                <Tab>June</Tab>
-                <Tab>July</Tab>
-                <Tab>August</Tab>
-                <Tab>September</Tab>
-                <Tab>October</Tab>
-                <Tab>November</Tab>
-                <Tab>December</Tab>
-              </TabList>
-              <TabPanels>
-                {/* <TabPanel>
+    <div>
+      <div className={classes.appBarSpacer} />
+      <div style={{ paddingLeft: 50 }}>
+        {/* <h2>Welcome {loginLevel.loginUser}!</h2>
+        <h3>Dashboard</h3> */}
+      </div>
+      <Container maxW="full">
+        <Box
+          //minW="100%"
+          padding="4"
+          width="full"
+          height="750"
+          borderColor="blue.500"
+          borderWidth="1px"
+          borderRadius="lg"
+          overflow="hidden"
+        >
+          <Tabs>
+            <TabList>
+              <Tab>Employees</Tab>
+              <Tab>Leaves</Tab>
+              <Tab>Expenses</Tab>
+              <Tab>Site Allowances</Tab>
+              <Tab>Payroll</Tab>
+            </TabList>
+
+            <TabPanels>
+              <TabPanel>
+                <Box
+                  maxW="full"
+                  padding="4"
+                  width="100%"
+                  height="650"
+                  borderColor="blue.500"
+                  borderWidth="1px"
+                  borderRadius="lg"
+                  overflow="hidden"
+                >
+                  <SimpleGrid>
+                    <Box>
+                      <Heading as="h2" size="lg">
+                        Employees
+                      </Heading>
+                    </Box>
+                    <Divider />
+                    <Box>
+                      <Tabs isLazy>
+                        <TabList>
+                          {/* <Tab>Chart</Tab>
+                          <Tab>Summary</Tab> */}
+                          <Tab>Details</Tab>
+                        </TabList>
+                        <TabPanels>
+                          <TabPanel>
+                            <EmployeeTableLeaveView />
+                          </TabPanel>
+                        </TabPanels>
+                      </Tabs>
+                    </Box>
+                    <Divider />
+                  </SimpleGrid>
+                </Box>
+              </TabPanel>
+              <TabPanel>
+                <Box
+                  maxW="100%"
+                  padding="4"
+                  width="full"
+                  height="650"
+                  borderColor="red.500"
+                  borderWidth="1px"
+                  borderRadius="lg"
+                  overflow="hidden"
+                >
+                  <SimpleGrid w="100%">
+                    <Box>
+                      <Heading as="h2" size="lg">
+                        Leaves
+                      </Heading>
+                    </Box>
+                    <Divider />
+                    <Box>
+                      <Tabs defaultIndex={currentmonth} isLazy>
+                        <TabList>
+                          {/* <Tab>Chart</Tab>
+                          <Tab>Summary</Tab> */}
+                          <Tab>January</Tab>
+                          <Tab>February</Tab>
+                          <Tab>March</Tab>
+                          <Tab>April</Tab>
+                          <Tab>May</Tab>
+                          <Tab>June</Tab>
+                          <Tab>July</Tab>
+                          <Tab>August</Tab>
+                          <Tab>September</Tab>
+                          <Tab>October</Tab>
+                          <Tab>November</Tab>
+                          <Tab>December</Tab>
+                        </TabList>
+                        <TabPanels>
+                          {/* <TabPanel>
                   <BarChart
                     heading="Expenses for the Month"
                     barchartdata={expchartdata}
@@ -506,85 +537,123 @@ const HomeManager = () => {
                 <TabPanel>
                   <SummaryTableView columns={columns} data={data} />
                 </TabPanel> */}
-                <TabPanel>
-                  <LeavesTableViewSummary year={currentyear} month={1} />
-                </TabPanel>
-                <TabPanel>
-                  <LeavesTableViewSummary year={currentyear} month={2} />
-                </TabPanel>
-                <TabPanel>
-                  <LeavesTableViewSummary year={currentyear} month={3} />
-                </TabPanel>
-                <TabPanel>
-                  <LeavesTableViewSummary year={currentyear} month={4} />
-                </TabPanel>
-                <TabPanel>
-                  <LeavesTableViewSummary year={currentyear} month={5} />
-                </TabPanel>
-                <TabPanel>
-                  <LeavesTableViewSummary year={currentyear} month={6} />
-                </TabPanel>
-                <TabPanel>
-                  <LeavesTableViewSummary year={currentyear} month={7} />
-                </TabPanel>
-                <TabPanel>
-                  <LeavesTableViewSummary year={currentyear} month={8} />
-                </TabPanel>
-                <TabPanel>
-                  <LeavesTableViewSummary year={currentyear} month={9} />
-                </TabPanel>
-                <TabPanel>
-                  <LeavesTableViewSummary year={currentyear} month={10} />
-                </TabPanel>
-                <TabPanel>
-                  <LeavesTableViewSummary year={currentyear} month={11} />
-                </TabPanel>
-                <TabPanel>
-                  <LeavesTableViewSummary year={currentyear} month={12} />
-                </TabPanel>
-              </TabPanels>
-            </Tabs>
-          </Box>
-          <Divider />
-        </SimpleGrid>
-      </Box>
-      <Box
-        maxW="x3"
-        padding="4"
-        width="100%"
-        height="500"
-        borderColor="blue.500"
-        borderWidth="1px"
-        borderRadius="lg"
-        overflow="hidden"
-      >
-        <SimpleGrid>
-          <Box>
-            <Heading as="h2" size="lg">
-              Expenses Claimed
-            </Heading>
-          </Box>
-          <Divider />
-          <Box>
-            <Tabs defaultIndex={currentmonth}>
-              <TabList>
-                {/* <Tab>Chart</Tab>
+                          <TabPanel>
+                            <LeavesTableViewSummary
+                              year={currentyear}
+                              month={1}
+                            />
+                          </TabPanel>
+                          <TabPanel>
+                            <LeavesTableViewSummary
+                              year={currentyear}
+                              month={2}
+                            />
+                          </TabPanel>
+                          <TabPanel>
+                            <LeavesTableViewSummary
+                              year={currentyear}
+                              month={3}
+                            />
+                          </TabPanel>
+                          <TabPanel>
+                            <LeavesTableViewSummary
+                              year={currentyear}
+                              month={4}
+                            />
+                          </TabPanel>
+                          <TabPanel>
+                            <LeavesTableViewSummary
+                              year={currentyear}
+                              month={5}
+                            />
+                          </TabPanel>
+                          <TabPanel>
+                            <LeavesTableViewSummary
+                              year={currentyear}
+                              month={6}
+                            />
+                          </TabPanel>
+                          <TabPanel>
+                            <LeavesTableViewSummary
+                              year={currentyear}
+                              month={7}
+                            />
+                          </TabPanel>
+                          <TabPanel>
+                            <LeavesTableViewSummary
+                              year={currentyear}
+                              month={8}
+                            />
+                          </TabPanel>
+                          <TabPanel>
+                            <LeavesTableViewSummary
+                              year={currentyear}
+                              month={9}
+                            />
+                          </TabPanel>
+                          <TabPanel>
+                            <LeavesTableViewSummary
+                              year={currentyear}
+                              month={10}
+                            />
+                          </TabPanel>
+                          <TabPanel>
+                            <LeavesTableViewSummary
+                              year={currentyear}
+                              month={11}
+                            />
+                          </TabPanel>
+                          <TabPanel>
+                            <LeavesTableViewSummary
+                              year={currentyear}
+                              month={12}
+                            />
+                          </TabPanel>
+                        </TabPanels>
+                      </Tabs>
+                    </Box>
+                    <Divider />
+                  </SimpleGrid>
+                </Box>
+              </TabPanel>
+              <TabPanel>
+                <Box
+                  maxW="x3"
+                  padding="4"
+                  width="100%"
+                  height="500"
+                  borderColor="blue.500"
+                  borderWidth="1px"
+                  borderRadius="lg"
+                  overflow="hidden"
+                >
+                  <SimpleGrid>
+                    <Box>
+                      <Heading as="h2" size="lg">
+                        Expenses Claimed
+                      </Heading>
+                    </Box>
+                    <Divider />
+                    <Box>
+                      <Tabs defaultIndex={currentmonth} isLazy>
+                        <TabList>
+                          {/* <Tab>Chart</Tab>
                 <Tab>Summary</Tab> */}
-                <Tab>January</Tab>
-                <Tab>February</Tab>
-                <Tab>March</Tab>
-                <Tab>April</Tab>
-                <Tab>May</Tab>
-                <Tab>June</Tab>
-                <Tab>July</Tab>
-                <Tab>August</Tab>
-                <Tab>September</Tab>
-                <Tab>October</Tab>
-                <Tab>November</Tab>
-                <Tab>December</Tab>
-              </TabList>
-              <TabPanels>
-                {/* <TabPanel>
+                          <Tab>January</Tab>
+                          <Tab>February</Tab>
+                          <Tab>March</Tab>
+                          <Tab>April</Tab>
+                          <Tab>May</Tab>
+                          <Tab>June</Tab>
+                          <Tab>July</Tab>
+                          <Tab>August</Tab>
+                          <Tab>September</Tab>
+                          <Tab>October</Tab>
+                          <Tab>November</Tab>
+                          <Tab>December</Tab>
+                        </TabList>
+                        <TabPanels>
+                          {/* <TabPanel>
                   <BarChart
                     heading="Expenses for the Month"
                     barchartdata={expchartdata}
@@ -593,85 +662,123 @@ const HomeManager = () => {
                 <TabPanel>
                   <ExpenseSummaryTableView year={currentyear} />
                 </TabPanel> */}
-                <TabPanel>
-                  <ExpensesTableViewSummary year={currentyear} month={1} />
-                </TabPanel>
-                <TabPanel>
-                  <ExpensesTableViewSummary year={currentyear} month={2} />
-                </TabPanel>
-                <TabPanel>
-                  <ExpensesTableViewSummary year={currentyear} month={3} />
-                </TabPanel>
-                <TabPanel>
-                  <ExpensesTableViewSummary year={currentyear} month={4} />
-                </TabPanel>
-                <TabPanel>
-                  <ExpensesTableViewSummary year={currentyear} month={5} />
-                </TabPanel>
-                <TabPanel>
-                  <ExpensesTableViewSummary year={currentyear} month={6} />
-                </TabPanel>
-                <TabPanel>
-                  <ExpensesTableViewSummary year={currentyear} month={7} />
-                </TabPanel>
-                <TabPanel>
-                  <ExpensesTableViewSummary year={currentyear} month={8} />
-                </TabPanel>
-                <TabPanel>
-                  <ExpensesTableViewSummary year={currentyear} month={9} />
-                </TabPanel>
-                <TabPanel>
-                  <ExpensesTableViewSummary year={currentyear} month={10} />
-                </TabPanel>
-                <TabPanel>
-                  <ExpensesTableViewSummary year={currentyear} month={11} />
-                </TabPanel>
-                <TabPanel>
-                  <ExpensesTableViewSummary year={currentyear} month={12} />
-                </TabPanel>
-              </TabPanels>
-            </Tabs>
-          </Box>
-          <Divider />
-        </SimpleGrid>
-      </Box>
-      <Box
-        maxW="x3"
-        padding="4"
-        width="100%"
-        height="500"
-        borderColor="blue.500"
-        borderWidth="1px"
-        borderRadius="lg"
-        overflow="hidden"
-      >
-        <SimpleGrid>
-          <Box>
-            <Heading as="h2" size="lg">
-              Site Allowances
-            </Heading>
-          </Box>
-          <Divider />
-          <Box>
-            <Tabs defaultIndex={currentmonth}>
-              <TabList>
-                {/* <Tab>Chart</Tab>
+                          <TabPanel>
+                            <ExpensesTableViewSummary
+                              year={currentyear}
+                              month={1}
+                            />
+                          </TabPanel>
+                          <TabPanel>
+                            <ExpensesTableViewSummary
+                              year={currentyear}
+                              month={2}
+                            />
+                          </TabPanel>
+                          <TabPanel>
+                            <ExpensesTableViewSummary
+                              year={currentyear}
+                              month={3}
+                            />
+                          </TabPanel>
+                          <TabPanel>
+                            <ExpensesTableViewSummary
+                              year={currentyear}
+                              month={4}
+                            />
+                          </TabPanel>
+                          <TabPanel>
+                            <ExpensesTableViewSummary
+                              year={currentyear}
+                              month={5}
+                            />
+                          </TabPanel>
+                          <TabPanel>
+                            <ExpensesTableViewSummary
+                              year={currentyear}
+                              month={6}
+                            />
+                          </TabPanel>
+                          <TabPanel>
+                            <ExpensesTableViewSummary
+                              year={currentyear}
+                              month={7}
+                            />
+                          </TabPanel>
+                          <TabPanel>
+                            <ExpensesTableViewSummary
+                              year={currentyear}
+                              month={8}
+                            />
+                          </TabPanel>
+                          <TabPanel>
+                            <ExpensesTableViewSummary
+                              year={currentyear}
+                              month={9}
+                            />
+                          </TabPanel>
+                          <TabPanel>
+                            <ExpensesTableViewSummary
+                              year={currentyear}
+                              month={10}
+                            />
+                          </TabPanel>
+                          <TabPanel>
+                            <ExpensesTableViewSummary
+                              year={currentyear}
+                              month={11}
+                            />
+                          </TabPanel>
+                          <TabPanel>
+                            <ExpensesTableViewSummary
+                              year={currentyear}
+                              month={12}
+                            />
+                          </TabPanel>
+                        </TabPanels>
+                      </Tabs>
+                    </Box>
+                    <Divider />
+                  </SimpleGrid>
+                </Box>
+              </TabPanel>
+              <TabPanel>
+                <Box
+                  maxW="x3"
+                  padding="4"
+                  width="100%"
+                  height="500"
+                  borderColor="blue.500"
+                  borderWidth="1px"
+                  borderRadius="lg"
+                  overflow="hidden"
+                >
+                  <SimpleGrid>
+                    <Box>
+                      <Heading as="h2" size="lg">
+                        Site Allowances
+                      </Heading>
+                    </Box>
+                    <Divider />
+                    <Box>
+                      <Tabs defaultIndex={currentmonth} isLazy>
+                        <TabList>
+                          {/* <Tab>Chart</Tab>
                 <Tab>Summary</Tab> */}
-                <Tab>January</Tab>
-                <Tab>February</Tab>
-                <Tab>March</Tab>
-                <Tab>April</Tab>
-                <Tab>May</Tab>
-                <Tab>June</Tab>
-                <Tab>July</Tab>
-                <Tab>August</Tab>
-                <Tab>September</Tab>
-                <Tab>October</Tab>
-                <Tab>November</Tab>
-                <Tab>December</Tab>
-              </TabList>
-              <TabPanels>
-                {/* <TabPanel>
+                          <Tab>January</Tab>
+                          <Tab>February</Tab>
+                          <Tab>March</Tab>
+                          <Tab>April</Tab>
+                          <Tab>May</Tab>
+                          <Tab>June</Tab>
+                          <Tab>July</Tab>
+                          <Tab>August</Tab>
+                          <Tab>September</Tab>
+                          <Tab>October</Tab>
+                          <Tab>November</Tab>
+                          <Tab>December</Tab>
+                        </TabList>
+                        <TabPanels>
+                          {/* <TabPanel>
                   <BarChart
                     heading="Site Allowances for the Month"
                     barchartdata={paychartdata}
@@ -680,113 +787,115 @@ const HomeManager = () => {
                 <TabPanel>
                   <SummaryTableView columns={columns} data={data} />
                 </TabPanel> */}
-                <TabPanel>
-                  <DailyAllowanceTableViewSummary
-                    year={currentyear}
-                    month="01"
-                  />
-                </TabPanel>
-                <TabPanel>
-                  <DailyAllowanceTableViewSummary
-                    year={currentyear}
-                    month="02"
-                  />
-                </TabPanel>
-                <TabPanel>
-                  <DailyAllowanceTableViewSummary
-                    year={currentyear}
-                    month="03"
-                  />
-                </TabPanel>
-                <TabPanel>
-                  <DailyAllowanceTableViewSummary
-                    year={currentyear}
-                    month="04"
-                  />
-                </TabPanel>
-                <TabPanel>
-                  <DailyAllowanceTableViewSummary
-                    year={currentyear}
-                    month="05"
-                  />
-                </TabPanel>
-                <TabPanel>
-                  <DailyAllowanceTableViewSummary
-                    year={currentyear}
-                    month="06"
-                  />
-                </TabPanel>
-                <TabPanel>
-                  <DailyAllowanceTableViewSummary
-                    year={currentyear}
-                    month="07"
-                  />
-                </TabPanel>
-                <TabPanel>
-                  <DailyAllowanceTableViewSummary
-                    year={currentyear}
-                    month="08"
-                  />
-                </TabPanel>
-                <TabPanel>
-                  <DailyAllowanceTableViewSummary
-                    year={currentyear}
-                    month="09"
-                  />
-                </TabPanel>
-                <TabPanel>
-                  <DailyAllowanceTableViewSummary
-                    year={currentyear}
-                    month="10"
-                  />
-                </TabPanel>
-                <TabPanel>
-                  <DailyAllowanceTableViewSummary
-                    year={currentyear}
-                    month="11"
-                  />
-                </TabPanel>
-                <TabPanel>
-                  <DailyAllowanceTableViewSummary
-                    year={currentyear}
-                    month="12"
-                  />
-                </TabPanel>
-              </TabPanels>
-            </Tabs>
-          </Box>
-          <Divider />
-        </SimpleGrid>
-      </Box>
-      <Box
-        maxW="x3"
-        padding="4"
-        width="100%"
-        height="100%"
-        borderColor="blue.500"
-        borderWidth="1px"
-        borderRadius="lg"
-        overflow="hidden"
-      >
-        <SimpleGrid>
-          <Box>
-            <Heading as="h2" size="lg">
-              Payroll
-            </Heading>
-          </Box>
-          <Divider />
-          <Box>
-            <Tabs>
-              <TabList>
-                {/* <Tab>Chart</Tab>
+                          <TabPanel>
+                            <DailyAllowanceTableViewSummary
+                              year={currentyear}
+                              month="01"
+                            />
+                          </TabPanel>
+                          <TabPanel>
+                            <DailyAllowanceTableViewSummary
+                              year={currentyear}
+                              month="02"
+                            />
+                          </TabPanel>
+                          <TabPanel>
+                            <DailyAllowanceTableViewSummary
+                              year={currentyear}
+                              month="03"
+                            />
+                          </TabPanel>
+                          <TabPanel>
+                            <DailyAllowanceTableViewSummary
+                              year={currentyear}
+                              month="04"
+                            />
+                          </TabPanel>
+                          <TabPanel>
+                            <DailyAllowanceTableViewSummary
+                              year={currentyear}
+                              month="05"
+                            />
+                          </TabPanel>
+                          <TabPanel>
+                            <DailyAllowanceTableViewSummary
+                              year={currentyear}
+                              month="06"
+                            />
+                          </TabPanel>
+                          <TabPanel>
+                            <DailyAllowanceTableViewSummary
+                              year={currentyear}
+                              month="07"
+                            />
+                          </TabPanel>
+                          <TabPanel>
+                            <DailyAllowanceTableViewSummary
+                              year={currentyear}
+                              month="08"
+                            />
+                          </TabPanel>
+                          <TabPanel>
+                            <DailyAllowanceTableViewSummary
+                              year={currentyear}
+                              month="09"
+                            />
+                          </TabPanel>
+                          <TabPanel>
+                            <DailyAllowanceTableViewSummary
+                              year={currentyear}
+                              month="10"
+                            />
+                          </TabPanel>
+                          <TabPanel>
+                            <DailyAllowanceTableViewSummary
+                              year={currentyear}
+                              month="11"
+                            />
+                          </TabPanel>
+                          <TabPanel>
+                            <DailyAllowanceTableViewSummary
+                              year={currentyear}
+                              month="12"
+                            />
+                          </TabPanel>
+                        </TabPanels>
+                      </Tabs>
+                    </Box>
+                    <Divider />
+                  </SimpleGrid>
+                </Box>
+              </TabPanel>
+              <TabPanel>
+                <Box
+                  maxW="x3"
+                  padding="4"
+                  width="100%"
+                  height="100%"
+                  borderColor="blue.500"
+                  borderWidth="1px"
+                  borderRadius="lg"
+                  overflow="hidden"
+                >
+                  <SimpleGrid>
+                    <Box>
+                      <Heading as="h2" size="lg">
+                        Payroll
+                      </Heading>
+                    </Box>
+                    <Divider />
+                    <Box>
+                      <Tabs isLazy>
+                        <TabList>
+                          {/* <Tab>Chart</Tab>
                 <Tab>Summary</Tab> */}
-                <Tab>Approved</Tab>
-                <Tab>Verified</Tab>
-                <Tab>Pending</Tab>
-                <Tab>Rejected</Tab>
-              </TabList>
-              <TabPanels>
-                {/* <TabPanel>
+                          <Tab>Approved</Tab>
+                          <Tab>Verified</Tab>
+                          <Tab>Pending</Tab>
+                          <Tab>Rejected</Tab>
+                        </TabList>
+                        <TabPanels>
+                          {/* <TabPanel>
                   <BarChart
                     heading="Payroll for the Month"
                     barchartdata={paychartdata}
@@ -795,25 +904,30 @@ const HomeManager = () => {
                 <TabPanel>
                   <PayslipSummaryTableView year={currentyear} status="Approved" />
                 </TabPanel> */}
-                <TabPanel>
-                  <PayslipTableViewSummary status="Approved" />
-                </TabPanel>
-                <TabPanel>
-                  <PayslipTableViewSummary status="Verified" />
-                </TabPanel>
-                <TabPanel>
-                  <PayslipTableViewSummary status="Pending" />
-                </TabPanel>
-                <TabPanel>
-                  <PayslipTableViewSummary status="Rejected" />
-                </TabPanel>
-              </TabPanels>
-            </Tabs>
-          </Box>
-          <Divider />
-        </SimpleGrid>
-      </Box>
-    </Container>
+                          <TabPanel>
+                            <PayslipTableViewSummary status="Approved" />
+                          </TabPanel>
+                          <TabPanel>
+                            <PayslipTableViewSummary status="Verified" />
+                          </TabPanel>
+                          <TabPanel>
+                            <PayslipTableViewSummary status="Pending" />
+                          </TabPanel>
+                          <TabPanel>
+                            <PayslipTableViewSummary status="Rejected" />
+                          </TabPanel>
+                        </TabPanels>
+                      </Tabs>
+                    </Box>
+                    <Divider />
+                  </SimpleGrid>
+                </Box>
+              </TabPanel>
+            </TabPanels>
+          </Tabs>
+        </Box>
+      </Container>
+    </div>
   );
 };
 

@@ -101,8 +101,8 @@ export default function DailyAllowancesTable() {
             search: false,
             toolbar: false,
             headerStyle: {
-              backgroundColor: "orange",
-              color: "#FFF",
+              backgroundColor: "#90CDF4",
+              color: "black",
             },
             showTitle: false,
           }}

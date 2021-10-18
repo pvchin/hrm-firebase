@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import MaterialTable from "material-table";
 import { TextField, MenuItem } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { Box} from "@chakra-ui/react"
 import AddIcon from "@material-ui/icons/Add";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";

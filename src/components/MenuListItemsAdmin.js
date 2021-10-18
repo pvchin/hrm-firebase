@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
+import { Text} from "@chakra-ui/react"
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -31,8 +32,10 @@ const MenuListItems = () => {
 
   return (
     <div className={classes.content}>
-      <ListSubheader inset className={classes.mainHeader}>
-        Admin
+      <ListSubheader align="center" className={classes.itemIcon}>
+        <Text color="blue" fontSize="21" fontWeight="bold">
+          Admin
+        </Text>
       </ListSubheader>
 
       <Link to="/">
@@ -106,7 +109,7 @@ const MenuListItems = () => {
           />
         </ListItem>
       </Link> */}
-      
+
       {/* <ListItem button onClick={handleClickTable}>
         <ListItemIcon className={classes.itemIcon}>
           <LayersIcon />

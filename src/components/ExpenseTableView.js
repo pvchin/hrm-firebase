@@ -88,7 +88,7 @@ export default function ExpenseTableView() {
             search: false,
             toolbar: false,
             headerStyle: {
-              backgroundColor: "orange",
+              backgroundColor: "#90CDF4",
               color: "primary",
             },
             showTitle: false,

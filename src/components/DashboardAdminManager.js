@@ -41,17 +41,17 @@ import {
 
 const drawerWidth = 240;
 
-export default function DashboardAdmin() {
+export default function DashboardAdmin({ open, handleDrawerOpen, handleDrawerClose }) {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
+  //const [open, setOpen] = React.useState(true);
   const [login, setLogin] = React.useState(true);
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
+  // const handleDrawerOpen = () => {
+  //   setOpen(true);
+  // };
+  // const handleDrawerClose = () => {
+  //   setOpen(false);
+  // };
 
   //  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
@@ -62,13 +62,13 @@ export default function DashboardAdmin() {
     <div className={classes.root}>
       <CssBaseline />
       <Router>
-        <Appbanner
+        {/* <Appbanner
           handleDrawerOpen={handleDrawerOpen}
           handleDrawerClose={handleDrawerClose}
           open={open}
           setLogin={setLogin}
           title="Human Resource Management System - AppSmiths Sutera Sdn Bhd"
-        />
+        /> */}
 
         <SideDrawer
           handleDrawerOpen={handleDrawerOpen}

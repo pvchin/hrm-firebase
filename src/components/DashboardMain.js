@@ -2,7 +2,8 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
+import { useRecoilState } from "recoil";
+import { Container, Flex, Heading } from "@chakra-ui/react";
 // import Chart from "./Chart";
 // import Deposits from "./Deposits";
 // import Orders from "./Orders";
@@ -17,9 +18,14 @@ import SingleDailyAllowance from "./SingleDailyAllowance";
 import SingleDailyAllowsDetls from "./SingleDailyAllowsDetls";
 import BatchDailyAllowances from "./BatchDailyAllowances";
 import SinglePayslip from "./SinglePayslip";
+import { loginLevelState } from "./data/atomdata";
 import Login from "./LoginForm";
-import Payrun from "./Payrun"
-import Payrunbatch from "./Payrunbatch"
+import Payrun from "./Payrun";
+import Payrunbatch from "./Payrunbatch";
+import DashboardStaff from "./DashboardStaff";
+import DashboardAdmin from "./DashboardAdmin";
+import DashboardAdminManager from "./DashboardAdminManager";
+import DashboardManager from "./DashboardManager";
 
 import {
   Home,
@@ -39,18 +45,25 @@ import {
   Error,
 } from "../pages";
 
-const drawerWidth = 240;
+const drawerWidth = 0;
 
 export default function DashboardMain() {
   const classes = useStyles();
+  const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
   const [open, setOpen] = React.useState(true);
   const [login, setLogin] = React.useState(true);
+  const [select, setSelect] = React.useState("Staff");
 
   const handleDrawerOpen = () => {
     setOpen(true);
   };
   const handleDrawerClose = () => {
     setOpen(false);
+  };
+
+  const handleSelect = (title) => {
+    setLoginLevel({ ...loginLevel, loginLevel: title });
+    setSelect(title);
   };
 
   //  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
@@ -65,104 +78,41 @@ export default function DashboardMain() {
         <Appbanner
           handleDrawerOpen={handleDrawerOpen}
           handleDrawerClose={handleDrawerClose}
+          handleSelect={handleSelect}
           open={open}
           setLogin={setLogin}
-          title="Human Resource Management System - AppSmiths Sutera Sdn Bhd (Main)"
+          title="HRMS - AppSmiths Sutera Sdn Bhd"
         />
-
-        <SideDrawer
-          handleDrawerOpen={handleDrawerOpen}
-          handleDrawerClose={handleDrawerClose}
-          open={open}
-        />
-
-        <main className={classes.content}>
-          <Switch>
-            <Route exact path="/">
-              <Home />
-            </Route>
-            {/* <Route exact path="/home">
-              <Home />
-            </Route> */}
-            <Route exact path="/allemployees">
-              <AllEmployees />
-            </Route>
-            <Route exact path="/payroll">
-              <Payroll />
-            </Route>
-            <Route exact path="/payslip">
-              <Payslip />
-            </Route>
-            <Route exact path="/singlepayslip">
-              <SinglePayslip />
-            </Route>
-            <Route exact path="/batchpayslips">
-              <BatchPayslips />
-            </Route>
-            <Route exact path="/leave">
-              <Leave />
-            </Route>
-            <Route exact path="/payrun">
-              <Payrun />
-            </Route>
-            <Route exact path="/payrunbatch">
-              <Payrunbatch />
-            </Route>
-            <Route exact path="/dailyallowances">
-              <DailyAllowances />
-            </Route>
-            <Route exact path="/singledailyallowsdetlstable">
-              <SingleDailyAllowsDetls />
-            </Route>
-            <Route exact path="/expenses">
-              <Expenses />
-            </Route>
-            <Route exact path="/departments">
-              <Departments />
-            </Route>
-            <Route exact path="/designation">
-              <Designation />
-            </Route>
-            <Route exact path="/tables">
-              <Tables />
-            </Route>
-            <Route exact path="/allowances">
-              <Allowances />
-            </Route>
-            <Route exact path="/clients">
-              <Clients />
-            </Route>
-            <Route exact path="/example">
-              <Example />
-            </Route>
-            <Route exact path="/singleemployee">
-              <SingleEmployee />
-            </Route>
-            <Route exact path="/singleleave">
-              <SingleLeave />
-            </Route>
-            <Route exact path="/singleexpense">
-              <SingleExpense />
-            </Route>
-            <Route exact path="/singledailyallowance">
-              <SingleDailyAllowance />
-            </Route>
-            <Route exact path="/batchdailyallowances">
-              <BatchDailyAllowances />
-            </Route>
-            <Route exact path="/error">
-              <Error />
-            </Route>
-            {/* <Route
-              exact
-              path="/employees/:empId"
-              children={<SingleEmployee />}
-            /> */}
-            <Route path="*">
-              <Error />
-            </Route>
-          </Switch>
-        </main>
+        <Flex>
+          {select === "Staff" && (
+            <DashboardStaff
+              open={open}
+              handleDrawerOpen={handleDrawerOpen}
+              handleDrawerClose={handleDrawerClose}
+            />
+          )}
+          {select === "Admin" && (
+            <DashboardAdmin
+              open={open}
+              handleDrawerOpen={handleDrawerOpen}
+              handleDrawerClose={handleDrawerClose}
+            />
+          )}
+          {select === "AdminManager" && (
+            <DashboardAdminManager
+              open={open}
+              handleDrawerOpen={handleDrawerOpen}
+              handleDrawerClose={handleDrawerClose}
+            />
+          )}
+          {select === "Manager" && (
+            <DashboardManager
+              open={open}
+              handleDrawerOpen={handleDrawerOpen}
+              handleDrawerClose={handleDrawerClose}
+            />
+          )}
+        </Flex>
       </Router>
     </div>
   );

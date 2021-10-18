@@ -2,6 +2,7 @@ import React from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import { useHistory, Link } from "react-router-dom";
+import { Button, HStack, Text } from "@chakra-ui/react";
 import Toolbar from "@material-ui/core/Toolbar";
 import Tooltip from "@material-ui/core/Tooltip";
 import AppBar from "@material-ui/core/AppBar";
@@ -16,9 +17,15 @@ import { loginLevelState } from "./data/atomdata";
 import { useUser } from "./user/useUser";
 import App from "../utils/firebase";
 
-const drawerWidth = 255;
+const drawerWidth = 240;
 
-const Appbanner = ({ handleDrawerOpen, handleDrawerClose, open, title }) => {
+const Appbanner = ({
+  handleDrawerOpen,
+  handleDrawerClose,
+  handleSelect,
+  open,
+  title,
+}) => {
   let history = useHistory();
   const classes = useStyles();
   const { user, clearUser } = useUser();
@@ -56,8 +63,40 @@ const Appbanner = ({ handleDrawerOpen, handleDrawerClose, open, title }) => {
         >
           {title}
         </Typography>
+        <HStack justifyContent="flex-start" px={2}>
+          <Button
+            colorScheme="white"
+            aria-label="Staff"
+            onClick={() => handleSelect("Staff")}
+          >
+            Staff
+          </Button>
+          <Button
+            colorScheme="white"
+            aria-label="Admin"
+            onClick={() => handleSelect("Admin")}
+          >
+            Admin
+          </Button>
+          <Button
+            colorScheme="white"
+            aria-label="Admin Manager"
+            onClick={() => handleSelect("AdminManager")}
+          >
+            Admin Manager
+          </Button>
+          <Button
+            colorScheme="white"
+            aria-label="Manager"
+            onClick={() => handleSelect("Manager")}
+          >
+            Manager
+          </Button>
+        </HStack>
         <div>
-          {loginLevel.loginUser && <h3>Welcome {loginLevel.loginUser}!</h3>}
+          <Text fontSize="18">
+          {loginLevel.loginUser && <h3>Welcome {loginLevel.loginEmail}!</h3>}
+          </Text>
         </div>
         {/* <IconButton color="inherit">
           <Badge badgeContent={0} color="secondary">
