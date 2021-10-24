@@ -1,5 +1,6 @@
 export const queryKeys = {
   employees: "employees",
+  allemployees: "allemployees",
   singleemployee: "singleemployee",
   departments: "departments",
   designations: "designations",

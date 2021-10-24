@@ -663,8 +663,22 @@ const Payrunbatch = () => {
                           return (
                             <div>
                               <Button
-                                className={classes.empbtn}
+                                //className={classes.empbtn}
+                                fontSize={{
+                                  base: "10px",
+                                  md: "10px",
+                                  lg: "12px",
+                                  xl: "16px",
+                                }}
                                 variant="outlined"
+                                height={[
+                                  `${item.name.length > 30 ? "60px" : "40px"}`,
+                                  "40px",
+                                ]}
+                                style={{
+                                  whiteSpace: "normal",
+                                  wordWrap: "break-word",
+                                }}
                                 // ${index === value && "activebtn"}
                                 onClick={(e) => {
                                   setRowIndex(index);
@@ -672,9 +686,7 @@ const Payrunbatch = () => {
                                   handleEmpButtonClick(index);
                                 }}
                               >
-                                <Text isTruncated maxWidth={240}>
-                                  {item.name}
-                                </Text>
+                                <Text align="left">{item.name}</Text>
                               </Button>
                               <Divider backgroundColor="white" />
                             </div>

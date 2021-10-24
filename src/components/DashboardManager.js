@@ -8,7 +8,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 // import Orders from "./Orders";
 
 import Appbanner from "./Appbanner";
-import Example from "./Example6";
+import Example from "./Example8";
 import SideDrawer from "./SideDrawer";
 import SingleEmployee from "./SingleEmployee";
 import SingleLeave from "./SingleLeave";
@@ -17,11 +17,12 @@ import SingleDailyAllowance from "./SingleDailyAllowance";
 import SingleDailyAllowsDetls from "./SingleDailyAllowsDetls";
 import BatchDailyAllowances from "./BatchDailyAllowances";
 import SinglePayslip from "./SinglePayslip";
-import UserAccessTable from "./UserAccessTable"
+import UserAccessTable from "./UserAccessTable";
 import Login from "./LoginForm";
-import Payrun from "./Payrun"
-import Payrunbatch from "./Payrunbatch"
-import ApprovalManager from "./ApprovalManager"
+import Payrun from "./Payrun";
+import Payrunbatch from "./Payrunbatch";
+import ApprovalManager from "./ApprovalManager";
+
 
 import {
   Home,
@@ -44,7 +45,11 @@ import {
 
 const drawerWidth = 240;
 
-export default function DashboardMain({ open, handleDrawerOpen, handleDrawerClose }) {
+export default function DashboardMain({
+  open,
+  handleDrawerOpen,
+  handleDrawerClose,
+}) {
   const classes = useStyles();
   //const [open, setOpen] = React.useState(true);
   const [login, setLogin] = React.useState(true);

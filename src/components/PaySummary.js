@@ -1,71 +1,30 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import ReactToPrint, { useReactToPrint } from "react-to-print";
 import currency from "currency.js";
 import PrintPaySummary from "./PrintPaySummary";
-import { Heading, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Heading,
+  Text,
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  chakra,
+} from "@chakra-ui/react";
+import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
+import { useTable, useSortBy } from "react-table";
 import MaterialTable from "material-table";
 import { Button, Icon, Grid, TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useRecoilState } from "recoil";
+import { formatPriceZero } from "../helpers/Utils";
 import { payrunState, payrunStatusState } from "./data/atomdata";
 import { usePayslipsContext } from "../context/payslips_context";
 import { ComponentToPrint } from "./ComponentToPrint";
-
-const columns = [
-  {
-    title: "Name",
-    field: "name",
-    editable: "never",
-  },
-  {
-    title: "Wages",
-    field: "wages_bnd",
-    editable: "never",
-    type: "currency",
-  },
-  {
-    title: "TAP Amount",
-    field: "tap_amount_bnd",
-    editable: "never",
-    type: "currency",
-  },
-  {
-    title: "SCP Amount",
-    field: "scp_amount_bnd",
-    editable: "never",
-    type: "currency",
-  },
-  {
-    title: "Site Allowances",
-    field: "site_allows_bnd",
-    editable: "never",
-    type: "currency",
-  },
-  {
-    title: "Expenses Claims",
-    field: "expenses_claims_bnd",
-    editable: "never",
-    type: "currency",
-  },
-  {
-    title: "Allowances",
-    field: "total_allowances_bnd",
-    editable: "never",
-    type: "currency",
-  },
-  {
-    title: "Deductions",
-    field: "total_deductions_bnd",
-    editable: "never",
-    type: "currency",
-  },
-  {
-    title: "Nett Pay",
-    field: "nett_pay_bnd",
-    editable: "never",
-    type: "currency",
-  },
-];
+import PaySummaryTable from "./PaySummaryTable";
 
 const initial_state = [
   {
@@ -86,6 +45,62 @@ const PaySummary = ({ singlebatchpayslip }) => {
   const [payrunstatus, setPayrunStatus] = useRecoilState(payrunStatusState);
   const [isCalc, setIsCalc] = useState(true);
   const { payrun, updatePayrun, payslip_period } = usePayslipsContext();
+
+  const columns = [
+    {
+      Header: "Name",
+      accessor: "name",
+    },
+    {
+      Header: "Wages",
+      accessor: "wages_bnd",
+      isNumeric: true,
+      Cell: (props) => formatPriceZero(props.value),
+    },
+
+    {
+      Header: "TAP Amount",
+      accessor: "tap_amount_bnd",
+      isNumeric: true,
+      Cell: (props) => formatPriceZero(props.value),
+    },
+    {
+      Header: "SCP Amount",
+      accessor: "scp_amount_bnd",
+      isNumeric: true,
+      Cell: (props) => formatPriceZero(props.value),
+    },
+    {
+      Header: "Site Allows",
+      accessor: "site_allows_bnd",
+      isNumeric: true,
+      Cell: (props) => formatPriceZero(props.value),
+    },
+    {
+      Header: "Exps Claims",
+      accessor: "expenses_claims_bnd",
+      isNumeric: true,
+      Cell: (props) => formatPriceZero(props.value),
+    },
+    {
+      Header: "Allowances",
+      accessor: "total_allowances_bnd",
+      isNumeric: true,
+      Cell: (props) => formatPriceZero(props.value),
+    },
+    {
+      Header: "Deductions",
+      accessor: "total_deductions_bnd",
+      isNumeric: true,
+      Cell: (props) => formatPriceZero(props.value),
+    },
+    {
+      Header: "Nett Pay",
+      accessor: "nett_pay_bnd",
+      isNumeric: true,
+      Cell: (props) => formatPriceZero(props.value),
+    },
+  ];
 
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
@@ -190,10 +205,10 @@ const PaySummary = ({ singlebatchpayslip }) => {
       <form>
         <Grid container direction="row" style={{ border: "1px solid black" }}>
           <Grid
-            // item
-            // sm={12}
-            // align="center"
-            // style={{ border: "1px solid black" }}
+          // item
+          // sm={12}
+          // align="center"
+          // style={{ border: "1px solid black" }}
           >
             <div>
               {/* <Button
@@ -330,7 +345,10 @@ const PaySummary = ({ singlebatchpayslip }) => {
             align="center"
             style={{ border: "1px solid white" }}
           >
-            <MaterialTable
+            <Box h="400" overflow="scroll">
+              <PaySummaryTable columns={columns} data={singlebatchpayslip} />
+            </Box>
+            {/* <MaterialTable
               columns={columns}
               data={singlebatchpayslip}
               title="Payroll"
@@ -345,7 +363,7 @@ const PaySummary = ({ singlebatchpayslip }) => {
                 },
                 showTitle: false,
               }}
-            />
+            /> */}
           </Grid>
         </Grid>
         <Grid container direction="row" style={{ border: "1px solid white" }}>

@@ -58,6 +58,7 @@ ReactDOM.render(
     <ReactQueryDevtools />
   </QueryClientProvider>,
   // </React.StrictMode>,
+  //document.getElementById("root").style.transform = "scale(1)"
   document.getElementById("root")
 );
 

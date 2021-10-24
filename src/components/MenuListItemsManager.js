@@ -19,6 +19,8 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import MoneyIcon from "@material-ui/icons/Money";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
+import { MdCheckCircle } from "react-icons/md";
+import { AiFillSetting} from "react-icons/ai"
 
 const MenuListItems = () => {
   const classes = useStyles();
@@ -68,7 +70,7 @@ const MenuListItems = () => {
       <Link to="/approval">
         <ListItem button>
           <ListItemIcon className={classes.itemIcon}>
-            <PeopleIcon />
+            <MdCheckCircle size="20" />
           </ListItemIcon>
           <ListItemText
             primary="Approval"
@@ -77,13 +79,13 @@ const MenuListItems = () => {
         </ListItem>
       </Link>
 
-      {/* <Link to="/leave">
+      {/* <Link to="/example">
         <ListItem button>
           <ListItemIcon className={classes.itemIcon}>
             <FlightIcon />
           </ListItemIcon>
           <ListItemText
-            primary="Leave"
+            primary="Example"
             className={classes.categoryHeaderPrimary}
           />
         </ListItem>
@@ -114,7 +116,7 @@ const MenuListItems = () => {
       </Link> */}
       <ListItem button onClick={handleClickPay}>
         <ListItemIcon className={classes.itemIcon}>
-          <LayersIcon />
+          <MonetizationOnIcon />
         </ListItemIcon>
         <ListItemText primary="Payroll" className={classes.item} />
         {openPay ? <ExpandLess /> : <ExpandMore />}
@@ -141,7 +143,7 @@ const MenuListItems = () => {
       <Link to="/useraccess">
         <ListItem button>
           <ListItemIcon className={classes.itemIcon}>
-            <PeopleIcon />
+            <AiFillSetting size="20" />
           </ListItemIcon>
           <ListItemText
             primary="User Access Settings"

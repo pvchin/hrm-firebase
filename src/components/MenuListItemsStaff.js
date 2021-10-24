@@ -13,9 +13,14 @@ import PeopleIcon from "@material-ui/icons/People";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 //import LayersIcon from "@material-ui/icons/Layers";
-//import MonetizationOnIcon from "@material-ui/icons/MonetizationOn";
+import MonetizationOnIcon from "@material-ui/icons/MonetizationOn";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import MoneyIcon from "@material-ui/icons/Money";
+import {
+  FaFileInvoiceDollar,
+  FaPeopleCarry,
+  FaCommentsDollar,
+} from "react-icons/fa";
 // import Collapse from "@material-ui/core/Collapse";
 // import ExpandLess from "@material-ui/icons/ExpandLess";
 // import ExpandMore from "@material-ui/icons/ExpandMore";
@@ -82,7 +87,7 @@ const MenuListItemsStaff = () => {
       <Link to="/expenses">
         <ListItem button>
           <ListItemIcon className={classes.itemIcon}>
-            <ShoppingCartIcon />
+            <FaFileInvoiceDollar size="20" />
           </ListItemIcon>
           <ListItemText
             primary="Expenses"
@@ -94,7 +99,7 @@ const MenuListItemsStaff = () => {
       <Link to="/trainings">
         <ListItem button>
           <ListItemIcon className={classes.itemIcon}>
-            <ShoppingCartIcon />
+            <FaPeopleCarry size="20" />
           </ListItemIcon>
           <ListItemText
             primary="Trainings"
@@ -106,7 +111,7 @@ const MenuListItemsStaff = () => {
       <Link to="/dailyallowances">
         <ListItem button>
           <ListItemIcon className={classes.itemIcon}>
-            <MoneyIcon />
+            <FaCommentsDollar size="20" />
           </ListItemIcon>
           <ListItemText
             primary="Site Allowances"
@@ -118,7 +123,7 @@ const MenuListItemsStaff = () => {
       <Link to="/payslips">
         <ListItem button>
           <ListItemIcon className={classes.itemIcon}>
-            <ShoppingCartIcon />
+            <MonetizationOnIcon />
           </ListItemIcon>
           <ListItemText
             primary="Payslips"

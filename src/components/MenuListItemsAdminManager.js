@@ -36,7 +36,9 @@ const MenuListItems = () => {
   return (
     <div className={classes.content}>
       <ListSubheader align="center" className={classes.itemIcon}>
-        <Text color="blue" fontSize="21" fontWeight="bold">Admin Manager</Text>
+        <Text color="blue" fontSize="21" fontWeight="bold">
+          Admin Manager
+        </Text>
       </ListSubheader>
 
       <Link to="/">
@@ -88,7 +90,7 @@ const MenuListItems = () => {
 
       <ListItem button onClick={handleClickPay}>
         <ListItemIcon className={classes.itemIcon}>
-          <LayersIcon />
+          <MonetizationOnIcon />
         </ListItemIcon>
         <ListItemText primary="Payroll" className={classes.item} />
         {openPay ? <ExpandLess /> : <ExpandMore />}

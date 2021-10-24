@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect} from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { useHistory} from "react-router-dom"
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -43,17 +44,9 @@ const drawerWidth = 240;
 
 export default function DashboardAdmin({ open, handleDrawerOpen, handleDrawerClose }) {
   const classes = useStyles();
+  const history =useHistory()
   //const [open, setOpen] = React.useState(true);
   const [login, setLogin] = React.useState(true);
-
-  // const handleDrawerOpen = () => {
-  //   setOpen(true);
-  // };
-  // const handleDrawerClose = () => {
-  //   setOpen(false);
-  // };
-
-  //  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   if (!login) {
     return <Login setLogin={setLogin} />;

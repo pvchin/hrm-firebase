@@ -1,6 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import { Redirect, useHistory } from "react-router-dom";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { Container, Flex, Heading } from "@chakra-ui/react";
@@ -49,10 +50,12 @@ const drawerWidth = 0;
 
 export default function DashboardMain() {
   const classes = useStyles();
+  const history = useHistory();
   const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
   const [open, setOpen] = React.useState(true);
   const [login, setLogin] = React.useState(true);
   const [select, setSelect] = React.useState("Staff");
+  //console.log("loginLevel", loginLevel);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -64,6 +67,7 @@ export default function DashboardMain() {
   const handleSelect = (title) => {
     setLoginLevel({ ...loginLevel, loginLevel: title });
     setSelect(title);
+     <Redirect to="/" />;
   };
 
   //  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
@@ -81,7 +85,7 @@ export default function DashboardMain() {
           handleSelect={handleSelect}
           open={open}
           setLogin={setLogin}
-          title="HRMS - AppSmiths Sutera Sdn Bhd"
+          title="HRMS Ver 1.0 - AppSmiths Sutera Sdn Bhd"
         />
         <Flex>
           {select === "Staff" && (

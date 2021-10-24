@@ -67,35 +67,53 @@ const Appbanner = ({
           <Button
             colorScheme="white"
             aria-label="Staff"
-            onClick={() => handleSelect("Staff")}
+            onClick={() => {
+              history.push("/");
+              handleSelect("Staff");
+            }}
           >
             Staff
           </Button>
-          <Button
-            colorScheme="white"
-            aria-label="Admin"
-            onClick={() => handleSelect("Admin")}
-          >
-            Admin
-          </Button>
-          <Button
-            colorScheme="white"
-            aria-label="Admin Manager"
-            onClick={() => handleSelect("AdminManager")}
-          >
-            Admin Manager
-          </Button>
-          <Button
-            colorScheme="white"
-            aria-label="Manager"
-            onClick={() => handleSelect("Manager")}
-          >
-            Manager
-          </Button>
+          {loginLevel.loginRole > 1 && (
+            <Button
+              colorScheme="white"
+              aria-label="Admin"
+              onClick={() => {
+                history.push("/");
+                handleSelect("Admin");
+              }}
+            >
+              Admin
+            </Button>
+          )}
+          {loginLevel.loginRole > 2 && (
+            <Button
+              colorScheme="white"
+              aria-label="Admin Manager"
+              onClick={() => {
+                history.push("/");
+                handleSelect("AdminManager");
+              }}
+            >
+              Admin Manager
+            </Button>
+          )}
+          {loginLevel.loginRole > 3 && (
+            <Button
+              colorScheme="white"
+              aria-label="Manager"
+              onClick={() => {
+                history.push("/");
+                handleSelect("Manager");
+              }}
+            >
+              Manager
+            </Button>
+          )}
         </HStack>
         <div>
           <Text fontSize="18">
-          {loginLevel.loginUser && <h3>Welcome {loginLevel.loginEmail}!</h3>}
+            {loginLevel.loginUser && <h3>Welcome {loginLevel.loginEmail}!</h3>}
           </Text>
         </div>
         {/* <IconButton color="inherit">

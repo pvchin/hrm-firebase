@@ -8,6 +8,7 @@ export const loginLevelState = atom({
     loginUser: "",
     login: false,
     loginEmail: "",
+    loginRole: 1,
     leave_bal: 0,
     siteallows_fee: 0,
     perdiem_fee: 0,

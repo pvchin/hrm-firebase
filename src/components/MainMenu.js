@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import { Redirect, useHistory } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { Button} from "@chakra-ui/react"
+import { Button } from "@chakra-ui/react";
 import LoginForm from "./LoginForm";
 import DashboardMain from "./DashboardMain";
 import DashboardStaff from "./DashboardStaff";
@@ -12,6 +13,7 @@ import { useAuthContext } from "../context/auth_context";
 import { useEmployees } from "./employees/useEmployees";
 
 const Main = () => {
+  const history = useHistory();
   const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
   const { currentUser } = useAuthContext();
   const [role, setRole] = useState("");

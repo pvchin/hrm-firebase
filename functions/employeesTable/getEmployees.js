@@ -2,7 +2,7 @@ const { table } = require("./airtable-employees");
 const formattedReturn = require("../formattedReturn");
 
 module.exports = async (event) => {
-  const { id, fv, fi } = event.queryStringParameters;
+  const { id, fv, fi, al } = event.queryStringParameters;
   // const { id, filterValue, filterField } = event.queryStringParameters;
   // console.log(filterValue, filterField);
 
@@ -63,8 +63,29 @@ module.exports = async (event) => {
   }
 
   try {
+    if (al) {
+      // const { id, linkid, ...fields } = JSON.parse(event.body);
+      // console.log(linkid);
+      const employees = await table
+        .select({
+          view: "viewAllEmployees",
+        })
+        .firstPage();
+      const formattedEmployees = employees.map((e) => ({
+        id: e.id,
+        ...e.fields,
+      }));
+
+      return formattedReturn(200, formattedEmployees);
+    }
+  } catch (err) {
+    console.error(err);
+    return formattedReturn(500, {});
+  }
+
+  try {
     const employees = await table
-      . select({
+      .select({
         view: "viewEmployee",
       })
       .all();

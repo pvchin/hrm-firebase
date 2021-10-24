@@ -51,7 +51,7 @@ import { usePayslipsBatch } from "./payslips/usePayslipsBatch";
 
 const columns = [
   {
-    title: "Name",
+    title: "NAME",
     field: "name",
     editable: "never",
     cellStyle: {
@@ -111,7 +111,7 @@ const Payrun = () => {
   const [errornoselect, setErrornoselect] = useState(false);
   const [isPayrunExist, setIsPayrunExist] = useState(false);
   const [isSubmit, setIsSubmit] = useState(false);
-  
+
   useEffect(() => {
     if (!payrun_loading) {
       setLoadPaybatch(false);
@@ -629,26 +629,29 @@ const Payrun = () => {
             style={{ border: "1px solid black" }}
             align="right"
           >
-            <MaterialTable
-              columns={columns}
-              data={employees}
-              title="Employee Listing"
-              options={{
-                filtering: false,
-                search: false,
-                toolbar: true,
-                selection: true,
-                pageSize: 10,
-                headerStyle: {
-                  backgroundColor: "#daad86",
-                  color: "primary",
-                },
-                showTitle: true,
-                // selectionProps: rowData => {
-                //   rowData.tableData.checked = true
-                // }
-              }}
-            />
+            <Box h="500" w="full" overflow="scroll">
+              <MaterialTable
+                columns={columns}
+                data={employees}
+                title="Employee Listing"
+                options={{
+                  filtering: false,
+                  search: false,
+                  toolbar: true,
+                  selection: true,
+                  paging: false,
+                  pageSize: 10,
+                  headerStyle: {
+                    backgroundColor: "#90CDF4",
+                    color: "primary",
+                  },
+                  showTitle: true,
+                  // selectionProps: rowData => {
+                  //   rowData.tableData.checked = true
+                  // }
+                }}
+              />
+            </Box>
           </Grid>
         </Grid>
         <Modal isOpen={isOpen} onClose={onClose}>

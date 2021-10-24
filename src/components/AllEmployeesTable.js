@@ -19,6 +19,7 @@ import { useTablesContext } from "../context/tables_context";
 import { useDepartments } from "./departments/useDepartments";
 import { useDesignations } from "./designations/useDesignations";
 import { useEmployees } from "./employees/useEmployees";
+import { useAllEmployees } from "./employees/useAllEmployees";
 import { useDeleteEmployees } from "./employees/useDeleteEmployees";
 import App from "../utils/firebase";
 
@@ -29,6 +30,7 @@ export default function AllEmployeesTable() {
   const { designations } = useDesignations();
   const { departments } = useDepartments();
   const { employees, setEmployeeId } = useEmployees();
+  const { allemployees, setAllEmpId } = useAllEmployees();
   const [empId, setEmpId] = useRecoilState(editEmployeeIdState);
   const deleteEmployees = useDeleteEmployees();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -60,6 +62,10 @@ export default function AllEmployeesTable() {
 
   const { loadDepartments, loadDesignations, resetTables } = useTablesContext();
 
+
+  useEffect(()=>{
+    setAllEmpId("111")
+  },[])
   // useEffect(() => {
   //   resetEmployees();
   //   loadEmployees();
@@ -156,7 +162,7 @@ export default function AllEmployeesTable() {
       <div style={{ maxWidth: "100%", paddingTop: "5px" }}>
         <MaterialTable
           columns={columns}
-          data={employees.sort((a, b) =>
+          data={allemployees.sort((a, b) =>
             a.name > b.name ? 1 : b.name > a.name ? -1 : 0
           )}
           title="Employees Listing"

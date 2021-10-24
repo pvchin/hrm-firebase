@@ -100,6 +100,7 @@ const SigninForm = () => {
         loginUserId: "admin",
         loginLevel: "Staff",
         loginEmail: "admin@abc.com",
+        loginRole: 4,
         login: true,
         leave_bal: 0,
         siteallows_fee: 0,
@@ -154,6 +155,7 @@ const SigninForm = () => {
       loginUserId: emp[0].id,
       loginLevel: role,
       loginEmail: email,
+      loginROle: emp[0].role,
       login: true,
       leave_bal: emp[0].leave_bal,
       siteallows_fee: emp[0].siteallows_fee,
@@ -234,6 +236,7 @@ const SigninForm = () => {
                         <Input
                           name="email"
                           value={value}
+                          fontSize="20"
                           //onChange={onChange}
                           onChange={(e) => {
                             onChange(e);
@@ -267,6 +270,7 @@ const SigninForm = () => {
                           name="password"
                           type="password"
                           value={value}
+                          fontSize="20"
                           onChange={(e) => {
                             onChange(e);
                             setPassword(e.target.value);

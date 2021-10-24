@@ -428,13 +428,13 @@ const HomeManager = () => {
   // }, []);
 
   return (
-    <div>
-      <div className={classes.appBarSpacer} />
-      <div style={{ paddingLeft: 50 }}>
-        {/* <h2>Welcome {loginLevel.loginUser}!</h2>
-        <h3>Dashboard</h3> */}
-      </div>
-      <Container maxW="full">
+    // <div>
+    //   <div className={classes.appBarSpacer} />
+    //   <div style={{ paddingLeft: 50 }}>
+    //     <h2>Welcome {loginLevel.loginUser}!</h2>
+    //     <h3>Dashboard</h3>
+    //   </div>
+      <Container maxW="full" mt="100">
         <Box
           //minW="100%"
           padding="4"
@@ -476,8 +476,6 @@ const HomeManager = () => {
                     <Box>
                       <Tabs isLazy>
                         <TabList>
-                          {/* <Tab>Chart</Tab>
-                          <Tab>Summary</Tab> */}
                           <Tab>Details</Tab>
                         </TabList>
                         <TabPanels>
@@ -502,7 +500,7 @@ const HomeManager = () => {
                   borderRadius="lg"
                   overflow="hidden"
                 >
-                  <SimpleGrid w="100%">
+                  <SimpleGrid w="168vh">
                     <Box>
                       <Heading as="h2" size="lg">
                         Leaves
@@ -627,7 +625,7 @@ const HomeManager = () => {
                   borderRadius="lg"
                   overflow="hidden"
                 >
-                  <SimpleGrid>
+                  <SimpleGrid w="168vh">
                     <Box>
                       <Heading as="h2" size="lg">
                         Expenses Claimed
@@ -638,7 +636,7 @@ const HomeManager = () => {
                       <Tabs defaultIndex={currentmonth} isLazy>
                         <TabList>
                           {/* <Tab>Chart</Tab>
-                <Tab>Summary</Tab> */}
+                          <Tab>Summary</Tab> */}
                           <Tab>January</Tab>
                           <Tab>February</Tab>
                           <Tab>March</Tab>
@@ -752,7 +750,7 @@ const HomeManager = () => {
                   borderRadius="lg"
                   overflow="hidden"
                 >
-                  <SimpleGrid>
+                  <SimpleGrid w="168vh">
                     <Box>
                       <Heading as="h2" size="lg">
                         Site Allowances
@@ -927,7 +925,7 @@ const HomeManager = () => {
           </Tabs>
         </Box>
       </Container>
-    </div>
+    // </div>
   );
 };
 

@@ -1,22 +1,37 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
+import { format, addMonths, getMonth } from "date-fns";
 import axios from "axios";
-import { Paper } from "@material-ui/core";
+import {
+  Box,
+  Button,
+  Container,
+  Flex,
+  Heading,
+  HStack,
+  Stack,
+} from "@chakra-ui/react";
 import { employees_url } from "../utils/constants";
+import Dayz from "dayz";
+// could also import the sass if you have a loader at dayz/dayz.scss
+import "dayz/dist/dayz.css";
+import moment from "moment";
 
-//const drawerWidth = 240;
-//const url = "https://course-api.com/react-tabs-project";
-
-// const loadEmp = async () =>
-//   await fetch(employees_url)
-//     .then((res) => (res.ok ? res : Promise.reject(res)))
-//     .then((res) => res.json());
-
-const loadEmp = async () => {
-  const { data } = await axios.get(employees_url);
-  return data;
-};
+const EVENTS = new Dayz.EventsCollection([
+  {
+    content: "A short event",
+    range: moment.range(moment("2021-09-08"), moment("2021-09-14")),
+  },
+  {
+    content: "Have lunch with Jayden",
+    range: moment.range(moment("2021-09-18"), moment("2021-09-24")),
+  },
+  {
+    content: "A Longer Event",
+    range: moment.range(moment("2021-09-22"), moment("2021-09-24")),
+  },
+]);
 
 const Example = () => {
   const classes = useStyles();
@@ -24,108 +39,63 @@ const Example = () => {
   const [paydata, setPaydata] = useState([]);
   const [loading, setLoading] = useState(true);
   const [jobs, setJobs] = useState([]);
-  const [value, setValue] = useState(0);
-  //const { data, error, isLoading } = useAsync({ promiseFn: loadEmp });
+  const [value, setValue] = useState("2021-09-11");
+  const [month, setMonth] = useState("");
+  const date = moment("2021-09-11");
 
-  const handleClick = () => {};
+  const ColoredDateCellWrapper = ({ children }) =>
+    React.cloneElement(React.Children.only(children), {
+      style: {
+        backgroundColor: "lightblue",
+      },
+    });
 
-  const handleButtonClick = (index) => {
-    // const newData = data[index];
-    // const { id, name } = data[index];
-    // setPaydata(() => {
-    //   return [...paydata, newData.map((item) => item.name)];
-    // });
-    // console.log("paydata", paydata, name, newData);
+  const handleNext = () => {
+    const today = new Date(value);
+    const newDate = addMonths(today, 1);
+    const newToday = format(newDate, "yyyy-MM-dd");
+    const month = newDate.toLocaleString("default", { month: "long" });
+    console.log("date", today, newDate, newToday, month);
+    setValue(newToday);
+    setMonth(month);
   };
 
-  //if (isLoading) return "Loading...";
-  // if (error) return `Something went wrong: ${error.message}`;
-  // if (data) {
-  // const empdata = data.map((r) => {
-  //   return { ...r };
-  // });
-  // setPaydata(() => {
-  //   return [
-  //     ...paydata,
-  //     data.map((item) => {
-  //       return { ...item };
-  //     }),
-  //   ];
-  // });
-  // console.log("Data", data, paydata);
-  // const { name, basic_salary } = paydata[value];
+  const handlePrev = () => {
+    const today = new Date(value);
+    const newDate = addMonths(today, -1);
+    const newToday = format(newDate, "yyyy-MM-dd");
+    const month = newDate.toLocaleString("default", { month: "long" });
+    console.log("date", today, newDate, newToday);
+    setValue(newToday);
+    setMonth(month);
+  };
+
   return (
-    <Paper className={fixedHeightPaper} style={{ backgroundColor: "yellow" }}>
-      <section className={classes.section}>
-        {/* <Grid
-            direction="row"
-            container
-            spacing={1}
-            style={{ border: "1px solid white" }}
-          >
-            <Grid container item sm={2} direction="column" align="left">
-              {paydata.map((item, index) => {
-                console.log("item", item, index);
-                return (
-                  <button
-                    key={index}
-                    onClick={(e) => {
-                      setValue(index);
-                      handleButtonClick(index);
-                    }}
-                    className={`classes.jobbtn`}
-                    // ${index === value && "activebtn"} `}
-                  >
-                    <h3>{item.name}</h3>
-                  </button>
-                );
-              })}
-            </Grid>
-            <Divider
-              orientation="vertical"
-              flexItem
-              style={{ background: "white" }}
-            />
-            <Grid container item sm={8}>
-              <article className={classes.jobinfo}>
-                <h3>{name}</h3>
-                <form>
-                  <TextField
-                    label="Name"
-                    variant="filled"
-                    type="name"
-                    required
-                    style={{ width: 350 }}
-                    value={name}
-                  />
-                  <TextField
-                    label="Basic Salary"
-                    variant="filled"
-                    type="currency"
-                    required
-                    style={{ width: 350 }}
-                    value={basic_salary}
-                  />
-                  <button onClick={(e) => handleClick(e)}>Submit</button>
-                </form>
-              </article>
-            </Grid>
-          </Grid> */}
-      </section>
-      <div className="col-md-6 col-sm-6 col-lg-6 col-xl-3">
-        <div className="card_dash_widget">
-          <div className="card_body">
-            <span className="dash_widget_icon">
-              <i className="fa fa-folder-open-o" />
-            </span>
-            <div className="dash_widget_info">
-              <h3>44</h3>
-              <span>Projects</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </Paper>
+    <Box
+      display="block"
+      h="600"
+      w="container.xl"
+      px="15"
+      mt="100"
+      overflow="scroll"
+    >
+      <HStack>
+        <Box align="flex-start">
+          <Button variant="solid" type="button" onClick={handlePrev}>
+            Prev
+          </Button>
+        </Box>
+        <Box pl="40%" pr="40%">
+          <Heading size="md">{month}</Heading>
+        </Box>
+        <Box align="flex-end">
+          <Button variant="solid" type="button" onClick={handleNext}>
+            Next
+          </Button>
+        </Box>
+      </HStack>
+      <Dayz display="month" date={moment(value)} events={EVENTS} />
+    </Box>
   );
 };
 

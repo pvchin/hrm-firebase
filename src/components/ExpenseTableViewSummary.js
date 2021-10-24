@@ -37,7 +37,7 @@ export default function ExpenseTableView({ year, month }) {
   const classes = useStyles();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isAlertOpen, setIsAlertOpen] = useState(false);
-  const [totals, setTotals] = useState(0)
+  const [totals, setTotals] = useState(0);
   const [isCalc, setIsCalc] = useState(false);
   const { loadEmployees } = useEmployeesContext();
   const { expensesstatus, setExpStatusId } = useExpensesStatus();
@@ -47,16 +47,15 @@ export default function ExpenseTableView({ year, month }) {
   useEffect(() => {
     setExpPeriodYrId(year);
     setExpPeriodMthId(month);
-    setIsCalc(true)
+    setIsCalc(true);
   }, []);
 
   useEffect(() => {
     if (expensesperiod) {
-      Calc_Totals()
-      setIsCalc(false)
+      Calc_Totals();
+      setIsCalc(false);
     }
-  },[isCalc])
-
+  }, [isCalc]);
 
   const Calc_Totals = () => {
     const amount = expensesperiod.reduce((acc, r) => {
@@ -66,13 +65,13 @@ export default function ExpenseTableView({ year, month }) {
         return acc;
       }
     }, 0);
-    setTotals(amount)
+    setTotals(amount);
   };
 
   return (
     <div className={classes.root}>
       {/* <h1>Expenses Claims Application</h1> */}
-     
+
       <div style={{ maxWidth: "100%", paddingTop: "5px" }}>
         <MaterialTable
           columns={columns}
