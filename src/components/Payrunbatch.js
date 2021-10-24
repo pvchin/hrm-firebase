@@ -629,7 +629,7 @@ const Payrunbatch = () => {
                     </Heading>
                   </Box>
                   <Divider backgroundColor="white" />
-                  <Box border="2px solid white" backgroundColor="cyan.100">
+                  <Box h="550" border="2px solid white" backgroundColor="cyan.100" overflow="scroll">
                     {/* {payslipsbatch &&
                       payslipsbatch.map((item, index) => {
                         return (

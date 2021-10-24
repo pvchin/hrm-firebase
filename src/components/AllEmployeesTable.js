@@ -62,10 +62,10 @@ export default function AllEmployeesTable() {
 
   const { loadDepartments, loadDesignations, resetTables } = useTablesContext();
 
+  useEffect(() => {
+    setAllEmpId("111");
+  }, []);
 
-  useEffect(()=>{
-    setAllEmpId("111")
-  },[])
   // useEffect(() => {
   //   resetEmployees();
   //   loadEmployees();
