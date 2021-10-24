@@ -81,7 +81,11 @@ export default function ExpenseTableView() {
       <div style={{ maxWidth: "100%", paddingTop: "5px" }}>
         <MaterialTable
           columns={columns}
-          data={expenses}
+          data={expenses
+            .filter((r) => r.status === "Pending")
+            .map((rec) => { return { ...rec } })
+          }
+            
           title="Leave Application"
           options={{
             filtering: false,
