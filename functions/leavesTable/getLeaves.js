@@ -2,7 +2,7 @@ const { table } = require("./airtable-leaves");
 const formattedReturn = require("../formattedReturn");
 
 module.exports = async (event) => {
-  const { id, fv, fi, m, y } = event.queryStringParameters;
+  const { id, fv, fi, m, y, al } = event.queryStringParameters;
   // const { id, filterValue, filterField } = event.queryStringParameters;
   // console.log(filterValue, filterField);
 
@@ -48,6 +48,20 @@ module.exports = async (event) => {
       .select({
         view: "sortedview",
         filterByFormula: `AND(MONTH(from_date)=${m},YEAR(from_date)=${y})`,
+      })
+      .firstPage();
+    const formattedLeaves = leaves.map((leave) => ({
+      id: leave.id,
+      ...leave.fields,
+    }));
+
+    return formattedReturn(200, formattedLeaves);
+  }
+
+  if (al) {
+    const leaves = await table
+      .select({
+        view: "leavesview",
       })
       .firstPage();
     const formattedLeaves = leaves.map((leave) => ({

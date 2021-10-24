@@ -17,7 +17,7 @@ const Main = () => {
   const { currentUser } = useAuthContext();
   const [role, setRole] = useState("");
   const SwitchCase = () => {
-    //console.log(loginLevel);
+    console.log(loginLevel);
     switch (loginLevel.loginLevel) {
       case "Staff":
         return <DashboardStaff />;
@@ -28,13 +28,15 @@ const Main = () => {
       case "Manager":
         return <DashboardManager />;
       default:
-        return "You are not authorised user!";
+        return `You are not4 authorised user!`;
     }
   };
 
   if (!loginLevel.login) {
+    
     return <LoginForm />;
   } else {
+    
     return (
       <div>
         <SwitchCase />

@@ -74,6 +74,7 @@ const SigninForm = () => {
   };
 
   const update_login = () => {
+   
     const emp = employees
       .filter((item) => item.email === email)
       .map((row) => {
@@ -112,50 +113,50 @@ const SigninForm = () => {
       return null;
     }
 
-    if (!emp.length) {
-      toast({
-        title: "This email is not existed!",
-        status: "warning",
-      });
-      return null;
-    }
+    // if (!emp.length) {
+    //   toast({
+    //     title: "This email is not existed!",
+    //     status: "warning",
+    //   });
+    //   return null;
+    // }
 
-    if (role === "Admin" && emp[0].level < 2) {
-      toast({
-        title: "You have no authorisation to access!",
-        status: "warning",
-      });
-      return null;
-    }
-    if (role === "Admin" && emp[0].level < 2) {
-      toast({
-        title: "You have no authorisation to access!",
-        status: "warning",
-      });
-      return null;
-    }
-    if (role === "AdminManager" && emp[0].level < 3) {
-      toast({
-        title: "You have no authorisation to access!",
-        status: "warning",
-      });
-      return null;
-    }
-    if (role === "Manager" && emp[0].level < 4) {
-      toast({
-        title: "You have no authorisation to access!",
-        status: "warning",
-      });
-      return null;
-    }
-
+    // if (role === "Admin" && emp[0].level < 2) {
+    //   toast({
+    //     title: "You have no authorisation to access!",
+    //     status: "warning",
+    //   });
+    //   return null;
+    // }
+    // if (role === "Admin" && emp[0].level < 2) {
+    //   toast({
+    //     title: "You have no authorisation to access!",
+    //     status: "warning",
+    //   });
+    //   return null;
+    // }
+    // if (role === "AdminManager" && emp[0].level < 3) {
+    //   toast({
+    //     title: "You have no authorisation to access!",
+    //     status: "warning",
+    //   });
+    //   return null;
+    // }
+    // if (role === "Manager" && emp[0].level < 4) {
+    //   toast({
+    //     title: "You have no authorisation to access!",
+    //     status: "warning",
+    //   });
+    //   return null;
+    // }
+    setRole("Staff");
     setLoginLevel({
       ...loginLevel,
       loginUser: emp[0].name,
       loginUserId: emp[0].id,
-      loginLevel: role,
+      loginLevel: "Staff",
       loginEmail: email,
-      loginROle: emp[0].role,
+      loginRole: emp[0].level,
       login: true,
       leave_bal: emp[0].leave_bal,
       siteallows_fee: emp[0].siteallows_fee,
