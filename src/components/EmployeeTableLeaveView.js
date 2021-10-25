@@ -91,7 +91,7 @@ export default function EmployeeTableLeaveView({ year }) {
           } = rec;
           // calculate leaves
           const leavedata = leaves
-            .filter((r) => r.empid === id && r.year === YEAR)
+            .filter((r) => r.empid === id)
             .map((rec) => {
               return { ...rec };
             });

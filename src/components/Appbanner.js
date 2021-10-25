@@ -72,7 +72,7 @@ const Appbanner = ({
               handleSelect("Staff");
             }}
           >
-            Staff
+            <Heading size="sm">Staff</Heading>
           </Button>
           {loginLevel.loginRole > 1 && (
             <Button
@@ -83,7 +83,7 @@ const Appbanner = ({
                 handleSelect("Admin");
               }}
             >
-              Admin
+              <Heading size="sm">Admin</Heading>
             </Button>
           )}
           {loginLevel.loginRole > 2 && (
@@ -95,7 +95,7 @@ const Appbanner = ({
                 handleSelect("AdminManager");
               }}
             >
-              Admin Manager
+              <Heading size="sm">Admin Manager</Heading>
             </Button>
           )}
           {loginLevel.loginRole > 3 && (
@@ -107,14 +107,14 @@ const Appbanner = ({
                 handleSelect("Manager");
               }}
             >
-              Manager
+              <Heading size="sm">Manager</Heading>
             </Button>
           )}
         </HStack>
         <div>
           <Text fontSize="18">
             {loginLevel.loginUser && (
-              <Heading size="md">Welcome {loginLevel.loginEmail}!</Heading>
+              <Heading size="sm">Welcome {loginLevel.loginEmail}!</Heading>
             )}
           </Text>
         </div>

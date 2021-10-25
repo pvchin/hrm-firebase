@@ -30,34 +30,34 @@ const client = new ApolloClient({
 const queryClient = new QueryClient();
 
 ReactDOM.render(
-  // <React.StrictMode>
-  <QueryClientProvider client={queryClient}>
-    <RecoilRoot>
-      <ApolloProvider client={client}>
-        <AuthProvider>
-          <EmployeesProvider>
-            <PayslipsProvider>
-              <LeavesProvider>
-                <ExpensesProvider>
-                  <DailyAllowancesProvider>
-                    <TrainingsProvider>
-                      <TablesProvider>
-                        {/* <Loading /> */}
-                        {/* <DevTools /> */}
-                        <App />
-                      </TablesProvider>
-                    </TrainingsProvider>
-                  </DailyAllowancesProvider>
-                </ExpensesProvider>
-              </LeavesProvider>
-            </PayslipsProvider>
-          </EmployeesProvider>
-        </AuthProvider>
-      </ApolloProvider>
-    </RecoilRoot>
-    <ReactQueryDevtools />
-  </QueryClientProvider>,
-  // </React.StrictMode>,
+  <React.StrictMode>
+    <QueryClientProvider client={queryClient}>
+      <RecoilRoot>
+        <ApolloProvider client={client}>
+          <AuthProvider>
+            <EmployeesProvider>
+              <PayslipsProvider>
+                <LeavesProvider>
+                  <ExpensesProvider>
+                    <DailyAllowancesProvider>
+                      <TrainingsProvider>
+                        <TablesProvider>
+                          {/* <Loading /> */}
+                          {/* <DevTools /> */}
+                          <App />
+                        </TablesProvider>
+                      </TrainingsProvider>
+                    </DailyAllowancesProvider>
+                  </ExpensesProvider>
+                </LeavesProvider>
+              </PayslipsProvider>
+            </EmployeesProvider>
+          </AuthProvider>
+        </ApolloProvider>
+      </RecoilRoot>
+      <ReactQueryDevtools />
+    </QueryClientProvider>
+  </React.StrictMode>,
   //document.getElementById("root").style.transform = "scale(1)"
   document.getElementById("root")
 );
