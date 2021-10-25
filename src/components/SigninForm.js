@@ -224,6 +224,7 @@ const SigninForm = () => {
                 <Controller
                   control={control}
                   name="email"
+                  fontSize="20"
                   //defaultValue={email}
 
                   render={({ field: { onChange, value, ref } }) => (
@@ -258,6 +259,7 @@ const SigninForm = () => {
                 <Controller
                   control={control}
                   name="password"
+                  fontSize="20"
                   //defaultValue={name}
                   render={({ field: { onChange, value, ref } }) => (
                     <InputGroup>

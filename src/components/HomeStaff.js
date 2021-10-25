@@ -116,7 +116,7 @@ const HomeStaff = () => {
         {/* <h2>Welcome Staff {loginLevel.loginUser}!</h2>
         <h3>Dashboard</h3> */}
       </div>
-      <Container maxWidth="full" className={classes.container}>
+      <Container maxWidth="xl" className={classes.container}>
         <Stack direction="column">
           <Box>
             <CardLayout2>

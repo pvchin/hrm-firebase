@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from "react";
 import MaterialTable from "material-table";
-import { useHistory} from "react-router-dom"
+import { useHistory } from "react-router-dom";
 import { TextField, MenuItem } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { GrFormView } from "react-icons/gr";
@@ -15,6 +15,9 @@ import { AlertDialog } from "../helpers/AlertDialogBox";
 import { useExpensesPeriod } from "./expenses/useExpensesPeriod";
 import { useEmployeesContext } from "../context/employees_context";
 import { useEmployees } from "./employees/useEmployees";
+import { useLeaves } from "./leaves/useLeaves";
+
+const YEAR = new Date().getFullYear();
 
 const columns = [
   {
@@ -30,18 +33,24 @@ const columns = [
   { title: "Designation", field: "designation" },
   { title: "Department", field: "department" },
   { title: "Leave Entitled", field: "leave_entitled", type: "numeric" },
+  { title: "Leave Taken", field: "leave_taken", type: "numeric" },
+  { title: "Leave Pending", field: "leave_pending", type: "numeric" },
   { title: "Leave Balance", field: "leave_bal", type: "numeric" },
   // { title: "Email", field: "email" },
 ];
 
 export default function EmployeeTableLeaveView({ year }) {
   const classes = useStyles();
-  const history = useHistory()
+  const history = useHistory();
   const { employees, setEmployeeId } = useEmployees();
-  const [expdata, setExpData] = useState([]);
+  const { leaves } = useLeaves();
+  const [empdata, setEmpData] = useState([]);
   const { expensesperiod, setExpPeriodYrId, setExpPeriodMthId } =
     useExpensesPeriod();
- 
+  const emp = employees.map((rec) => {
+    return { ...rec, leave_taken: 0, leave_pending: 0 };
+  });
+
   const {
     editEmployeeID,
     employees_loading,
@@ -54,27 +63,73 @@ export default function EmployeeTableLeaveView({ year }) {
     resetEmployees,
     //getSingleEmployee,
   } = useEmployeesContext();
-  
-  const update_Employee = (data) => {
-     const { id } = data;
-     resetSingleEmployee();
-     resetEmployees();
-     setEditEmployeeID(id);
-     setIsEditingOn();
-     setEmployeeId(id);
 
-     history.push("/singleemployee");
-  }
-  
+  const update_Employee = (data) => {
+    const { id } = data;
+    resetSingleEmployee();
+    resetEmployees();
+    setEditEmployeeID(id);
+    setIsEditingOn();
+    setEmployeeId(id);
+
+    history.push("/singleemployee");
+  };
+
+  const Build_EmpData = (YEAR) => {
+    // eslint-disable-next-line no-lone-blocks
+    {
+      emp &&
+        emp.forEach((rec, index) => {
+          const {
+            id,
+            name,
+            icno,
+            gender,
+            designation,
+            department,
+            leave_entitled,
+          } = rec;
+          // calculate leaves
+          const leavedata = leaves
+            .filter((r) => r.empid === id && r.year === YEAR)
+            .map((rec) => {
+              return { ...rec };
+            });
+          const leaveTaken = leavedata.reduce((acc, item) => {
+            if (item.status === "Approved") {
+              return acc + item.no_of_days;
+            } else {
+              return acc;
+            }
+          }, 0);
+          const leavePending = leavedata.reduce((acc, item) => {
+            if (item.status === "Pending") {
+              return acc + item.no_of_days;
+            } else {
+              return acc;
+            }
+          }, 0);
+          const leavebal = isNaN(emp[index].leave_entitled)
+            ? 0
+            : emp[index].leave_entitled;
+          emp[index].leave_taken = leaveTaken;
+          emp[index].leave_pending = leavePending;
+          emp[index].leave_bal = leavebal - leaveTaken;
+          setEmpData(emp);
+        });
+    }
+  };
+
+  useEffect(() => {
+    Build_EmpData("2021");
+  }, []);
 
   return (
     <div className={classes.root}>
       <div style={{ maxWidth: "100%", paddingTop: "5px" }}>
         <MaterialTable
           columns={columns}
-          data={employees.sort((a, b) =>
-            a.name > b.name ? 1 : b.name > a.name ? -1 : 0
-          )}
+          data={empdata}
           title="Expenses Claims"
           actions={[
             (rowData) => ({
@@ -82,7 +137,7 @@ export default function EmployeeTableLeaveView({ year }) {
               icon: () => <GrFormView size="33px" />,
               tooltip: "View",
               onClick: (event, rowData) => {
-                update_Employee(rowData)
+                update_Employee(rowData);
               },
             }),
           ]}

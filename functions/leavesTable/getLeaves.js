@@ -62,6 +62,7 @@ module.exports = async (event) => {
     const leaves = await table
       .select({
         view: "leavesview",
+        filterByFormula: `YEAR(from_date) = '${al}'`,
       })
       .firstPage();
     const formattedLeaves = leaves.map((leave) => ({

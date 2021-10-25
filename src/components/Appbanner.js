@@ -2,7 +2,7 @@ import React from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import { useHistory, Link } from "react-router-dom";
-import { Button, HStack, Text } from "@chakra-ui/react";
+import { Button, Heading, HStack, Text } from "@chakra-ui/react";
 import Toolbar from "@material-ui/core/Toolbar";
 import Tooltip from "@material-ui/core/Tooltip";
 import AppBar from "@material-ui/core/AppBar";
@@ -113,7 +113,9 @@ const Appbanner = ({
         </HStack>
         <div>
           <Text fontSize="18">
-            {loginLevel.loginUser && <h3>Welcome {loginLevel.loginEmail}!</h3>}
+            {loginLevel.loginUser && (
+              <Heading size="md">Welcome {loginLevel.loginEmail}!</Heading>
+            )}
           </Text>
         </div>
         {/* <IconButton color="inherit">

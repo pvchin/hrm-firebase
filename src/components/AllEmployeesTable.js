@@ -43,7 +43,11 @@ export default function AllEmployeesTable() {
     },
     { title: "IC No", field: "ic_no" },
     { title: "Gender", field: "gender" },
-    { title: "Age", field: "age", type: "numeric" },
+    {
+      title: "Age",
+      field: "age",
+      type: "numeric",
+    },
     { title: "Email", field: "email" },
   ]);
 
@@ -119,6 +123,17 @@ export default function AllEmployeesTable() {
     const id = editEmployeeID;
     deleteEmployees(id);
     //loadEmployees();
+  };
+
+  const calculateAge = (dob) => {
+    var today = new Date();
+    var birthDate = new Date(dob);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    return age;
   };
 
   const Reset_PW = () => {
