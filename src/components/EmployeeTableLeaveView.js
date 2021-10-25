@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import MaterialTable from "material-table";
 import { useHistory } from "react-router-dom";
+import moment from "moment";
 import { TextField, MenuItem } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { GrFormView } from "react-icons/gr";
@@ -91,7 +92,7 @@ export default function EmployeeTableLeaveView({ year }) {
           } = rec;
           // calculate leaves
           const leavedata = leaves
-            .filter((r) => r.empid === id)
+            .filter((r) => r.empid === id && moment(r.from_date).format("YYYY") === YEAR)
             .map((rec) => {
               return { ...rec };
             });
