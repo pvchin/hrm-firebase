@@ -137,11 +137,11 @@ const EmployeeView = () => {
             maxW="x3"
             padding="4"
             width="100%"
-            height="650"
+            height="750"
             borderColor="blue.500"
             borderWidth="1px"
             borderRadius="lg"
-            overflow="hidden"
+            overflow="scroll"
           >
             <SimpleGrid>
               <Box>

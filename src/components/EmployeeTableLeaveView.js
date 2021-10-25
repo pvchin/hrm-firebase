@@ -25,18 +25,46 @@ const columns = [
     title: "Name",
     field: "name",
     cellStyle: {
-      width: 200,
-      maxWidth: 200,
+      width: 250,
+      maxWidth: 250,
     },
   },
   { title: "IC No", field: "ic_no" },
   { title: "Gender", field: "gender" },
   { title: "Designation", field: "designation" },
   { title: "Department", field: "department" },
-  { title: "Leave Entitled", field: "leave_entitled", type: "numeric" },
-  { title: "Leave Taken", field: "leave_taken", type: "numeric" },
-  { title: "Leave Pending", field: "leave_pending", type: "numeric" },
-  { title: "Leave Balance", field: "leave_bal", type: "numeric" },
+  {
+    title: "Leave Entitled",
+    field: "leave_entitled",
+    type: "numeric",
+    cellStyle: {
+      width: 60,
+    },
+  },
+  {
+    title: "Leave Taken",
+    field: "leave_taken",
+    type: "numeric",
+    cellStyle: {
+      width: 60,
+    },
+  },
+  {
+    title: "Leave Pending",
+    field: "leave_pending",
+    type: "numeric",
+    cellStyle: {
+      width: 60,
+    },
+  },
+  {
+    title: "Leave Balance",
+    field: "leave_bal",
+    type: "numeric",
+    cellStyle: {
+      width: 60,
+    },
+  },
   // { title: "Email", field: "email" },
 ];
 
@@ -92,7 +120,10 @@ export default function EmployeeTableLeaveView({ year }) {
           } = rec;
           // calculate leaves
           const leavedata = leaves
-            .filter((r) => r.empid === id && moment(r.from_date).format("YYYY") === YEAR)
+            .filter(
+              (r) =>
+                r.empid === id && moment(r.from_date).format("YYYY") === YEAR
+            )
             .map((rec) => {
               return { ...rec };
             });
@@ -131,7 +162,7 @@ export default function EmployeeTableLeaveView({ year }) {
         <MaterialTable
           columns={columns}
           data={empdata}
-          title="Expenses Claims"
+          title="Employee Leave Details"
           actions={[
             (rowData) => ({
               //disabled: rowData.status !== "Pending",

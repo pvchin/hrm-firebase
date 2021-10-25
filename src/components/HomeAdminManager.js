@@ -426,11 +426,11 @@ const HomeAdminManager = () => {
         //minW="100%"
         padding="4"
         width="full"
-        height="750"
+        height="800"
         borderColor="blue.500"
         borderWidth="1px"
         borderRadius="lg"
-        overflow="hidden"
+        overflow="scroll"
       >
         <Tabs>
           <TabList>
@@ -447,11 +447,11 @@ const HomeAdminManager = () => {
                 maxW="full"
                 padding="4"
                 width="100%"
-                height="650"
+                height="800"
                 borderColor="blue.500"
                 borderWidth="1px"
                 borderRadius="lg"
-                overflow="hidden"
+                overflow="scroll"
               >
                 <SimpleGrid>
                   <Box>
@@ -481,11 +481,11 @@ const HomeAdminManager = () => {
                 maxW="100%"
                 padding="4"
                 width="full"
-                height="650"
+                height="800"
                 borderColor="red.500"
                 borderWidth="1px"
                 borderRadius="lg"
-                overflow="hidden"
+                overflow="scroll"
               >
                 <SimpleGrid w="168vh">
                   <Box>
@@ -606,11 +606,11 @@ const HomeAdminManager = () => {
                 maxW="x3"
                 padding="4"
                 width="100%"
-                height="500"
+                height="800"
                 borderColor="blue.500"
                 borderWidth="1px"
                 borderRadius="lg"
-                overflow="hidden"
+                overflow="scroll"
               >
                 <SimpleGrid w="168vh">
                   <Box>
@@ -731,11 +731,11 @@ const HomeAdminManager = () => {
                 maxW="x3"
                 padding="4"
                 width="100%"
-                height="500"
+                height="800"
                 borderColor="blue.500"
                 borderWidth="1px"
                 borderRadius="lg"
-                overflow="hidden"
+                overflow="scroll"
               >
                 <SimpleGrid w="168vh">
                   <Box>
@@ -856,11 +856,11 @@ const HomeAdminManager = () => {
                 maxW="x3"
                 padding="4"
                 width="100%"
-                height="100%"
+                height="800"
                 borderColor="blue.500"
                 borderWidth="1px"
                 borderRadius="lg"
-                overflow="hidden"
+                overflow="scroll"
               >
                 <SimpleGrid>
                   <Box>
