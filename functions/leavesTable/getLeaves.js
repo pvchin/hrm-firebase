@@ -21,7 +21,11 @@ module.exports = async (event) => {
 
   if (fv) {
     const leaves = await table
-      .select({ view: "sortedview", filterByFormula: `empid = '${fv}'` })
+      .select({
+        view: "sortedview",
+        //filterByFormula: `empid = '${fv}'`
+        filterByFormula: `AND(empid='${fv}',YEAR(from_date)='${y}')`,
+      })
       .firstPage();
     const formattedLeaves = leaves.map((leave) => ({
       id: leave.id,

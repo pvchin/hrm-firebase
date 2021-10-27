@@ -28,7 +28,7 @@ const CustomAlertDialog = ({ dialogRef ,isOpen, onClose, onConfirm , title, chil
         <AlertDialogCloseButton onClick={onClose} />
 
         <AlertDialogBody fontFamily="roboto" fontSize="1.25rem">
-          You have an uncompleted order, do you wish to continue?
+          {title}
         </AlertDialogBody>
 
         <AlertDialogFooter>

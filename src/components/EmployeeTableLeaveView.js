@@ -34,8 +34,24 @@ const columns = [
   { title: "Designation", field: "designation" },
   { title: "Department", field: "department" },
   {
+    title: "Leave B/F",
+    field: "leave_bf",
+    type: "numeric",
+    cellStyle: {
+      width: 60,
+    },
+  },
+  {
     title: "Leave Entitled",
     field: "leave_entitled",
+    type: "numeric",
+    cellStyle: {
+      width: 60,
+    },
+  },
+  {
+    title: "Leave C/D",
+    field: "leave_cd",
     type: "numeric",
     cellStyle: {
       width: 60,
@@ -117,6 +133,8 @@ export default function EmployeeTableLeaveView({ year }) {
             designation,
             department,
             leave_entitled,
+            leave_bf,
+            leave_cd,
           } = rec;
           // calculate leaves
           const leavedata = leaves
@@ -141,12 +159,18 @@ export default function EmployeeTableLeaveView({ year }) {
               return acc;
             }
           }, 0);
-          const leavebal = isNaN(emp[index].leave_entitled)
+          const leaveEntitled = isNaN(emp[index].leave_entitled)
             ? 0
             : emp[index].leave_entitled;
+          const leaveBf = isNaN(emp[index].leave_bf)
+            ? 0
+            : emp[index].leave_bf;
+           const leaveCd = isNaN(emp[index].leave_cd)
+             ? 0
+             : emp[index].leave_cd;
           emp[index].leave_taken = leaveTaken;
           emp[index].leave_pending = leavePending;
-          emp[index].leave_bal = leavebal - leaveTaken;
+          emp[index].leave_bal = leaveEntitled + leaveBf - leaveCd - leaveTaken;
           setEmpData(emp);
         });
     }

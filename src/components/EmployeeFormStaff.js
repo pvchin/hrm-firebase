@@ -44,6 +44,7 @@ const initial_values = {
   nationality: "",
   address: "",
   leave_bal: 0,
+  leave_bf: 0,
   leave_entitled: 0,
   tap_acno: "",
   scp_acno: "",
@@ -93,7 +94,7 @@ const EmployeeForm = () => {
     bank_acno,
     tap_acno,
     scp_acno,
-    leave_bal,
+    leave_bf,
     leave_entitled,
     date_of_join,
     date_of_resign,
@@ -109,7 +110,7 @@ const EmployeeForm = () => {
     reporting_email,
   } = single_employee || initial_values;
   const { handleSubmit, control } = useForm();
-
+  console.log("single employee", single_employee)
   const handleReportingTo = (name) => {
     const emp = employees
       .filter((f) => f.name === name)
@@ -861,20 +862,20 @@ const EmployeeForm = () => {
                   //rules={{ required: "Email is required" }}
                 />
                 <Controller
-                  name="leave_bal"
+                  name="leave_bf"
                   control={control}
-                  defaultValue={leave_bal}
+                  defaultValue={leave_bf}
                   render={({
                     field: { onChange, value },
                     fieldState: { error },
                   }) => {
                     return (
                       <TextField
-                        label="Leaves Balance"
+                        label="Leaves B/F"
                         id="standard-leavebal"
-                        name="leave_bal"
+                        name="leave_bf"
                         type="numeric"
-                        defaultValue={leave_bal}
+                        defaultValue={leave_bf}
                         className={classes.textField}
                         onChange={onChange}
                         error={!!error}
@@ -908,6 +909,7 @@ const EmployeeForm = () => {
                         onChange={onChange}
                         error={!!error}
                         helperText={error ? error.message : null}
+                        
                       />
                     );
                   }}

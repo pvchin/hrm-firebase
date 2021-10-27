@@ -34,7 +34,7 @@ const initial_state = {
   leave_bal: 0,
 };
 
-const LeaveForm = ({ formdata, setFormdata, handleDialogClose }) => {
+const LeaveForm = ({ formdata, leavestate, setFormdata, handleDialogClose }) => {
   const classes = useStyles();
   const toast = useCustomToast();
   const { employees } = useEmployees();
@@ -46,6 +46,7 @@ const LeaveForm = ({ formdata, setFormdata, handleDialogClose }) => {
   const { handleSubmit, control } = useForm();
   const initialValues = Object.values(initial_state).join("");
   const { isLeaveEditing, editLeaveID } = useLeavesContext();
+  
 
   const handleSentEmail = (data) => {
     const { from_date, to_date } = data;
@@ -207,7 +208,7 @@ const LeaveForm = ({ formdata, setFormdata, handleDialogClose }) => {
             <Controller
               name="leave_bal"
               control={control}
-              defaultValue={loginLevel.leave_bal}
+              defaultValue={leavestate.leave_bal}
               render={({
                 field: { onChange, value },
                 fieldState: { error },
@@ -219,7 +220,7 @@ const LeaveForm = ({ formdata, setFormdata, handleDialogClose }) => {
                     type="number"
                     id="standard-number"
                     name="leave_bal"
-                    defaultValue={loginLevel.leave_bal}
+                    defaultValue={leavestate.leave_bal}
                     className={classes.textField}
                     //onChange={onChange}
                     onChange={(e) => {

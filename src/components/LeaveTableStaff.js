@@ -1,6 +1,15 @@
 import React, { useState, useEffect } from "react";
 import MaterialTable, { MTableToolbar } from "material-table";
 import { TextField, MenuItem, Button, Icon } from "@material-ui/core";
+import {
+  Box,
+  Heading,
+  Grid,
+  GridItem,
+  HStack,
+  SimpleGrid,
+  Text,
+} from "@chakra-ui/react";
 import { makeStyles } from "@material-ui/core/styles";
 import { useRecoilState } from "recoil";
 import { loginLevelState } from "./data/atomdata";
@@ -12,14 +21,14 @@ import SearchIcon from "@material-ui/icons/Search";
 import LeaveForm from "./LeaveForm";
 import { CustomDialog } from "../helpers/CustomDialog";
 import { AlertDialogBox } from "../helpers/AlertDialogBox";
-import CustomAlertDialog  from "../helpers/CustomAlertDialog"
+import CustomAlertDialog from "../helpers/CustomAlertDialog";
 import { useLeavesContext } from "../context/leaves_context";
 import { useEmployeesContext } from "../context/employees_context";
 import { useLeaves } from "./leaves/useLeaves";
 import { useAddLeaves } from "./leaves/useAddLeaves";
 import { useDeleteLeaves } from "./leaves/useDeleteLeaves";
 import { useUpdateLeaves } from "./leaves/useUpdateLeaves";
-import { Heading } from "@chakra-ui/react";
+import { useSingleEmployee } from "./employees/useSingleEmployee";
 
 const initial_form = {
   name: "",
@@ -119,7 +128,8 @@ const columns = [
 
 export default function LeaveTableStaff() {
   const classes = useStyles();
-  const { leaves, filter, setFilter, setLeaveId } = useLeaves();
+  const { singleemployee, setSingleEmployeeId } = useSingleEmployee();
+  const { leaves, setLeaveYr, setLeaveId } = useLeaves();
   const updateLeaves = useUpdateLeaves();
   const addLeaves = useAddLeaves();
   const deleteLeaves = useDeleteLeaves();
@@ -128,6 +138,8 @@ export default function LeaveTableStaff() {
   const [alertSuccess, setAlertSuccess] = useState(false);
   const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
   const [formdata, setFormdata] = useState(initial_form);
+  const [leavestate, setLeaveState] = useState({});
+  const [isLoad, setIsLoad] = useState(true);
   const { editEmployeeID } = useEmployeesContext();
   const {
     editLeaveID,
@@ -138,10 +150,50 @@ export default function LeaveTableStaff() {
   const [isOpen, setIsOpen] = React.useState(false);
   const onClose = () => setIsOpen(false);
   const cancelRef = React.useRef();
+  console.log("leavestate", loginLevel);
+  const YEAR = new Date().getFullYear();
 
   useEffect(() => {
-    setFilter(loginLevel.loginUserId);
+    setLeaveId(loginLevel.loginUserId);
+    setLeaveYr(YEAR);
   }, []);
+
+  useEffect(() => {
+    if (leaves) {
+      Calc_Leave();
+    }
+  }, [JSON.stringify(leaves)]);
+
+  const Calc_Leave = () => {
+    const { leave_bf, leave_entitled, leave_cd } = loginLevel;
+    const leaveTaken = leaves.reduce((acc, item) => {
+      if (item.status === "Approved") {
+        return acc + item.no_of_days;
+      } else {
+        return acc;
+      }
+    }, 0);
+    const leavePending = leaves.reduce((acc, item) => {
+      if (item.status === "Pending") {
+        return acc + item.no_of_days;
+      } else {
+        return acc;
+      }
+    }, 0);
+    const leaveEntitled = isNaN(leave_entitled) ? 0 : leave_entitled;
+    const leaveBf = isNaN(leave_bf) ? 0 : leave_bf;
+    const leaveCd = isNaN(leave_cd) ? 0 : leave_cd;
+    const bal = leaveBf + leaveEntitled - leaveCd - leaveTaken;
+    const rec = {
+      leave_bf: leaveBf,
+      leave_entitled: leaveEntitled,
+      leave_cd: leaveCd,
+      leave_taken: leaveTaken,
+      leave_pending: leavePending,
+      leave_bal: bal,
+    };
+    setLeaveState(rec);
+  };
 
   const update_Leave = async (data) => {
     const { id } = data;
@@ -177,6 +229,7 @@ export default function LeaveTableStaff() {
 
   const handleDialogClose = () => {
     setIsDialogOpen(false);
+
     // if (isLeaveEditing) {
     //   loadEmpLeaves(editEmployeeID);
     // }
@@ -198,8 +251,67 @@ export default function LeaveTableStaff() {
   return (
     <div className={classes.root}>
       {/* <h1>Expenses Claims Application</h1> */}
-
-      <div style={{ maxWidth: "100%", paddingTop: "5px" }}>
+      <Box>
+        <Grid
+          p={1}
+          h="100px"
+          templateRows="repeat(2, 1fr)"
+          templateColumns="repeat(12, 1fr)"
+          gap={6}
+          border="1px solid blue"
+          bg="gray.200"
+        >
+          <GridItem colSpan={2} align="center">
+            <Heading pt={3} size="sm">
+              Leave B/F
+            </Heading>
+          </GridItem>
+          <GridItem colSpan={2} align="center">
+            <Heading pt={3} size="sm">
+              Leave Entitled
+            </Heading>
+          </GridItem>
+          <GridItem colSpan={2} align="center">
+            <Heading pt={3} size="sm">
+              Leave C/D
+            </Heading>
+          </GridItem>
+          <GridItem colSpan={2} align="center">
+            <Heading pt={3} size="sm">
+              Leave Taken
+            </Heading>
+          </GridItem>
+          <GridItem colSpan={2} align="center">
+            <Heading pt={3} size="sm">
+              Leave Pending
+            </Heading>
+          </GridItem>
+          <GridItem colSpan={2} align="center">
+            <Heading pt={3} size="sm">
+              Leave Balance
+            </Heading>
+          </GridItem>
+          <GridItem colSpan={2} bg="white" align="center">
+            <Text fontSize="20">{leavestate.leave_bf}</Text>
+          </GridItem>
+          <GridItem colSpan={2} bg="white" align="center">
+            <Text fontSize="20">{leavestate.leave_entitled} </Text>
+          </GridItem>
+          <GridItem colSpan={2} bg="white" align="center">
+            <Text fontSize="20">{leavestate.leave_cd} </Text>
+          </GridItem>
+          <GridItem colSpan={2} bg="white" align="center">
+            <Text fontSize="20">{leavestate.leave_taken}</Text>
+          </GridItem>
+          <GridItem colSpan={2} bg="white" align="center">
+            <Text fontSize="20">{leavestate.leave_pending}</Text>
+          </GridItem>
+          <GridItem colSpan={2} bg="white" align="center">
+            <Text fontSize="20">{leavestate.leave_bal}</Text>
+          </GridItem>
+        </Grid>
+      </Box>
+      <Box maxW="100%" pt={5} h={600} overflow="scroll">
         <MaterialTable
           columns={columns}
           data={leaves}
@@ -266,6 +378,7 @@ export default function LeaveTableStaff() {
           ]}
           options={{
             filtering: true,
+            paging: false,
             headerStyle: {
               backgroundColor: "orange",
               color: "primary",
@@ -289,6 +402,7 @@ export default function LeaveTableStaff() {
         >
           <LeaveForm
             formdata={formdata}
+            leavestate={leavestate}
             setFormdata={setFormdata}
             handleDialogClose={handleDialogClose}
           />
@@ -311,7 +425,7 @@ export default function LeaveTableStaff() {
         >
           <h2>Are you sure you want to delete?</h2>
         </AlertBox> */}
-      </div>
+      </Box>
     </div>
   );
 }

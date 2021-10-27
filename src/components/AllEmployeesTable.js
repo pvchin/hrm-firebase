@@ -44,9 +44,10 @@ export default function AllEmployeesTable() {
     { title: "IC No", field: "ic_no" },
     { title: "Gender", field: "gender" },
     {
-      title: "Age",
-      field: "age",
-      type: "numeric",
+      title: "Birth Date",
+      field: "birthdate",
+      type: "date",
+      dateSetting: { locale: "en-GB" },
     },
     { title: "Email", field: "email" },
   ]);

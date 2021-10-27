@@ -6,15 +6,16 @@ import { filterByEmpId } from "./utils";
 import axios from "axios";
 import { queryKeys } from "../react-query/constants";
 
-async function getLeaves(empid) {
-  //const { data } = await axios.get(`${leaves_url}?fv=${empid}`);
-  const { data } = await axios.get(`${leaves_url}`);
+async function getLeaves(leaveId, leaveYr) {
+  const { data } = await axios.get(`${leaves_url}?fv=${leaveId}&y=${leaveYr}`);
+  //const { data } = await axios.get(`${leaves_url}`);
   return data;
 }
 
 export function useLeaves(empid) {
   const [filter, setFilter] = useState("all");
   const [leaveId, setLeaveId] = useState("");
+  const [leaveYr, setLeaveYr] = useState("")
 
   const selectFn = useCallback(
     (unfiltered) => filterByEmpId(unfiltered, filter),
@@ -23,13 +24,13 @@ export function useLeaves(empid) {
 
   const fallback = [];
   const { data: leaves = fallback } = useQuery(
-    //[queryKeys.leaves, { leaveId }],
-    queryKeys.leaves,
-    () => getLeaves(leaveId),
+    [queryKeys.leaves, leaveId, leaveYr ],
+    //queryKeys.leaves,
+    () => getLeaves(leaveId, leaveYr),
     {
       select: filter !== "all" ? selectFn : undefined,
     }
   );
 
-  return { leaves, filter, setFilter, setLeaveId };
+  return { leaves, filter, setFilter, setLeaveId, setLeaveYr };
 }
