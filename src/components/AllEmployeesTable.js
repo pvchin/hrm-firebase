@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import MaterialTable, { MTableToolbar } from "material-table";
 import { useHistory } from "react-router-dom";
+import { Box} from "@chakra-ui/react"
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, Icon } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
@@ -175,7 +176,8 @@ export default function AllEmployeesTable() {
   }
   return (
     <div className={classes.root}>
-      <div style={{ maxWidth: "100%", paddingTop: "5px" }}>
+      {/* <div style={{ maxWidth: "100%", paddingTop: "5px" }}> */}
+        <Box maxW="100%" pt="5px">
         <MaterialTable
           columns={columns}
           data={allemployees.sort((a, b) =>
@@ -220,6 +222,7 @@ export default function AllEmployeesTable() {
           options={{
             filtering: true,
             selection: true,
+            paging: false,
             headerStyle: {
               //backgroundColor: "#DAAD86",
               backgroundColor: "#90CDF4",
@@ -265,7 +268,7 @@ export default function AllEmployeesTable() {
         >
           <h2>Are you sure you want to delete ?</h2>
         </AlertDialogBox>
-      </div>
+      </Box>
     </div>
   );
 }
