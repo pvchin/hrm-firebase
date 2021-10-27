@@ -33,14 +33,7 @@ const columns = [
   { title: "Gender", field: "gender" },
   { title: "Designation", field: "designation" },
   { title: "Department", field: "department" },
-  {
-    title: "Leave B/F",
-    field: "leave_bf",
-    type: "numeric",
-    cellStyle: {
-      width: 60,
-    },
-  },
+
   {
     title: "Leave Entitled",
     field: "leave_entitled",
@@ -50,8 +43,16 @@ const columns = [
     },
   },
   {
-    title: "Leave C/D",
-    field: "leave_cd",
+    title: "Leave C/F",
+    field: "leave_bf",
+    type: "numeric",
+    cellStyle: {
+      width: 60,
+    },
+  },
+  {
+    title: "Total Leave",
+    field: "leave_total",
     type: "numeric",
     cellStyle: {
       width: 60,
@@ -65,14 +66,14 @@ const columns = [
       width: 60,
     },
   },
-  {
-    title: "Leave Pending",
-    field: "leave_pending",
-    type: "numeric",
-    cellStyle: {
-      width: 60,
-    },
-  },
+  // {
+  //   title: "Leave Pending",
+  //   field: "leave_pending",
+  //   type: "numeric",
+  //   cellStyle: {
+  //     width: 60,
+  //   },
+  // },
   {
     title: "Leave Balance",
     field: "leave_bal",
@@ -93,7 +94,7 @@ export default function EmployeeTableLeaveView({ year }) {
   const { expensesperiod, setExpPeriodYrId, setExpPeriodMthId } =
     useExpensesPeriod();
   const emp = employees.map((rec) => {
-    return { ...rec, leave_taken: 0, leave_pending: 0 };
+    return { ...rec, leave_total: 0 , leave_taken: 0, leave_pending: 0 };
   });
 
   const {
@@ -162,13 +163,10 @@ export default function EmployeeTableLeaveView({ year }) {
           const leaveEntitled = isNaN(emp[index].leave_entitled)
             ? 0
             : emp[index].leave_entitled;
-          const leaveBf = isNaN(emp[index].leave_bf)
-            ? 0
-            : emp[index].leave_bf;
-           const leaveCd = isNaN(emp[index].leave_cd)
-             ? 0
-             : emp[index].leave_cd;
-          emp[index].leave_taken = leaveTaken;
+          const leaveBf = isNaN(emp[index].leave_bf) ? 0 : emp[index].leave_bf;
+          const leaveCd = isNaN(emp[index].leave_cd) ? 0 : emp[index].leave_cd;
+          emp[index].leave_total= leaveEntitled + leaveBf
+          emp[index].leave_taken = leaveTaken + leaveCd;
           emp[index].leave_pending = leavePending;
           emp[index].leave_bal = leaveEntitled + leaveBf - leaveCd - leaveTaken;
           setEmpData(emp);

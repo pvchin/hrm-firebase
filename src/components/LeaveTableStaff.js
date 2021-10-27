@@ -183,12 +183,14 @@ export default function LeaveTableStaff() {
     const leaveEntitled = isNaN(leave_entitled) ? 0 : leave_entitled;
     const leaveBf = isNaN(leave_bf) ? 0 : leave_bf;
     const leaveCd = isNaN(leave_cd) ? 0 : leave_cd;
+    const leaveTotal = leaveBf + leaveEntitled
     const bal = leaveBf + leaveEntitled - leaveCd - leaveTaken;
     const rec = {
       leave_bf: leaveBf,
       leave_entitled: leaveEntitled,
+      leave_total: leaveTotal,
       leave_cd: leaveCd,
-      leave_taken: leaveTaken,
+      leave_taken: leaveTaken + leaveCd,
       leave_pending: leavePending,
       leave_bal: bal,
     };
@@ -262,43 +264,44 @@ export default function LeaveTableStaff() {
           bg="gray.200"
         >
           <GridItem colSpan={2} align="center">
-            <Heading pt={3} size="sm">
-              Leave B/F
+            <Heading pt={3} size="xs">
+              Leave Entitlement
             </Heading>
           </GridItem>
           <GridItem colSpan={2} align="center">
-            <Heading pt={3} size="sm">
-              Leave Entitled
+            <Heading pt={3} size="xs">
+              Leave Carried Forward
             </Heading>
           </GridItem>
           <GridItem colSpan={2} align="center">
-            <Heading pt={3} size="sm">
-              Leave C/D
+            <Heading pt={3} size="xs">
+              Total Leaves Days
             </Heading>
           </GridItem>
           <GridItem colSpan={2} align="center">
-            <Heading pt={3} size="sm">
+            <Heading pt={3} size="xs">
               Leave Taken
             </Heading>
           </GridItem>
           <GridItem colSpan={2} align="center">
-            <Heading pt={3} size="sm">
+            <Heading pt={3} size="xs">
               Leave Pending
             </Heading>
           </GridItem>
           <GridItem colSpan={2} align="center">
-            <Heading pt={3} size="sm">
-              Leave Balance
+            <Heading pt={3} size="xs">
+              Balance Leave Days
             </Heading>
+          </GridItem>
+
+          <GridItem colSpan={2} bg="white" align="center">
+            <Text fontSize="20">{leavestate.leave_entitled} </Text>
           </GridItem>
           <GridItem colSpan={2} bg="white" align="center">
             <Text fontSize="20">{leavestate.leave_bf}</Text>
           </GridItem>
           <GridItem colSpan={2} bg="white" align="center">
-            <Text fontSize="20">{leavestate.leave_entitled} </Text>
-          </GridItem>
-          <GridItem colSpan={2} bg="white" align="center">
-            <Text fontSize="20">{leavestate.leave_cd} </Text>
+            <Text fontSize="20">{leavestate.leave_total} </Text>
           </GridItem>
           <GridItem colSpan={2} bg="white" align="center">
             <Text fontSize="20">{leavestate.leave_taken}</Text>
