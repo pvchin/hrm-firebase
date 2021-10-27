@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory, Link } from "react-router-dom";
 import MaterialTable, { MTableToolbar } from "material-table";
 import { makeStyles } from "@material-ui/core/styles";
+import { Box } from "@chakra-ui/react";
 import {
   useSetRecoilState,
   useRecoilValue,
@@ -23,7 +24,7 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { CustomDialog } from "../helpers/CustomDialog";
 import { useDailyAllowancesContext } from "../context/dailyallowances_context";
 //import { useEmployeesContext } from "../context/employees_context";
-import { useDailyAllowsPeriod} from "./dailyallows/useDailyAllowsPeriod"
+import { useDailyAllowsPeriod } from "./dailyallows/useDailyAllowsPeriod";
 
 const FILTERSTRING = "Submitted";
 
@@ -40,11 +41,11 @@ const columns = [
   { title: "Status", field: "status" },
 ];
 
-export default function DailyAllowancesTable({month, year}) {
+export default function DailyAllowancesTable({ month, year }) {
   let history = useHistory();
   const classes = useStyles();
-  const period = `${year}-${month}`
- 
+  const period = `${year}-${month}`;
+
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [tmpallowsdata, setTmpallowsdata] = useState([]);
   const allows_period = useRecoilValue(allowsPeriodState);
@@ -81,10 +82,10 @@ export default function DailyAllowancesTable({month, year}) {
     setIsDialogOpen(false);
     //getSingleBatchDailyAllowance(dailyallowance_period);
   };
-  
+
   return (
     <div className={classes.root}>
-      <div style={{ maxWidth: "100%", paddingTop: "5px" }}>
+      <Box maxW="100%" pt="5px" overflow="scroll">
         <MaterialTable
           columns={columns}
           data={dailyallowsperiod}
@@ -93,6 +94,7 @@ export default function DailyAllowancesTable({month, year}) {
             filtering: false,
             search: false,
             toolbar: false,
+            paging: false,
             headerStyle: {
               backgroundColor: "rgba(75, 192, 192, 1)",
               color: "#FFF",
@@ -100,7 +102,7 @@ export default function DailyAllowancesTable({month, year}) {
             showTitle: false,
           }}
         />
-      </div>
+      </Box>
     </div>
   );
 }

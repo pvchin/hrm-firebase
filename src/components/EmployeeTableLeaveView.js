@@ -199,6 +199,7 @@ export default function EmployeeTableLeaveView({ year }) {
             filtering: true,
             search: true,
             toolbar: false,
+            paging: false,
             headerStyle: {
               backgroundColor: "rgba(75, 192, 192, 1)",
               color: "white",

@@ -20,7 +20,7 @@ export default function PaySummaryTable({ columns, data }) {
 
   return (
     <Table colorScheme="whiteAlpha" variant="simple" {...getTableProps()}>
-      <Thead position="sticky" top="1" bgColor="blue.200">
+      <Thead position="sticky" top="0" bgColor="blue.200">
         {headerGroups.map((headerGroup) => (
           <Tr {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map((column) => (

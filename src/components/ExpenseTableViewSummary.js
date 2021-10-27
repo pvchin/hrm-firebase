@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import MaterialTable from "material-table";
 import { TextField, MenuItem } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { Box } from "@chakra-ui/react";
 import AddIcon from "@material-ui/icons/Add";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -72,7 +73,7 @@ export default function ExpenseTableView({ year, month }) {
     <div className={classes.root}>
       {/* <h1>Expenses Claims Application</h1> */}
 
-      <div style={{ maxWidth: "100%", paddingTop: "5px" }}>
+      <Box maxW="100%" pt="5px" overflow="scroll">
         <MaterialTable
           columns={columns}
           data={expensesperiod}
@@ -81,6 +82,7 @@ export default function ExpenseTableView({ year, month }) {
             filtering: false,
             search: false,
             toolbar: false,
+            paging: false,
             headerStyle: {
               backgroundColor: "rgba(75, 192, 192, 1)",
               color: "white",
@@ -88,7 +90,7 @@ export default function ExpenseTableView({ year, month }) {
             showTitle: false,
           }}
         />
-      </div>
+      </Box>
     </div>
   );
 }

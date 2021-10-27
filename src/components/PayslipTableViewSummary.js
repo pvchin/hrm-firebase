@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import MaterialTable, { MTableToolbar } from "material-table";
 import { makeStyles } from "@material-ui/core/styles";
+import { Box} from "@chakra-ui/react"
 import { useHistory, Link } from "react-router-dom";
 import { useSetRecoilState, useRecoilValue } from "recoil";
 import {
@@ -57,7 +58,8 @@ export default function PayslipTableVIew({status}) {
   
   return (
     <div className={classes.root}>
-      <div style={{ maxWidth: "100%", paddingTop: "5px" }}>
+    
+        <Box maxW="100%" pt="5px" overflow="Scroll">
         <MaterialTable
           columns={columns}
           data={payrunstatus}
@@ -66,6 +68,7 @@ export default function PayslipTableVIew({status}) {
             filtering: false,
             search: false,
             toolbar: false,
+            paging: false,
             headerStyle: {
               backgroundColor: "rgba(75, 192, 192, 1)",
               color: "#FFF",
@@ -73,7 +76,7 @@ export default function PayslipTableVIew({status}) {
             showTitle: false,
           }}
         />
-      </div>
+      </Box>
     </div>
   );
 }

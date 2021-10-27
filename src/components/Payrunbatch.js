@@ -533,12 +533,12 @@ const Payrunbatch = () => {
             <GridItem rowSpan={1} colSpan={2}></GridItem>
             <GridItem rowSpan={1} colSpan={4}>
               <Box textAlign="center" alignItems="center">
-                <Heading pl="10" pt="2">
+                <Heading pl="10" pt={2}>
                   Payroll
                 </Heading>
               </Box>
             </GridItem>
-            <GridItem rowSpan={1} colSpan={4}>
+            <GridItem rowSpan={1} colSpan={4} pt={0}>
               <Box pt="2" pr={5} alignItems="right" align="right">
                 <Stack spacing={4} direction="row" align="center" pl={150}>
                   <Button

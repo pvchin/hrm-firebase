@@ -443,7 +443,7 @@ const HomeManager = () => {
           borderColor="blue.500"
           borderWidth="1px"
           borderRadius="lg"
-          overflow="scroll"
+          //overflow="scroll"
         >
           <Tabs>
             <TabList>
