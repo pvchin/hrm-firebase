@@ -14,7 +14,7 @@ async function getEmployees(empid) {
 
 export function useAllEmployees(empid) {
   const [filter, setFilter] = useState("all");
-  const [allempId, setAllEmpId] = useState("");
+  const [allempId, setAllEmpId] = useState("111");
 
   const selectFn = useCallback(
     (unfiltered) => filterByEmpId(unfiltered, filter),

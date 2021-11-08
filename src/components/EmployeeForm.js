@@ -118,7 +118,7 @@ const EmployeeForm = () => {
     empno,
     reporting_to,
     reporting_email,
-  } = single_employee[0];
+  } = single_employee[0] || initial_values;
 
   const calculateAge = (dob) => {
     var today = new Date();

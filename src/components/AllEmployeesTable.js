@@ -169,11 +169,11 @@ export default function AllEmployeesTable() {
     });
   };
 
-  if (employees_loading) {
-    return <div>Loading...</div>;
-  } else {
-    //console.log(employees);
-  }
+  // if (employees_loading) {
+  //   return <div>Loading...</div>;
+  // } else {
+  //   //console.log(employees);
+  // }
   return (
     <div className={classes.root}>
       {/* <div style={{ maxWidth: "100%", paddingTop: "5px" }}> */}
