@@ -85,7 +85,7 @@ export default function DashboardMain() {
           handleSelect={handleSelect}
           open={open}
           setLogin={setLogin}
-          title="HRMS Ver 1.0 - AppSmiths Sutera Sdn Bhd"
+          title="HRMS Ver 1.1 - AppSmiths Sutera Sdn Bhd"
         />
         <Flex>
           {select === "Staff" && (

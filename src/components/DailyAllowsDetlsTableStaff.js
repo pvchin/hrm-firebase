@@ -6,6 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { useIsFetching } from "react-query";
 import { TextField, Icon, Grid, Button } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
+import { useDisclosure } from "@chakra-ui/react";
 import { useRecoilValue, useRecoilState } from "recoil";
 import { useCustomToast } from "../helpers/useCustomToast";
 import {
@@ -23,6 +24,7 @@ import { useUpdateDailyAllowsDetls } from "./dailyallowsdetls/useUpdateDailyAllo
 import { useDeleteDailyAllowsDetls } from "./dailyallowsdetls/useDeleteDailyAllowsDetls";
 import { useDailyAllowsDetlsBatch } from "./dailyallowsdetls/useDailyAllowsDetlsBatch";
 import { useDailyAllows } from "./dailyallows/useDailyAllows";
+//import { useDailyAllowsDetls } from "./dailyallowsdetls/useDailyAllowsDetls";
 import { useUpdateDailyAllows } from "./dailyallows/useUpdateDailyAllows";
 import { AlertDialogBox } from "../helpers/AlertDialogBox";
 
@@ -133,6 +135,7 @@ export default function DailyAllowsDetlsTableStaff() {
   const [isExitAlertOpen, setIsExitAlertOpen] = useState(false);
   const [dailyallowsdata, setDailyAllowsData] = useState({});
   const totalsValues = Object.values(totals).join("");
+  const [isRowIndex, setIsRowIndex] = useState("");
 
   // const {
   //   //dailyallowances,
@@ -284,20 +287,20 @@ export default function DailyAllowsDetlsTableStaff() {
 
   const handleOnExitConfirm = () => {
     //save allows data details
-    const { id } = allowsdata;
-    updateDailyAllows({
-      id: id,
-      ...allowsdata,
-      no_of_days: totals.totaldays,
-      amount: totals.totalamount,
-      totaljobbonus: totals.totalbonus,
-      totalperdiem: totals.totaldiem,
-    });
+    // const { id } = allowsdata;
+    // updateDailyAllows({
+    //   id: id,
+    //   ...allowsdata,
+    //   no_of_days: totals.totaldays,
+    //   amount: totals.totalamount,
+    //   totaljobbonus: totals.totalbonus,
+    //   totalperdiem: totals.totaldiem,
+    // });
     history.push("/dailyallowances");
-    toast({
-      title: "Site Allowances table being submitted!",
-      status: "success",
-    });
+    // toast({
+    //   title: "Site Allowances table being submitted!",
+    //   status: "success",
+    // });
   };
 
   const handleSubmitAlertOpen = () => {
@@ -399,7 +402,7 @@ export default function DailyAllowsDetlsTableStaff() {
         .map((rec) => {
           return { ...rec };
         });
-      console.log("data", data);
+
       updateDailyAllows({
         id: data[0].id,
         no_of_days: totdays,
@@ -455,15 +458,18 @@ export default function DailyAllowsDetlsTableStaff() {
   //   });
   // };
 
-  // const delete_DailyAllowance = (data) => {
-  //   const { id } = data;
-  //   deleteDailyAllowsDetl(id);
-  //   //update_Daily Allowances Details;
-  //   getSingleBatchDailyAllowsDetl(
-  //     single_dailyallowance.empid,
-  //     dailyallowance_period
-  //   );
-  // };
+  const delete_AllowsDetl = (data, index) => {
+    const allowsdata = dailyallowsdetls;
+    const { id } = data;
+    deleteDailyAllowsDetls(id);
+    // toast({
+    //   title: "Site Allowances details record being deleted!",
+    //   status: "warning",
+    // });
+    //recalc
+    allowsdata.splice(index, 1);
+    handle_tempcalc(allowsdata);
+  };
 
   //  setAllowsDetlsdata(dailyallowsdetls);
 
@@ -501,17 +507,18 @@ export default function DailyAllowsDetlsTableStaff() {
                   resolve();
                 }, 1000);
               }),
-            // onRowDelete: (oldData) =>
-            //   new Promise((resolve, reject) => {
-            //     setTimeout(() => {
-            //       //const dataDelete = [...allowsDetlsTable];
-            //       const index = oldData.tableData.id;
-            //       //dataDelete.splice(index, 1);
-            //       //setAllowsDetlsTable([...dataDelete]);
+            onRowDelete: (oldData) =>
+              new Promise((resolve, reject) => {
+                setTimeout(() => {
+                  //const dataDelete = [...allowsDetlsTable];
+                  const index = oldData.tableData.id;
+                  delete_AllowsDetl(oldData, index);
+                  //dataDelete.splice(index, 1);
+                  //setAllowsDetlsTable([...dataDelete]);
 
-            //       resolve();
-            //     }, 1000);
-            //   }),
+                  resolve();
+                }, 1000);
+              }),
           }}
           options={{
             filtering: true,
@@ -573,7 +580,7 @@ export default function DailyAllowsDetlsTableStaff() {
                   >
                     Submit <Icon className={classes.rightIcon}>send</Icon>
                   </Button>
-                  {/* <Button
+                  <Button
                     type="submit"
                     variant="contained"
                     color="secondary"
@@ -581,7 +588,7 @@ export default function DailyAllowsDetlsTableStaff() {
                     onClick={(e) => exit_AllowsDetls(e)}
                   >
                     Exit
-                  </Button> */}
+                  </Button>
 
                   <div>
                     <Grid
@@ -714,6 +721,16 @@ export default function DailyAllowsDetlsTableStaff() {
           <h2>Are you sure you want to exit ?</h2>
         </AlertDialogBox>
       </div>
+      {/* <div>
+        <AlertDialogBox
+          onClose={onAlertDeleteClose}
+          onConfirm={handleOnAlertDeleteConfirm}
+          isOpen={isAlertDeleteOpen}
+          title="Site Allowances Batch"
+        >
+          <h2>Are you sure you want to delete {isRowIndex} ?</h2>
+        </AlertDialogBox>
+      </div> */}
     </div>
   );
 }

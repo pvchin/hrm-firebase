@@ -29,8 +29,9 @@ const columns = [
       maxWidth: 250,
     },
   },
-  { title: "IC No", field: "ic_no" },
-  { title: "Gender", field: "gender" },
+  // { title: "IC No", field: "ic_no" },
+  // { title: "Gender", field: "gender" },
+  { title: "Emp No", field: "empno" },
   { title: "Designation", field: "designation" },
   { title: "Department", field: "department" },
 
@@ -94,7 +95,7 @@ export default function EmployeeTableLeaveView({ year }) {
   const { expensesperiod, setExpPeriodYrId, setExpPeriodMthId } =
     useExpensesPeriod();
   const emp = employees.map((rec) => {
-    return { ...rec, leave_total: 0 , leave_taken: 0, leave_pending: 0 };
+    return { ...rec, leave_total: 0, leave_taken: 0, leave_pending: 0 };
   });
 
   const {
@@ -165,7 +166,7 @@ export default function EmployeeTableLeaveView({ year }) {
             : emp[index].leave_entitled;
           const leaveBf = isNaN(emp[index].leave_bf) ? 0 : emp[index].leave_bf;
           const leaveCd = isNaN(emp[index].leave_cd) ? 0 : emp[index].leave_cd;
-          emp[index].leave_total= leaveEntitled + leaveBf
+          emp[index].leave_total = leaveEntitled + leaveBf;
           emp[index].leave_taken = leaveTaken + leaveCd;
           emp[index].leave_pending = leavePending;
           emp[index].leave_bal = leaveEntitled + leaveBf - leaveCd - leaveTaken;

@@ -7,8 +7,10 @@ import axios from "axios";
 import { queryKeys } from "../react-query/constants";
 
 async function getDailyAllowsDetls(empid) {
+  // const { data } = await axios.get(
+  //   `${dailyallowsdetls_url}?fv=${dailyAllowsDetlsId}&pe=${dailyAllowsDetlsPeriod}`
+  // );
   const { data } = await axios.get(`${dailyallowsdetls_url}?em=${empid}`);
-  //const { data } = await axios.get(`${dailyallowsdetls_url}`);
   return data;
 }
 
@@ -23,7 +25,7 @@ export function useDailyAllowsDetls(empid) {
 
   const fallback = [];
   const { data: dailyallowsdetls = fallback } = useQuery(
-    //[queryKeys.leaves, { leaveId }],
+    //[queryKeys.leaves, dailyAllowsDetlsId, dailyAllowsDetlsPeriod],
     queryKeys.dailyallowsdetls,
     () => getDailyAllowsDetls(dailyAllowsDetlsId),
     {

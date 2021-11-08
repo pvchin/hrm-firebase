@@ -29,15 +29,15 @@ import { useAddDailyAllows } from "./dailyallows/useAddDailyAllows";
 import { useUpdateDailyAllows } from "./dailyallows/useUpdateDailyAllows";
 import { useDeleteDailyAllows } from "./dailyallows/useDeleteDailyAllows";
 import { useDeleteDailyAllowsDetls } from "./dailyallowsdetls/useDeleteDailyAllowsDetls";
-import { useDailyAllowsDetls } from "./dailyallowsdetls/useDailyAllowsDetls";
+import { useDailyAllowsDetlsBatch } from "./dailyallowsdetls/useDailyAllowsDetlsBatch";
 
 export default function DailyAllowancesTableStaff() {
   let history = useHistory();
   const classes = useStyles();
   const toast = useCustomToast();
   const { dailyallows, dailyAllowsId, setDailyAllowsId } = useDailyAllows();
-  const { dailyallowsdetls, setDailyAllowsDetlsId, setDailyAllowsDetlsFilter } =
-    useDailyAllowsDetls();
+  const { dailyallowsdetls, setDailyAllowsDetlsId, setDailyAllowsDetlsPeriod } =
+    useDailyAllowsDetlsBatch();
   const addDailyAllows = useAddDailyAllows();
   const updateDailyAllows = useUpdateDailyAllows();
   const deleteDailyAllows = useDeleteDailyAllows();
@@ -46,13 +46,13 @@ export default function DailyAllowancesTableStaff() {
   const [isAddPeriodDialogOpen, setIsAddPeriodDialogOpen] = useState(false);
   const [tmpallowsdata, setTmpallowsdata] = useState([]);
   const [allowsdata, setAllowsdata] = useRecoilState(allowsDataState);
-  const [isAlertOpen, setIsAlertOpen] = useState(false);
+  const [isDeleteAlertOpen, setIsDeleteAlertOpen] = useState(false);
   const [allowsDetlsdata, setAllowsDetlsdata] =
     useRecoilState(allowsDataDetlsState);
   const [allows_period, setAllows_period] = useRecoilState(allowsPeriodState);
   const [allows_empid, setAllows_empid] = useRecoilState(empidState);
   const [allowsdataId, setAllowsdataId] = useState(allowsDataIdState);
-  const [toLoad, settoLoad] = useState(true);
+  const [toLoadDetls, setToLoadDetls] = useState(false);
   const [error, setError] = useState("");
   const [deletestate, setDeletestate] = useState({
     id: "",
@@ -183,16 +183,18 @@ export default function DailyAllowancesTableStaff() {
 
   const delete_SiteAllows = (data) => {
     const { id, period, empid } = data;
-    setDeletestate({ id: id, period: period, empid: empid });
-    handleAlertOpen();
+    setDeletestate((prev) => (prev = { id: id, period: period, empid: empid }));
+    setDailyAllowsDetlsId(empid);
+    setDailyAllowsDetlsPeriod(period);
+    handleDeleteAlertOpen();
   };
 
-  const handleAlertOpen = () => {
-    setIsAlertOpen(true);
+  const handleDeleteAlertOpen = () => {
+    setIsDeleteAlertOpen(true);
   };
 
-  const handleAlertClose = () => {
-    setIsAlertOpen(false);
+  const handleDeleteAlertClose = () => {
+    setIsDeleteAlertOpen(false);
   };
 
   const handleOnDeleteConfirm = (data) => {
@@ -233,7 +235,7 @@ export default function DailyAllowancesTableStaff() {
   };
 
   const handleAllowsDetlDialogClose = () => {
-    settoLoad(true);
+    //settoLoad(true);
     setIsAllowsDetlDialogOpen(false);
   };
 
@@ -286,7 +288,8 @@ export default function DailyAllowancesTableStaff() {
               },
             }),
             (rowData) => ({
-              disabled: rowData.status === "Approved" || rowData.status === "Submitted",
+              disabled:
+                rowData.status === "Approved" || rowData.status === "Submitted",
               icon: "delete",
               tooltip: "Delete Record",
               onClick: (event, rowData) => {
@@ -351,9 +354,9 @@ export default function DailyAllowancesTableStaff() {
         </div>
         <div>
           <AlertDialogBox
-            onClose={handleAlertClose}
+            onClose={handleDeleteAlertClose}
             onConfirm={handleOnDeleteConfirm}
-            isOpen={isAlertOpen}
+            isOpen={isDeleteAlertOpen}
             title="Delete Site Allowances Batch"
           >
             <h2>Are you sure you want to delete ?</h2>

@@ -633,7 +633,6 @@ const EmployeeForm = () => {
                             checked={checktap}
                             type="checkbox"
                             onChange={(e) => {
-                              console.log("tap", !e.target.checked);
                               onChange(e.target.checked);
                               setCheckTap(e.target.checked);
                             }}
