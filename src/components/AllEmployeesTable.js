@@ -139,7 +139,7 @@ export default function AllEmployeesTable() {
   };
 
   const Reset_PW = () => {
-    employees.forEach((rec) => {
+    allemployees.forEach((rec) => {
       if (rec.tableData.checked) {
         try {
           if (rec.password) {
@@ -164,7 +164,7 @@ export default function AllEmployeesTable() {
         }
       }
     });
-    employees.forEach((d) => {
+    allemployees.forEach((d) => {
       if (d.tableData) d.tableData.checked = false;
     });
   };
