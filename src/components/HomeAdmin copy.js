@@ -38,7 +38,6 @@ import DailyAllowancesTableAdmin from "./DailyAllowancesTableAdmin";
 import TrainingsTableViewAdmin from "./TrainingsTableViewAdmin";
 import WPExpiryViewAdmin from "./WPExpiryViewAdmin";
 import EmployeeTableLeaveView from "./EmployeeTableLeaveView";
-import LeavesTableViewSummary from "./LeavesTableViewSummary";
 
 const drawerWidth = 240;
 
@@ -65,9 +64,7 @@ const EmployeeView = () => {
   const { payslips, loadPendingPayslips } = usePayslipsContext();
   const { dailyallowances, loadPendingDailyAllowances } =
     useDailyAllowancesContext();
-const currentyear = new Date().getFullYear();
-  const currentmonth = new Date().getMonth();
-  
+
   const handleLeaveDialogOpen = () => {
     setLeavesdata([]);
     setLeavesdata([...leaves]);
@@ -146,173 +143,29 @@ const currentyear = new Date().getFullYear();
             borderRadius="lg"
             overflow="scroll"
           >
-            <Tabs>
-              <TabList>
-                <Tab>Employees</Tab>
-                <Tab>Leaves</Tab>
-              </TabList>
-              <TabPanels>
-                <TabPanel>
-                  <Box
-                    maxW="full"
-                    padding="4"
-                    width="100%"
-                    height="700"
-                    borderColor="blue.500"
-                    borderWidth="1px"
-                    borderRadius="lg"
-                    overflow="scroll"
-                  >
-                    <SimpleGrid>
-                      <Box>
-                        <Heading as="h2" size="lg">
-                          Employees
-                        </Heading>
-                      </Box>
-                      <Divider />
-                      <Box>
-                        <Tabs isLazy>
-                          <TabList>
-                            <Tab>Details</Tab>
-                          </TabList>
-                          <TabPanels>
-                            <TabPanel>
-                              <EmployeeTableLeaveView />
-                            </TabPanel>
-                          </TabPanels>
-                        </Tabs>
-                      </Box>
-                      <Divider />
-                    </SimpleGrid>
-                  </Box>
-                </TabPanel>
-                <TabPanel>
-                  <Box
-                    maxW="100%"
-                    padding="4"
-                    width="full"
-                    height="700"
-                    borderColor="blue.500"
-                    borderWidth="1px"
-                    borderRadius="lg"
-                    overflow="scroll"
-                  >
-                    <SimpleGrid w="168vh">
-                      <Box>
-                        <Heading as="h2" size="lg">
-                          Leaves
-                        </Heading>
-                      </Box>
-                      <Divider />
-                      <Box>
-                        <Tabs defaultIndex={currentmonth} isLazy>
-                          <TabList>
-                            {/* <Tab>Chart</Tab>
-                          <Tab>Summary</Tab> */}
-                            <Tab>January</Tab>
-                            <Tab>February</Tab>
-                            <Tab>March</Tab>
-                            <Tab>April</Tab>
-                            <Tab>May</Tab>
-                            <Tab>June</Tab>
-                            <Tab>July</Tab>
-                            <Tab>August</Tab>
-                            <Tab>September</Tab>
-                            <Tab>October</Tab>
-                            <Tab>November</Tab>
-                            <Tab>December</Tab>
-                          </TabList>
-                          <TabPanels>
-                            {/* <TabPanel>
-                  <BarChart
-                    heading="Expenses for the Month"
-                    barchartdata={expchartdata}
-                  />
-                </TabPanel>
-                <TabPanel>
-                  <SummaryTableView columns={columns} data={data} />
-                </TabPanel> */}
-                            <TabPanel>
-                              <LeavesTableViewSummary
-                                year={currentyear}
-                                month={1}
-                              />
-                            </TabPanel>
-                            <TabPanel>
-                              <LeavesTableViewSummary
-                                year={currentyear}
-                                month={2}
-                              />
-                            </TabPanel>
-                            <TabPanel>
-                              <LeavesTableViewSummary
-                                year={currentyear}
-                                month={3}
-                              />
-                            </TabPanel>
-                            <TabPanel>
-                              <LeavesTableViewSummary
-                                year={currentyear}
-                                month={4}
-                              />
-                            </TabPanel>
-                            <TabPanel>
-                              <LeavesTableViewSummary
-                                year={currentyear}
-                                month={5}
-                              />
-                            </TabPanel>
-                            <TabPanel>
-                              <LeavesTableViewSummary
-                                year={currentyear}
-                                month={6}
-                              />
-                            </TabPanel>
-                            <TabPanel>
-                              <LeavesTableViewSummary
-                                year={currentyear}
-                                month={7}
-                              />
-                            </TabPanel>
-                            <TabPanel>
-                              <LeavesTableViewSummary
-                                year={currentyear}
-                                month={8}
-                              />
-                            </TabPanel>
-                            <TabPanel>
-                              <LeavesTableViewSummary
-                                year={currentyear}
-                                month={9}
-                              />
-                            </TabPanel>
-                            <TabPanel>
-                              <LeavesTableViewSummary
-                                year={currentyear}
-                                month={10}
-                              />
-                            </TabPanel>
-                            <TabPanel>
-                              <LeavesTableViewSummary
-                                year={currentyear}
-                                month={11}
-                              />
-                            </TabPanel>
-                            <TabPanel>
-                              <LeavesTableViewSummary
-                                year={currentyear}
-                                month={12}
-                              />
-                            </TabPanel>
-                          </TabPanels>
-                        </Tabs>
-                      </Box>
-                      <Divider />
-                    </SimpleGrid>
-                  </Box>
-                </TabPanel>
-              </TabPanels>
-            </Tabs>
+            <SimpleGrid>
+              <Box>
+                <Heading as="h2" size="lg">
+                  Employees
+                </Heading>
+              </Box>
+              <Divider />
+              <Box>
+                <Tabs isLazy>
+                  <TabList>
+                    {/* <Tab>Chart</Tab>
+                <Tab>Summary</Tab> */}
+                    <Tab>Details</Tab>
+                  </TabList>
+                  <TabPanels>
+                    <TabPanel>
+                      <EmployeeTableLeaveView />
+                    </TabPanel>
+                  </TabPanels>
+                </Tabs>
+              </Box>
+              <Divider />
+            </SimpleGrid>
           </Box>
         </Stack>
 
