@@ -28,7 +28,7 @@ import { useEmployees } from "./employees/useEmployees";
 const SERVICE_ID = process.env.REACT_APP_EMAILJS_SERVICEID;
 const TEMPLATE_ID = "template_1y8odlq";
 const USER_ID = process.env.REACT_APP_EMAILJS_USERID;
-//const ADMINMANAGER_EMAIL = process.env.REACT_APP_ADMINMANAGER_EMAIL;
+const ADMINMANAGER_EMAIL = process.env.REACT_APP_ADMINMANAGER_EMAIL;
 
 const initial_form = {
   name: "",
@@ -190,7 +190,7 @@ export default function LeaveTableApproval() {
       to_name: name,
       to_email: emp[0].email,
       message: `Your leave application from ${from_date} to ${to_date} has been ${result}!`,
-      //cc_to: ADMINMANAGER_EMAIL,
+      cc_to: ADMINMANAGER_EMAIL,
     };
 
     emailjs.send(SERVICE_ID, TEMPLATE_ID, emaildata, USER_ID).then(
