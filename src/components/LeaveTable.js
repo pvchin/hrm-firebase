@@ -8,7 +8,10 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import CheckIcon from "@material-ui/icons/Check";
 import SearchIcon from "@material-ui/icons/Search";
 import LeaveFormAdmin from "./LeaveFormAdmin";
+import { useRecoilState } from "recoil";
+import { loginLevelState } from "./data/atomdata";
 import { CustomDialog } from "../helpers/CustomDialog";
+import { useCustomToast } from "../helpers/useCustomToast";
 import { AlertDialog } from "../helpers/AlertDialogBox";
 import { useLeavesContext } from "../context/leaves_context";
 import { useEmployeesContext } from "../context/employees_context";
@@ -25,6 +28,7 @@ const initial_form = {
   status: "Pending",
   no_of_days: 0,
   leave_bal: 0,
+  reporting_email: "",
 };
 
 const columns = [
@@ -86,11 +90,13 @@ const columns = [
 
 export default function LeaveTable() {
   const classes = useStyles();
+  const toast = useCustomToast()
   const { leaves, filter, setFilter, setLeaveId } = useLeaves();
   const updateLeaves = useUpdateLeaves();
   const addLeaves = useAddLeaves();
   const deleteLeaves = useDeleteLeaves();
   const [formdata, setFormdata] = useState(initial_form);
+  const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   const { loadEmployees } = useEmployeesContext();
@@ -123,7 +129,8 @@ export default function LeaveTable() {
 
   const add_Leave = async (data) => {
     // const { id } = data;
-    setFormdata({ ...data });
+    const newdata = { ...data, reporting_email: loginLevel.reporting_email };
+    setFormdata({ ...newdata });
     resetSingleLeave();
     setEditLeaveID("");
     setIsLeaveEditingOff();

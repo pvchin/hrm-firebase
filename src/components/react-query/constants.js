@@ -11,6 +11,7 @@ export const queryKeys = {
   educations: "educations",
   leaves: "leaves",
   leavesperiod: "leavesperiod",
+  leavesstatus: "leavesstatus",
   expenses: "expenses",
   expensespayrun: "expensespayrun",
   expensesstatus: "expensesstatus",

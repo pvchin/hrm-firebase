@@ -32,9 +32,15 @@ const initial_state = {
   status: "Pending",
   no_of_days: 0,
   leave_bal: 0,
+  reporting_email: "",
 };
 
-const LeaveForm = ({ formdata, leavestate, setFormdata, handleDialogClose }) => {
+const LeaveForm = ({
+  formdata,
+  leavestate,
+  setFormdata,
+  handleDialogClose,
+}) => {
   const classes = useStyles();
   const toast = useCustomToast();
   const { employees } = useEmployees();
@@ -46,7 +52,6 @@ const LeaveForm = ({ formdata, leavestate, setFormdata, handleDialogClose }) => 
   const { handleSubmit, control } = useForm();
   const initialValues = Object.values(initial_state).join("");
   const { isLeaveEditing, editLeaveID } = useLeavesContext();
-  
 
   const handleSentEmail = (data) => {
     const { from_date, to_date } = data;
@@ -80,8 +85,16 @@ const LeaveForm = ({ formdata, leavestate, setFormdata, handleDialogClose }) => 
     console.log("leave", data);
     if (isLeaveEditing) {
       updateLeaves({ id: editLeaveID, ...data });
+      toast({
+        title: "Your leave has been updated!",
+        status: "success",
+      });
     } else {
-      addLeaves({ ...data, empid: loginLevel.loginUserId });
+      addLeaves({
+        ...data,
+        empid: loginLevel.loginUserId,
+        reporting_email: loginLevel.reporting_email,
+      });
       handleSentEmail(data);
     }
 

@@ -33,6 +33,7 @@ import DailyAllowanceTableViewSummary from "./DailyAllowancesTableViewSummary";
 import PayslipTableViewSummary from "./PayslipTableViewSummary";
 import PayslipSummaryTableView from "./PayslipSummaryTableView";
 import { useExpensesPeriod } from "./expenses/useExpensesPeriod";
+import LeavesTableApproval from "./LeaveTableApproval";
 
 const drawerWidth = 240;
 
@@ -439,6 +440,7 @@ const HomeAdminManager = () => {
             <Tab>Expenses</Tab>
             <Tab>Site Allowances</Tab>
             <Tab>Payroll</Tab>
+            <Tab>Leaves Approval</Tab>
           </TabList>
 
           <TabPanels>
@@ -462,9 +464,9 @@ const HomeAdminManager = () => {
                   <Divider />
                   <Box>
                     <Tabs isLazy>
-                      <TabList>
+                      {/* <TabList>
                         <Tab>Details</Tab>
-                      </TabList>
+                      </TabList> */}
                       <TabPanels>
                         <TabPanel>
                           <EmployeeTableLeaveView />
@@ -906,6 +908,20 @@ const HomeAdminManager = () => {
                   </Box>
                   <Divider />
                 </SimpleGrid>
+              </Box>
+            </TabPanel>
+            <TabPanel>
+              <Box
+                maxW="full"
+                padding="4"
+                width="100%"
+                height="700"
+                borderColor="blue.500"
+                borderWidth="1px"
+                borderRadius="lg"
+                overflow="scroll"
+              >
+                <LeavesTableApproval />
               </Box>
             </TabPanel>
           </TabPanels>

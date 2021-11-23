@@ -29,7 +29,13 @@ const columns = [
   {
     title: "Role",
     field: "role",
-    lookup: { 1: "Staff", 2: "Admin", 3: "AdminManager", 4: "Manager" },
+    lookup: {
+      1: "Staff",
+      2: "Admin",
+      3: "Ops Supervisor",
+      4: "AdminManager",
+      5: "Manager",
+    },
   },
 ];
 
@@ -48,43 +54,43 @@ export default function UserAccessTable() {
   return (
     <div className={fixedHeightPaper}>
       {/* <div className={classes.root}> */}
-        <Box w="100%" mt="65">
-          <MaterialTable
-            columns={columns}
-            data={employees}
-            title="User Access Table"
-            editable={{
-              onRowUpdate: (newData, oldData) =>
-                new Promise((resolve, reject) => {
-                  setTimeout(() => {
-                    const dataUpdate = [...employees];
-                    const index = oldData.tableData.id;
-                    dataUpdate[index] = newData;
-                    update_rec(newData);
+      <Box w="100%" mt="65">
+        <MaterialTable
+          columns={columns}
+          data={employees}
+          title="User Access Table"
+          editable={{
+            onRowUpdate: (newData, oldData) =>
+              new Promise((resolve, reject) => {
+                setTimeout(() => {
+                  const dataUpdate = [...employees];
+                  const index = oldData.tableData.id;
+                  dataUpdate[index] = newData;
+                  update_rec(newData);
 
-                    resolve();
-                  }, 1000);
-                }),
-            }}
-            options={{
-              filtering: true,
-              pageSize: 10,
-              headerStyle: {
-                backgroundColor: "#90CDF4",
-                color: "primary",
-              },
-              showTitle: true,
-            }}
-            components={{
-              Toolbar: (props) => (
-                <div>
-                  <MTableToolbar {...props} />
-                  <div style={{ padding: "5px 10px" }}></div>
-                </div>
-              ),
-            }}
-          />
-        </Box>
+                  resolve();
+                }, 1000);
+              }),
+          }}
+          options={{
+            filtering: true,
+            pageSize: 10,
+            headerStyle: {
+              backgroundColor: "#90CDF4",
+              color: "primary",
+            },
+            showTitle: true,
+          }}
+          components={{
+            Toolbar: (props) => (
+              <div>
+                <MTableToolbar {...props} />
+                <div style={{ padding: "5px 10px" }}></div>
+              </div>
+            ),
+          }}
+        />
+      </Box>
       {/* </div> */}
     </div>
   );

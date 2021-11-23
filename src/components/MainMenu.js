@@ -6,6 +6,7 @@ import LoginForm from "./LoginForm";
 import DashboardMain from "./DashboardMain";
 import DashboardStaff from "./DashboardStaff";
 import DashboardAdmin from "./DashboardAdmin";
+import DashboardOpsSpvr from "./DashboardOpsSpvr";
 import DashboardAdminManager from "./DashboardAdminManager";
 import DashboardManager from "./DashboardManager";
 import { loginLevelState } from "./data/atomdata";
@@ -24,6 +25,8 @@ const Main = () => {
         return <DashboardStaff />;
       case "Admin":
         return <DashboardAdmin />;
+      case "OpsSpvr":
+        return <DashboardOpsSpvr />;
       case "AdminManager":
         return <DashboardAdminManager />;
       case "Manager":

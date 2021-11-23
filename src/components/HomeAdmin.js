@@ -65,9 +65,9 @@ const EmployeeView = () => {
   const { payslips, loadPendingPayslips } = usePayslipsContext();
   const { dailyallowances, loadPendingDailyAllowances } =
     useDailyAllowancesContext();
-const currentyear = new Date().getFullYear();
+  const currentyear = new Date().getFullYear();
   const currentmonth = new Date().getMonth();
-  
+
   const handleLeaveDialogOpen = () => {
     setLeavesdata([]);
     setLeavesdata([...leaves]);
@@ -172,9 +172,9 @@ const currentyear = new Date().getFullYear();
                       <Divider />
                       <Box>
                         <Tabs isLazy>
-                          <TabList>
+                          {/* <TabList>
                             <Tab>Details</Tab>
-                          </TabList>
+                          </TabList> */}
                           <TabPanels>
                             <TabPanel>
                               <EmployeeTableLeaveView />

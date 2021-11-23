@@ -18,10 +18,10 @@ export function useUpdateLeaves(data) {
   const { mutate } = useMutation((data) => updateLeaves(data), {
     onSuccess: () => {
       queryClient.invalidateQueries("leaves");
-      toast({
-        title: "Leave record being updated!",
-        status: "success",
-      });
+      // toast({
+      //   title: "Leave record being updated!",
+      //   status: "success",
+      // });
     },
   });
 

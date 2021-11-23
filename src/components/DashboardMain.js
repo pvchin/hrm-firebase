@@ -25,6 +25,7 @@ import Payrun from "./Payrun";
 import Payrunbatch from "./Payrunbatch";
 import DashboardStaff from "./DashboardStaff";
 import DashboardAdmin from "./DashboardAdmin";
+import DashboardOpsSpvr from "./DashboardOpsSpvr";
 import DashboardAdminManager from "./DashboardAdminManager";
 import DashboardManager from "./DashboardManager";
 
@@ -85,7 +86,7 @@ export default function DashboardMain() {
           handleSelect={handleSelect}
           open={open}
           setLogin={setLogin}
-          title="HRMS Ver 1.1 - AppSmiths Sutera Sdn Bhd"
+          title="HRMS V1.2 - AppSmiths Sutera Sdn Bhd"
         />
         <Flex>
           {select === "Staff" && (
@@ -97,6 +98,13 @@ export default function DashboardMain() {
           )}
           {select === "Admin" && (
             <DashboardAdmin
+              open={open}
+              handleDrawerOpen={handleDrawerOpen}
+              handleDrawerClose={handleDrawerClose}
+            />
+          )}
+          {select === "OpsSpvr" && (
+            <DashboardOpsSpvr
               open={open}
               handleDrawerOpen={handleDrawerOpen}
               handleDrawerClose={handleDrawerClose}

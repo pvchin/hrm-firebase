@@ -11,6 +11,7 @@ import { loginLevelState } from "../components/data/atomdata";
 import CardLayout3 from "../helpers/CardLayout3";
 import Copyright from "../components/Copyright";
 import HomeAdmin from "../components/HomeAdmin";
+import HomeOpsSpvr from "../components/HomeOpsSpvr";
 import HomeStaff from "../components/HomeStaff";
 import HomeAdminManager from "../components/HomeAdminManager";
 import HomeManager from "../components/HomeManager";
@@ -28,6 +29,8 @@ const SwitchCase = () => {
       return <HomeStaff />;
     case "Admin":
       return <HomeAdmin />;
+    case "OpsSpvr":
+      return <HomeOpsSpvr />;
     case "AdminManager":
       return <HomeAdminManager />;
     case "Manager":

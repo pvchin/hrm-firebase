@@ -475,9 +475,9 @@ const HomeManager = () => {
                   <Divider />
                   <Box>
                     <Tabs isLazy>
-                      <TabList>
+                      {/* <TabList>
                         <Tab>Details</Tab>
-                      </TabList>
+                      </TabList> */}
                       <TabPanels>
                         <TabPanel>
                           <EmployeeTableLeaveView />

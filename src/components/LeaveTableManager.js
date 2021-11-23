@@ -21,6 +21,7 @@ import { useEmployees } from "./employees/useEmployees";
 const SERVICE_ID = process.env.REACT_APP_EMAILJS_SERVICEID;
 const TEMPLATE_ID = "template_1y8odlq";
 const USER_ID = process.env.REACT_APP_EMAILJS_USERID;
+//const ADMINMANAGER_EMAIL = process.env.ADMINMANAGER_EMAIL;
 
 const columns = [
   {
@@ -150,13 +151,13 @@ export default function LeaveTable({
       .map((r) => {
         return { ...r };
       });
-    console.log("leave form", data, emp);
+    //console.log("leave form", data, emp);
 
     var emaildata = {
       to_name: name,
       to_email: emp[0].email,
       message: `Your leave application from ${from_date} to ${to_date} has been ${result}!`,
-      // cc_to: loginLevel.reporting_email,
+      //cc_to: ADMINMANAGER_EMAIL,
     };
 
     emailjs.send(SERVICE_ID, TEMPLATE_ID, emaildata, USER_ID).then(

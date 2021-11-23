@@ -104,7 +104,7 @@ const SigninForm = () => {
         loginUserId: "admin",
         loginLevel: "Staff",
         loginEmail: "admin@abc.com",
-        loginRole: 4,
+        loginRole: 5,
         login: true,
         leave_bal: 0,
         leave_entitled: 0,

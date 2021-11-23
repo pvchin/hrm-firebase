@@ -89,6 +89,18 @@ const Appbanner = ({
           {loginLevel.loginRole > 2 && (
             <Button
               colorScheme="white"
+              aria-label="Ops Supervisor"
+              onClick={() => {
+                history.push("/");
+                handleSelect("OpsSpvr");
+              }}
+            >
+              <Heading size="sm">Ops Supervisor</Heading>
+            </Button>
+          )}
+          {loginLevel.loginRole > 3 && (
+            <Button
+              colorScheme="white"
               aria-label="Admin Manager"
               onClick={() => {
                 history.push("/");
@@ -98,7 +110,7 @@ const Appbanner = ({
               <Heading size="sm">Admin Manager</Heading>
             </Button>
           )}
-          {loginLevel.loginRole > 3 && (
+          {loginLevel.loginRole > 4 && (
             <Button
               colorScheme="white"
               aria-label="Manager"
@@ -114,7 +126,7 @@ const Appbanner = ({
         <div>
           <Text fontSize="18">
             {loginLevel.loginUser && (
-              <Heading size="sm">Welcome {loginLevel.loginEmail}!</Heading>
+              <Heading size="sm">{loginLevel.loginEmail}!</Heading>
             )}
           </Text>
         </div>

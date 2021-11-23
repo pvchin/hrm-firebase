@@ -26,7 +26,7 @@ import { useDailyAllowancesContext } from "../context/dailyallowances_context";
 import DailyAllowsDetlsTable from "./DailyAllowsDetlsTable";
 import { useDailyAllowsStatus } from "./dailyallows/useDailyAllowsStatus";
 
-const FILTERSTRING = "Submitted";
+const FILTERSTRING = "Verified";
 
 const columns = [
   {

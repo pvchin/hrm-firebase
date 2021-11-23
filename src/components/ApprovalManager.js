@@ -13,7 +13,7 @@ import { useLeavesContext } from "../context/leaves_context";
 import { useExpensesContext } from "../context/expenses_context";
 import { usePayslipsContext } from "../context/payslips_context";
 import { useDailyAllowancesContext } from "../context/dailyallowances_context";
-import LeaveTableView from "./LeaveTableView";
+import LeaveTableViewManager from "./LeaveTableViewManager";
 import LeaveTableManager from "./LeaveTableManager";
 import ExpenseTableView from "./ExpenseTableView";
 import ExpenseTableManager from "./ExpenseTableManager";
@@ -94,7 +94,7 @@ const EmployeeView = () => {
   };
 
   useEffect(() => {
-    setDailyAllowsStatusId("Submitted");
+    setDailyAllowsStatusId("Verified");
   },[])
 
   return (
@@ -111,7 +111,7 @@ const EmployeeView = () => {
               title="Leaves pending for approval"
               handleClick={handleLeaveDialogOpen}
             >
-              <LeaveTableView />
+              <LeaveTableViewManager />
             </CardLayout3>
           </Grid>
           <Grid item xs={12} md={8} lg={12}>

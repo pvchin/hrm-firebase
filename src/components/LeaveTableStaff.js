@@ -218,6 +218,7 @@ export default function LeaveTableStaff() {
 
   const delete_Leave = (data) => {
     const { id } = data;
+    console.log("delete leave", id)
     setEditLeaveID(id);
     setIsAlertOpen(true);
     //handleAlertOpen();
@@ -411,7 +412,7 @@ export default function LeaveTableStaff() {
           />
         </CustomDialog>
 
-        <CustomAlertDialog
+        {/* <CustomAlertDialog
           isOpen={isAlertOpen}
           cancelRef={cancelRef}
           onClose={handleAlertClose}
@@ -419,7 +420,15 @@ export default function LeaveTableStaff() {
           title="DELETE"
         >
           <Heading size="sm">Are you sure you want to delete ?</Heading>
-        </CustomAlertDialog>
+        </CustomAlertDialog> */}
+        <AlertDialogBox
+          onClose={handleAlertClose}
+          onConfirm={handleOnDeleteConfirm}
+          isOpen={isAlertOpen}
+          title="Delete Leave"
+        >
+          <h2>Are you sure you want to delete ?</h2>
+        </AlertDialogBox>
         {/* <AlertBox
           isOpen={isOpen}
           leastDestructiveRef={cancelRef}

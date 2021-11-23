@@ -21,6 +21,7 @@ import MenuListItems from "./MenuListItems";
 import { loginLevelState } from "./data/atomdata";
 import MenuListItemsStaff from "./MenuListItemsStaff";
 import MenuListItemsAdmin from "./MenuListItemsAdmin";
+import MenuListItemsOpsSpvr from "./MenuListItemsOpsSpvr";
 import MenuListItemsAdminManager from "./MenuListItemsAdminManager";
 import MenuListItemsManager from "./MenuListItemsManager";
 import headerlogo from "../assets/headerlogo.png";
@@ -38,10 +39,12 @@ const SideDrawer = ({ HandleDrawerOpen, handleDrawerClose, open }) => {
         return <MenuListItemsStaff />;
       case "Admin":
         return <MenuListItemsAdmin />;
+      case "OpsSpvr":
+        return <MenuListItemsOpsSpvr />;
       case "AdminManager":
         return <MenuListItemsAdminManager />;
       case "Manager":
-       return <MenuListItemsManager />;
+        return <MenuListItemsManager />;
       default:
         return "You are not authorised user!";
     }

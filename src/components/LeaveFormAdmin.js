@@ -14,6 +14,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import { useEmployeesContext } from "../context/employees_context";
 import { useLeavesContext } from "../context/leaves_context";
 import { Controller, useForm } from "react-hook-form";
+import { useCustomToast } from "../helpers/useCustomToast";
 import { useLeaves } from "./leaves/useLeaves";
 import { useAddLeaves } from "./leaves/useAddLeaves";
 import { useDeleteLeaves } from "./leaves/useDeleteLeaves";
@@ -31,6 +32,7 @@ const initial_state = {
 
 const LeaveForm = ({ formdata, setFormdata, handleDialogClose }) => {
   const classes = useStyles();
+  const toast = useCustomToast()
   const { leaves, filter, setFilter, setLeaveId } = useLeaves();
   const updateLeaves = useUpdateLeaves();
   const addLeaves = useAddLeaves();
@@ -40,13 +42,21 @@ const LeaveForm = ({ formdata, setFormdata, handleDialogClose }) => {
   const initialValues = Object.values(initial_state).join("");
   const { isLeaveEditing, editLeaveID } = useLeavesContext();
 
-  console.log("leave", isLeaveEditing, formdata);
+  //console.log("leave", isLeaveEditing, formdata);
   const onSubmit = (data) => {
     console.log("leave", data);
     if (isLeaveEditing) {
       updateLeaves({ id: editLeaveID, ...data });
+       toast({
+         title: "Leave record being rejected!",
+         status: "success",
+       });
     } else {
-      addLeaves({ ...data, empid: loginLevel.loginUserId });
+      addLeaves({
+        ...data,
+        empid: loginLevel.loginUserId,
+        reporting_email: loginLevel.reporting_email,
+      });
     }
 
     //history.push("/leave");
