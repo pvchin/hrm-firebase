@@ -252,7 +252,9 @@ export default function LeaveTable({
       <div style={{ maxWidth: "100%", paddingTop: "5px" }}>
         <MaterialTable
           columns={columns}
-          data={leavesdata}
+          data={leavesdata.filter(
+            (r) => r.reporting_email === loginLevel.loginEmail
+          )}
           title="Leave Application"
           icons={{
             Add: (props) => <AddIcon />,

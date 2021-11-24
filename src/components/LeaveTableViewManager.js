@@ -121,6 +121,7 @@ export default function LeaveTableView() {
       </div>
     )
   }
+  console.log("approval", leaves)
   return (
     <div className={classes.root}>
       {/* <h1>Expenses Claims Application</h1> */}
@@ -128,7 +129,7 @@ export default function LeaveTableView() {
       <div style={{ maxWidth: "100%", paddingTop: "5px" }}>
         <MaterialTable
           columns={columns}
-          data={leaves.filter((r)=>r.reporting_email === loginLevel.reporting_email)}
+          data={leaves.filter((r)=>r.reporting_email === loginLevel.loginEmail)}
           title="Leave Application"
           options={{
             filtering: false,
