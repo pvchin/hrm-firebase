@@ -33,6 +33,7 @@ import LeaveTableAdmin from "./LeaveTableManager";
 import ExpenseTableAdmin from "./ExpenseTableAdmin";
 //import PayslipTableView from "./PayslipTableView";
 import PayslipTableAdmin from "./PayslipTableAdmin";
+import HocTableViewSummary from "./HocTableViewSummary";
 //import DailyAllowancesTableView from "./DailyAllowancesTableView";
 import DailyAllowancesTableAdmin from "./DailyAllowancesTableAdmin";
 import TrainingsTableViewAdmin from "./TrainingsTableViewAdmin";
@@ -150,6 +151,7 @@ const EmployeeView = () => {
               <TabList>
                 <Tab>Employees</Tab>
                 <Tab>Leaves</Tab>
+                <Tab>HOC History</Tab>
               </TabList>
               <TabPanels>
                 <TabPanel>
@@ -300,6 +302,131 @@ const EmployeeView = () => {
                             </TabPanel>
                             <TabPanel>
                               <LeavesTableViewSummary
+                                year={currentyear}
+                                month={12}
+                              />
+                            </TabPanel>
+                          </TabPanels>
+                        </Tabs>
+                      </Box>
+                      <Divider />
+                    </SimpleGrid>
+                  </Box>
+                </TabPanel>
+                <TabPanel>
+                  <Box
+                    maxW="100%"
+                    padding="4"
+                    width="full"
+                    height="700"
+                    borderColor="blue.500"
+                    borderWidth="1px"
+                    borderRadius="lg"
+                    overflow="scroll"
+                  >
+                    <SimpleGrid w="168vh">
+                      <Box>
+                        <Heading as="h2" size="lg">
+                          HOC History
+                        </Heading>
+                      </Box>
+                      <Divider />
+                      <Box>
+                        <Tabs defaultIndex={currentmonth} isLazy>
+                          <TabList>
+                            {/* <Tab>Chart</Tab>
+                          <Tab>Summary</Tab> */}
+                            <Tab>January</Tab>
+                            <Tab>February</Tab>
+                            <Tab>March</Tab>
+                            <Tab>April</Tab>
+                            <Tab>May</Tab>
+                            <Tab>June</Tab>
+                            <Tab>July</Tab>
+                            <Tab>August</Tab>
+                            <Tab>September</Tab>
+                            <Tab>October</Tab>
+                            <Tab>November</Tab>
+                            <Tab>December</Tab>
+                          </TabList>
+                          <TabPanels>
+                            {/* <TabPanel>
+                  <BarChart
+                    heading="Expenses for the Month"
+                    barchartdata={expchartdata}
+                  />
+                </TabPanel>
+                <TabPanel>
+                  <SummaryTableView columns={columns} data={data} />
+                </TabPanel> */}
+                            <TabPanel>
+                              <HocTableViewSummary
+                                year={currentyear}
+                                month={1}
+                              />
+                            </TabPanel>
+                            <TabPanel>
+                              <HocTableViewSummary
+                                year={currentyear}
+                                month={2}
+                              />
+                            </TabPanel>
+                            <TabPanel>
+                              <HocTableViewSummary
+                                year={currentyear}
+                                month={3}
+                              />
+                            </TabPanel>
+                            <TabPanel>
+                              <HocTableViewSummary
+                                year={currentyear}
+                                month={4}
+                              />
+                            </TabPanel>
+                            <TabPanel>
+                              <HocTableViewSummary
+                                year={currentyear}
+                                month={5}
+                              />
+                            </TabPanel>
+                            <TabPanel>
+                              <HocTableViewSummary
+                                year={currentyear}
+                                month={6}
+                              />
+                            </TabPanel>
+                            <TabPanel>
+                              <HocTableViewSummary
+                                year={currentyear}
+                                month={7}
+                              />
+                            </TabPanel>
+                            <TabPanel>
+                              <HocTableViewSummary
+                                year={currentyear}
+                                month={8}
+                              />
+                            </TabPanel>
+                            <TabPanel>
+                              <HocTableViewSummary
+                                year={currentyear}
+                                month={9}
+                              />
+                            </TabPanel>
+                            <TabPanel>
+                              <HocTableViewSummary
+                                year={currentyear}
+                                month={10}
+                              />
+                            </TabPanel>
+                            <TabPanel>
+                              <HocTableViewSummary
+                                year={currentyear}
+                                month={11}
+                              />
+                            </TabPanel>
+                            <TabPanel>
+                              <HocTableViewSummary
                                 year={currentyear}
                                 month={12}
                               />

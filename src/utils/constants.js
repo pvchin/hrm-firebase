@@ -25,6 +25,14 @@ export const family_url = "/api/family";
 export const educations_url = "/api/educations";
 export const experiences_url = "/api/experiences";
 export const trainings_url = "/api/trainings";
+export const hoc_url = "/api/hoc";
+export const hocwhat_url = "/api/hocwhat";
+export const hocwhatdetails_url = "/api/hocwhatdetails";
+export const hocwhy_url = "/api/hocwhy";
+export const hocwhydetails_url = "/api/hocwhydetails";
+export const hoclookup_url = "/api/hoclookup";
+export const hoclocation_url = "/api/hoclocation";
+export const hoccategory_url = "/api/hoccategory";
 export const payroll_endmonth_day = "25";
 
 export const headEmployeesTableCells = [
@@ -221,7 +229,7 @@ export const links = [
   },
 ];
 
-export const events=  [
+export const events = [
   {
     id: 0,
     title: "All Day Event very long title",

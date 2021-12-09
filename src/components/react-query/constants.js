@@ -30,4 +30,12 @@ export const queryKeys = {
   dailyallowsdetls: "dailyallowsdetls",
   user: "user",
   currency: "currency",
+  hoc: "hoc",
+  hoclookup: "hoclookup",
+  hoclocation: "hoclocation",
+  hoccategory: "hoccategory",
+  hocwhat: "hocwhat",
+  hocwhatdetails: "hocwhatdetails",
+  hocwhy: "hocwhy",
+  hocwhydetails: "hocwhydetails",
 };

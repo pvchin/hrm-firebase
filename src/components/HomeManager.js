@@ -31,6 +31,7 @@ import EmployeeTableLeaveView from "./EmployeeTableLeaveView";
 import ExpensesTableViewSummary from "./ExpenseTableViewSummary";
 import ExpenseSummaryTableView from "./ExpensesSummaryTableView";
 import LeavesTableViewSummary from "./LeavesTableViewSummary";
+import HocTableViewSummary from "./HocTableViewSummary";
 import SummaryTableView from "../helpers/SummaryTableView";
 import DailyAllowanceTableViewSummary from "./DailyAllowancesTableViewSummary";
 import PayslipTableViewSummary from "./PayslipTableViewSummary";
@@ -452,6 +453,7 @@ const HomeManager = () => {
             <Tab>Expenses</Tab>
             <Tab>Site Allowances</Tab>
             <Tab>Payroll</Tab>
+            <Tab>HOC History</Tab>
           </TabList>
 
           <TabPanels>
@@ -498,7 +500,7 @@ const HomeManager = () => {
                 borderColor="blue.500"
                 borderWidth="1px"
                 borderRadius="lg"
-              overflow="scroll"
+                overflow="scroll"
               >
                 <SimpleGrid w="168vh">
                   <Box>
@@ -913,6 +915,131 @@ const HomeManager = () => {
                         </TabPanel>
                         <TabPanel>
                           <PayslipTableViewSummary status="Rejected" />
+                        </TabPanel>
+                      </TabPanels>
+                    </Tabs>
+                  </Box>
+                  <Divider />
+                </SimpleGrid>
+              </Box>
+            </TabPanel>
+            <TabPanel>
+              <Box
+                maxW="100%"
+                padding="4"
+                width="full"
+                height="700"
+                borderColor="blue.500"
+                borderWidth="1px"
+                borderRadius="lg"
+                overflow="scroll"
+              >
+                <SimpleGrid w="168vh">
+                  <Box>
+                    <Heading as="h2" size="lg">
+                      HOC History
+                    </Heading>
+                  </Box>
+                  <Divider />
+                  <Box>
+                    <Tabs defaultIndex={currentmonth} isLazy>
+                      <TabList>
+                        {/* <Tab>Chart</Tab>
+                          <Tab>Summary</Tab> */}
+                        <Tab>January</Tab>
+                        <Tab>February</Tab>
+                        <Tab>March</Tab>
+                        <Tab>April</Tab>
+                        <Tab>May</Tab>
+                        <Tab>June</Tab>
+                        <Tab>July</Tab>
+                        <Tab>August</Tab>
+                        <Tab>September</Tab>
+                        <Tab>October</Tab>
+                        <Tab>November</Tab>
+                        <Tab>December</Tab>
+                      </TabList>
+                      <TabPanels>
+                        {/* <TabPanel>
+                  <BarChart
+                    heading="Expenses for the Month"
+                    barchartdata={expchartdata}
+                  />
+                </TabPanel>
+                <TabPanel>
+                  <SummaryTableView columns={columns} data={data} />
+                </TabPanel> */}
+                        <TabPanel>
+                          <HocTableViewSummary
+                            year={currentyear}
+                            month={1}
+                          />
+                        </TabPanel>
+                        <TabPanel>
+                          <HocTableViewSummary
+                            year={currentyear}
+                            month={2}
+                          />
+                        </TabPanel>
+                        <TabPanel>
+                          <HocTableViewSummary
+                            year={currentyear}
+                            month={3}
+                          />
+                        </TabPanel>
+                        <TabPanel>
+                          <HocTableViewSummary
+                            year={currentyear}
+                            month={4}
+                          />
+                        </TabPanel>
+                        <TabPanel>
+                          <HocTableViewSummary
+                            year={currentyear}
+                            month={5}
+                          />
+                        </TabPanel>
+                        <TabPanel>
+                          <HocTableViewSummary
+                            year={currentyear}
+                            month={6}
+                          />
+                        </TabPanel>
+                        <TabPanel>
+                          <HocTableViewSummary
+                            year={currentyear}
+                            month={7}
+                          />
+                        </TabPanel>
+                        <TabPanel>
+                          <HocTableViewSummary
+                            year={currentyear}
+                            month={8}
+                          />
+                        </TabPanel>
+                        <TabPanel>
+                          <HocTableViewSummary
+                            year={currentyear}
+                            month={9}
+                          />
+                        </TabPanel>
+                        <TabPanel>
+                          <HocTableViewSummary
+                            year={currentyear}
+                            month={10}
+                          />
+                        </TabPanel>
+                        <TabPanel>
+                          <HocTableViewSummary
+                            year={currentyear}
+                            month={11}
+                          />
+                        </TabPanel>
+                        <TabPanel>
+                          <HocTableViewSummary
+                            year={currentyear}
+                            month={12}
+                          />
                         </TabPanel>
                       </TabPanels>
                     </Tabs>

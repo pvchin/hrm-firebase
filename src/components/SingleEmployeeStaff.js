@@ -52,11 +52,11 @@ const SingleEmployee = ({ title }) => {
               {/* <Grid item xs={12} md={8} lg={9}> */}
               <Grid item xs={12}>
                 <Paper className={fixedHeightPaper}>
-                  <Link to="/allemployees">
+                  {/* <Link to="/allemployees">
                     <div>
                       <ArrowBackIcon fontSize="large" color="primary" />
                     </div>
-                  </Link>
+                  </Link> */}
                   <div>
                     {/* <ToolbarHeader title={title} /> */}
 

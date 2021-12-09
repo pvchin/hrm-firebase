@@ -22,7 +22,7 @@ module.exports = async (event) => {
     const designations = await table
       .select({ filterByFormula: `gender=${filterValue}` })
       .firstPage();
-    const formattedDesignations = designations.map((designationt) => ({
+    const formattedDesignations = designations.map((designation) => ({
       id: designation.id,
       ...designation.fields,
     }));

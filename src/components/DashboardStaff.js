@@ -26,6 +26,7 @@ import {
   Home,
   AllEmployees,
   Leave,
+  Hoc,
   LeaveStaff,
   TrainingsStaff,
   ExpensesStaff,
@@ -103,6 +104,9 @@ export default function DashboardMain({
             </Route>
             <Route exact path="/leave">
               <LeaveStaff />
+            </Route>
+            <Route exact path="/hoc">
+              <Hoc />
             </Route>
             <Route exact path="/trainings">
               <TrainingsStaff />

@@ -96,6 +96,18 @@ const MenuListItemsStaff = () => {
         </ListItem>
       </Link>
 
+      <Link to="/hoc">
+        <ListItem button>
+          <ListItemIcon className={classes.itemIcon}>
+            <FaFileInvoiceDollar size="20" />
+          </ListItemIcon>
+          <ListItemText
+            primary="HOC"
+            className={classes.categoryHeaderPrimary}
+          />
+        </ListItem>
+      </Link>
+
       <Link to="/trainings">
         <ListItem button>
           <ListItemIcon className={classes.itemIcon}>

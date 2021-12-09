@@ -4,6 +4,7 @@ import AllEmployees from "./AllEmployeesPage";
 import Leave from "./LeavePage";
 import LeaveStaff from "./LeaveStaffPage";
 import Expenses from "./ExpensesPage";
+import Hoc from "./HocPage";
 import ExpensesStaff from "./ExpensesStaffPage";
 import TrainingsStaff from "./TrainingsStaffPage";
 import UserAccess from "./UserAccessPage";
@@ -29,6 +30,7 @@ export {
   LeaveStaff,
   TrainingsStaff,
   Expenses,
+  Hoc,
   ExpensesStaff,
   Payslip,
   PayslipStaff,

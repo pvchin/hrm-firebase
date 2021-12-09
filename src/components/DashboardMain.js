@@ -68,7 +68,7 @@ export default function DashboardMain() {
   const handleSelect = (title) => {
     setLoginLevel({ ...loginLevel, loginLevel: title });
     setSelect(title);
-     <Redirect to="/" />;
+    <Redirect to="/" />;
   };
 
   //  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
@@ -86,7 +86,7 @@ export default function DashboardMain() {
           handleSelect={handleSelect}
           open={open}
           setLogin={setLogin}
-          title="HRMS V1.2 - AppSmiths Sutera Sdn Bhd"
+          title="HRMS V1.3 - AppSmiths Sutera Sdn Bhd"
         />
         <Flex>
           {select === "Staff" && (

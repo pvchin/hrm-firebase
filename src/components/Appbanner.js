@@ -2,9 +2,9 @@ import React from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import { useHistory, Link } from "react-router-dom";
-import { Button, Heading, HStack, Text } from "@chakra-ui/react";
+import { Button, Heading, HStack, Text, Tooltip } from "@chakra-ui/react";
 import Toolbar from "@material-ui/core/Toolbar";
-import Tooltip from "@material-ui/core/Tooltip";
+//import Tooltip from "@material-ui/core/Tooltip";
 import AppBar from "@material-ui/core/AppBar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
@@ -63,6 +63,9 @@ const Appbanner = ({
         >
           {title}
         </Typography>
+        {/* <Heading size="md">
+          {title}
+        </Heading> */}
         <HStack justifyContent="flex-start" px={2}>
           <Button
             colorScheme="white"
@@ -74,7 +77,7 @@ const Appbanner = ({
           >
             <Heading size="sm">Staff</Heading>
           </Button>
-          {loginLevel.loginRole > 1 && loginLevel.loginRole !== 3 &&   (
+          {loginLevel.loginRole > 1 && loginLevel.loginRole !== 3 && (
             <Button
               colorScheme="white"
               aria-label="Admin"
@@ -123,19 +126,20 @@ const Appbanner = ({
             </Button>
           )}
         </HStack>
-        <div>
-          <Text fontSize="18">
-            {loginLevel.loginUser && (
-              <Heading size="sm">{loginLevel.loginEmail}!</Heading>
-            )}
-          </Text>
-        </div>
+        <HStack>
+          {/* <Text fontSize="18"> */}
+          {loginLevel.loginUser && (
+            <Heading size="sm">{loginLevel.loginEmail}!</Heading>
+          )}
+          {/* </Text> */}
+        </HStack>
         {/* <IconButton color="inherit">
           <Badge badgeContent={0} color="secondary">
             <NotificationsIcon />
           </Badge>
         </IconButton> */}
-        <Tooltip title="Logout">
+
+        <Tooltip label="Logout">
           <IconButton color="inherit" onClick={(e) => handleExit(e)}>
             <ExitToApplication />
           </IconButton>
