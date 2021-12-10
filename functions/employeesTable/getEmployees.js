@@ -7,7 +7,7 @@ module.exports = async (event) => {
   // console.log(filterValue, filterField);
 
   if (id) {
-    const employee = await table.find(id);
+    const employee = await table.select({ view: "viewAllEmployees" }).find(id);
     const formattedEmployees = { id: employee.id, ...employee.fields };
     if (employee.error) {
       return {

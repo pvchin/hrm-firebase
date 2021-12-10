@@ -20,7 +20,7 @@ import { Controller, useForm } from "react-hook-form";
 import { useRecoilState } from "recoil";
 import { loginLevelState } from "./data/atomdata";
 import { editEmployeeIdState } from "./data/atomdata";
-
+import { useAllEmployees } from "./employees/useAllEmployees";
 import { useEmployees } from "./employees/useEmployees";
 import { useAddEmployees } from "./employees/useAddEmployees";
 import { useUpdateEmployees } from "./employees/useUpdateEmployees";
@@ -69,6 +69,7 @@ const initial_values = {
 const EmployeeForm = () => {
   const classes = useStyles();
   const { employees, employeeId, setEmployeeId } = useEmployees();
+  const { allemployees, setAllEmpId } = useAllEmployees();
   const addEmployees = useAddEmployees();
   const updateEmployees = useUpdateEmployees();
   //const currencyRate = useCurrency()
@@ -81,7 +82,7 @@ const EmployeeForm = () => {
   const { handleSubmit, control, setValue, register } = useForm();
   const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
   const { isEditing, editEmployeeID } = useEmployeesContext();
-  const single_employee = employees
+  const single_employee = allemployees
     .filter((r) => r.id === editEmployeeID)
     .map((r) => {
       return { ...r };
@@ -159,10 +160,13 @@ const EmployeeForm = () => {
     setReportEmail(reporting_email);
   }, []);
 
-  if (!employees) {
+  useEffect(() => {
+    setAllEmpId("111");
+  }, []);
+
+  if (!allemployees) {
     return <h2>Loading ...</h2>;
   }
-
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -936,7 +940,11 @@ const EmployeeForm = () => {
                         <MenuItem value="">None</MenuItem>
                         {designations &&
                           designations.map((r) => {
-                            return <MenuItem key={r.id} value={r.name}>{r.name}</MenuItem>;
+                            return (
+                              <MenuItem key={r.id} value={r.name}>
+                                {r.name}
+                              </MenuItem>
+                            );
                           })}
                       </TextField>
                     );
@@ -966,7 +974,11 @@ const EmployeeForm = () => {
                         <MenuItem value="">None</MenuItem>
                         {departments &&
                           departments.map((r) => {
-                            return <MenuItem key={r.id} value={r.name}>{r.name}</MenuItem>;
+                            return (
+                              <MenuItem key={r.id} value={r.name}>
+                                {r.name}
+                              </MenuItem>
+                            );
                           })}
                       </TextField>
                     );
@@ -1001,7 +1013,11 @@ const EmployeeForm = () => {
                         <MenuItem value="">None</MenuItem>
                         {employees &&
                           employees.map((r) => {
-                            return <MenuItem key={r.id} value={r.name}>{r.name}</MenuItem>;
+                            return (
+                              <MenuItem key={r.id} value={r.name}>
+                                {r.name}
+                              </MenuItem>
+                            );
                           })}
                       </TextField>
                     );
