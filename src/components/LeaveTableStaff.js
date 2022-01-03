@@ -183,7 +183,7 @@ export default function LeaveTableStaff() {
     const leaveEntitled = isNaN(leave_entitled) ? 0 : leave_entitled;
     const leaveBf = isNaN(leave_bf) ? 0 : leave_bf;
     const leaveCd = isNaN(leave_cd) ? 0 : leave_cd;
-    const leaveTotal = leaveBf + leaveEntitled
+    const leaveTotal = leaveBf + leaveEntitled;
     const bal = leaveBf + leaveEntitled - leaveCd - leaveTaken;
     const rec = {
       leave_bf: leaveBf,
@@ -218,7 +218,7 @@ export default function LeaveTableStaff() {
 
   const delete_Leave = (data) => {
     const { id } = data;
-    console.log("delete leave", id)
+    console.log("delete leave", id);
     setEditLeaveID(id);
     setIsAlertOpen(true);
     //handleAlertOpen();
