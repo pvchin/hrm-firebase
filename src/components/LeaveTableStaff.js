@@ -7,6 +7,7 @@ import {
   Grid,
   GridItem,
   HStack,
+  Select,
   SimpleGrid,
   Text,
 } from "@chakra-ui/react";
@@ -148,15 +149,22 @@ export default function LeaveTableStaff() {
     setIsLeaveEditingOff,
   } = useLeavesContext();
   const [isOpen, setIsOpen] = React.useState(false);
+  const [isLeaveYear, setLeaveYear] = useState(true);
   const onClose = () => setIsOpen(false);
   const cancelRef = React.useRef();
-  console.log("leavestate", loginLevel);
-  const YEAR = new Date().getFullYear();
+  const [selectleaveyear, setSelectLeaveYear] = useState("");
+  const currentyear = new Date().getFullYear();
+  //const YEAR = new Date().getFullYear();
+
+  useEffect(() => {
+    setSelectLeaveYear(currentyear);
+  }, []);
 
   useEffect(() => {
     setLeaveId(loginLevel.loginUserId);
-    setLeaveYr(YEAR);
-  }, []);
+    setLeaveYr(selectleaveyear ? selectleaveyear : currentyear);
+    setIsLoad(false);
+  }, [isLoad]);
 
   useEffect(() => {
     if (leaves) {
@@ -251,9 +259,30 @@ export default function LeaveTableStaff() {
     deleteLeaves(id);
   };
 
+  const UpdateLeaveYear = (e) => {
+    setSelectLeaveYear((prev) => (prev = e.target.value));
+    setIsLoad(true);
+  };
+
   return (
     <div className={classes.root}>
       {/* <h1>Expenses Claims Application</h1> */}
+      <Box>
+        <HStack mb={2}>
+          <Box>
+            <Heading size="md">YEAR: </Heading>
+          </Box>
+          <Select
+            value={selectleaveyear}
+            fontSize={20}
+            maxWidth={100}
+            onChange={(e) => UpdateLeaveYear(e)}
+          >
+            <option value="2021">2021</option>
+            <option value="2022">2022</option>
+          </Select>
+        </HStack>
+      </Box>
       <Box>
         <Grid
           p={1}
