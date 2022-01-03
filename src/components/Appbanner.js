@@ -125,6 +125,18 @@ const Appbanner = ({
               <Heading size="sm">Manager</Heading>
             </Button>
           )}
+          {loginLevel.loginRole > 5 && (
+            <Button
+              colorScheme="white"
+              aria-label="Director"
+              onClick={() => {
+                history.push("/");
+                handleSelect("Director");
+              }}
+            >
+              <Heading size="sm">Director</Heading>
+            </Button>
+          )}
         </HStack>
         <HStack>
           {/* <Text fontSize="18"> */}

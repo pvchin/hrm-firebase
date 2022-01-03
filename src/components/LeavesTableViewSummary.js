@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import MaterialTable from "material-table";
+import MaterialTable, { MTableToolbar } from "material-table";
 import { TextField, MenuItem } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { Box } from "@chakra-ui/react"
+import { Box, Button, HStack, Text } from "@chakra-ui/react";
 import AddIcon from "@material-ui/icons/Add";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -12,6 +12,7 @@ import LeaveForm from "./LeaveForm";
 import { CustomDialog } from "../helpers/CustomDialog";
 import { AlertDialog } from "../helpers/AlertDialogBox";
 import { useLeavesPeriod } from "./leaves/useLeavesPeriod";
+import Export2Excel from "./ExportLeave2Excel";
 
 const FILTERSTRING = "Pending";
 
@@ -49,6 +50,9 @@ const columns = [
   { title: "Status", field: "status" },
 ];
 
+
+
+
 export default function LeaveTableViewSummary({ year, month }) {
   const classes = useStyles();
   const { leavesperiod, setLeavePeriodYrId, setLeavePeriodMthId } =
@@ -64,7 +68,8 @@ export default function LeaveTableViewSummary({ year, month }) {
       {/* <h1>Expenses Claims Application</h1> */}
 
       {/* <div style={{ maxWidth: "100%", paddingTop: "5px" }}> */}
-        <Box maxW="100%" pt="5px" overflow="scroll">
+      
+      <Box maxW="100%" pt="5px" overflow="scroll">
         <MaterialTable
           columns={columns}
           data={leavesperiod}
@@ -81,8 +86,8 @@ export default function LeaveTableViewSummary({ year, month }) {
             showTitle: false,
           }}
         />
-        </Box>
-      </div>
+      </Box>
+    </div>
     // </div>
   );
 }

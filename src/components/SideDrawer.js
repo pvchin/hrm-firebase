@@ -24,6 +24,7 @@ import MenuListItemsAdmin from "./MenuListItemsAdmin";
 import MenuListItemsOpsSpvr from "./MenuListItemsOpsSpvr";
 import MenuListItemsAdminManager from "./MenuListItemsAdminManager";
 import MenuListItemsManager from "./MenuListItemsManager";
+import MenuListItemsDirector from "./MenuListItemsDirector"
 import headerlogo from "../assets/headerlogo.png";
 
 const drawerWidth = 240;
@@ -45,6 +46,8 @@ const SideDrawer = ({ HandleDrawerOpen, handleDrawerClose, open }) => {
         return <MenuListItemsAdminManager />;
       case "Manager":
         return <MenuListItemsManager />;
+      case "Director":
+        return <MenuListItemsDirector />;
       default:
         return "You are not authorised user!";
     }

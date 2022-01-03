@@ -35,6 +35,7 @@ const columns = [
       3: "Ops Supervisor",
       4: "AdminManager",
       5: "Manager",
+      6: "Director",
     },
   },
 ];

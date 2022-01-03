@@ -193,14 +193,14 @@ const PayForm = ({
       return false;
     }
     wages = isNaN(state.wages) || state.wages === undefined ? 0 : state.wages;
-    console.log("Wages", wages);
     totalTAP = state.tap_checkbox ? Math.ceil(wages * 0.05) : 0;
     totalSCP = state.tap_checkbox
-      ? Math.round((wages + Number.EPSILON) * 0.035 * 100) / 100
-      : 0;
+    ? Math.round((wages + Number.EPSILON) * 0.035 * 100) / 100
+    : 0;
     if (totalSCP > 98) {
       totalSCP = 98;
     }
+    console.log("scp", totalSCP);
     siteallows = parseFloat(isNaN(state.site_allows) ? 0 : state.site_allows);
     expsclaims = parseFloat(
       isNaN(state.expenses_claims) ? 0 : state.expenses_claims
@@ -279,6 +279,8 @@ const PayForm = ({
     data.expenses_claims = expsclaims;
     data.nett_pay = nettPay;
     data.wages_bnd = wagesbnd;
+    data.tap_amount_bnd = totalTAPbnd;
+    data.scp_amount_bnd = totalSCPbnd;
     data.site_allows_bnd = siteallowsbnd;
     data.expenses_claims_bnd = expsclaimsbnd;
     data.total_allowances_bnd = allowsbnd;
@@ -1280,6 +1282,7 @@ const PayForm = ({
                 </Button>
               </div>
             </Grid>
+            
             {state.salary_currency && state.salary_currency !== "BND" && (
               <Grid
                 item

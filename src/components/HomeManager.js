@@ -9,7 +9,9 @@ import {
   Flex,
   Grid,
   Heading,
+  HStack,
   SimpleGrid,
+  Select,
   Stack,
   Tabs,
   TabList,
@@ -412,6 +414,11 @@ const HomeManager = () => {
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   const { expensesperiod, setExpPeriodId } = useExpensesPeriod();
   const [expdata, setExpData] = useState(initial_expdata);
+   const [selectleaveyear, setSelectLeaveYear] = useState("");
+   const [selectexpenseyear, setSelectExpenseYear] = useState("");
+   const [selectsiteallowsyear, setSelectSiteAllowsYear] = useState("");
+   const [selectpayrollyear, setSelectPayrollYear] = useState("");
+   const [selecthocyear, setSelectHocYear] = useState("");
   const currentyear = new Date().getFullYear();
   const currentmonth = new Date().getMonth();
 
@@ -428,6 +435,14 @@ const HomeManager = () => {
   //   Build_ExpData();
   // }, []);
 
+   useEffect(() => {
+     setSelectLeaveYear(currentyear);
+     setSelectExpenseYear(currentyear);
+     setSelectSiteAllowsYear(currentyear);
+     setSelectPayrollYear(currentyear);
+     setSelectHocYear(currentyear);
+   }, []);
+  
   return (
     // <div>
     //   <div className={classes.appBarSpacer} />
@@ -503,11 +518,34 @@ const HomeManager = () => {
                 overflow="scroll"
               >
                 <SimpleGrid w="168vh">
-                  <Box>
-                    <Heading as="h2" size="lg">
-                      Leaves
-                    </Heading>
-                  </Box>
+                  <HStack>
+                    <Box>
+                      <Heading as="h2" size="lg">
+                        Leaves
+                      </Heading>
+                    </Box>
+                    <Box alignSelf="flex-end">
+                      <HStack>
+                        <Select
+                          value={selectleaveyear}
+                          fontSize={20}
+                          onChange={(e) => setSelectLeaveYear(e.target.value)}
+                        >
+                          <option value="2021">2021</option>
+                          <option value="2022">2022</option>
+                        </Select>
+                        {/* <Box size="xl" py={2}>
+                          <Text fontSize="lg">
+                            <ExportLeave2Excel
+                              filename="leave"
+                              dataset={dataset}
+                              title="Leave"
+                            />
+                          </Text>
+                        </Box> */}
+                      </HStack>
+                    </Box>
+                  </HStack>
                   <Divider />
                   <Box>
                     <Tabs defaultIndex={currentmonth} isLazy>
@@ -539,73 +577,97 @@ const HomeManager = () => {
                 </TabPanel> */}
                         <TabPanel>
                           <LeavesTableViewSummary
-                            year={currentyear}
+                            year={
+                              selectleaveyear ? selectleaveyear : currentyear
+                            }
                             month={1}
                           />
                         </TabPanel>
                         <TabPanel>
                           <LeavesTableViewSummary
-                            year={currentyear}
+                            year={
+                              selectleaveyear ? selectleaveyear : currentyear
+                            }
                             month={2}
                           />
                         </TabPanel>
                         <TabPanel>
                           <LeavesTableViewSummary
-                            year={currentyear}
+                            year={
+                              selectleaveyear ? selectleaveyear : currentyear
+                            }
                             month={3}
                           />
                         </TabPanel>
                         <TabPanel>
                           <LeavesTableViewSummary
-                            year={currentyear}
+                            year={
+                              selectleaveyear ? selectleaveyear : currentyear
+                            }
                             month={4}
                           />
                         </TabPanel>
                         <TabPanel>
                           <LeavesTableViewSummary
-                            year={currentyear}
+                            year={
+                              selectleaveyear ? selectleaveyear : currentyear
+                            }
                             month={5}
                           />
                         </TabPanel>
                         <TabPanel>
                           <LeavesTableViewSummary
-                            year={currentyear}
+                            year={
+                              selectleaveyear ? selectleaveyear : currentyear
+                            }
                             month={6}
                           />
                         </TabPanel>
                         <TabPanel>
                           <LeavesTableViewSummary
-                            year={currentyear}
+                            year={
+                              selectleaveyear ? selectleaveyear : currentyear
+                            }
                             month={7}
                           />
                         </TabPanel>
                         <TabPanel>
                           <LeavesTableViewSummary
-                            year={currentyear}
+                            year={
+                              selectleaveyear ? selectleaveyear : currentyear
+                            }
                             month={8}
                           />
                         </TabPanel>
                         <TabPanel>
                           <LeavesTableViewSummary
-                            year={currentyear}
+                            year={
+                              selectleaveyear ? selectleaveyear : currentyear
+                            }
                             month={9}
                           />
                         </TabPanel>
                         <TabPanel>
                           <LeavesTableViewSummary
-                            year={currentyear}
+                            year={
+                              selectleaveyear ? selectleaveyear : currentyear
+                            }
                             month={10}
                           />
                         </TabPanel>
                         <TabPanel>
                           <LeavesTableViewSummary
-                            year={currentyear}
+                            year={
+                              selectleaveyear ? selectleaveyear : currentyear
+                            }
                             month={11}
                           />
                         </TabPanel>
                         <TabPanel>
                           <LeavesTableViewSummary
-                            year={currentyear}
+                            year={
+                              selectleaveyear ? selectleaveyear : currentyear
+                            }
                             month={12}
                           />
                         </TabPanel>
@@ -628,11 +690,34 @@ const HomeManager = () => {
                 overflow="scroll"
               >
                 <SimpleGrid w="168vh">
-                  <Box>
-                    <Heading as="h2" size="lg">
-                      Expenses Claimed
-                    </Heading>
-                  </Box>
+                  <HStack>
+                    <Box>
+                      <Heading as="h2" size="lg">
+                        Expenses Claims
+                      </Heading>
+                    </Box>
+                    <Box alignSelf="flex-end">
+                      <HStack>
+                        <Select
+                          value={selectexpenseyear}
+                          fontSize={20}
+                          onChange={(e) => setSelectExpenseYear(e.target.value)}
+                        >
+                          <option value="2021">2021</option>
+                          <option value="2022">2022</option>
+                        </Select>
+                        {/* <Box size="xl" py={2}>
+                          <Text fontSize="lg">
+                            <ExportLeave2Excel
+                              filename="leave"
+                              dataset={dataset}
+                              title="Leave"
+                            />
+                          </Text>
+                        </Box> */}
+                      </HStack>
+                    </Box>
+                  </HStack>
                   <Divider />
                   <Box>
                     <Tabs defaultIndex={currentmonth} isLazy>
@@ -664,73 +749,121 @@ const HomeManager = () => {
                 </TabPanel> */}
                         <TabPanel>
                           <ExpensesTableViewSummary
-                            year={currentyear}
+                            year={
+                              selectexpenseyear
+                                ? selectexpenseyear
+                                : currentyear
+                            }
                             month={1}
                           />
                         </TabPanel>
                         <TabPanel>
                           <ExpensesTableViewSummary
-                            year={currentyear}
+                            year={
+                              selectexpenseyear
+                                ? selectexpenseyear
+                                : currentyear
+                            }
                             month={2}
                           />
                         </TabPanel>
                         <TabPanel>
                           <ExpensesTableViewSummary
-                            year={currentyear}
+                            year={
+                              selectexpenseyear
+                                ? selectexpenseyear
+                                : currentyear
+                            }
                             month={3}
                           />
                         </TabPanel>
                         <TabPanel>
                           <ExpensesTableViewSummary
-                            year={currentyear}
+                            year={
+                              selectexpenseyear
+                                ? selectexpenseyear
+                                : currentyear
+                            }
                             month={4}
                           />
                         </TabPanel>
                         <TabPanel>
                           <ExpensesTableViewSummary
-                            year={currentyear}
+                            year={
+                              selectexpenseyear
+                                ? selectexpenseyear
+                                : currentyear
+                            }
                             month={5}
                           />
                         </TabPanel>
                         <TabPanel>
                           <ExpensesTableViewSummary
-                            year={currentyear}
+                            year={
+                              selectexpenseyear
+                                ? selectexpenseyear
+                                : currentyear
+                            }
                             month={6}
                           />
                         </TabPanel>
                         <TabPanel>
                           <ExpensesTableViewSummary
-                            year={currentyear}
+                            year={
+                              selectexpenseyear
+                                ? selectexpenseyear
+                                : currentyear
+                            }
                             month={7}
                           />
                         </TabPanel>
                         <TabPanel>
                           <ExpensesTableViewSummary
-                            year={currentyear}
+                            year={
+                              selectexpenseyear
+                                ? selectexpenseyear
+                                : currentyear
+                            }
                             month={8}
                           />
                         </TabPanel>
                         <TabPanel>
                           <ExpensesTableViewSummary
-                            year={currentyear}
+                            year={
+                              selectexpenseyear
+                                ? selectexpenseyear
+                                : currentyear
+                            }
                             month={9}
                           />
                         </TabPanel>
                         <TabPanel>
                           <ExpensesTableViewSummary
-                            year={currentyear}
+                            year={
+                              selectexpenseyear
+                                ? selectexpenseyear
+                                : currentyear
+                            }
                             month={10}
                           />
                         </TabPanel>
                         <TabPanel>
                           <ExpensesTableViewSummary
-                            year={currentyear}
+                            year={
+                              selectexpenseyear
+                                ? selectexpenseyear
+                                : currentyear
+                            }
                             month={11}
                           />
                         </TabPanel>
                         <TabPanel>
                           <ExpensesTableViewSummary
-                            year={currentyear}
+                            year={
+                              selectexpenseyear
+                                ? selectexpenseyear
+                                : currentyear
+                            }
                             month={12}
                           />
                         </TabPanel>
@@ -753,11 +886,36 @@ const HomeManager = () => {
                 overflow="scroll"
               >
                 <SimpleGrid w="168vh">
-                  <Box>
-                    <Heading as="h2" size="lg">
-                      Site Allowances
-                    </Heading>
-                  </Box>
+                  <HStack>
+                    <Box>
+                      <Heading as="h2" size="lg">
+                        Site Allowances
+                      </Heading>
+                    </Box>
+                    <Box alignSelf="flex-end">
+                      <HStack>
+                        <Select
+                          value={selectsiteallowsyear}
+                          fontSize={20}
+                          onChange={(e) =>
+                            setSelectSiteAllowsYear(e.target.value)
+                          }
+                        >
+                          <option value="2021">2021</option>
+                          <option value="2022">2022</option>
+                        </Select>
+                        {/* <Box size="xl" py={2}>
+                          <Text fontSize="lg">
+                            <ExportLeave2Excel
+                              filename="leave"
+                              dataset={dataset}
+                              title="Leave"
+                            />
+                          </Text>
+                        </Box> */}
+                      </HStack>
+                    </Box>
+                  </HStack>
                   <Divider />
                   <Box>
                     <Tabs defaultIndex={currentmonth} isLazy>
@@ -789,73 +947,121 @@ const HomeManager = () => {
                 </TabPanel> */}
                         <TabPanel>
                           <DailyAllowanceTableViewSummary
-                            year={currentyear}
+                            year={
+                              selectsiteallowsyear
+                                ? selectsiteallowsyear
+                                : currentyear
+                            }
                             month="01"
                           />
                         </TabPanel>
                         <TabPanel>
                           <DailyAllowanceTableViewSummary
-                            year={currentyear}
+                            year={
+                              selectsiteallowsyear
+                                ? selectsiteallowsyear
+                                : currentyear
+                            }
                             month="02"
                           />
                         </TabPanel>
                         <TabPanel>
                           <DailyAllowanceTableViewSummary
-                            year={currentyear}
+                            year={
+                              selectsiteallowsyear
+                                ? selectsiteallowsyear
+                                : currentyear
+                            }
                             month="03"
                           />
                         </TabPanel>
                         <TabPanel>
                           <DailyAllowanceTableViewSummary
-                            year={currentyear}
+                            year={
+                              selectsiteallowsyear
+                                ? selectsiteallowsyear
+                                : currentyear
+                            }
                             month="04"
                           />
                         </TabPanel>
                         <TabPanel>
                           <DailyAllowanceTableViewSummary
-                            year={currentyear}
+                            year={
+                              selectsiteallowsyear
+                                ? selectsiteallowsyear
+                                : currentyear
+                            }
                             month="05"
                           />
                         </TabPanel>
                         <TabPanel>
                           <DailyAllowanceTableViewSummary
-                            year={currentyear}
+                            year={
+                              selectsiteallowsyear
+                                ? selectsiteallowsyear
+                                : currentyear
+                            }
                             month="06"
                           />
                         </TabPanel>
                         <TabPanel>
                           <DailyAllowanceTableViewSummary
-                            year={currentyear}
+                            year={
+                              selectsiteallowsyear
+                                ? selectsiteallowsyear
+                                : currentyear
+                            }
                             month="07"
                           />
                         </TabPanel>
                         <TabPanel>
                           <DailyAllowanceTableViewSummary
-                            year={currentyear}
+                            year={
+                              selectsiteallowsyear
+                                ? selectsiteallowsyear
+                                : currentyear
+                            }
                             month="08"
                           />
                         </TabPanel>
                         <TabPanel>
                           <DailyAllowanceTableViewSummary
-                            year={currentyear}
+                            year={
+                              selectsiteallowsyear
+                                ? selectsiteallowsyear
+                                : currentyear
+                            }
                             month="09"
                           />
                         </TabPanel>
                         <TabPanel>
                           <DailyAllowanceTableViewSummary
-                            year={currentyear}
+                            year={
+                              selectsiteallowsyear
+                                ? selectsiteallowsyear
+                                : currentyear
+                            }
                             month="10"
                           />
                         </TabPanel>
                         <TabPanel>
                           <DailyAllowanceTableViewSummary
-                            year={currentyear}
+                            year={
+                              selectsiteallowsyear
+                                ? selectsiteallowsyear
+                                : currentyear
+                            }
                             month="11"
                           />
                         </TabPanel>
                         <TabPanel>
                           <DailyAllowanceTableViewSummary
-                            year={currentyear}
+                            year={
+                              selectsiteallowsyear
+                                ? selectsiteallowsyear
+                                : currentyear
+                            }
                             month="12"
                           />
                         </TabPanel>
@@ -935,11 +1141,34 @@ const HomeManager = () => {
                 overflow="scroll"
               >
                 <SimpleGrid w="168vh">
-                  <Box>
-                    <Heading as="h2" size="lg">
-                      HOC History
-                    </Heading>
-                  </Box>
+                  <HStack>
+                    <Box>
+                      <Heading as="h2" size="lg">
+                        HOC History
+                      </Heading>
+                    </Box>
+                    <Box alignSelf="flex-end">
+                      <HStack>
+                        <Select
+                          value={selecthocyear}
+                          fontSize={20}
+                          onChange={(e) => setSelectHocYear(e.target.value)}
+                        >
+                          <option value="2021">2021</option>
+                          <option value="2022">2022</option>
+                        </Select>
+                        {/* <Box size="xl" py={2}>
+                          <Text fontSize="lg">
+                            <ExportLeave2Excel
+                              filename="leave"
+                              dataset={dataset}
+                              title="Leave"
+                            />
+                          </Text>
+                        </Box> */}
+                      </HStack>
+                    </Box>
+                  </HStack>
                   <Divider />
                   <Box>
                     <Tabs defaultIndex={currentmonth} isLazy>
@@ -971,73 +1200,73 @@ const HomeManager = () => {
                 </TabPanel> */}
                         <TabPanel>
                           <HocTableViewSummary
-                            year={currentyear}
+                            year={selecthocyear ? selecthocyear : currentyear}
                             month={1}
                           />
                         </TabPanel>
                         <TabPanel>
                           <HocTableViewSummary
-                            year={currentyear}
+                            year={selecthocyear ? selecthocyear : currentyear}
                             month={2}
                           />
                         </TabPanel>
                         <TabPanel>
                           <HocTableViewSummary
-                            year={currentyear}
+                            year={selecthocyear ? selecthocyear : currentyear}
                             month={3}
                           />
                         </TabPanel>
                         <TabPanel>
                           <HocTableViewSummary
-                            year={currentyear}
+                            year={selecthocyear ? selecthocyear : currentyear}
                             month={4}
                           />
                         </TabPanel>
                         <TabPanel>
                           <HocTableViewSummary
-                            year={currentyear}
+                            year={selecthocyear ? selecthocyear : currentyear}
                             month={5}
                           />
                         </TabPanel>
                         <TabPanel>
                           <HocTableViewSummary
-                            year={currentyear}
+                            year={selecthocyear ? selecthocyear : currentyear}
                             month={6}
                           />
                         </TabPanel>
                         <TabPanel>
                           <HocTableViewSummary
-                            year={currentyear}
+                            year={selecthocyear ? selecthocyear : currentyear}
                             month={7}
                           />
                         </TabPanel>
                         <TabPanel>
                           <HocTableViewSummary
-                            year={currentyear}
+                            year={selecthocyear ? selecthocyear : currentyear}
                             month={8}
                           />
                         </TabPanel>
                         <TabPanel>
                           <HocTableViewSummary
-                            year={currentyear}
+                            year={selecthocyear ? selecthocyear : currentyear}
                             month={9}
                           />
                         </TabPanel>
                         <TabPanel>
                           <HocTableViewSummary
-                            year={currentyear}
+                            year={selecthocyear ? selecthocyear : currentyear}
                             month={10}
                           />
                         </TabPanel>
                         <TabPanel>
                           <HocTableViewSummary
-                            year={currentyear}
+                            year={selecthocyear ? selecthocyear : currentyear}
                             month={11}
                           />
                         </TabPanel>
                         <TabPanel>
                           <HocTableViewSummary
-                            year={currentyear}
+                            year={selecthocyear ? selecthocyear : currentyear}
                             month={12}
                           />
                         </TabPanel>

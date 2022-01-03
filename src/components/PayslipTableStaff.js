@@ -28,7 +28,7 @@ const columns = [
     title: "Name",
     field: "name",
   },
-  { title: "Period", field: "period" },
+  { title: "Period", field: "payrun" },
   // {
   //   title: "Date",
   //   field: "date",
@@ -115,7 +115,10 @@ export default function PayslipTable() {
       <div style={{ maxWidth: "100%", paddingTop: "5px" }}>
         <MaterialTable
           columns={columns}
-          data={payslips}
+          //data={payslips}
+          data={payslips.sort((a, b) =>
+            a.payrun > b.payrun ? -1 : b.payrun > a.payrun ? 1 : 0
+          )}
           title="Payslips"
           icons={{
             Add: (props) => <AddIcon />,

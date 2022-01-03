@@ -5,8 +5,8 @@ import { employees_url } from "../../utils/constants";
 import axios from "axios";
 import { queryKeys } from "../react-query/constants";
 
-async function getSingleEmployee(empid) {
-  const { data } = await axios.get(`${employees_url}?id=${empid}`);
+async function getSingleEmployee(singleEmployeeId) {
+  const { data } = await axios.get(`${employees_url}?id=${singleEmployeeId}`);
   return data;
 }
 

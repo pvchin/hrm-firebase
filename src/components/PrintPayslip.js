@@ -120,8 +120,8 @@ const PrintPayslip = ({ data, emp }) => {
     data.rowData.deducts_type8,
   ];
   const deductionsamt = [
-    formatPrice(parseInt(data.rowData.tap_amount_bnd, 10)),
-    formatPrice(parseInt(data.rowData.scp_amount_bnd, 10)),
+    formatPrice(parseFloat(data.rowData.tap_amount_bnd, 10)),
+    formatPrice(parseFloat(data.rowData.scp_amount_bnd, 10)),
     formatPrice(
       Math.round(
         (data.rowData.deducts_type1amt + Number.EPSILON) *

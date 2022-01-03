@@ -15,6 +15,7 @@ import HomeOpsSpvr from "../components/HomeOpsSpvr";
 import HomeStaff from "../components/HomeStaff";
 import HomeAdminManager from "../components/HomeAdminManager";
 import HomeManager from "../components/HomeManager";
+import HomeDirector from "../components/HomeDirector";
 const drawerWidth = 240;
 
 const HomePage = () => {
@@ -35,6 +36,8 @@ const SwitchCase = () => {
       return <HomeAdminManager />;
     case "Manager":
       return <HomeManager />;
+    case "Director":
+      return <HomeDirector />;
     default:
       return "You are not authorised user!";
   }

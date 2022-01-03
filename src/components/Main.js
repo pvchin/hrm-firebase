@@ -8,6 +8,7 @@ import DashboardAdmin from "./DashboardAdmin";
 import DashboardOpsSpvr from "./DashboardOpsSpvr";
 import DashboardAdminManager from "./DashboardAdminManager";
 import DashboardManager from "./DashboardManager";
+import DashboardDirector from "./DashboardDirector";
 import { loginLevelState } from "./data/atomdata";
 import { useAuthContext } from "../context/auth_context";
 import { useEmployees } from "./employees/useEmployees";
@@ -30,8 +31,10 @@ const Main = () => {
         return <DashboardAdminManager />;
       case "Manager":
         return <DashboardManager />;
+      case "Director":
+        return <DashboardDirector />;
       default:
-        return `You are not4 authorised user!`;
+        return `You are not an authorised user!`;
     }
   };
 

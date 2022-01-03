@@ -28,6 +28,7 @@ import DashboardAdmin from "./DashboardAdmin";
 import DashboardOpsSpvr from "./DashboardOpsSpvr";
 import DashboardAdminManager from "./DashboardAdminManager";
 import DashboardManager from "./DashboardManager";
+import DashboardDirector from "./DashboardDirector";
 
 import {
   Home,
@@ -86,7 +87,7 @@ export default function DashboardMain() {
           handleSelect={handleSelect}
           open={open}
           setLogin={setLogin}
-          title="HRMS V1.3 - AppSmiths Sutera Sdn Bhd"
+          title="HRMS V1.4 - AppSmiths Sutera Sdn Bhd"
         />
         <Flex>
           {select === "Staff" && (
@@ -119,6 +120,13 @@ export default function DashboardMain() {
           )}
           {select === "Manager" && (
             <DashboardManager
+              open={open}
+              handleDrawerOpen={handleDrawerOpen}
+              handleDrawerClose={handleDrawerClose}
+            />
+          )}
+          {select === "Director" && (
+            <DashboardDirector
               open={open}
               handleDrawerOpen={handleDrawerOpen}
               handleDrawerClose={handleDrawerClose}
