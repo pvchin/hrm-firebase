@@ -92,6 +92,7 @@ export default function EmployeeTableLeaveView({ year }) {
   const { employees, setEmployeeId } = useEmployees();
   const { leaves } = useLeaves();
   const [empdata, setEmpData] = useState([]);
+  const currentyear = new Date().getFullYear();
   const { expensesperiod, setExpPeriodYrId, setExpPeriodMthId } =
     useExpensesPeriod();
   const emp = employees.map((rec) => {
@@ -147,6 +148,7 @@ export default function EmployeeTableLeaveView({ year }) {
             .map((rec) => {
               return { ...rec };
             });
+          console.log("leavedata", leavedata);
           const leaveTaken = leavedata.reduce((acc, item) => {
             if (item.status === "Approved") {
               return acc + item.no_of_days;
@@ -165,7 +167,8 @@ export default function EmployeeTableLeaveView({ year }) {
             ? 0
             : emp[index].leave_entitled;
           const leaveBf = isNaN(emp[index].leave_bf) ? 0 : emp[index].leave_bf;
-          const leaveCd = isNaN(emp[index].leave_cd) ? 0 : emp[index].leave_cd;
+          //const leaveCd = isNaN(emp[index].leave_cd) ? 0 : emp[index].leave_cd;
+          const leaveCd = 0;
           emp[index].leave_total = leaveEntitled + leaveBf;
           emp[index].leave_taken = leaveTaken + leaveCd;
           emp[index].leave_pending = leavePending;
@@ -176,7 +179,7 @@ export default function EmployeeTableLeaveView({ year }) {
   };
 
   useEffect(() => {
-    Build_EmpData(YEAR);
+    Build_EmpData("2022");
   }, []);
 
   return (
