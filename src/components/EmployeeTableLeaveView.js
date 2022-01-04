@@ -176,7 +176,7 @@ export default function EmployeeTableLeaveView({ year }) {
   };
 
   useEffect(() => {
-    Build_EmpData("2021");
+    Build_EmpData(YEAR);
   }, []);
 
   return (

@@ -38,4 +38,5 @@ export const queryKeys = {
   hocwhatdetails: "hocwhatdetails",
   hocwhy: "hocwhy",
   hocwhydetails: "hocwhydetails",
+  yearendleavebal: "yearendleavebal",
 };

@@ -33,6 +33,7 @@ export const hocwhydetails_url = "/api/hocwhydetails";
 export const hoclookup_url = "/api/hoclookup";
 export const hoclocation_url = "/api/hoclocation";
 export const hoccategory_url = "/api/hoccategory";
+export const yearendleavebal_url = "/api/yearendleavebal";
 export const payroll_endmonth_day = "25";
 
 export const headEmployeesTableCells = [
