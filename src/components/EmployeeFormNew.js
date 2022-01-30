@@ -32,6 +32,7 @@ import App from "../utils/firebase";
 
 const initial_values = {
   name: "",
+  empno: "",
   gender: "",
   ic_no: "",
   email: "",
@@ -79,6 +80,7 @@ const EmployeeFormNew = () => {
   } = useEmployeesContext();
   const {
     name,
+    empno,
     ic_no,
     gender,
     age,
@@ -216,6 +218,29 @@ const EmployeeFormNew = () => {
                     );
                   }}
                   rules={{ required: "Name required" }}
+                />
+                <Controller
+                  name="empno"
+                  control={control}
+                  defaultValue={empno}
+                  render={({
+                    field: { onChange, value },
+                    fieldState: { error },
+                  }) => {
+                    return (
+                      <TextField
+                        label="Emp No"
+                        id="standard-empno"
+                        defaultValue={empno}
+                        name="empno"
+                        className={classes.textField}
+                        onChange={onChange}
+                        error={!!error}
+                        helperText={error ? error.message : null}
+                      />
+                    );
+                  }}
+                  //rules={{ required: "Name required" }}
                 />
               </div>
               <div>
