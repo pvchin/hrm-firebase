@@ -1,5 +1,6 @@
 import React from "react";
 import ReactExport from "react-data-export";
+//import { ExcelFile, ExcelSheet } from "react-export-excel";
 import { Button } from "@chakra-ui/react";
 
 const ExcelFile = ReactExport.ExcelFile;
@@ -238,6 +239,7 @@ const data1 = [
     },
   ],
 ];
+
 const multiDataSet = [
   {
     columns: cols2,
@@ -245,11 +247,45 @@ const multiDataSet = [
   },
 ];
 
+const multiDataSet1 = [
+  {
+    columns: [
+      { value: "Name", widthPx: 50 }, // width in pixels
+      { value: "Salary", widthCh: 20 }, // width in charachters
+      { value: "Sex", widthPx: 60, widthCh: 20 }, // will check for width in pixels first
+    ],
+    data: [
+      ["Johnson", 30000, "Male"],
+      ["Monika", 355000, "Female"],
+      ["Konstantina", 20000, "Female"],
+      ["John", 250000, "Male"],
+      ["Josef", 450500, "Male"],
+    ],
+  },
+  {
+    xSteps: 1, // Will start putting cell with 1 empty cell on left most
+    ySteps: 5, //will put space of 5 rows,
+    columns: ["Name", "Department"],
+    data: [
+      ["Johnson", "Finance"],
+      ["Monika", "IT"],
+      ["Konstantina", "IT Billing"],
+      ["John", "HR"],
+      ["Josef", "Testing"],
+    ],
+  },
+];
+
 const ExportLeave2Excel = ({ filename, dataset, title }) => {
   return (
+    // <ExcelFile element={<Button>Export to Excel</Button>} filename={filename}>
+    //   <ExcelSheet dataSet={multiDataSet1} name="Organization" />
+    // </ExcelFile>
+
     <ExcelFile element={<Button>Export to Excel</Button>} filename={filename}>
-      <ExcelSheet dataSet={multiDataSet} name="Leave" />
+      <ExcelSheet dataSet={multiDataSet1} name="Leave" />
     </ExcelFile>
+
     // <ExcelFile element={<Button>Export to Excel</Button>} filename={filename}>
     //   <ExcelSheet data={dataset} name={title}>
     //     <ExcelColumn label="Name" value="name" />
@@ -259,7 +295,7 @@ const ExportLeave2Excel = ({ filename, dataset, title }) => {
     //     <ExcelColumn label="Reason" value="reason" />
     //     <ExcelColumn label="Status" value="status" />
     //   </ExcelSheet>
-    // </ExcelFile>
+    //</ExcelFile>
   );
 };
 

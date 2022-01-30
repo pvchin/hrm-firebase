@@ -66,11 +66,12 @@ const initial_values = {
 const EmployeeForm = () => {
   const classes = useStyles();
   const toast = useCustomToast();
-  const { employees, setFilter } = useEmployees();
-  const { singleemployee, setSingleEmployeeId } = useSingleEmployee();
+  const { employees, setFilter, setEmployeeId } = useEmployees();
+  //const { singleemployee, setSingleEmployeeId } = useSingleEmployee();
   const updateEmployees = useUpdateEmployees();
   const [empage, setEmpage] = useState(0);
   const [reportemail, setReportEmail] = useState("");
+  const { handleSubmit, control, setValue, register } = useForm();
   const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
   const {
     isEditing,
@@ -79,7 +80,11 @@ const EmployeeForm = () => {
     getSingleEmployee,
     single_employee_loading,
   } = useEmployeesContext();
-
+  const single_employee = employees
+    .filter((r) => r.id === loginLevel.loginUserId)
+    .map((r) => {
+      return { ...r };
+    });
   const {
     name,
     empno,
@@ -110,13 +115,10 @@ const EmployeeForm = () => {
     perdiem_fee,
     reporting_to,
     reporting_email,
-  } = singleemployee || initial_values;
-  const { handleSubmit, control } = useForm({
-    defaultValues: {
-      singleemployee,
-    },
-  });
-  console.log("single employee", singleemployee);
+  } = single_employee[0] || initial_values;
+
+  //console.log("single employee", single_employee);
+
   const handleReportingTo = (name) => {
     const emp = employees
       .filter((f) => f.name === name)
@@ -127,7 +129,8 @@ const EmployeeForm = () => {
   };
 
   const onSubmit = (data) => {
-    updateEmployees({ id: editEmployeeID, ...data });
+    //console.log("Data",data)
+    updateEmployees({ id: loginLevel.loginUserId, ...data });
   };
 
   const Reset_PW = () => {
@@ -157,9 +160,9 @@ const EmployeeForm = () => {
     return age;
   };
 
-  useEffect(() => {
-    setSingleEmployeeId(loginLevel.loginUserId);
-  }, []);
+  // useEffect(() => {
+  //   setEmployeeId(loginLevel.loginUserId);
+  // }, []);
 
   useEffect(() => {
     let age = calculateAge(birthdate);
@@ -167,13 +170,13 @@ const EmployeeForm = () => {
     setReportEmail(reporting_email);
   }, []);
 
-  if (single_employee_loading) {
-    return (
-      <div>
-        <h2>Loading... </h2>
-      </div>
-    );
-  }
+  // if (single_employee_loading) {
+  //   return (
+  //     <div>
+  //       <h2>Loading... </h2>
+  //     </div>
+  //   );
+  //}
 
   return (
     <div>
@@ -219,12 +222,13 @@ const EmployeeForm = () => {
                       <TextField
                         label="Name"
                         id="standard-name"
+                        defaultValue={name}
                         name="name"
-                        value={name}
                         className={classes.textField}
                         onChange={onChange}
                         error={!!error}
                         helperText={error ? error.message : null}
+                        inputProps={{ readOnly: true }}
                       />
                     );
                   }}
@@ -243,15 +247,16 @@ const EmployeeForm = () => {
                         label="Emp No"
                         id="standard-empno"
                         name="empno"
-                        value={empno}
+                        defaultValue={empno}
                         className={classes.textField}
                         onChange={onChange}
                         error={!!error}
                         helperText={error ? error.message : null}
+                        inputProps={{ readOnly: true }}
                       />
                     );
                   }}
-                  //rules={{ required: "Name required" }}
+                  rules={{ required: "Name required" }}
                 />
               </div>
               <div>
@@ -268,15 +273,16 @@ const EmployeeForm = () => {
                         label="Email"
                         id="standard-email"
                         name="email"
-                        value={email}
+                        defaultValue={email}
                         className={classes.textField}
                         onChange={onChange}
                         error={!!error}
                         helperText={error ? error.message : null}
+                        inputProps={{ readOnly: true }}
                       />
                     );
                   }}
-                  rules={{ required: "Email is required" }}
+                  //rules={{ required: "Email is required" }}
                 />
 
                 <Controller
@@ -291,8 +297,8 @@ const EmployeeForm = () => {
                       <TextField
                         label="IC No"
                         id="standard-icno"
+                        defaultValue={ic_no}
                         name="ic_no"
-                        value={ic_no}
                         className={classes.textField}
                         onChange={onChange}
                         error={!!error}
@@ -318,7 +324,7 @@ const EmployeeForm = () => {
                         id="standard-birthdate"
                         name="birthdate"
                         type="date"
-                        value={birthdate}
+                        defaultValue={birthdate}
                         className={classes.textField}
                         onChange={(e) => {
                           onChange(e.target.value);
@@ -380,7 +386,7 @@ const EmployeeForm = () => {
                         label="Passport No"
                         id="stanrad-ppno"
                         name="passportno"
-                        value={passportno}
+                        defaultValue={passportno}
                         className={classes.textField}
                         onChange={onChange}
                         error={!!error}
@@ -404,7 +410,7 @@ const EmployeeForm = () => {
                         id="standard-ppexpiry"
                         name="passport_expirydate"
                         type="date"
-                        value={passport_expirydate}
+                        defaultValue={passport_expirydate}
                         className={classes.textField}
                         onChange={onChange}
                         error={!!error}
@@ -432,7 +438,7 @@ const EmployeeForm = () => {
                         label="Nationality"
                         id="standard-nationality"
                         name="nationality"
-                        value={nationality}
+                        defaultValue={nationality}
                         className={classes.textField}
                         onChange={onChange}
                         error={!!error}
@@ -455,7 +461,7 @@ const EmployeeForm = () => {
                         label="Gender"
                         id="standard-gender"
                         name="gender"
-                        value={gender}
+                        defaultValue={gender}
                         className={classes.textField}
                         onChange={onChange}
                         error={!!error}
@@ -484,7 +490,7 @@ const EmployeeForm = () => {
                         label="Address"
                         id="standard-address"
                         name="address"
-                        value={address}
+                        defaultValue={address}
                         className={classes.textField}
                         onChange={onChange}
                         error={!!error}
@@ -512,7 +518,7 @@ const EmployeeForm = () => {
                       <CurrencyTextField
                         label="Basic Salary"
                         variant="standard"
-                        value={basic_salary}
+                        defaultValue={basic_salary}
                         currencySymbol="$"
                         outputFormat="number"
                         decimalCharacter="."
@@ -546,7 +552,7 @@ const EmployeeForm = () => {
                         label="Currency"
                         id="standard-currency"
                         name="salary_currency"
-                        value={salary_currency}
+                        defaultValue={salary_currency}
                         className={classes.textField}
                         onChange={onChange}
                         error={!!error}
@@ -576,7 +582,7 @@ const EmployeeForm = () => {
                       <CurrencyTextField
                         label="Site Allowances Fee"
                         variant="standard"
-                        value={siteallows_fee}
+                        defaultValue={siteallows_fee}
                         currencySymbol="$"
                         outputFormat="number"
                         decimalCharacter="."
@@ -609,7 +615,7 @@ const EmployeeForm = () => {
                       <CurrencyTextField
                         label="Per Diem Fee"
                         variant="standard"
-                        value={perdiem_fee}
+                        defaultValue={perdiem_fee}
                         currencySymbol="$"
                         outputFormat="number"
                         decimalCharacter="."
@@ -645,7 +651,7 @@ const EmployeeForm = () => {
                         label="Bank Name"
                         id="standard-bankname"
                         name="bank_name"
-                        value={bank_name}
+                        defaultValue={bank_name}
                         className={classes.textField}
                         onChange={onChange}
                         error={!!error}
@@ -669,6 +675,7 @@ const EmployeeForm = () => {
                         label="Bank Ac No"
                         id="standard-bankacno"
                         name="bank_acno"
+                        defaultValue={bank_acno}
                         value={bank_acno}
                         className={classes.textField}
                         onChange={onChange}
@@ -694,7 +701,7 @@ const EmployeeForm = () => {
                         label="TAP Ac No"
                         id="standard-tapacno"
                         name="tap_acno"
-                        value={tap_acno}
+                        defaultValue={tap_acno}
                         className={classes.textField}
                         onChange={onChange}
                         error={!!error}
@@ -718,7 +725,7 @@ const EmployeeForm = () => {
                         label="SCP Ac No"
                         id="standard-scpacno"
                         name="scp_acno"
-                        value={scp_acno}
+                        defaultValue={scp_acno}
                         className={classes.textField}
                         onChange={onChange}
                         error={!!error}
@@ -743,7 +750,7 @@ const EmployeeForm = () => {
                         label="Work Permit No"
                         id="standard-wpno"
                         name="workpermitno"
-                        value={workpermitno}
+                        defaultValue={workpermitno}
                         className={classes.textField}
                         onChange={onChange}
                         error={!!error}
@@ -767,7 +774,7 @@ const EmployeeForm = () => {
                         id="standard-wpexpiry"
                         name="workpermit_expirydate"
                         type="date"
-                        value={workpermit_expirydate}
+                        defaultValue={workpermit_expirydate}
                         className={classes.textField}
                         onChange={onChange}
                         error={!!error}
@@ -797,7 +804,7 @@ const EmployeeForm = () => {
                         id="standard-joindate"
                         name="date_of_join"
                         type="date"
-                        value={date_of_join}
+                        defaultValue={date_of_join}
                         className={classes.textField}
                         onChange={onChange}
                         error={!!error}
@@ -824,7 +831,7 @@ const EmployeeForm = () => {
                         id="standard-resigndate"
                         name="date_of_resign"
                         type="date"
-                        value={date_of_resign}
+                        defaultValue={date_of_resign}
                         className={classes.textField}
                         onChange={onChange}
                         error={!!error}
@@ -853,7 +860,7 @@ const EmployeeForm = () => {
                         id="standard-annualleave"
                         name="leave_entitled"
                         type="numeric"
-                        value={leave_entitled}
+                        defaultValue={leave_entitled}
                         className={classes.textField}
                         onChange={onChange}
                         error={!!error}
@@ -881,7 +888,7 @@ const EmployeeForm = () => {
                         id="standard-leavebal"
                         name="leave_bf"
                         type="numeric"
-                        value={leave_bf}
+                        defaultValue={leave_bf}
                         className={classes.textField}
                         onChange={onChange}
                         error={!!error}
@@ -910,7 +917,7 @@ const EmployeeForm = () => {
                         label="Designation"
                         id="standard-designation"
                         name="designation"
-                        value={designation}
+                        defaultValue={designation}
                         className={classes.textField}
                         onChange={onChange}
                         error={!!error}
@@ -933,7 +940,7 @@ const EmployeeForm = () => {
                         label="Department"
                         id="standard-department"
                         name="department"
-                        value={department}
+                        defaultValue={department}
                         className={classes.textField}
                         onChange={onChange}
                         error={!!error}
@@ -958,7 +965,7 @@ const EmployeeForm = () => {
                         label="Reporting To"
                         id="standard-reportingto"
                         name="reporting_to"
-                        value={reporting_to}
+                        defaultValue={reporting_to}
                         className={classes.textField}
                         onChange={(e) => {
                           onChange(e.target.value);
@@ -991,7 +998,7 @@ const EmployeeForm = () => {
                         label="Reporting Email"
                         id="standard-reportingemail"
                         name="reporting_email"
-                        value={reportemail}
+                        defaultValue={reportemail}
                         className={classes.textField}
                         onChange={onChange}
                         error={!!error}

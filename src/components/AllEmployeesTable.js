@@ -31,7 +31,7 @@ export default function AllEmployeesTable() {
   const { designations } = useDesignations();
   const { departments } = useDepartments();
   const { employees, setEmployeeId } = useEmployees();
-  const { allemployees, setAllEmpId } = useAllEmployees();
+  //const { allemployees, setAllEmpId } = useAllEmployees();
   const [empId, setEmpId] = useRecoilState(editEmployeeIdState);
   const deleteEmployees = useDeleteEmployees();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -68,9 +68,9 @@ export default function AllEmployeesTable() {
 
   const { loadDepartments, loadDesignations, resetTables } = useTablesContext();
 
-  useEffect(() => {
-    setAllEmpId("111");
-  }, []);
+  // useEffect(() => {
+  //   setAllEmpId("111");
+  // }, []);
 
   // useEffect(() => {
   //   resetEmployees();
@@ -139,7 +139,7 @@ export default function AllEmployeesTable() {
   };
 
   const Reset_PW = () => {
-    allemployees.forEach((rec) => {
+    employees.forEach((rec) => {
       if (rec.tableData.checked) {
         try {
           if (rec.password) {
@@ -164,7 +164,7 @@ export default function AllEmployeesTable() {
         }
       }
     });
-    allemployees.forEach((d) => {
+    employees.forEach((d) => {
       if (d.tableData) d.tableData.checked = false;
     });
   };
@@ -180,7 +180,9 @@ export default function AllEmployeesTable() {
         <Box maxW="100%" pt="5px">
         <MaterialTable
           columns={columns}
-          data={allemployees.sort((a, b) =>
+          data={employees
+            .filter((r)=>!r.hasresigned )
+            .sort((a, b) =>
             a.name > b.name ? 1 : b.name > a.name ? -1 : 0
           )}
           title="Employees Listing"

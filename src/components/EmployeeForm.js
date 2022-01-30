@@ -53,6 +53,7 @@ const initial_values = {
   scp_acno: "",
   date_of_join: null,
   date_of_resign: null,
+  hasresigned: false,
   designation: "",
   department: "",
   passportno: "",
@@ -69,7 +70,7 @@ const initial_values = {
 const EmployeeForm = () => {
   const classes = useStyles();
   const { employees, employeeId, setEmployeeId } = useEmployees();
-  const { allemployees, setAllEmpId } = useAllEmployees();
+  //const { allemployees, setAllEmpId } = useAllEmployees();
   const addEmployees = useAddEmployees();
   const updateEmployees = useUpdateEmployees();
   //const currencyRate = useCurrency()
@@ -78,11 +79,12 @@ const EmployeeForm = () => {
   const [reportemail, setReportEmail] = useState("");
   const [empage, setEmpage] = useState(0);
   const [checktap, setCheckTap] = useState(false);
+  const [isresigned, setIsresigned] = useState(false);
   const [empId, setEmpId] = useRecoilState(editEmployeeIdState);
   const { handleSubmit, control, setValue, register } = useForm();
   const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
   const { isEditing, editEmployeeID } = useEmployeesContext();
-  const single_employee = allemployees
+  const single_employee = employees
     .filter((r) => r.id === editEmployeeID)
     .map((r) => {
       return { ...r };
@@ -108,6 +110,7 @@ const EmployeeForm = () => {
     scp_acno,
     date_of_join,
     date_of_resign,
+    hasresigned,
     designation,
     department,
     passportno,
@@ -157,14 +160,15 @@ const EmployeeForm = () => {
     let age = calculateAge(birthdate);
     setEmpage(age);
     setCheckTap(tap_checkbox);
+    setIsresigned(hasresigned);
     setReportEmail(reporting_email);
   }, []);
 
-  useEffect(() => {
-    setAllEmpId("111");
-  }, []);
+  // useEffect(() => {
+  //   setAllEmpId("111");
+  // }, []);
 
-  if (!allemployees) {
+  if (!employees) {
     return <h2>Loading ...</h2>;
   }
   return (
@@ -828,33 +832,63 @@ const EmployeeForm = () => {
                   }}
                   //rules={{ required: "Email is required" }}
                 />
-                <Controller
-                  name="date_of_resign"
-                  control={control}
-                  defaultValue={date_of_resign}
-                  render={({
-                    field: { onChange, value },
-                    fieldState: { error },
-                  }) => {
-                    return (
-                      <TextField
-                        label="Resign Date"
-                        id="standard-resindate"
-                        name="date_of_resign"
-                        type="date"
-                        defaultValue={date_of_resign}
-                        className={classes.textField}
-                        onChange={onChange}
-                        error={!!error}
-                        helperText={error ? error.message : null}
-                        InputLabelProps={{
-                          shrink: true,
-                        }}
-                      />
-                    );
-                  }}
-                  //rules={{ required: "Email is required" }}
-                />
+                <div>
+                  <Controller
+                    name="date_of_resign"
+                    control={control}
+                    defaultValue={date_of_resign}
+                    render={({
+                      field: { onChange, value },
+                      fieldState: { error },
+                    }) => {
+                      return (
+                        <TextField
+                          label="Resign Date"
+                          id="standard-resindate"
+                          name="date_of_resign"
+                          type="date"
+                          defaultValue={date_of_resign}
+                          className={classes.textField}
+                          onChange={onChange}
+                          error={!!error}
+                          helperText={error ? error.message : null}
+                          InputLabelProps={{
+                            shrink: true,
+                          }}
+                        />
+                      );
+                    }}
+                    //rules={{ required: "Email is required" }}
+                  />
+
+                  <Controller
+                    name="hasresigned"
+                    control={control}
+                    render={({
+                      field: { onChange, value },
+                      fieldState: { error },
+                    }) => {
+                      return (
+                        <FormControlLabel
+                          control={
+                            <Checkbox
+                              name="hasresigned"
+                              defaultValue={hasresigned}
+                              checked={isresigned}
+                              type="checkbox"
+                              onChange={(e) => {
+                                onChange(e.target.checked);
+                                setIsresigned(e.target.checked);
+                              }}
+                            />
+                          }
+                          label="Resigned"
+                        />
+                      );
+                    }}
+                    //rules={{ required: "IC No required" }}
+                  />
+                </div>
               </div>
               <div>
                 <Controller

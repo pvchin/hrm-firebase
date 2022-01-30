@@ -632,7 +632,7 @@ const Payrun = () => {
             <Box h="500" w="full" overflow="scroll">
               <MaterialTable
                 columns={columns}
-                data={employees}
+                data={employees.filter((r)=>!r.hasresigned)}
                 title="Employee Listing"
                 options={{
                   filtering: false,

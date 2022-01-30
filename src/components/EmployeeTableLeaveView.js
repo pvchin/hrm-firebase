@@ -50,7 +50,7 @@ const columns = [
     cellStyle: {
       width: 60,
     },
-  },
+  }, 
   {
     title: "Total Leave",
     field: "leave_total",
@@ -169,6 +169,7 @@ export default function EmployeeTableLeaveView({ year }) {
           const leaveBf = isNaN(emp[index].leave_bf) ? 0 : emp[index].leave_bf;
           //const leaveCd = isNaN(emp[index].leave_cd) ? 0 : emp[index].leave_cd;
           const leaveCd = 0;
+          emp[index].leave_cd = leaveCd;
           emp[index].leave_total = leaveEntitled + leaveBf;
           emp[index].leave_taken = leaveTaken + leaveCd;
           emp[index].leave_pending = leavePending;
@@ -179,7 +180,7 @@ export default function EmployeeTableLeaveView({ year }) {
   };
 
   useEffect(() => {
-    Build_EmpData("2022");
+    Build_EmpData(YEAR);
   }, []);
 
   return (

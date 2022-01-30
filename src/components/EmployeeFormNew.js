@@ -122,7 +122,7 @@ const EmployeeFormNew = () => {
   //const [alert, setAlert] = useState(false);
   const { handleSubmit, control } = useForm();
   const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
-  console.log("emplevel", loginLevel);
+  //console.log("emplevel", loginLevel);
 
   const calculateAge = (dob) => {
     var today = new Date();

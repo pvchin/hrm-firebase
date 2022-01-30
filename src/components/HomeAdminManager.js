@@ -545,7 +545,7 @@ const HomeAdminManager = () => {
                           <option value="2021">2021</option>
                           <option value="2022">2022</option>
                         </Select>
-                        {/* <Box size="xl" py={2}>
+                        <Box size="xl" py={2}>
                           <Text fontSize="lg">
                             <ExportLeave2Excel
                               filename="leave"
@@ -553,7 +553,7 @@ const HomeAdminManager = () => {
                               title="Leave"
                             />
                           </Text>
-                        </Box> */}
+                        </Box>
                       </HStack>
                     </Box>
                   </HStack>
