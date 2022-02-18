@@ -25,7 +25,7 @@ import { loginLevelState } from "./data/atomdata";
 import BarChart from "../helpers/BarChart";
 import BarChartStack from "../helpers/BarChartStack";
 
-import EmployeeTableLeaveView from "./EmployeeTableLeaveView";
+import EmployeeTableLeaveView from "./EmployeeTableLeaveViewTabs";
 import ExpensesTableViewSummary from "./ExpenseTableViewSummary";
 import ExpenseSummaryTableView from "./ExpensesSummaryTableView";
 import LeavesTableViewSummary from "./LeavesTableViewSummary";

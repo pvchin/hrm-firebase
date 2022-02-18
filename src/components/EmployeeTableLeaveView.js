@@ -50,7 +50,7 @@ const columns = [
     cellStyle: {
       width: 60,
     },
-  }, 
+  },
   {
     title: "Total Leave",
     field: "leave_total",
@@ -148,7 +148,7 @@ export default function EmployeeTableLeaveView({ year }) {
             .map((rec) => {
               return { ...rec };
             });
-          console.log("leavedata", leavedata);
+          //console.log("leavedata", leavedata);
           const leaveTaken = leavedata.reduce((acc, item) => {
             if (item.status === "Approved") {
               return acc + item.no_of_days;
@@ -188,7 +188,9 @@ export default function EmployeeTableLeaveView({ year }) {
       <div style={{ maxWidth: "100%", paddingTop: "5px" }}>
         <MaterialTable
           columns={columns}
-          data={empdata}
+          data={empdata
+            .filter((r) => !r.hasresigned)
+            .sort((a, b) => (a.name > b.name ? 1 : b.name > a.name ? -1 : 0))}
           title="Employee Leave Details"
           actions={[
             (rowData) => ({

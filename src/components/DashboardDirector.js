@@ -8,7 +8,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 // import Orders from "./Orders";
 
 import Appbanner from "./Appbanner";
-import Example from "./Example8";
+import Example from "./Example6";
 import SideDrawer from "./SideDrawer";
 import SingleEmployee from "./SingleEmployee";
 import SingleLeave from "./SingleLeave";

@@ -39,4 +39,6 @@ export const queryKeys = {
   hocwhy: "hocwhy",
   hocwhydetails: "hocwhydetails",
   yearendleavebal: "yearendleavebal",
+  jobhistory: "jobhistory",
+  jobstatus: "jobstatus",
 };

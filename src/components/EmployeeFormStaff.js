@@ -28,6 +28,7 @@ import EmpFamily from "./EmpFamily";
 import EmpEducations from "./EmpEducations";
 import EmpExperiences from "./EmpExperiences";
 import EmpTrainings from "./EmpTrainings";
+import EmpJobhistory from "./EmpJobhistory"
 import App from "../utils/firebase";
 
 const initial_values = {
@@ -809,6 +810,7 @@ const EmployeeForm = () => {
                         onChange={onChange}
                         error={!!error}
                         helperText={error ? error.message : null}
+                        inputProps={{ readOnly: true }}
                         InputLabelProps={{
                           shrink: true,
                         }}
@@ -836,6 +838,7 @@ const EmployeeForm = () => {
                         onChange={onChange}
                         error={!!error}
                         helperText={error ? error.message : null}
+                        inputProps={{ readOnly: true }}
                         InputLabelProps={{
                           shrink: true,
                         }}
@@ -1022,6 +1025,9 @@ const EmployeeForm = () => {
         </Paper>
       </form>
 
+      <Grid xs={12}>
+        <EmpJobhistory />
+      </Grid>
       <Grid xs={12}>
         <EmpFamily />
       </Grid>

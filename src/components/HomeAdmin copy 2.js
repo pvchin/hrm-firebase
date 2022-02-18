@@ -37,7 +37,7 @@ import PayslipTableAdmin from "./PayslipTableAdmin";
 import DailyAllowancesTableAdmin from "./DailyAllowancesTableAdmin";
 import TrainingsTableViewAdmin from "./TrainingsTableViewAdmin";
 import WPExpiryViewAdmin from "./WPExpiryViewAdmin";
-import EmployeeTableLeaveView from "./EmployeeTableLeaveView";
+import EmployeeTableLeaveView from "./EmployeeTableLeaveViewTabs";
 import LeavesTableViewSummary from "./LeavesTableViewSummary";
 
 const drawerWidth = 240;

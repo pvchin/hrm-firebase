@@ -17,6 +17,7 @@ module.exports = async (event) => {
 
     return formattedReturn(200, formattedHoclocation);
   }
+  
   try {
     if (fv) {
       // const { id, linkid, ...fields } = JSON.parse(event.body);

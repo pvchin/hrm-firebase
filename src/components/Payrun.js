@@ -112,6 +112,9 @@ const Payrun = () => {
   const [isPayrunExist, setIsPayrunExist] = useState(false);
   const [isSubmit, setIsSubmit] = useState(false);
 
+  //filter regisned employees
+  const allemployees = employees.filter((r) => !r.hasresigned && !r.nonpayroll)
+
   useEffect(() => {
     if (!payrun_loading) {
       setLoadPaybatch(false);
@@ -142,7 +145,7 @@ const Payrun = () => {
   const handlePayrunSubmit = (e) => {
     e.preventDefault();
     setPayrunId("");
-    var count = employees.reduce((acc, r) => {
+    var count = allemployees.reduce((acc, r) => {
       if (r.tableData.checked) {
         return acc + 1;
       } else {
@@ -209,8 +212,8 @@ const Payrun = () => {
       tmpnettpaybnd = 0;
 
     resetPayslipsData();
-    employees &&
-      employees.forEach((emp, index) => {
+    allemployees &&
+      allemployees.forEach((emp, index) => {
         exp = 0;
         allows = 0;
         tmpbasicsalary = 0;
@@ -632,7 +635,8 @@ const Payrun = () => {
             <Box h="500" w="full" overflow="scroll">
               <MaterialTable
                 columns={columns}
-                data={employees.filter((r)=>!r.hasresigned)}
+                //data={employees.filter((r) => !r.hasresigned && !r.nonpayroll)}
+                data={allemployees}
                 title="Employee Listing"
                 options={{
                   filtering: false,

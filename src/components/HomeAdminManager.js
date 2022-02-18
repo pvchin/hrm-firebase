@@ -40,6 +40,9 @@ import PayslipSummaryTableView from "./PayslipSummaryTableView";
 import { useExpensesPeriod } from "./expenses/useExpensesPeriod";
 import LeavesTableApproval from "./LeaveTableApproval";
 import ExportLeave2Excel from "./ExportLeave2Excel";
+import ExportHoc2Excel from "./ExportHoc2Excel";
+import Export2Excel from "./Export2Excel"
+import { useHoc } from "./hoc/useHoc";
 
 const drawerWidth = 240;
 
@@ -437,6 +440,7 @@ const HomeAdminManager = () => {
   const [selecthocyear, setSelectHocYear] = useState("");
   const currentyear = new Date().getFullYear();
   const currentmonth = new Date().getMonth();
+   const { hoc, filter, setFilter, setHocId } = useHoc();
 
   // const Build_ExpData = () => {
   //   const currentmonth = new Date().getMonth();
@@ -1169,15 +1173,15 @@ const HomeAdminManager = () => {
                           <option value="2021">2021</option>
                           <option value="2022">2022</option>
                         </Select>
-                        {/* <Box size="xl" py={2}>
+                        <Box size="xl" py={2}>
                           <Text fontSize="lg">
-                            <ExportLeave2Excel
-                              filename="leave"
-                              dataset={dataset}
-                              title="Leave"
-                            />
+                            {/* <Export2Excel
+                              filename="hoc"
+                              dataset={hoc}
+                              title="Hoc"
+                            /> */}
                           </Text>
-                        </Box> */}
+                        </Box>
                       </HStack>
                     </Box>
                   </HStack>

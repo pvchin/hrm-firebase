@@ -1,7 +1,15 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import MaterialTable, { MTableToolbar } from "material-table";
 import { useHistory } from "react-router-dom";
-import { Box} from "@chakra-ui/react"
+import {
+  Box,
+  Heading,
+  Tabs,
+  TabList,
+  TabPanels,
+  Tab,
+  TabPanel,
+} from "@chakra-ui/react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, Icon } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
@@ -20,7 +28,7 @@ import { useTablesContext } from "../context/tables_context";
 import { useDepartments } from "./departments/useDepartments";
 import { useDesignations } from "./designations/useDesignations";
 import { useEmployees } from "./employees/useEmployees";
-import { useAllEmployees } from "./employees/useAllEmployees";
+//import { useAllEmployees } from "./employees/useAllEmployees";
 import { useDeleteEmployees } from "./employees/useDeleteEmployees";
 import App from "../utils/firebase";
 
@@ -176,101 +184,192 @@ export default function AllEmployeesTable() {
   // }
   return (
     <div className={classes.root}>
-      {/* <div style={{ maxWidth: "100%", paddingTop: "5px" }}> */}
-        <Box maxW="100%" pt="5px">
-        <MaterialTable
-          columns={columns}
-          data={employees
-            .filter((r)=>!r.hasresigned )
-            .sort((a, b) =>
-            a.name > b.name ? 1 : b.name > a.name ? -1 : 0
-          )}
-          title="Employees Listing"
-          icons={{
-            Add: (props) => <AddIcon />,
-            Edit: (props) => <EditIcon />,
-            Delete: (props) => <DeleteIcon />,
-            Clear: (props) => <DeleteIcon />,
-            Check: (props) => <CheckIcon />,
-            Search: (props) => <SearchIcon />,
-            ResetSearch: (props) => <DeleteIcon />,
-          }}
-          actions={[
-            {
-              icon: "edit",
-              tooltip: "Edit Record",
-              position: "row",
-              onClick: (event, rowData) => {
-                update_Employee(rowData);
-              },
-            },
-            {
-              icon: "delete",
-              tooltip: "Delete Record",
-              position: "row",
-              onClick: (event, rowData) => {
-                delete_Employee(rowData);
-              },
-            },
-            {
-              icon: "add",
-              tooltip: "Add Record",
-              isFreeAction: true,
-              onClick: (event, rowData) => {
-                add_Employee(rowData);
-              },
-            },
-          ]}
-          options={{
-            filtering: true,
-            selection: true,
-            paging: false,
-            headerStyle: {
-              //backgroundColor: "#DAAD86",
-              backgroundColor: "#90CDF4",
-              color: "secondary",
-            },
-            showTitle: true,
-          }}
-          components={{
-            Toolbar: (props) => (
-              <div>
-                <MTableToolbar {...props} />
-                <div style={{ padding: "5px 10px" }}>
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    color="secondary"
-                    className={classes.button}
-                    onClick={Reset_PW}
-                  >
-                    Reset PW <Icon className={classes.rightIcon}>send</Icon>
-                  </Button>
-                </div>
-              </div>
-            ),
-          }}
-        />
-        <CustomDialog
-          isOpen={isDialogOpen}
-          handleClose={handleDialogClose}
-          title=""
-          showButton={true}
-          isFullscreen={true}
-          isFullwidth={true}
-        >
-          <EmployeeView handleDialogClose={handleDialogClose} />
-        </CustomDialog>
-
-        <AlertDialogBox
-          onClose={handleAlertClose}
-          onConfirm={handleOnDeleteConfirm}
-          isOpen={isAlertOpen}
-          title="Delete Employee"
-        >
-          <h2>Are you sure you want to delete ?</h2>
-        </AlertDialogBox>
+      <Box p={2}>
+        <Heading size="md">Employee Listing</Heading>
       </Box>
+      <Tabs>
+        <TabList>
+          <Tab>Current</Tab>
+          <Tab>Resigned</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>
+            <Box maxW="100%" pt="5px">
+              <MaterialTable
+                columns={columns}
+                data={employees
+                  .filter((r) => !r.hasresigned)
+                  .sort((a, b) =>
+                    a.name > b.name ? 1 : b.name > a.name ? -1 : 0
+                  )}
+                title="Current Employees"
+                icons={{
+                  Add: (props) => <AddIcon />,
+                  Edit: (props) => <EditIcon />,
+                  Delete: (props) => <DeleteIcon />,
+                  Clear: (props) => <DeleteIcon />,
+                  Check: (props) => <CheckIcon />,
+                  Search: (props) => <SearchIcon />,
+                  ResetSearch: (props) => <DeleteIcon />,
+                }}
+                actions={[
+                  {
+                    icon: "edit",
+                    tooltip: "Edit Record",
+                    position: "row",
+                    onClick: (event, rowData) => {
+                      update_Employee(rowData);
+                    },
+                  },
+                  {
+                    icon: "delete",
+                    tooltip: "Delete Record",
+                    position: "row",
+                    onClick: (event, rowData) => {
+                      delete_Employee(rowData);
+                    },
+                  },
+                  {
+                    icon: "add",
+                    tooltip: "Add Record",
+                    isFreeAction: true,
+                    onClick: (event, rowData) => {
+                      add_Employee(rowData);
+                    },
+                  },
+                ]}
+                options={{
+                  filtering: true,
+                  selection: true,
+                  paging: false,
+                  headerStyle: {
+                    //backgroundColor: "#DAAD86",
+                    backgroundColor: "#90CDF4",
+                    color: "secondary",
+                  },
+                  showTitle: true,
+                }}
+                components={{
+                  Toolbar: (props) => (
+                    <div>
+                      <MTableToolbar {...props} />
+                      <div style={{ padding: "5px 10px" }}>
+                        <Button
+                          type="submit"
+                          variant="contained"
+                          color="secondary"
+                          className={classes.button}
+                          onClick={Reset_PW}
+                        >
+                          Reset PW{" "}
+                          <Icon className={classes.rightIcon}>send</Icon>
+                        </Button>
+                      </div>
+                    </div>
+                  ),
+                }}
+              />
+            </Box>
+          </TabPanel>
+          <TabPanel>
+            <Box maxW="100%" pt="5px">
+              <MaterialTable
+                columns={columns}
+                data={employees
+                  .filter((r) => r.hasresigned)
+                  .sort((a, b) =>
+                    a.name > b.name ? 1 : b.name > a.name ? -1 : 0
+                  )}
+                title="Resigned Employees"
+                icons={{
+                  Add: (props) => <AddIcon />,
+                  Edit: (props) => <EditIcon />,
+                  Delete: (props) => <DeleteIcon />,
+                  Clear: (props) => <DeleteIcon />,
+                  Check: (props) => <CheckIcon />,
+                  Search: (props) => <SearchIcon />,
+                  ResetSearch: (props) => <DeleteIcon />,
+                }}
+                actions={[
+                  {
+                    icon: "edit",
+                    tooltip: "Edit Record",
+                    position: "row",
+                    onClick: (event, rowData) => {
+                      update_Employee(rowData);
+                    },
+                  },
+                  {
+                    icon: "delete",
+                    tooltip: "Delete Record",
+                    position: "row",
+                    onClick: (event, rowData) => {
+                      delete_Employee(rowData);
+                    },
+                  },
+                  {
+                    icon: "add",
+                    tooltip: "Add Record",
+                    isFreeAction: true,
+                    onClick: (event, rowData) => {
+                      add_Employee(rowData);
+                    },
+                  },
+                ]}
+                options={{
+                  filtering: true,
+                  selection: false,
+                  paging: false,
+                  headerStyle: {
+                    //backgroundColor: "#DAAD86",
+                    backgroundColor: "#90CDF4",
+                    color: "secondary",
+                  },
+                  showTitle: true,
+                }}
+                components={{
+                  Toolbar: (props) => (
+                    <div>
+                      <MTableToolbar {...props} />
+                      <div style={{ padding: "5px 10px" }}>
+                        {/* <Button
+                          type="submit"
+                          variant="contained"
+                          color="secondary"
+                          className={classes.button}
+                          onClick={Reset_PW}
+                        >
+                          Reset PW{" "}
+                          <Icon className={classes.rightIcon}>send</Icon>
+                        </Button> */}
+                      </div>
+                    </div>
+                  ),
+                }}
+              />
+            </Box>
+          </TabPanel>
+        </TabPanels>
+      </Tabs>
+      <CustomDialog
+        isOpen={isDialogOpen}
+        handleClose={handleDialogClose}
+        title=""
+        showButton={true}
+        isFullscreen={true}
+        isFullwidth={true}
+      >
+        <EmployeeView handleDialogClose={handleDialogClose} />
+      </CustomDialog>
+
+      <AlertDialogBox
+        onClose={handleAlertClose}
+        onConfirm={handleOnDeleteConfirm}
+        isOpen={isAlertOpen}
+        title="Delete Employee"
+      >
+        <h2>Are you sure you want to delete ?</h2>
+      </AlertDialogBox>
     </div>
   );
 }

@@ -142,6 +142,7 @@ const Payrun = () => {
 
   const handlePayrunSubmit = (e) => {
     e.preventDefault();
+    console.log("employees", employees)
     setPayrunId("");
     var count = employees.reduce((acc, r) => {
       if (r.tableData.checked) {

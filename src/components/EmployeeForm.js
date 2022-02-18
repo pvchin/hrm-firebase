@@ -31,6 +31,7 @@ import EmpFamily from "./EmpFamily";
 import EmpEducations from "./EmpEducations";
 import EmpExperiences from "./EmpExperiences";
 import EmpTrainings from "./EmpTrainings";
+import EmpJobhistory from "./EmpJobhistory";
 
 const initial_values = {
   name: "",
@@ -1096,6 +1097,16 @@ const EmployeeForm = () => {
       </form>
 
       <div>
+        {/* <Grid xs={12}>
+          <EmpJobhistory
+            staffname={name}
+            empid={editEmployeeID}
+            basicsalary={basic_salary}
+            siteallows={siteallows_fee}
+            department={department}
+            designaton={designation}
+          />
+        </Grid> */}
         <Grid xs={12}>
           <EmpFamily />
         </Grid>
