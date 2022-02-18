@@ -260,6 +260,7 @@ const EmployeeForm = () => {
                         defaultValue={email}
                         className={classes.textField}
                         onChange={onChange}
+                        inputProps={{ readOnly: true }}
                         error={!!error}
                         helperText={error ? error.message : null}
                       />

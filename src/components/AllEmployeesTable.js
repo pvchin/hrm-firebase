@@ -4,11 +4,19 @@ import { useHistory } from "react-router-dom";
 import {
   Box,
   Heading,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
   Tabs,
   TabList,
   TabPanels,
   Tab,
   TabPanel,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, Icon } from "@material-ui/core";
@@ -31,6 +39,7 @@ import { useEmployees } from "./employees/useEmployees";
 //import { useAllEmployees } from "./employees/useAllEmployees";
 import { useDeleteEmployees } from "./employees/useDeleteEmployees";
 import App from "../utils/firebase";
+import EmployeeFormAdd from "./EmployeeFormAdd";
 
 export default function AllEmployeesTable() {
   let history = useHistory();
@@ -44,7 +53,11 @@ export default function AllEmployeesTable() {
   const deleteEmployees = useDeleteEmployees();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isAlertOpen, setIsAlertOpen] = useState(false);
-
+  const {
+    isOpen: isAddEmpFormOpen,
+    onOpen: onAddEmpFormOpen,
+    onClose: onAddEmpFormClose,
+  } = useDisclosure();
   const columns = useMemo(() => [
     {
       title: "Name",
@@ -97,11 +110,12 @@ export default function AllEmployeesTable() {
   };
 
   const add_Employee = async (data) => {
-    resetSingleEmployee();
-    setEditEmployeeID("");
-    setIsEditingOff();
+    //resetSingleEmployee();
+    //setEditEmployeeID("");
+    //setIsEditingOff();
     //handleDialogOpen();
-    history.push("/singleemployee");
+    onAddEmpFormOpen()
+    //history.push("/singleemployee");
   };
 
   const delete_Employee = (data) => {
@@ -351,6 +365,27 @@ export default function AllEmployeesTable() {
           </TabPanel>
         </TabPanels>
       </Tabs>
+      <Modal
+        closeOnOverlayClick={false}
+        isOpen={isAddEmpFormOpen}
+        onClose={onAddEmpFormClose}
+        size="md"
+      >
+        <ModalOverlay />
+        <ModalContent>
+          {/* <ModalHeader>Product Form</ModalHeader> */}
+          <ModalCloseButton />
+          <ModalBody>
+            <EmployeeFormAdd onAddEmpFormClose={onAddEmpFormClose} />
+          </ModalBody>
+
+          {/* <ModalFooter>
+            <Button colorScheme="blue" mr={3} onClick={onProductClose}>
+              Close
+            </Button>
+          </ModalFooter> */}
+        </ModalContent>
+      </Modal>
       <CustomDialog
         isOpen={isDialogOpen}
         handleClose={handleDialogClose}
