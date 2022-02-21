@@ -2,7 +2,6 @@ import React, { useState, useEffect, useMemo } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { useCustomToast } from "../helpers/useCustomToast";
 import { useTable } from "react-table";
-import ReactWhatsapp from "react-whatsapp";
 import * as emailjs from "emailjs-com";
 import axios from "axios";
 import clsx from "clsx";

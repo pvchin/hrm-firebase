@@ -10,7 +10,7 @@ import Appbanner from "./Appbanner";
 import Example from "./Example6";
 import SideDrawer from "./SideDrawer";
 import SingleEmployee from "./SingleEmployee";
-import SingleEmployeeStaff from "./SingleEmployeeStaff old";
+import SingleEmployeeStaff from "./SingleEmployeeStaff";
 import SingleLeave from "./SingleLeave";
 import SingleExpense from "./SingleExpense";
 import SingleDailyAllowance from "./SingleDailyAllowance";
