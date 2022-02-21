@@ -23,7 +23,6 @@ import { useUpdateExpenses } from "./expenses/useUpdateExpenses";
 import { useDailyAllowsPayrun } from "./dailyallows/useDailyAllowsPayrun";
 import { useUpdateDailyAllows } from "./dailyallows/useUpdateDailyAllows";
 
-
 const FILTERSTRING = "Pending";
 
 const columns = [
@@ -92,6 +91,9 @@ export default function PayslipTable() {
     loadPendingPayslips,
   } = usePayslipsContext();
 
+  useEffect(() => {
+    setPSBPayrunId("XXX");
+  }, []);
   // useEffect(() => {
   //   if (single_payslip.payrun) {
   //     console.log("single_payslip", single_payslip);
