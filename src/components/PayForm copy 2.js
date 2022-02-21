@@ -116,7 +116,7 @@ const PayForm = ({
   const [isLoad, setIsLoad] = useState(false);
 
   useEffect(() => {
-    setState(prev => prev = { ...formdata });
+    setState({ ...formdata });
     setLoadFormdata(false);
   }, [loadFormdata]);
 
@@ -147,7 +147,7 @@ const PayForm = ({
         : value;
 
     //setFormInput({ [name]: val });
-    setState(prev => prev = { ...state, [name]: val });
+    setState({ ...state, [name]: val });
     Update_Empdata({ name: name, value: val });
     setIsLoad(true);
   };
@@ -194,8 +194,8 @@ const PayForm = ({
     wages = isNaN(state.wages) || state.wages === undefined ? 0 : state.wages;
     totalTAP = state.tap_checkbox ? Math.ceil(wages * 0.05) : 0;
     totalSCP = state.tap_checkbox
-    ? Math.round((wages + Number.EPSILON) * 0.035 * 100) / 100
-    : 0;
+      ? Math.round((wages + Number.EPSILON) * 0.035 * 100) / 100
+      : 0;
     if (totalSCP > 98) {
       totalSCP = 98;
     }
@@ -248,7 +248,7 @@ const PayForm = ({
     nettPaybnd =
       Math.round((nettPay + Number.EPSILON) * state.currency_rate * 100) / 100;
 
-    setState(prev => prev = {
+    setState({
       ...state,
       wages: wages,
       total_allowances: allows,
@@ -1281,7 +1281,7 @@ const PayForm = ({
                 </Button>
               </div>
             </Grid>
-            
+
             {state.salary_currency && state.salary_currency !== "BND" && (
               <Grid
                 item
