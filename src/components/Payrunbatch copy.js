@@ -290,7 +290,6 @@ const Payrunbatch = () => {
   const saveIndividualPayslips = () => {
     singlebatchpayslip.forEach((rec) => {
       const { id, rec_id, tableData, ...fields } = rec;
-      console.log("updatepayslip", rec);
       updatePayslip({ id, ...fields });
     });
   };
@@ -350,20 +349,17 @@ const Payrunbatch = () => {
       return acc + Math.round((value + Number.EPSILON) * 100) / 100;
     }, 0);
 
-    setPayrundata(
-      (prev) =>
-        (prev = {
-          ...payrundata,
-          totalpayroll: totalpayroll,
-          totalwages: totalwages,
-          totaltap: totaltap,
-          totalscp: totalscp,
-          totalallows: totalallows,
-          totaldeducts: totaldeducts,
-          totalsiteallows: totalsiteallows,
-          totalexpensesclaims: totalexpensesclaims,
-        })
-    );
+    setPayrundata(prev => prev = {
+      ...payrundata,
+      totalpayroll: totalpayroll,
+      totalwages: totalwages,
+      totaltap: totaltap,
+      totalscp: totalscp,
+      totalallows: totalallows,
+      totaldeducts: totaldeducts,
+      totalsiteallows: totalsiteallows,
+      totalexpensesclaims: totalexpensesclaims,
+    });
   };
 
   const handleSavePayrun = () => {
@@ -395,7 +391,7 @@ const Payrunbatch = () => {
 
   const handleVerifyPayslips = (e) => {
     e.preventDefault();
-    setPayrundata((prev) => (prev = { ...payrundata, status: "Verified" }));
+    setPayrundata(prev => prev = { ...payrundata, status: "Verified" });
     setPayrunStatus("Verified");
     // save individual payslips
     saveIndividualPayslips();
@@ -420,8 +416,8 @@ const Payrunbatch = () => {
 
   const handleEmpButtonClick = (index) => {
     const paydata = singlebatchpayslip[index];
-    //setFormdata(prev => prev = initial_formdata);
-    setFormdata((prev) => (prev = { ...initial_formdata, ...paydata }));
+    setFormdata(prev => prev = initial_formdata);
+    setFormdata(prev => prev = { ...initial_formdata, ...paydata });
     //setFormdata({ ...initial_formdata, ...paydata });
     setLoadFormdata(true);
   };
