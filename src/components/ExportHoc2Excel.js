@@ -1,11 +1,11 @@
 import React from "react";
-import ReactExport from "react-data-export";
+//import ReactExport from "react-data-export";
 //import { ExcelFile, ExcelSheet } from "react-export-excel";
 import { Button } from "@chakra-ui/react";
 
-const ExcelFile = ReactExport.ExcelFile;
-const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
-const ExcelColumn = ReactExport.ExcelFile.ExcelColumn;
+//const ExcelFile = ReactExport.ExcelFile;
+//const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
+//const ExcelColumn = ReactExport.ExcelFile.ExcelColumn;
 
 const cols = [
   { title: "Findings", width: { wch: 100 } },
@@ -272,13 +272,14 @@ const multiDataSet1 = [
 
 const ExportHoc2Excel = ({ filename, dataset, title }) => {
   return (
+    <div>Excel</div>
     // <ExcelFile element={<Button>Export to Excel</Button>} filename={filename}>
     //   <ExcelSheet dataSet={multiDataSet1} name="Organization" />
     // </ExcelFile>
 
-    <ExcelFile element={<Button>Export to Excel</Button>} filename={filename}>
-      <ExcelSheet dataSet={multiDataSet} name="Leave" />
-    </ExcelFile>
+    // <ExcelFile element={<Button>Export to Excel</Button>} filename={filename}>
+    //   <ExcelSheet dataSet={multiDataSet} name="Leave" />
+    // </ExcelFile>
 
     // <ExcelFile element={<Button>Export to Excel</Button>} filename={filename}>
     //   <ExcelSheet data={dataset} name={title}>
