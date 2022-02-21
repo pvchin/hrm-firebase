@@ -4,8 +4,8 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { Loading } from "./components/app/Loading";
 import { RecoilRoot } from "recoil";
-import { ApolloProvider } from "react-apollo";
-import { ApolloClient } from "apollo-client";
+//import { ApolloProvider } from "react-apollo";
+//import { ApolloClient } from "apollo-client";
 import { HttpLink } from "apollo-link-http";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import App from "./App";
@@ -19,13 +19,13 @@ import { TablesProvider } from "./context/tables_context";
 import { TrainingsProvider } from "./context/trainings_context";
 import { AuthProvider } from "./context/auth_context";
 
-const client = new ApolloClient({
-  link: new HttpLink({
-    uri: "https://localhost:4000/graphql",
-    credentials: "include",
-  }),
-  cache: new InMemoryCache(),
-});
+// const client = new ApolloClient({
+//   link: new HttpLink({
+//     uri: "https://localhost:4000/graphql",
+//     credentials: "include",
+//   }),
+//   cache: new InMemoryCache(),
+// });
 
 const queryClient = new QueryClient();
 
@@ -33,7 +33,7 @@ ReactDOM.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <RecoilRoot>
-        <ApolloProvider client={client}>
+        {/* <ApolloProvider client={client}> */}
           <AuthProvider>
             <EmployeesProvider>
               <PayslipsProvider>
@@ -53,7 +53,7 @@ ReactDOM.render(
               </PayslipsProvider>
             </EmployeesProvider>
           </AuthProvider>
-        </ApolloProvider>
+        {/* </ApolloProvider> */}
       </RecoilRoot>
       <ReactQueryDevtools />
     </QueryClientProvider>

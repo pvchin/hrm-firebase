@@ -14,7 +14,6 @@ import {
   chakra,
 } from "@chakra-ui/react";
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
-import { useTable, useSortBy } from "react-table";
 import MaterialTable from "material-table";
 import { Button, Icon, Grid, TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
