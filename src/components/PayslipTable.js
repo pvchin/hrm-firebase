@@ -93,6 +93,7 @@ export default function PayslipTable() {
 
   useEffect(() => {
     setPSBPayrunId("XXX");
+    setDailyAllowsPayrunId("XXX");
   }, []);
   // useEffect(() => {
   //   if (single_payslip.payrun) {
