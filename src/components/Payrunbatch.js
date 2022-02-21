@@ -349,7 +349,7 @@ const Payrunbatch = () => {
       return acc + Math.round((value + Number.EPSILON) * 100) / 100;
     }, 0);
 
-    setPayrundata({
+    setPayrundata(prev => prev = {
       ...payrundata,
       totalpayroll: totalpayroll,
       totalwages: totalwages,
@@ -374,7 +374,7 @@ const Payrunbatch = () => {
     const tmppayrun = payrun.filter((r) => r.payrun === payslip_period);
     //console.log("paysave", tmppayrun[0].id);
     // eslint-disable-next-line no-lone-blocks
-    console.log("paybatch", payslip_period, payrundata);
+    //console.log("paybatch", payslip_period, payrundata);
     updatePayrun({
       id: tmppayrun[0].id,
       totalpayroll: payrundata.totalpayroll,
@@ -391,7 +391,7 @@ const Payrunbatch = () => {
 
   const handleVerifyPayslips = (e) => {
     e.preventDefault();
-    setPayrundata({ ...payrundata, status: "Verified" });
+    setPayrundata(prev => prev = { ...payrundata, status: "Verified" });
     setPayrunStatus("Verified");
     // save individual payslips
     saveIndividualPayslips();
@@ -416,9 +416,9 @@ const Payrunbatch = () => {
 
   const handleEmpButtonClick = (index) => {
     const paydata = singlebatchpayslip[index];
-    setFormdata(initial_formdata);
-    setFormdata({ ...initial_formdata, ...paydata });
-    setFormdata({ ...initial_formdata, ...paydata });
+    setFormdata(prev => prev = initial_formdata);
+    setFormdata(prev => prev = { ...initial_formdata, ...paydata });
+    //setFormdata({ ...initial_formdata, ...paydata });
     setLoadFormdata(true);
   };
 

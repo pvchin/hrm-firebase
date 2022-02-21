@@ -1,4 +1,4 @@
-import React from "react";
+import React, { lazy } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -43,6 +43,7 @@ import {
   Error,
 } from "../pages";
 
+//const Home = lazy(() => import("../pages/HomePage"));
 const drawerWidth = 240;
 
 export default function DashboardMain({

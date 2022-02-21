@@ -17,10 +17,6 @@ import {
   TabPanel,
 } from "@chakra-ui/react";
 import { TextField, Grid, Paper, Container } from "@material-ui/core";
-import CardLayout from "../helpers/CardLayout";
-import CardLayout2 from "../helpers/CardLayout2";
-import CardLayout3 from "../helpers/CardLayout3";
-import Copyright from "../components/Copyright";
 import { useEmployees } from "./employees/useEmployees";
 import { CustomDialog } from "../helpers/CustomDialog";
 import { useRecoilState } from "recoil";
@@ -29,6 +25,10 @@ import { useLeavesContext } from "../context/leaves_context";
 import { useExpensesContext } from "../context/expenses_context";
 import { usePayslipsContext } from "../context/payslips_context";
 import { useDailyAllowancesContext } from "../context/dailyallowances_context";
+
+import CardLayout from "../helpers/CardLayout";
+import CardLayout2 from "../helpers/CardLayout2";
+import CardLayout3 from "../helpers/CardLayout3";
 import LeaveTableViewAdmin from "./LeaveTableViewAdmin";
 import LeaveTableAdmin from "./LeaveTableManager";
 //import ExpenseTableView from "./ExpenseTableView";
@@ -42,6 +42,13 @@ import TrainingsTableViewAdmin from "./TrainingsTableViewAdmin";
 import WPExpiryViewAdmin from "./WPExpiryViewAdmin";
 import EmployeeTableLeaveView from "./EmployeeTableLeaveView";
 import LeavesTableViewSummary from "./LeavesTableViewSummary";
+import Copyright from "../components/Copyright";
+
+//const Copyright  = React.lazy(()=> import("../components/Copyright"));
+//const CardLayout = React.lazy(() => import("../helpers/CardLayout"));
+//const CardLayout2 = React.lazy(() => import("../helpers/CardLayout2"));
+//const CardLayout3 = React.lazy(() => import("../helpers/CardLayout3"));
+
 
 const drawerWidth = 240;
 
