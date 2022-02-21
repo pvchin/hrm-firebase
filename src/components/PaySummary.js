@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef, useMemo } from "react";
-import ReactToPrint, { useReactToPrint } from "react-to-print";
 import currency from "currency.js";
 import PrintPaySummary from "./PrintPaySummary";
 import {
@@ -102,9 +101,7 @@ const PaySummary = ({ singlebatchpayslip }) => {
     },
   ];
 
-  const handlePrint = useReactToPrint({
-    content: () => componentRef.current,
-  });
+ 
 
   const exportPdfTable = () => {
     PrintPaySummary((singlebatchpayslip = { singlebatchpayslip }));

@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useReactToPrint } from "react-to-print";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import dayjs from "dayjs";
@@ -629,7 +628,12 @@ const Payrunbatch = () => {
                     </Heading>
                   </Box>
                   <Divider backgroundColor="white" />
-                  <Box h="550" border="2px solid white" backgroundColor="cyan.100" overflow="scroll">
+                  <Box
+                    h="550"
+                    border="2px solid white"
+                    backgroundColor="cyan.100"
+                    overflow="scroll"
+                  >
                     {/* {payslipsbatch &&
                       payslipsbatch.map((item, index) => {
                         return (
