@@ -46,62 +46,6 @@ const PaySummary = ({ singlebatchpayslip }) => {
 
   const columns = [
     {
-      title: "Name",
-      field: "name",
-      editable: "never",
-    },
-    {
-      title: "Wages",
-      field: "wages_bnd",
-      editable: "never",
-      type: "currency",
-    },
-    {
-      title: "TAP Amount",
-      field: "tap_amount_bnd",
-      editable: "never",
-      type: "currency",
-    },
-    {
-      title: "SCP Amount",
-      field: "scp_amount_bnd",
-      editable: "never",
-      type: "currency",
-    },
-    {
-      title: "Site Allows",
-      field: "site_allows_bnd",
-      editable: "never",
-      type: "currency",
-    },
-    {
-      title: "Exps Claims",
-      field: "expenses_claims_bnd",
-      editable: "never",
-      type: "currency",
-    },
-    {
-      title: "Allowances",
-      field: "total_allowances_bnd",
-      editable: "never",
-      type: "currency",
-    },
-    {
-      title: "Deductions",
-      field: "total_deductions_bnd",
-      editable: "never",
-      type: "currency",
-    },
-    {
-      title: "Nett Pay",
-      field: "nett_pay_bnd",
-      editable: "never",
-      type: "currency",
-    },
-  ];
-
-  const columns1 = [
-    {
       Header: "Name",
       accessor: "name",
     },
@@ -155,6 +99,8 @@ const PaySummary = ({ singlebatchpayslip }) => {
       Cell: (props) => formatPriceZero(props.value),
     },
   ];
+
+ 
 
   const exportPdfTable = () => {
     PrintPaySummary((singlebatchpayslip = { singlebatchpayslip }));
@@ -395,27 +341,25 @@ const PaySummary = ({ singlebatchpayslip }) => {
             align="center"
             style={{ border: "1px solid white" }}
           >
-            {/* <Box h="400" overflow="scroll">
+            <Box h="400" overflow="scroll">
               <PaySummaryTable columns={columns} data={singlebatchpayslip} />
-            </Box> */}
-            <Box h="400" w="full" overflow="scroll">
-              <MaterialTable
-                columns={columns}
-                data={singlebatchpayslip}
-                title="Payroll"
-                options={{
-                  filtering: false,
-                  search: false,
-                  toolbar: false,
-                  paging: false,
-                  headerStyle: {
-                    backgroundColor: "lightblue",
-                    color: "primary",
-                  },
-                  showTitle: false,
-                }}
-              />
             </Box>
+            {/* <MaterialTable
+              columns={columns}
+              data={singlebatchpayslip}
+              title="Payroll"
+              options={{
+                filtering: false,
+                search: false,
+                toolbar: false,
+
+                headerStyle: {
+                  backgroundColor: "lightblue",
+                  color: "primary",
+                },
+                showTitle: false,
+              }}
+            /> */}
           </Grid>
         </Grid>
         <Grid container direction="row" style={{ border: "1px solid white" }}>

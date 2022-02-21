@@ -44,11 +44,11 @@ import EmployeeTableLeaveView from "./EmployeeTableLeaveView";
 import LeavesTableViewSummary from "./LeavesTableViewSummary";
 import Copyright from "../components/Copyright";
 
+//const EmployeeTableLeaveView = React.lazy(()=> import("./EmployeeTableLeaveView"));
 //const Copyright  = React.lazy(()=> import("../components/Copyright"));
 //const CardLayout = React.lazy(() => import("../helpers/CardLayout"));
 //const CardLayout2 = React.lazy(() => import("../helpers/CardLayout2"));
 //const CardLayout3 = React.lazy(() => import("../helpers/CardLayout3"));
-
 
 const drawerWidth = 240;
 
@@ -140,7 +140,9 @@ const EmployeeView = () => {
         <Stack direction="column">
           <Box>
             <CardLayout2>
-              <LeaveTableViewAdmin />
+              <React.Suspense fallback={<div>Loading...</div>}>
+                <LeaveTableViewAdmin />
+              </React.Suspense>
             </CardLayout2>
           </Box>
           <Box>

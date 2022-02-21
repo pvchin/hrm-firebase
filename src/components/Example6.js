@@ -4,7 +4,7 @@ import { useCustomToast } from "../helpers/useCustomToast";
 import * as emailjs from "emailjs-com";
 import axios from "axios";
 import clsx from "clsx";
-import Table from "../helpers/TableContainer";
+//import Table from "../helpers/TableContainer";
 import { Box, Image } from "@chakra-ui/react";
 import Paper from "@material-ui/core/Paper";
 import { Cloudinary, Transformation } from "@cloudinary/base";
@@ -167,7 +167,7 @@ const Example = () => {
           <h1>
             <center>React Table Demo</center>
           </h1>
-          <Table columns={columns} data={data} />
+          {/* <Table columns={columns} data={data} /> */}
           <button onClick={handleButtonClick}>Send Email</button>
         </div>
       </section>
