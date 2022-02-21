@@ -19,29 +19,29 @@ import {
   TabPanel,
   Text,
 } from "@chakra-ui/react";
-import CardLayout from "../helpers/CardLayout";
-import CardLayout2 from "../helpers/CardLayout2";
-import CardLayout4 from "../helpers/CardLayout4";
-import Copyright from "./Copyright";
-import { CustomDialog } from "../helpers/CustomDialog";
-import { useRecoilState } from "recoil";
-import { loginLevelState } from "./data/atomdata";
-import BarChart from "../helpers/BarChart";
-import BarChartStack from "../helpers/BarChartStack";
+//import CardLayout from "../helpers/CardLayout";
+//import CardLayout2 from "../helpers/CardLayout2";
+//import CardLayout4 from "../helpers/CardLayout4";
+//import Copyright from "./Copyright";
+//import { CustomDialog } from "../helpers/CustomDialog";
+//import { useRecoilState } from "recoil";
+//import { loginLevelState } from "./data/atomdata";
+//import BarChart from "../helpers/BarChart";
+//import BarChartStack from "../helpers/BarChartStack";
 import EmployeeTableLeaveView from "./EmployeeTableLeaveView";
 import ExpensesTableViewSummary from "./ExpenseTableViewSummary";
-import ExpenseSummaryTableView from "./ExpensesSummaryTableView";
+//import ExpenseSummaryTableView from "./ExpensesSummaryTableView";
 import LeavesTableViewSummary from "./LeavesTableViewSummary";
 import HocTableViewSummary from "./HocTableViewSummary";
-import SummaryTableView from "../helpers/SummaryTableView";
+//import SummaryTableView from "../helpers/SummaryTableView";
 import DailyAllowanceTableViewSummary from "./DailyAllowancesTableViewSummary";
 import PayslipTableViewSummary from "./PayslipTableViewSummary";
-import PayslipSummaryTableView from "./PayslipSummaryTableView";
+//import PayslipSummaryTableView from "./PayslipSummaryTableView";
 import { useExpensesPeriod } from "./expenses/useExpensesPeriod";
 import LeavesTableApproval from "./LeaveTableApproval";
-import ExportLeave2Excel from "./ExportLeave2Excel";
-import ExportHoc2Excel from "./ExportHoc2Excel";
-import Export2Excel from "./Export2Excel"
+//import ExportLeave2Excel from "./ExportLeave2Excel";
+//import ExportHoc2Excel from "./ExportHoc2Excel";
+//import Export2Excel from "./Export2Excel"
 import { useHoc } from "./hoc/useHoc";
 
 const drawerWidth = 240;
