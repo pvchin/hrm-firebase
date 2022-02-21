@@ -1,5 +1,5 @@
 import React from "react";
-import { Bar } from "react-chartjs-2";
+//import { Bar } from "react-chartjs-2";
 
 const state = {
   labels: [
@@ -30,7 +30,7 @@ const state = {
 export default function BarChart({ heading, barchartdata }) {
   return (
     <div>
-      <Bar
+      {/* <Bar
         data={barchartdata}
         height="80"
         options={{
@@ -44,7 +44,7 @@ export default function BarChart({ heading, barchartdata }) {
             position: "right",
           },
         }}
-      />
+      /> */}
     </div>
   );
 }

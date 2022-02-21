@@ -1,5 +1,5 @@
 import React from "react";
-import { Bar, char } from "react-chartjs-2";
+//import { Bar, char } from "react-chartjs-2";
 import { Box, Container } from "@chakra-ui/react";
 
 const data = {
@@ -105,7 +105,7 @@ export default function BarChartStack() {
   return (
     <Container maxW="container.x2">
       <Box>
-        <Bar data={data} width="1200" height="2800" options={options} />
+        {/* <Bar data={data} width="1200" height="2800" options={options} /> */}
       </Box>
     </Container>
   );
