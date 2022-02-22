@@ -44,7 +44,6 @@ import EmployeeTableLeaveView from "./EmployeeTableLeaveView";
 import LeavesTableViewSummary from "./LeavesTableViewSummary";
 import Copyright from "../components/Copyright";
 
-//const EmployeeTableLeaveView = React.lazy(()=> import("./EmployeeTableLeaveView"));
 //const Copyright  = React.lazy(()=> import("../components/Copyright"));
 //const CardLayout = React.lazy(() => import("../helpers/CardLayout"));
 //const CardLayout2 = React.lazy(() => import("../helpers/CardLayout2"));
