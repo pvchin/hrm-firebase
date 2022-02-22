@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import MaterialTable, { MTableToolbar } from "material-table";
 import { makeStyles } from "@material-ui/core/styles";
-import { TextField, Icon, Button, MenuItem } from "@material-ui/core";
+import { TextField,  Button, MenuItem } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
-import { useSetRecoilState, useRecoilValue, useRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import {
   allowsPeriodState,
   allowsDataState,
-  allowsDataDetlsState,
+  //allowsDataDetlsState,
   empidState,
   loginLevelState,
 } from "./data/atomdata";
@@ -59,11 +59,11 @@ const columns = [
 ];
 
 export default function DailyAllowancesTableStaff() {
-  let history = useHistory();
+  //let history = useHistory();
   const classes = useStyles();
   const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
   const [isAddPeriodDialogOpen, setIsAddPeriodDialogOpen] = useState(false);
-  const [tmpallowsdata, setTmpallowsdata] = useState([]);
+  //const [tmpallowsdata, setTmpallowsdata] = useState([]);
   const [allowsdata, setAllowsdata] = useRecoilState(allowsDataState);
   const [allows_period, setAllows_period] = useRecoilState(allowsPeriodState);
   const [allows_empid, setAllows_empid] = useRecoilState(empidState);
@@ -84,17 +84,17 @@ export default function DailyAllowancesTableStaff() {
     loadEmpDailyAllowances(loginLevel.loginUserId);
   }, [toLoad]);
 
-  const Save_DailyAllowancesData = () => {
-    dailyallowances.forEach((data) => {
-      const { id } = data;
-      if (id) {
-        const { id, rec_id, tableData, ...fields } = data;
-        updateDailyAllowance({ id, ...fields });
-      }
-    });
+  // const Save_DailyAllowancesData = () => {
+  //   dailyallowances.forEach((data) => {
+  //     const { id } = data;
+  //     if (id) {
+  //       const { id, rec_id, tableData, ...fields } = data;
+  //       updateDailyAllowance({ id, ...fields });
+  //     }
+  //   });
 
-    //handleDialogClose();
-  };
+  //   //handleDialogClose();
+  // };
 
   const update_SiteAllowsDetl = (data) => {
     const { id, empid, period, no_of_days, amount } = data;
@@ -125,9 +125,9 @@ export default function DailyAllowancesTableStaff() {
     setIsAddPeriodDialogOpen(false);
   };
 
-  const handleAllowsDetlDialogOpen = () => {
-    setIsAllowsDetlDialogOpen(true);
-  };
+  // const handleAllowsDetlDialogOpen = () => {
+  //   setIsAllowsDetlDialogOpen(true);
+  // };
 
   const handleAllowsDetlDialogClose = () => {
     settoLoad(true);

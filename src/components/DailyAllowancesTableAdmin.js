@@ -1,26 +1,26 @@
-import React, { useState, useEffect } from "react";
-import { useHistory, Link } from "react-router-dom";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import MaterialTable, { MTableToolbar } from "material-table";
 import { makeStyles } from "@material-ui/core/styles";
-import { TextField, Icon, Button, MenuItem } from "@material-ui/core";
+import { TextField, Button, MenuItem } from "@material-ui/core";
 import {
   useSetRecoilState,
   useRecoilValue,
   useRecoilState,
-  useRecoilValueLoadable,
+  //useRecoilValueLoadable,
 } from "recoil";
 import {
   allowsPeriodState,
   allowsDataState,
   empidState,
 } from "./data/atomdata";
-import { fetchDailyAllowancesSelector } from "./data/selectordata";
+//import { fetchDailyAllowancesSelector } from "./data/selectordata";
 import AddIcon from "@material-ui/icons/Add";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import CheckIcon from "@material-ui/icons/Check";
 import SearchIcon from "@material-ui/icons/Search";
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+//import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { CustomDialog } from "../helpers/CustomDialog";
 import { useDailyAllowancesContext } from "../context/dailyallowances_context";
 //import { useEmployeesContext } from "../context/employees_context";
