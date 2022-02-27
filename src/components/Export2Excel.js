@@ -1,12 +1,12 @@
 import React from "react";
 //import ReactExport from "react-export-excel";
-//import ReactExport from "react-data-export";
+import ReactExport from "react-data-export";
 //import { ExcelFile, ExcelSheet } from "react-export-excel";
 import { Button } from "@chakra-ui/react";
 
-//const ExcelFile = ReactExport.ExcelFile;
-//const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
-//const ExcelColumn = ReactExport.ExcelFile.ExcelColumn;
+const ExcelFile = ReactExport.ExcelFile;
+const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
+const ExcelColumn = ReactExport.ExcelFile.ExcelColumn;
 
 const ExportLeave2Excel = ({ filename, dataset, title }) => {
   const cols1 = [
@@ -154,14 +154,14 @@ const ExportLeave2Excel = ({ filename, dataset, title }) => {
       },
       {
         value: rec.what_details,
-          style: {
-            font: { sz: "9" },
-            alignment: {
-              wrapText: true,
-              horizontal: "center",
-              vertical: "top",
-            },
-         },
+        style: {
+          font: { sz: "9" },
+          alignment: {
+            wrapText: true,
+            horizontal: "center",
+            vertical: "top",
+          },
+        },
       },
       {
         value: rec.why,
@@ -210,14 +210,13 @@ const ExportLeave2Excel = ({ filename, dataset, title }) => {
 
   console.log("hocdata", cols, hocdata);
   return (
-    <div>Excel</div>
     // <ExcelFile element={<Button>Export to Excel</Button>} filename={filename}>
     //   <ExcelSheet dataSet={multiDataSet1} name="Organization" />
     // </ExcelFile>
 
-    // <ExcelFile element={<Button>Export to Excel</Button>} filename={filename}>
-    //   <ExcelSheet dataSet={multiDataSet} name="HOC" />
-    // </ExcelFile>
+    <ExcelFile element={<Button>Export to Excel</Button>} filename={filename}>
+      <ExcelSheet dataSet={multiDataSet} name="HOC" />
+    </ExcelFile>
 
     // <ExcelFile element={<Button>Export to Excel</Button>} filename={filename}>
     //   <ExcelSheet data={dataset} name={title}>
