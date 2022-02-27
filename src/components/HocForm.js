@@ -92,7 +92,7 @@ const HocForm = ({ formdata, setFormdata, handleDialogClose, isEditId }) => {
 
   useEffect(() => {
     setHoclocationId("C");
-  },[])
+  }, []);
 
   useEffect(() => {
     if (whatstatus === "") {

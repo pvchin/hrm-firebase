@@ -121,20 +121,19 @@ const Example = () => {
       function (response) {
         console.log(response.status, response.text);
         setEmailStatus("success");
-        
       },
       function (err) {
         console.log(err);
         setEmailStatus("failure");
       }
     );
-    console.log("email", emailstatus)
+    console.log("email", emailstatus);
     if (emailstatus === "success") {
-       toast({
-         title: "Invalid email or password!",
-         status: "warning",
-       });
-    } 
+      toast({
+        title: "Invalid email or password!",
+        status: "warning",
+      });
+    }
   };
 
   return (
