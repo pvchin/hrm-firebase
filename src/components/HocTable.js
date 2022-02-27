@@ -161,7 +161,8 @@ export default function HocTable() {
   const [isEditId, setIsEditId] = useState("");
 
   useEffect(() => {
-    setFilter(loginLevel.loginUserId);
+    //console.log("loginid", loginLevel.loginUserId)
+    setHocId(loginLevel.loginUserId);
   }, []);
 
   const add_Hoc = async (data) => {
