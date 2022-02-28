@@ -6,35 +6,35 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 // import Chart from "./Chart";
 // import Deposits from "./Deposits";
 // import Orders from "./Orders";
-import Appbanner from "./Appbanner";
+//import Appbanner from "./Appbanner";
 import Example from "./Example6";
 import SideDrawer from "./SideDrawer";
 import SingleEmployee from "./SingleEmployee";
-import SingleEmployeeStaff from "./SingleEmployeeStaff";
+//import SingleEmployeeStaff from "./SingleEmployeeStaff";
 import SingleLeave from "./SingleLeave";
 import SingleExpense from "./SingleExpense";
-import SingleDailyAllowance from "./SingleDailyAllowance";
-import SingleDailyAllowsDetls from "./SingleDailyAllowsDetls";
-import BatchDailyAllowances from "./BatchDailyAllowances";
-import SinglePayslip from "./SinglePayslip";
+//import SingleDailyAllowance from "./SingleDailyAllowance";
+//import SingleDailyAllowsDetls from "./SingleDailyAllowsDetls";
+//import BatchDailyAllowances from "./BatchDailyAllowances";
+//import SinglePayslip from "./SinglePayslip";
 import Login from "./LoginForm";
-import Payrun from "./Payrun";
-import Payrunbatch from "./Payrunbatch";
+//import Payrun from "./Payrun";
+//import Payrunbatch from "./Payrunbatch";
 
 import {
   Home,
   AllEmployees,
   Leave,
-  Expenses,
-  Payslip,
-  BatchPayslips,
-  Payroll,
+  //Expenses,
+  //Payslip,
+  //BatchPayslips,
+  //Payroll,
   Departments,
   Designation,
   Tables,
   Clients,
   Allowances,
-  DailyAllowances,
+  //DailyAllowances,
   // PrivateRoute,
   Error,
 } from "../pages";

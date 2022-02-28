@@ -12,21 +12,20 @@ import {
   MenuItem,
 } from "@material-ui/core";
 import currency from "currency.js";
-import { useBoolean } from "@chakra-ui/hooks";
 import CurrencyTextField from "@unicef/material-ui-currency-textfield";
 import { makeStyles } from "@material-ui/core/styles";
 import { useEmployeesContext } from "../context/employees_context";
 import { Controller, useForm } from "react-hook-form";
 import { useRecoilState } from "recoil";
 import { loginLevelState } from "./data/atomdata";
-import { editEmployeeIdState } from "./data/atomdata";
-import { useAllEmployees } from "./employees/useAllEmployees";
+//import { editEmployeeIdState } from "./data/atomdata";
+//import { useAllEmployees } from "./employees/useAllEmployees";
 import { useEmployees } from "./employees/useEmployees";
 import { useAddEmployees } from "./employees/useAddEmployees";
 import { useUpdateEmployees } from "./employees/useUpdateEmployees";
 import { useDepartments } from "./departments/useDepartments";
 import { useDesignations } from "./designations/useDesignations";
-import { useCurrency } from "./currency/useCurrency";
+//import { useCurrency } from "./currency/useCurrency";
 import EmpFamily from "./EmpFamily";
 import EmpEducations from "./EmpEducations";
 import EmpExperiences from "./EmpExperiences";
@@ -81,7 +80,7 @@ const EmployeeForm = () => {
   const [empage, setEmpage] = useState(0);
   const [checktap, setCheckTap] = useState(false);
   const [isresigned, setIsresigned] = useState(false);
-  const [empId, setEmpId] = useRecoilState(editEmployeeIdState);
+  //const [empId, setEmpId] = useRecoilState(editEmployeeIdState);
   const { handleSubmit, control, setValue, register } = useForm();
   const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
   const { isEditing, editEmployeeID } = useEmployeesContext();

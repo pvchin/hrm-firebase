@@ -9,29 +9,29 @@ import {
   ListSubheader,
   Collapse,
 } from "@material-ui/core";
-import { Box, HStack, Text } from "@chakra-ui/react";
+import {  Text } from "@chakra-ui/react";
 import DashboardIcon from "@material-ui/icons/Dashboard";
-import FlightIcon from "@material-ui/icons/Flight";
+//import FlightIcon from "@material-ui/icons/Flight";
 import PeopleIcon from "@material-ui/icons/People";
 import LayersIcon from "@material-ui/icons/Layers";
 import MonetizationOnIcon from "@material-ui/icons/MonetizationOn";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import MoneyIcon from "@material-ui/icons/Money";
+//import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+//import MoneyIcon from "@material-ui/icons/Money";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 
 const MenuListItems = () => {
   const classes = useStyles();
   const [openPay, setOpenPay] = useState(false);
-  const [openTable, setOpenTable] = useState(false);
+  //const [openTable, setOpenTable] = useState(false);
 
   const handleClickPay = () => {
     setOpenPay(!openPay);
   };
 
-  const handleClickTable = () => {
-    setOpenTable(!openTable);
-  };
+  // const handleClickTable = () => {
+  //   setOpenTable(!openTable);
+  // };
 
   return (
     <div className={classes.content}>

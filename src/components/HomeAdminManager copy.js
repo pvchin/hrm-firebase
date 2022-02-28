@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import clsx from "clsx";
-import dayjs from "dayjs";
+//import { makeStyles } from "@material-ui/core/styles";
+//import clsx from "clsx";
+//import dayjs from "dayjs";
 import {
   Box,
-  Button,
+  //Button,
   Container,
   Divider,
-  Grid,
+  //Grid,
   Heading,
   HStack,
   Select,
@@ -28,7 +28,7 @@ import {
 //import { loginLevelState } from "./data/atomdata";
 //import BarChart from "../helpers/BarChart";
 //import BarChartStack from "../helpers/BarChartStack";
-import EmployeeTableLeaveView from "./EmployeeTableLeaveView";
+//import EmployeeTableLeaveView from "./EmployeeTableLeaveView";
 import ExpensesTableViewSummary from "./ExpenseTableViewSummary";
 //import ExpenseSummaryTableView from "./ExpensesSummaryTableView";
 import LeavesTableViewSummary from "./LeavesTableViewSummary";
@@ -37,402 +37,402 @@ import HocTableViewSummary from "./HocTableViewSummary";
 import DailyAllowanceTableViewSummary from "./DailyAllowancesTableViewSummary";
 import PayslipTableViewSummary from "./PayslipTableViewSummary";
 //import PayslipSummaryTableView from "./PayslipSummaryTableView";
-import { useExpensesPeriod } from "./expenses/useExpensesPeriod";
+//import { useExpensesPeriod } from "./expenses/useExpensesPeriod";
 import LeavesTableApproval from "./LeaveTableApproval";
 //import ExportLeave2Excel from "./ExportLeave2Excel";
 //import ExportHoc2Excel from "./ExportHoc2Excel";
 //import Export2Excel from "./Export2Excel"
-import { useHoc } from "./hoc/useHoc";
+//import { useHoc } from "./hoc/useHoc";
 
-const drawerWidth = 240;
+//const drawerWidth = 240;
 
-const FILTERSTRING = "Pending";
+//const FILTERSTRING = "Pending";
 
-const months = [
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "Jun",
-  "Jul",
-  "Aug",
-  "Sep",
-  "Oct",
-  "Nov",
-  "Dec",
-];
-const monthsname = [
-  "jan",
-  "feb",
-  "mar",
-  "apr",
-  "may",
-  "jun",
-  "jul",
-  "aug",
-  "sep",
-  "oct",
-  "nov",
-  "dec",
-];
+// const months = [
+//   "Jan",
+//   "Feb",
+//   "Mar",
+//   "Apr",
+//   "May",
+//   "Jun",
+//   "Jul",
+//   "Aug",
+//   "Sep",
+//   "Oct",
+//   "Nov",
+//   "Dec",
+// ];
+// const monthsname = [
+//   "jan",
+//   "feb",
+//   "mar",
+//   "apr",
+//   "may",
+//   "jun",
+//   "jul",
+//   "aug",
+//   "sep",
+//   "oct",
+//   "nov",
+//   "dec",
+// ];
 
-const expchartdata = {
-  labels: [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ],
-  datasets: [
-    {
-      label: "Expenses",
-      backgroundColor: "rgba(75,192,192,1)",
-      borderColor: "rgba(0,0,0,1)",
-      borderWidth: 2,
-      data: [65, 59, 80, 81, 56, 50, 60, 40, 70, 60, 50, 60],
-    },
-  ],
-};
+// const expchartdata = {
+//   labels: [
+//     "January",
+//     "February",
+//     "March",
+//     "April",
+//     "May",
+//     "June",
+//     "July",
+//     "August",
+//     "September",
+//     "October",
+//     "November",
+//     "December",
+//   ],
+//   datasets: [
+//     {
+//       label: "Expenses",
+//       backgroundColor: "rgba(75,192,192,1)",
+//       borderColor: "rgba(0,0,0,1)",
+//       borderWidth: 2,
+//       data: [65, 59, 80, 81, 56, 50, 60, 40, 70, 60, 50, 60],
+//     },
+//   ],
+// };
 
-const sitechartdata = {
-  labels: [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ],
-  datasets: [
-    {
-      label: "Expenses",
-      backgroundColor: "rgba(75,192,192,1)",
-      borderColor: "rgba(0,0,0,1)",
-      borderWidth: 2,
-      data: [
-        25000, 39000, 20000, 21000, 26000, 20000, 20000, 20000, 22000, 20000,
-        25000, 20000,
-      ],
-    },
-  ],
-};
+// const sitechartdata = {
+//   labels: [
+//     "January",
+//     "February",
+//     "March",
+//     "April",
+//     "May",
+//     "June",
+//     "July",
+//     "August",
+//     "September",
+//     "October",
+//     "November",
+//     "December",
+//   ],
+//   datasets: [
+//     {
+//       label: "Expenses",
+//       backgroundColor: "rgba(75,192,192,1)",
+//       borderColor: "rgba(0,0,0,1)",
+//       borderWidth: 2,
+//       data: [
+//         25000, 39000, 20000, 21000, 26000, 20000, 20000, 20000, 22000, 20000,
+//         25000, 20000,
+//       ],
+//     },
+//   ],
+// };
 
-const paychartdata = {
-  labels: [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ],
-  datasets: [
-    {
-      label: "Expenses",
-      backgroundColor: "rgba(75,192,192,1)",
-      borderColor: "rgba(0,0,0,1)",
-      borderWidth: 2,
-      data: [
-        65000, 59000, 80000, 81000, 56000, 50000, 60000, 70000, 72000, 60000,
-        55000, 60000,
-      ],
-    },
-  ],
-};
+// const paychartdata = {
+//   labels: [
+//     "January",
+//     "February",
+//     "March",
+//     "April",
+//     "May",
+//     "June",
+//     "July",
+//     "August",
+//     "September",
+//     "October",
+//     "November",
+//     "December",
+//   ],
+//   datasets: [
+//     {
+//       label: "Expenses",
+//       backgroundColor: "rgba(75,192,192,1)",
+//       borderColor: "rgba(0,0,0,1)",
+//       borderWidth: 2,
+//       data: [
+//         65000, 59000, 80000, 81000, 56000, 50000, 60000, 70000, 72000, 60000,
+//         55000, 60000,
+//       ],
+//     },
+//   ],
+// };
 
-const columns = [
-  {
-    title: "January",
-    field: "jan",
-  },
-  {
-    title: "February",
-    field: "feb",
-  },
-  {
-    title: "March",
-    field: "mar",
-  },
-  {
-    title: "April",
-    field: "apr",
-  },
-  {
-    title: "May",
-    field: "may",
-  },
-  {
-    title: "June",
-    field: "jun",
-  },
-  {
-    title: "July",
-    field: "jul",
-  },
-  {
-    title: "August",
-    field: "aug",
-  },
-  {
-    title: "September",
-    field: "sep",
-  },
-  {
-    title: "October",
-    field: "oct",
-  },
-  {
-    title: "November",
-    field: "nov",
-  },
-  {
-    title: "December",
-    field: "dec",
-  },
-];
+// const columns = [
+//   {
+//     title: "January",
+//     field: "jan",
+//   },
+//   {
+//     title: "February",
+//     field: "feb",
+//   },
+//   {
+//     title: "March",
+//     field: "mar",
+//   },
+//   {
+//     title: "April",
+//     field: "apr",
+//   },
+//   {
+//     title: "May",
+//     field: "may",
+//   },
+//   {
+//     title: "June",
+//     field: "jun",
+//   },
+//   {
+//     title: "July",
+//     field: "jul",
+//   },
+//   {
+//     title: "August",
+//     field: "aug",
+//   },
+//   {
+//     title: "September",
+//     field: "sep",
+//   },
+//   {
+//     title: "October",
+//     field: "oct",
+//   },
+//   {
+//     title: "November",
+//     field: "nov",
+//   },
+//   {
+//     title: "December",
+//     field: "dec",
+//   },
+// ];
 
-const data = [
-  {
-    jan: 80,
-    feb: 90,
-    mar: 78,
-    apr: 63,
-    may: 55,
-    jun: 60,
-    jul: 55,
-    aug: 65,
-    sep: 70,
-    oct: 58,
-    nov: 60,
-    dec: 62,
-  },
-];
+// const data = [
+//   {
+//     jan: 80,
+//     feb: 90,
+//     mar: 78,
+//     apr: 63,
+//     may: 55,
+//     jun: 60,
+//     jul: 55,
+//     aug: 65,
+//     sep: 70,
+//     oct: 58,
+//     nov: 60,
+//     dec: 62,
+//   },
+// ];
 
-const paysummcolumns = [
-  {
-    title: "Category",
-    field: "category",
-  },
-  {
-    title: "Jan",
-    field: "jan",
-  },
-  {
-    title: "Feb",
-    field: "feb",
-  },
-  {
-    title: "Mar",
-    field: "mar",
-  },
-  {
-    title: "Apr",
-    field: "apr",
-  },
-  {
-    title: "May",
-    field: "may",
-  },
-  {
-    title: "Jun",
-    field: "jun",
-  },
-  {
-    title: "Jul",
-    field: "jul",
-  },
-  {
-    title: "Aug",
-    field: "aug",
-  },
-  {
-    title: "Sep",
-    field: "sep",
-  },
-  {
-    title: "Oct",
-    field: "oct",
-  },
-  {
-    title: "Nov",
-    field: "nov",
-  },
-  {
-    title: "Dec",
-    field: "dec",
-  },
-];
+// const paysummcolumns = [
+//   {
+//     title: "Category",
+//     field: "category",
+//   },
+//   {
+//     title: "Jan",
+//     field: "jan",
+//   },
+//   {
+//     title: "Feb",
+//     field: "feb",
+//   },
+//   {
+//     title: "Mar",
+//     field: "mar",
+//   },
+//   {
+//     title: "Apr",
+//     field: "apr",
+//   },
+//   {
+//     title: "May",
+//     field: "may",
+//   },
+//   {
+//     title: "Jun",
+//     field: "jun",
+//   },
+//   {
+//     title: "Jul",
+//     field: "jul",
+//   },
+//   {
+//     title: "Aug",
+//     field: "aug",
+//   },
+//   {
+//     title: "Sep",
+//     field: "sep",
+//   },
+//   {
+//     title: "Oct",
+//     field: "oct",
+//   },
+//   {
+//     title: "Nov",
+//     field: "nov",
+//   },
+//   {
+//     title: "Dec",
+//     field: "dec",
+//   },
+// ];
 
-const paysummdata = [
-  {
-    category: "Basic Salary",
-    jan: 80,
-    feb: 90,
-    mar: 78,
-    apr: 63,
-    may: 55,
-    jun: 60,
-    jul: 55,
-    aug: 65,
-    sep: 70,
-    oct: 58,
-    nov: 60,
-    dec: 62,
-  },
-  {
-    category: "TAP/SCP",
-    jan: 80,
-    feb: 90,
-    mar: 78,
-    apr: 63,
-    may: 55,
-    jun: 60,
-    jul: 55,
-    aug: 65,
-    sep: 70,
-    oct: 58,
-    nov: 60,
-    dec: 62,
-  },
-  {
-    category: "Site Allowances",
-    jan: 80,
-    feb: 90,
-    mar: 78,
-    apr: 63,
-    may: 55,
-    jun: 60,
-    jul: 55,
-    aug: 65,
-    sep: 70,
-    oct: 58,
-    nov: 60,
-    dec: 62,
-  },
-  {
-    category: "Expenses Claims",
-    jan: 80,
-    feb: 90,
-    mar: 78,
-    apr: 63,
-    may: 55,
-    jun: 60,
-    jul: 55,
-    aug: 65,
-    sep: 70,
-    oct: 58,
-    nov: 60,
-    dec: 62,
-  },
-  {
-    category: "Allowances",
-    jan: 80,
-    feb: 90,
-    mar: 78,
-    apr: 63,
-    may: 55,
-    jun: 60,
-    jul: 55,
-    aug: 65,
-    sep: 70,
-    oct: 58,
-    nov: 60,
-    dec: 62,
-  },
-  {
-    category: "Deductions",
-    jan: 80,
-    feb: 90,
-    mar: 78,
-    apr: 63,
-    may: 55,
-    jun: 60,
-    jul: 55,
-    aug: 65,
-    sep: 70,
-    oct: 58,
-    nov: 60,
-    dec: 62,
-  },
-  {
-    category: "Totals",
-    jan: 80,
-    feb: 90,
-    mar: 78,
-    apr: 63,
-    may: 55,
-    jun: 60,
-    jul: 55,
-    aug: 65,
-    sep: 70,
-    oct: 58,
-    nov: 60,
-    dec: 62,
-  },
-];
+// const paysummdata = [
+//   {
+//     category: "Basic Salary",
+//     jan: 80,
+//     feb: 90,
+//     mar: 78,
+//     apr: 63,
+//     may: 55,
+//     jun: 60,
+//     jul: 55,
+//     aug: 65,
+//     sep: 70,
+//     oct: 58,
+//     nov: 60,
+//     dec: 62,
+//   },
+//   {
+//     category: "TAP/SCP",
+//     jan: 80,
+//     feb: 90,
+//     mar: 78,
+//     apr: 63,
+//     may: 55,
+//     jun: 60,
+//     jul: 55,
+//     aug: 65,
+//     sep: 70,
+//     oct: 58,
+//     nov: 60,
+//     dec: 62,
+//   },
+//   {
+//     category: "Site Allowances",
+//     jan: 80,
+//     feb: 90,
+//     mar: 78,
+//     apr: 63,
+//     may: 55,
+//     jun: 60,
+//     jul: 55,
+//     aug: 65,
+//     sep: 70,
+//     oct: 58,
+//     nov: 60,
+//     dec: 62,
+//   },
+//   {
+//     category: "Expenses Claims",
+//     jan: 80,
+//     feb: 90,
+//     mar: 78,
+//     apr: 63,
+//     may: 55,
+//     jun: 60,
+//     jul: 55,
+//     aug: 65,
+//     sep: 70,
+//     oct: 58,
+//     nov: 60,
+//     dec: 62,
+//   },
+//   {
+//     category: "Allowances",
+//     jan: 80,
+//     feb: 90,
+//     mar: 78,
+//     apr: 63,
+//     may: 55,
+//     jun: 60,
+//     jul: 55,
+//     aug: 65,
+//     sep: 70,
+//     oct: 58,
+//     nov: 60,
+//     dec: 62,
+//   },
+//   {
+//     category: "Deductions",
+//     jan: 80,
+//     feb: 90,
+//     mar: 78,
+//     apr: 63,
+//     may: 55,
+//     jun: 60,
+//     jul: 55,
+//     aug: 65,
+//     sep: 70,
+//     oct: 58,
+//     nov: 60,
+//     dec: 62,
+//   },
+//   {
+//     category: "Totals",
+//     jan: 80,
+//     feb: 90,
+//     mar: 78,
+//     apr: 63,
+//     may: 55,
+//     jun: 60,
+//     jul: 55,
+//     aug: 65,
+//     sep: 70,
+//     oct: 58,
+//     nov: 60,
+//     dec: 62,
+//   },
+// ];
 
-const initial_expdata = [
-  {
-    jan: 0,
-    feb: 0,
-    mar: 0,
-    apr: 0,
-    may: 0,
-    jun: 0,
-    jul: 0,
-    aug: 0,
-    sep: 0,
-    oct: 0,
-    nov: 0,
-    dec: 0,
-  },
-];
+// const initial_expdata = [
+//   {
+//     jan: 0,
+//     feb: 0,
+//     mar: 0,
+//     apr: 0,
+//     may: 0,
+//     jun: 0,
+//     jul: 0,
+//     aug: 0,
+//     sep: 0,
+//     oct: 0,
+//     nov: 0,
+//     dec: 0,
+//   },
+// ];
 
-const dataset = [
-  {
-    name: "Johson",
-    from_date: "2021-12-01",
-    to_date: "2021-12-04",
-    no_of_days: 3,
-    reason: "Holiday leave",
-    status: "Approved",
-  },
-  {
-    name: "David",
-    from_date: "2021-12-15",
-    to_date: "2021-12-16",
-    no_of_days: 2,
-    reason: "Annual leave",
-    status: "Approved",
-  },
-];
+// const dataset = [
+//   {
+//     name: "Johson",
+//     from_date: "2021-12-01",
+//     to_date: "2021-12-04",
+//     no_of_days: 3,
+//     reason: "Holiday leave",
+//     status: "Approved",
+//   },
+//   {
+//     name: "David",
+//     from_date: "2021-12-15",
+//     to_date: "2021-12-16",
+//     no_of_days: 2,
+//     reason: "Annual leave",
+//     status: "Approved",
+//   },
+// ];
 
 const HomeAdminManager = () => {
-  const classes = useStyles();
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-  const { expensesperiod, setExpPeriodId } = useExpensesPeriod();
-  const [expdata, setExpData] = useState(initial_expdata);
+  //const classes = useStyles();
+  //const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+  //const { expensesperiod, setExpPeriodId } = useExpensesPeriod();
+  //const [expdata, setExpData] = useState(initial_expdata);
   const [selectleaveyear, setSelectLeaveYear] = useState("");
   const [selectexpenseyear, setSelectExpenseYear] = useState("");
   const [selectsiteallowsyear, setSelectSiteAllowsYear] = useState("");
@@ -440,7 +440,7 @@ const HomeAdminManager = () => {
   const [selecthocyear, setSelectHocYear] = useState("");
   const currentyear = new Date().getFullYear();
   const currentmonth = new Date().getMonth();
-   const { hoc, filter, setFilter, setHocId } = useHoc();
+   //const { hoc, filter, setFilter, setHocId } = useHoc();
 
   // const Build_ExpData = () => {
   //   const currentmonth = new Date().getMonth();
@@ -1311,83 +1311,83 @@ const HomeAdminManager = () => {
   );
 };
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-  },
-  toolbar: {
-    paddingRight: 24, // keep right padding when drawer closed
-  },
-  toolbarIcon: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "flex-end",
-    padding: "0 8px",
-    ...theme.mixins.toolbar,
-  },
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(["width", "margin"], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-  },
-  appBarShift: {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(["width", "margin"], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  menuButton: {
-    marginRight: 36,
-  },
-  menuButtonHidden: {
-    display: "none",
-  },
-  title: {
-    flexGrow: 1,
-  },
-  drawerPaper: {
-    position: "relative",
-    whiteSpace: "nowrap",
-    width: drawerWidth,
-    transition: theme.transitions.create("width", {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  drawerPaperClose: {
-    overflowX: "hidden",
-    transition: theme.transitions.create("width", {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    width: theme.spacing(7),
-    [theme.breakpoints.up("sm")]: {
-      width: theme.spacing(9),
-    },
-  },
-  appBarSpacer: theme.mixins.toolbar,
-  content: {
-    flexGrow: 1,
-    height: "100vh",
-    overflow: "auto",
-  },
-  container: {
-    paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(4),
-  },
-  paper: {
-    padding: theme.spacing(2),
-    display: "flex",
-    overflow: "auto",
-    flexDirection: "column",
-  },
-  fixedHeight: {
-    height: 240,
-  },
-}));
+// const useStyles = makeStyles((theme) => ({
+//   root: {
+//     display: "flex",
+//   },
+//   toolbar: {
+//     paddingRight: 24, // keep right padding when drawer closed
+//   },
+//   toolbarIcon: {
+//     display: "flex",
+//     alignItems: "center",
+//     justifyContent: "flex-end",
+//     padding: "0 8px",
+//     ...theme.mixins.toolbar,
+//   },
+//   appBar: {
+//     zIndex: theme.zIndex.drawer + 1,
+//     transition: theme.transitions.create(["width", "margin"], {
+//       easing: theme.transitions.easing.sharp,
+//       duration: theme.transitions.duration.leavingScreen,
+//     }),
+//   },
+//   appBarShift: {
+//     marginLeft: drawerWidth,
+//     width: `calc(100% - ${drawerWidth}px)`,
+//     transition: theme.transitions.create(["width", "margin"], {
+//       easing: theme.transitions.easing.sharp,
+//       duration: theme.transitions.duration.enteringScreen,
+//     }),
+//   },
+//   menuButton: {
+//     marginRight: 36,
+//   },
+//   menuButtonHidden: {
+//     display: "none",
+//   },
+//   title: {
+//     flexGrow: 1,
+//   },
+//   drawerPaper: {
+//     position: "relative",
+//     whiteSpace: "nowrap",
+//     width: drawerWidth,
+//     transition: theme.transitions.create("width", {
+//       easing: theme.transitions.easing.sharp,
+//       duration: theme.transitions.duration.enteringScreen,
+//     }),
+//   },
+//   drawerPaperClose: {
+//     overflowX: "hidden",
+//     transition: theme.transitions.create("width", {
+//       easing: theme.transitions.easing.sharp,
+//       duration: theme.transitions.duration.leavingScreen,
+//     }),
+//     width: theme.spacing(7),
+//     [theme.breakpoints.up("sm")]: {
+//       width: theme.spacing(9),
+//     },
+//   },
+//   appBarSpacer: theme.mixins.toolbar,
+//   content: {
+//     flexGrow: 1,
+//     height: "100vh",
+//     overflow: "auto",
+//   },
+//   container: {
+//     paddingTop: theme.spacing(4),
+//     paddingBottom: theme.spacing(4),
+//   },
+//   paper: {
+//     padding: theme.spacing(2),
+//     display: "flex",
+//     overflow: "auto",
+//     flexDirection: "column",
+//   },
+//   fixedHeight: {
+//     height: 240,
+//   },
+// }));
 
 export default HomeAdminManager;

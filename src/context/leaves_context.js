@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useReducer } from "react";
+import React, { useContext,  useReducer } from "react";
 import axios from "axios";
 import reducer from "../reducers/leaves_reducer";
 import { leaves_url } from "../utils/constants";
@@ -7,7 +7,7 @@ import {
   SET_EDITLEAVEID,
   SET_ISLEAVEEDITING_ON,
   SET_ISLEAVEEDITING_OFF,
-  SET_SINGLELEAVE,
+  //SET_SINGLELEAVE,
   GET_LEAVES_BEGIN,
   GET_LEAVES_SUCCESS,
   GET_LEAVES_ERROR,
@@ -27,7 +27,7 @@ import {
   UPDATE_LEAVE_SUCCESS,
   UPDATE_LEAVE_ERROR,
   RESET_SINGLE_LEAVE,
-  RESET_TABLES,
+  //RESET_TABLES,
 } from "../actions";
 
 const initialState = {
@@ -152,8 +152,8 @@ export const LeavesProvider = ({ children }) => {
   };
 
   const addLeave = async (data) => {
-    const { id, name, from_date, to_date, reason, no_of_days, status } = data;
-    //
+    //const { id, name, from_date, to_date, reason, no_of_days, status } = data;
+    
     dispatch({ type: ADD_LEAVE_BEGIN });
     try {
       await fetch(leaves_url, {

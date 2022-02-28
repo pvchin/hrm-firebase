@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useRef } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import clsx from "clsx";
-import dayjs from "dayjs";
+import React, { useState, useEffect } from "react";
+//import { makeStyles } from "@material-ui/core/styles";
+//import clsx from "clsx";
 import { useHistory } from "react-router-dom";
 import * as emailjs from "emailjs-com";
 import MaterialTable, { MTableToolbar } from "material-table";
@@ -17,30 +16,30 @@ import {
   Flex,
   Heading,
   Stack,
-  Spacer,
+  //Spacer,
   Tabs,
   TabList,
   TabPanels,
   Tab,
   TabPanel,
   Table,
-  Thead,
+  //Thead,
   Tbody,
-  Tfoot,
-  Tr,
-  Th,
-  Td,
-  TableCaption,
+  //Tfoot,
+  //Tr,
+  //Th,
+  //Td,
+  //TableCaption,
   Text,
   Modal,
   ModalOverlay,
   ModalContent,
-  ModalHeader,
+  //ModalHeader,
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-  Wrap,
-  WrapItem,
+  //Wrap,
+  //WrapItem,
   useDisclosure,
 } from "@chakra-ui/react";
 import PayForm from "./PayForm";
@@ -53,16 +52,16 @@ import { usePayslipsBatch } from "./payslips/usePayslipsBatch";
 import { useUpdatePayslips } from "./payslips/useUpdatePayslips";
 import { usePayslipsContext } from "../context/payslips_context";
 import { useTablesContext } from "../context/tables_context";
-import { useSetRecoilState, useRecoilState } from "recoil";
+import {  useRecoilState } from "recoil";
 import {
   payrunState,
-  paydataState,
+  //paydataState,
   payrunIdState,
   payrunStatusState,
 } from "./data/atomdata";
-import { useRecoilValue } from "recoil";
+//import { useRecoilValue } from "recoil";
 
-const drawerWidth = 240;
+//const drawerWidth = 240;
 const SERVICE_ID = process.env.REACT_APP_EMAILJS_SERVICEID;
 const TEMPLATE_ID = "template_1y8odlq";
 const USER_ID = process.env.REACT_APP_EMAILJS_USERID;
@@ -162,22 +161,22 @@ const columns = [
 
 const Payrunbatch = () => {
   let history = useHistory();
-  const classes = useStyles();
+  //const classes = useStyles();
   const toast = useCustomToast();
-  const componentRef = useRef();
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+  //const componentRef = useRef();
+  //const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   //const { register, handleSubmit, control, setValue, reset, watch } = useForm();
 
   const {
     //payrun,
-    getSingleBatchPayslip,
+    //getSingleBatchPayslip,
     //singlebatchpayslip,
     payslip_period,
     //updatePayslip,
     //updatePayrun,
-    singlebatch_payslip_loading,
-    singlebatch_payslip_error,
+    //singlebatch_payslip_loading,
+    //singlebatch_payslip_error,
   } = usePayslipsContext();
   const { payslipsbatch, psbpayrunId, setPSBPayrunId } = usePayslipsBatch();
   const { employees } = useEmployees();
@@ -186,14 +185,14 @@ const Payrunbatch = () => {
   const updatePayrun = useUpdatePayrun();
   const { loadPayitems, payitems } = useTablesContext();
   const [payrundata, setPayrundata] = useRecoilState(payrunState);
-  const [payrunId, setPayrunId] = useRecoilState(payrunIdState);
-  const [payrunstatus, setPayrunStatus] = useRecoilState(payrunStatusState);
+  const [payrunId] = useRecoilState(payrunIdState);
+  const  [setPayrunStatus] = useRecoilState(payrunStatusState);
   const [loadFormdata, setLoadFormdata] = useState(false);
   const [loadUpdatedata, setLoadUpdatedata] = useState(false);
   const [formdata, setFormdata] = useState(initial_formdata);
   const [rowindex, setRowIndex] = useState(0);
   const [emponclick, setEmponclick] = useState(false);
-  const [showSumm, setShowSumm] = useState(false);
+  //const [showSumm, setShowSumm] = useState(false);
   const [isCalc, setIsCalc] = useState(false);
   const [isStart, setIsStart] = useState(true);
   const [isShow, setIsShow] = useState(false);
@@ -232,10 +231,10 @@ const Payrunbatch = () => {
   //   setIsLoad(false);
   // }, [isLoad]);
 
-  const handleShowSumm = (e) => {
-    e.preventDefault();
-    setShowSumm(!showSumm);
-  };
+  // const handleShowSumm = (e) => {
+  //   e.preventDefault();
+  //   setShowSumm(!showSumm);
+  // };
 
   const handlePrintSummary = (e) => {
     e.preventDefault();
@@ -751,106 +750,106 @@ const Payrunbatch = () => {
   );
 };
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  button: {
-    margin: theme.spacing(1),
-  },
-  container: {
-    margin: 0,
-    padding: 0,
-    width: "80vw",
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fill,250px)",
-    gridAutoRows: "10px",
-    position: "absolute",
-    left: "50%",
-    transform: "translateX(-50%)",
-    justifyContent: "center",
-    backgroundColor: "primary",
-  },
-  fixedHeight: {
-    height: 800,
-  },
-  paper: {
-    paddingTop: theme.spacing(10),
-    // display: "flex",
-    display: "flex",
-    overflow: "auto",
-    flexDirection: "column",
-    border: "1px solid",
-    width: "100%",
-    color: "primary",
-    bcakgroundColor: "white",
-  },
-  card: {
-    backgroundColor: "white",
-  },
-  section: {
-    width: "80vw",
-    margin: "1rem auto",
-    maxWidth: "var(--max-width)",
-  },
-  underline: {
-    width: "5rem",
-    height: "0.25rem",
-    marginBottom: "1.25rem",
-    background: "var(--clr-primary-5)",
-    marginLeft: "auto",
-    marginRight: "auto",
-  },
-  title: {
-    marginbottom: "4rem",
-    textAlign: "center",
-  },
-  empscenter: {
-    width: "80vw",
-    margin: "0 auto",
-    maxWidth: "var(--max-width)",
-    flexDirection: "row",
-  },
-  empcontainer: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "center",
-    marginBottom: "4rem",
-    flexWrap: "wrap",
-  },
-  empbtn: {
-    background: "transparent",
-    borderColor: "transparent",
-    textTransform: "capitalize",
-    fontSize: "1rem",
-    letterSpacing: "var(--spacing)",
-    margin: "0 0.5rem",
-    transition: "var(--transition)",
-    cursor: "pointer",
-    padding: "0.25rem 0",
-    lineHeight: "1",
-    outlineColor: "var(--clr-primary-10)",
-    "&:hover": {
-      color: "var(--clr-primary-5)",
-      boxShadow: "0 2px var(--clr-primary-5)",
-    },
-  },
-  activebtn: {
-    color: "var(--clr-primary-5)",
-    boxShadow: "0 2px var(--clr-primary-5)",
-  },
-  empinfo: {
-    fontWeight: "400",
-  },
-  divider: {
-    // Theme Color, or use css color in quote
-    background: "white",
-  },
-  textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: 350,
-  },
-}));
+// const useStyles = makeStyles((theme) => ({
+//   root: {
+//     flexGrow: 1,
+//   },
+//   button: {
+//     margin: theme.spacing(1),
+//   },
+//   container: {
+//     margin: 0,
+//     padding: 0,
+//     width: "80vw",
+//     display: "grid",
+//     gridTemplateColumns: "repeat(auto-fill,250px)",
+//     gridAutoRows: "10px",
+//     position: "absolute",
+//     left: "50%",
+//     transform: "translateX(-50%)",
+//     justifyContent: "center",
+//     backgroundColor: "primary",
+//   },
+//   fixedHeight: {
+//     height: 800,
+//   },
+//   paper: {
+//     paddingTop: theme.spacing(10),
+//     // display: "flex",
+//     display: "flex",
+//     overflow: "auto",
+//     flexDirection: "column",
+//     border: "1px solid",
+//     width: "100%",
+//     color: "primary",
+//     bcakgroundColor: "white",
+//   },
+//   card: {
+//     backgroundColor: "white",
+//   },
+//   section: {
+//     width: "80vw",
+//     margin: "1rem auto",
+//     maxWidth: "var(--max-width)",
+//   },
+//   underline: {
+//     width: "5rem",
+//     height: "0.25rem",
+//     marginBottom: "1.25rem",
+//     background: "var(--clr-primary-5)",
+//     marginLeft: "auto",
+//     marginRight: "auto",
+//   },
+//   title: {
+//     marginbottom: "4rem",
+//     textAlign: "center",
+//   },
+//   empscenter: {
+//     width: "80vw",
+//     margin: "0 auto",
+//     maxWidth: "var(--max-width)",
+//     flexDirection: "row",
+//   },
+//   empcontainer: {
+//     display: "flex",
+//     flexDirection: "row",
+//     justifyContent: "center",
+//     marginBottom: "4rem",
+//     flexWrap: "wrap",
+//   },
+//   empbtn: {
+//     background: "transparent",
+//     borderColor: "transparent",
+//     textTransform: "capitalize",
+//     fontSize: "1rem",
+//     letterSpacing: "var(--spacing)",
+//     margin: "0 0.5rem",
+//     transition: "var(--transition)",
+//     cursor: "pointer",
+//     padding: "0.25rem 0",
+//     lineHeight: "1",
+//     outlineColor: "var(--clr-primary-10)",
+//     "&:hover": {
+//       color: "var(--clr-primary-5)",
+//       boxShadow: "0 2px var(--clr-primary-5)",
+//     },
+//   },
+//   activebtn: {
+//     color: "var(--clr-primary-5)",
+//     boxShadow: "0 2px var(--clr-primary-5)",
+//   },
+//   empinfo: {
+//     fontWeight: "400",
+//   },
+//   divider: {
+//     // Theme Color, or use css color in quote
+//     background: "white",
+//   },
+//   textField: {
+//     marginLeft: theme.spacing(1),
+//     marginRight: theme.spacing(1),
+//     width: 350,
+//   },
+// }));
 
 export default Payrunbatch;

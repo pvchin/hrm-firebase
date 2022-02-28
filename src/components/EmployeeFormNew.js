@@ -11,7 +11,6 @@ import {
   FormControlLabel,
 } from "@material-ui/core";
 
-import { Alert } from "@material-ui/lab";
 import { makeStyles } from "@material-ui/core/styles";
 import MenuItem from "@material-ui/core/MenuItem";
 import { useEmployeesContext } from "../context/employees_context";
@@ -63,7 +62,6 @@ const initial_values = {
   perdiem_fee: 0,
   role: 1,
   password: "abc123*",
-  empno: "",
   reporting_to: "",
   reporting_email: "",
 };
@@ -73,7 +71,7 @@ const EmployeeFormNew = () => {
   const {
     isEditing,
     single_employee,
-    updateEmployee,
+    //updateEmployee,
     //addEmployee,
     editEmployeeID,
     single_employee_loading,
@@ -83,7 +81,7 @@ const EmployeeFormNew = () => {
     empno,
     ic_no,
     gender,
-    age,
+    //age,
     birthdate,
     email,
     address,
@@ -120,7 +118,7 @@ const EmployeeFormNew = () => {
   const { departments } = useDepartments();
   const [empage, setEmpage] = useState(0);
   const [reportemail, setReportEmail] = useState("");
-  const [checktap, setCheckTap] = useState(false);
+  //const [checktap, setCheckTap] = useState(false);
   //const [alert, setAlert] = useState(false);
   const { handleSubmit, control } = useForm();
   const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);

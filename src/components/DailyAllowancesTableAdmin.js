@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+//import { useHistory } from "react-router-dom";
 import MaterialTable, { MTableToolbar } from "material-table";
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField, Button, MenuItem } from "@material-ui/core";
 import {
-  useSetRecoilState,
+  //useSetRecoilState,
   useRecoilValue,
   useRecoilState,
   //useRecoilValueLoadable,
@@ -12,7 +12,7 @@ import {
 import {
   allowsPeriodState,
   allowsDataState,
-  empidState,
+  //empidState,
 } from "./data/atomdata";
 //import { fetchDailyAllowancesSelector } from "./data/selectordata";
 import AddIcon from "@material-ui/icons/Add";
@@ -26,7 +26,7 @@ import { useDailyAllowancesContext } from "../context/dailyallowances_context";
 //import { useEmployeesContext } from "../context/employees_context";
 import DailyAllowsDetlsTable from "./DailyAllowsDetlsTable";
 
-const FILTERSTRING = "Submitted";
+//const FILTERSTRING = "Submitted";
 
 const columns = [
   {
@@ -70,40 +70,40 @@ export default function DailyAllowancesTable({
   update_dailyallowance_error,
   handleDialogClose,
 }) {
-  let history = useHistory();
+  //let history = useHistory();
   const classes = useStyles();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [tmpallowsdata, setTmpallowsdata] = useState([]);
+  //const [tmpallowsdata, setTmpallowsdata] = useState([]);
   const allows_period = useRecoilValue(allowsPeriodState);
-  const allows_empid = useRecoilValue(empidState);
+  //const allows_empid = useRecoilValue(empidState);
   const [allowsdata, setAllowsdata] = useRecoilState(allowsDataState);
-  const setEmpID = useSetRecoilState(empidState);
+  //const setEmpID = useSetRecoilState(empidState);
   const title = `Site Allowances (${allows_period})`;
   const {
-    dailyallowances_loading,
-    singlebatch_dailyallowance,
-    singlebatch_dailyallowance_loading,
-    deleteDailyAllowance,
+    //dailyallowances_loading,
+    //singlebatch_dailyallowance,
+    //singlebatch_dailyallowance_loading,
+    //deleteDailyAllowance,
     updateDailyAllowance,
-    setEditDailyAllowanceID,
-    setIsDailyAllowanceEditingOn,
-    setIsDailyAllowanceEditingOff,
-    resetSingleDailyAllowance,
-    dailyallowance_period,
-    getSingleBatchDailyAllowance,
+    //setEditDailyAllowanceID,
+    //setIsDailyAllowanceEditingOn,
+    //setIsDailyAllowanceEditingOff,
+    //resetSingleDailyAllowance,
+    //dailyallowance_period,
+    //getSingleBatchDailyAllowance,
   } = useDailyAllowancesContext();
 
-  const Save_DailyAllowancesData = () => {
-    dailyallowancesdata.forEach((data) => {
-      const { id } = data;
-      if (id) {
-        const { id, rec_id, tableData, ...fields } = data;
-        updateDailyAllowance({ id, ...fields });
-      }
-    });
+  // const Save_DailyAllowancesData = () => {
+  //   dailyallowancesdata.forEach((data) => {
+  //     const { id } = data;
+  //     if (id) {
+  //       const { id, rec_id, tableData, ...fields } = data;
+  //       updateDailyAllowance({ id, ...fields });
+  //     }
+  //   });
 
-    handleDialogClose();
-  };
+  //   handleDialogClose();
+  // };
 
   const Approve_DailyAllowancesData = () => {
     dailyallowancesdata.forEach((rec) => {
@@ -137,13 +137,7 @@ export default function DailyAllowancesTable({
     });
   };
 
-  if (dailyallowances_loading) {
-    return (
-      <div>
-        <h2>Loading... daily allowances</h2>
-      </div>
-    );
-  }
+  
 
   return (
     <div className={classes.root}>

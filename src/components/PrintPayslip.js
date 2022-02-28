@@ -1,7 +1,6 @@
 import pdfMake from "pdfmake/build/pdfmake";
 import vfsFonts from "pdfmake/build/vfs_fonts";
 import { formatPrice, formatPriceZero } from "../helpers/Utils";
-import { Divider } from "@material-ui/core";
 
 const PrintPayslip = ({ data, emp }) => {
   var months = [
@@ -30,12 +29,12 @@ const PrintPayslip = ({ data, emp }) => {
     ic_no,
     designation,
     bank_acno,
-    bank_name,
+    //bank_name,
     tap_acno,
     scp_acno,
-    payrun,
+    //payrun,
   } = emp[0];
-  const { name, total_allowances_bnd, total_deductions_bnd } = data.rowData;
+  const { name } = data.rowData;
   const totalEarnings =
     data.rowData.wages_bnd +
     data.rowData.site_allows_bnd +

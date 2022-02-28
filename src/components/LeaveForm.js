@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Button,
   Icon,
@@ -12,12 +12,12 @@ import { useRecoilState } from "recoil";
 import { loginLevelState } from "./data/atomdata";
 import { makeStyles } from "@material-ui/core/styles";
 import { useCustomToast } from "../helpers/useCustomToast";
-import { useEmployees } from "./employees/useEmployees";
+//import { useEmployees } from "./employees/useEmployees";
 import { useLeavesContext } from "../context/leaves_context";
 import { Controller, useForm } from "react-hook-form";
-import { useLeaves } from "./leaves/useLeaves";
+//import { useLeaves } from "./leaves/useLeaves";
 import { useAddLeaves } from "./leaves/useAddLeaves";
-import { useDeleteLeaves } from "./leaves/useDeleteLeaves";
+//import { useDeleteLeaves } from "./leaves/useDeleteLeaves";
 import { useUpdateLeaves } from "./leaves/useUpdateLeaves";
 
 const SERVICE_ID = process.env.REACT_APP_EMAILJS_SERVICEID;
@@ -43,14 +43,14 @@ const LeaveForm = ({
 }) => {
   const classes = useStyles();
   const toast = useCustomToast();
-  const { employees } = useEmployees();
-  const { leaves, filter, setFilter, setLeaveId } = useLeaves();
+  //const { employees } = useEmployees();
+  //const { leaves, filter, setFilter, setLeaveId } = useLeaves();
   const updateLeaves = useUpdateLeaves();
   const addLeaves = useAddLeaves();
-  const [state, setState] = useState(initial_state);
-  const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
+  //const [state, setState] = useState(initial_state);
+  const [loginLevel] = useRecoilState(loginLevelState);
   const { handleSubmit, control } = useForm();
-  const initialValues = Object.values(initial_state).join("");
+  //const initialValues = Object.values(initial_state).join("");
   const { isLeaveEditing, editLeaveID } = useLeavesContext();
 
   const handleSentEmail = (data) => {

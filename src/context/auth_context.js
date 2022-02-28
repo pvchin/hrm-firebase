@@ -1,8 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import App from "../utils/firebase"
-import axios from "axios";
-import reducer from "../reducers/expenses_reducer";
-
 
 import {} from "../actions";
 

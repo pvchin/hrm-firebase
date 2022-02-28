@@ -1,15 +1,12 @@
 import React, { useEffect } from "react";
-import MaterialTable, { MTableToolbar } from "material-table";
+import MaterialTable from "material-table";
 import { makeStyles } from "@material-ui/core/styles";
-import { useHistory, Link } from "react-router-dom";
-import { useSetRecoilState, useRecoilValue } from "recoil";
-import {
-  payPeriodState,
-  payPeriodEndMonthState,
-  payPeriodEmpIdState,
-} from "./data/atomdata";
+//import {
+  //payPeriodState,
+  //payPeriodEndMonthState,
+  //payPeriodEmpIdState,
+//} from "./data/atomdata";
 import { usePayslipsContext } from "../context/payslips_context";
-import { useEmployeesContext } from "../context/employees_context";
 
 const FILTERSTRING = "Verified";
 
@@ -81,15 +78,15 @@ const columns = [
 ];
 
 export default function PayslipTableVIew() {
-  let history = useHistory();
+  //et history = useHistory();
   const classes = useStyles();
-  const setPayPeriodEmpId = useSetRecoilState(payPeriodEmpIdState);
+  
   const {
     batchpayrun,
     getBatchPayrun,
     batchpayrun_loading,
     batchpayrun_error,
-    loadPendingPayslips,
+    //loadPendingPayslips,
   } = usePayslipsContext();
   //const { loadEmployees, employees } = useEmployeesContext();
 

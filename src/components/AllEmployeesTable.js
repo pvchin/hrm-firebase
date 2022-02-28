@@ -7,8 +7,8 @@ import {
   Modal,
   ModalOverlay,
   ModalContent,
-  ModalHeader,
-  ModalFooter,
+  //ModalHeader,
+  //ModalFooter,
   ModalBody,
   ModalCloseButton,
   Tabs,
@@ -26,15 +26,15 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import CheckIcon from "@material-ui/icons/Check";
 import SearchIcon from "@material-ui/icons/Search";
 import { useCustomToast } from "../helpers/useCustomToast";
-import { useRecoilState } from "recoil";
-import { editEmployeeIdState } from "./data/atomdata";
+//import { useRecoilState } from "recoil";
+//import { editEmployeeIdState } from "./data/atomdata";
 import { CustomDialog } from "../helpers/CustomDialog";
 import { AlertDialogBox } from "../helpers/AlertDialogBox";
 import EmployeeView from "./EmployeeView";
 import { useEmployeesContext } from "../context/employees_context";
-import { useTablesContext } from "../context/tables_context";
-import { useDepartments } from "./departments/useDepartments";
-import { useDesignations } from "./designations/useDesignations";
+//import { useTablesContext } from "../context/tables_context";
+//import { useDepartments } from "./departments/useDepartments";
+//import { useDesignations } from "./designations/useDesignations";
 import { useEmployees } from "./employees/useEmployees";
 //import { useAllEmployees } from "./employees/useAllEmployees";
 import { useDeleteEmployees } from "./employees/useDeleteEmployees";
@@ -45,11 +45,11 @@ export default function AllEmployeesTable() {
   let history = useHistory();
   const classes = useStyles();
   const toast = useCustomToast();
-  const { designations } = useDesignations();
-  const { departments } = useDepartments();
+  //const { designations } = useDesignations();
+  //const { departments } = useDepartments();
   const { employees, setEmployeeId } = useEmployees();
   //const { allemployees, setAllEmpId } = useAllEmployees();
-  const [empId, setEmpId] = useRecoilState(editEmployeeIdState);
+  //const [empId, setEmpId] = useRecoilState(editEmployeeIdState);
   const deleteEmployees = useDeleteEmployees();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isAlertOpen, setIsAlertOpen] = useState(false);
@@ -76,18 +76,18 @@ export default function AllEmployeesTable() {
 
   const {
     editEmployeeID,
-    employees_loading,
+    //employees_loading,
     //deleteEmployee,
     //loadEmployees,
     setEditEmployeeID,
     setIsEditingOn,
-    setIsEditingOff,
+    //setIsEditingOff,
     resetSingleEmployee,
     resetEmployees,
     //getSingleEmployee,
   } = useEmployeesContext();
 
-  const { loadDepartments, loadDesignations, resetTables } = useTablesContext();
+  //const { loadDepartments, loadDesignations, resetTables } = useTablesContext();
 
   // useEffect(() => {
   //   setAllEmpId("111");
@@ -126,9 +126,9 @@ export default function AllEmployeesTable() {
     //loadEmployees();
   };
 
-  const handleDialogOpen = () => {
-    setIsDialogOpen(true);
-  };
+  // const handleDialogOpen = () => {
+  //   setIsDialogOpen(true);
+  // };
 
   const handleDialogClose = () => {
     setIsDialogOpen(false);
@@ -149,16 +149,16 @@ export default function AllEmployeesTable() {
     //loadEmployees();
   };
 
-  const calculateAge = (dob) => {
-    var today = new Date();
-    var birthDate = new Date(dob);
-    var age = today.getFullYear() - birthDate.getFullYear();
-    var m = today.getMonth() - birthDate.getMonth();
-    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-      age--;
-    }
-    return age;
-  };
+  // const calculateAge = (dob) => {
+  //   var today = new Date();
+  //   var birthDate = new Date(dob);
+  //   var age = today.getFullYear() - birthDate.getFullYear();
+  //   var m = today.getMonth() - birthDate.getMonth();
+  //   if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+  //     age--;
+  //   }
+  //   return age;
+  // };
 
   const Reset_PW = () => {
     employees.forEach((rec) => {

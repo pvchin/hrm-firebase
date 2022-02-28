@@ -1,24 +1,24 @@
 import React, { useState, useEffect } from "react";
-import { useHistory, Link } from "react-router-dom";
+//import { useHistory } from "react-router-dom";
 import MaterialTable, { MTableToolbar } from "material-table";
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField, Icon, Button } from "@material-ui/core";
 import {
-  selector,
+  //selector,
   useRecoilValue,
-  useRecoilState,
-  useRecoilValueLoadable,
-  useRecoilStateLoadable,
+  //useRecoilState,
+  //useRecoilValueLoadable,
+  //useRecoilStateLoadable,
 } from "recoil";
 import {
-  loginLevelState,
-  allowsDataState,
+  //loginLevelState,
+  //allowsDataState,
   empidState,
   allowsPeriodState,
 } from "./data/atomdata";
-import { fetchDailyAllowsDetlsSelector } from "./data/selectordata";
+//import { fetchDailyAllowsDetlsSelector } from "./data/selectordata";
 import { useDailyAllowancesContext } from "../context/dailyallowances_context";
-import { useDailyAllowsDetlsBatch } from "./dailyallowsdetls/useDailyAllowsDetlsBatch";
+//import { useDailyAllowsDetlsBatch } from "./dailyallowsdetls/useDailyAllowsDetlsBatch";
 import { useDailyAllows } from "./dailyallows/useDailyAllows";
 
 const columns = [
@@ -74,13 +74,13 @@ const columns = [
 ];
 
 export default function DailyAllowsDetlsTable() {
-  let history = useHistory();
+  //let history = useHistory();
   const classes = useStyles();
   // const [allowsDetlsTable, setAllowsDetlsTable] =
   // useRecoilState(allowsDataDetlsState);
   //console.log("detlstable", singlebatch_dailyallowsdetl);
   //const [allowsDetlsdata, setAllowsDetilsdata] = useRecoilStateLoadable(fetchDailyAllowsDetlsSelector);
-  const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
+  //const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
   const allows_period = useRecoilValue(allowsPeriodState);
   const allows_empid = useRecoilValue(empidState);
   const { dailyallows, dailyAllowsId, setDailyAllowsId } = useDailyAllows();
@@ -91,16 +91,16 @@ export default function DailyAllowsDetlsTable() {
   } = useDailyAllowsDetlsBatch();
   const {
     dailyallowsdetls,
-    addDailyAllowsDetl,
-    dailyallowsdetls_loading,
-    updateDailyAllowsDetl,
-    deleteDailyAllowsDetl,
-    getSingleBatchDailyAllowsDetl,
+    //addDailyAllowsDetl,
+    //dailyallowsdetls_loading,
+    //updateDailyAllowsDetl,
+    //deleteDailyAllowsDetl,
+    //getSingleBatchDailyAllowsDetl,
     //singlebatch_dailyallowsdetl,
-    singlebatch_dailyallowsdetl_loading,
-    dailyallowance_period,
-    single_dailyallowance,
-    editDailyAllowanceID,
+    //singlebatch_dailyallowsdetl_loading,
+    //dailyallowance_period,
+    //single_dailyallowance,
+    //editDailyAllowanceID,
   } = useDailyAllowancesContext();
 
   // useEffect(() => {

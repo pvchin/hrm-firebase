@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import MaterialTable, { MTableToolbar } from "material-table";
 import { makeStyles } from "@material-ui/core/styles";
-import { Button, Icon, TextField, MenuItem, Select } from "@material-ui/core";
+import { TextField, MenuItem } from "@material-ui/core";
 import { useRecoilState } from "recoil";
 import { loginLevelState } from "./data/atomdata";
 import { useEmployeesContext } from "../context/employees_context";
-import { useTrainingsContext } from "../context/trainings_context";
+//import { useTrainingsContext } from "../context/trainings_context";
 import { useTrainings } from "./trainings/useTrainings";
 import { useInstitutes } from "./institutes/useInstitutes";
 import { useUpdateTrainings } from "./trainings/useUpdateTrainings";

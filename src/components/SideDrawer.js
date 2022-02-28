@@ -1,23 +1,21 @@
 import React from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import Drawer from "@material-ui/core/Drawer";
-import Box from "@material-ui/core/Box";
 import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import {
-  RecoilRoot,
-  atom,
-  selector,
+  //RecoilRoot,
+  //atom,
+  //selector,
   useRecoilState,
-  useRecoilValue,
-  useSetRecoilState,
+  //useRecoilValue,
+  //useSetRecoilState,
 } from "recoil";
 
-import MenuListItems from "./MenuListItems";
+//import MenuListItems from "./MenuListItems";
 import { loginLevelState } from "./data/atomdata";
 import MenuListItemsStaff from "./MenuListItemsStaff";
 import MenuListItemsAdmin from "./MenuListItemsAdmin";
@@ -25,13 +23,13 @@ import MenuListItemsOpsSpvr from "./MenuListItemsOpsSpvr";
 import MenuListItemsAdminManager from "./MenuListItemsAdminManager";
 import MenuListItemsManager from "./MenuListItemsManager";
 import MenuListItemsDirector from "./MenuListItemsDirector"
-import headerlogo from "../assets/headerlogo.png";
+//import headerlogo from "../assets/headerlogo.png";
 
 const drawerWidth = 240;
 
 const SideDrawer = ({ HandleDrawerOpen, handleDrawerClose, open }) => {
   const classes = useStyles();
-  const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
+  const [loginLevel] = useRecoilState(loginLevelState);
 
   const SwitchCase = () => {
   

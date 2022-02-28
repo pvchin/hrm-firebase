@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import clsx from "clsx";
+//import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
-import { HStack, Button, Text } from "@chakra-ui/react"
+import { Text } from "@chakra-ui/react"
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -10,12 +10,10 @@ import ListSubheader from "@material-ui/core/ListSubheader";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import FlightIcon from "@material-ui/icons/Flight";
 import PeopleIcon from "@material-ui/icons/People";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
 //import LayersIcon from "@material-ui/icons/Layers";
 import MonetizationOnIcon from "@material-ui/icons/MonetizationOn";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import MoneyIcon from "@material-ui/icons/Money";
+//import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+//import MoneyIcon from "@material-ui/icons/Money";
 import {
   FaFileInvoiceDollar,
   FaPeopleCarry,
@@ -25,20 +23,20 @@ import {
 // import ExpandLess from "@material-ui/icons/ExpandLess";
 // import ExpandMore from "@material-ui/icons/ExpandMore";
 
-const drawerWidth = 0;
+//const drawerWidth = 0;
 
 const MenuListItemsStaff = () => {
   const classes = useStyles();
-  const [openPay, setOpenPay] = useState(false);
-  const [openTable, setOpenTable] = useState(false);
+  //const [openPay, setOpenPay] = useState(false);
+  //const [openTable, setOpenTable] = useState(false);
 
-  const handleClickPay = () => {
-    setOpenPay(!openPay);
-  };
+  // const handleClickPay = () => {
+  //   setOpenPay(!openPay);
+  //};
 
-  const handleClickTable = () => {
-    setOpenTable(!openTable);
-  };
+  // const handleClickTable = () => {
+  //   setOpenTable(!openTable);
+  // };
 
   return (
     <div className={classes.content}>

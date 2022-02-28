@@ -13,13 +13,13 @@ import CurrencyTextField from "@unicef/material-ui-currency-textfield";
 import { makeStyles } from "@material-ui/core/styles";
 import MenuItem from "@material-ui/core/MenuItem";
 import { useCustomToast } from "../helpers/useCustomToast";
-import { selector, useRecoilState, useRecoilValueLoadable } from "recoil";
+import { useRecoilState } from "recoil";
 import { loginLevelState } from "./data/atomdata";
-import { useEmployeesContext } from "../context/employees_context";
+//import { useEmployeesContext } from "../context/employees_context";
 import { Controller, useForm } from "react-hook-form";
 
 import { useEmployees } from "./employees/useEmployees";
-import { useSingleEmployee } from "./employees/useSingleEmployee";
+//import { useSingleEmployee } from "./employees/useSingleEmployee";
 import { useUpdateEmployees } from "./employees/useUpdateEmployees";
 // import EmpFamilyStaff from "./EmpFamilyStaff";
 // import EmpEducationsStaff from "./EmpEducationsStaff";
@@ -67,20 +67,20 @@ const initial_values = {
 const EmployeeForm = () => {
   const classes = useStyles();
   const toast = useCustomToast();
-  const { employees, setFilter, setEmployeeId } = useEmployees();
+  const { employees,setEmployeeId } = useEmployees();
   //const { singleemployee, setSingleEmployeeId } = useSingleEmployee();
   const updateEmployees = useUpdateEmployees();
   const [empage, setEmpage] = useState(0);
   const [reportemail, setReportEmail] = useState("");
   const { handleSubmit, control, setValue, register } = useForm();
   const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
-  const {
-    isEditing,
-    //single_employee,
-    editEmployeeID,
-    getSingleEmployee,
-    single_employee_loading,
-  } = useEmployeesContext();
+  // const {
+  //   isEditing,
+  //   single_employee,
+  //   editEmployeeID,
+  //   getSingleEmployee,
+  //   single_employee_loading,
+  // } = useEmployeesContext();
   const single_employee = employees
     .filter((r) => r.id === loginLevel.loginUserId)
     .map((r) => {
@@ -92,7 +92,7 @@ const EmployeeForm = () => {
     birthdate,
     ic_no,
     gender,
-    age,
+    //age,
     email,
     nationality,
     address,

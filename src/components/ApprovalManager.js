@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import clsx from "clsx";
-import { TextField, Grid, Paper, Container, Box } from "@material-ui/core";
-import CardLayout from "../helpers/CardLayout";
-import CardLayout2 from "../helpers/CardLayout2";
+//import clsx from "clsx";
+import { Grid,  Container, Box } from "@material-ui/core";
+//import CardLayout from "../helpers/CardLayout";
+//import CardLayout2 from "../helpers/CardLayout2";
 import CardLayout3 from "../helpers/CardLayout3";
 import Copyright from "./Copyright";
 import { CustomDialog } from "../helpers/CustomDialog";
-import { useRecoilState } from "recoil";
-import { loginLevelState } from "./data/atomdata";
+//import { useRecoilState } from "recoil";
+//import { loginLevelState } from "./data/atomdata";
 import { useLeavesContext } from "../context/leaves_context";
 import { useExpensesContext } from "../context/expenses_context";
 import { usePayslipsContext } from "../context/payslips_context";
@@ -21,8 +21,8 @@ import PayslipTableViewManager from "./PayslipTableViewManager";
 import PayslipTableAdmin from "./PayslipTableAdmin";
 import DailyAllowancesTableView from "./DailyAllowancesTableView";
 import DailyAllowancesTableAdmin from "./DailyAllowancesTableAdmin";
-import OnLeavesView from "./OnLeavesView";
-import WPExpiryView from "./WPExpiryView";
+//import OnLeavesView from "./OnLeavesView";
+//import WPExpiryView from "./WPExpiryView";
 import { useDailyAllowsStatus } from "./dailyallows/useDailyAllowsStatus";
 
 const drawerWidth = 240;
@@ -31,8 +31,8 @@ const FILTERSTRING = "Pending";
 
 const EmployeeView = () => {
   const classes = useStyles();
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-  const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
+  //const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+  //const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
   const [leavesdata, setLeavesdata] = useState([]);
   const [isLeaveDialogOpen, setIsLeaveDialogOpen] = useState(false);
   const [expensesdata, setExpensesdata] = useState([]);
@@ -45,8 +45,8 @@ const EmployeeView = () => {
   const { dailyallowsstatus, setDailyAllowsStatusId } = useDailyAllowsStatus();
   const { leaves, loadPendingLeaves } = useLeavesContext();
   const { expenses, loadPendingExpenses } = useExpensesContext();
-  const { batchpayslips, loadPendingPayslips } = usePayslipsContext();
-  const { dailyallowances, loadPendingDailyAllowances } =
+  const {  loadPendingPayslips } = usePayslipsContext();
+  const {  loadPendingDailyAllowances } =
     useDailyAllowancesContext();
 
   const handleLeaveDialogOpen = () => {

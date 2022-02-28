@@ -1,8 +1,7 @@
 import React from "react";
-import styled from "styled-components";
 import { Link as ReactLink } from "react-router-dom";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import { Box, Container, Flex, Heading, Link, HStack, Stack } from "@chakra-ui/react";
+import { Box, Container,  Heading, Link, HStack } from "@chakra-ui/react";
 
 const ErrorPage = () => {
   return (
@@ -20,19 +19,6 @@ const ErrorPage = () => {
   );
 };
 
-const Wrapper = styled.main`
-  background: var(--clr-primary-10);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  h1 {
-    font-size: 10rem;
-  }
-  h3 {
-    text-transform: none;
-    margin-bottom: 2rem;
-  }
-`;
+
 
 export default ErrorPage;

@@ -1,38 +1,34 @@
 import React from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import clsx from "clsx";
-import { lighten, makeStyles } from "@material-ui/core/styles";
+import {  makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
-import Tooltip from "@material-ui/core/Tooltip";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { Link } from "react-router-dom";
 import ExpenseForm from "./ExpenseForm";
 
 const drawerWidth = 240;
 
-const ToolbarHeader = ({ title }) => {
-  const classes = useToolbarStyles();
+// const ToolbarHeader = ({ title }) => {
+//   const classes = useToolbarStyles();
 
-  return (
-    <div>
-      <Toolbar>
-        <Typography
-          className={classes.title}
-          variant="h6"
-          id="tableTitle"
-          component="div"
-        >
-          {title}
-        </Typography>
-      </Toolbar>
-    </div>
-  );
-};
+//   return (
+//     <div>
+//       <Toolbar>
+//         <Typography
+//           className={classes.title}
+//           variant="h6"
+//           id="tableTitle"
+//           component="div"
+//         >
+//           {title}
+//         </Typography>
+//       </Toolbar>
+//     </div>
+//   );
+//};
 
 const SingleExpense = ({ title }) => {
   const classes = useStyles();
@@ -149,24 +145,5 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const useToolbarStyles = makeStyles((theme) => ({
-  root: {
-    paddingLeft: theme.spacing(2),
-    paddingRight: theme.spacing(1),
-  },
-  highlight:
-    theme.palette.type === "light"
-      ? {
-          color: theme.palette.secondary.main,
-          backgroundColor: lighten(theme.palette.secondary.light, 0.85),
-        }
-      : {
-          color: theme.palette.text.primary,
-          backgroundColor: theme.palette.secondary.dark,
-        },
-  title: {
-    flex: "1 1 100%",
-  },
-}));
 
 export default SingleExpense;

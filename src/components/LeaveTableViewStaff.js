@@ -1,29 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import clsx from "clsx";
-import axios from "axios";
+//import clsx from "clsx";
 import { useHistory } from "react-router-dom";
-import MaterialTable from "material-table";
 import {
   Box,
   Grid,
   Heading,
   GridItem,
-  Icon,
+  //Icon,
   IconButton,
   Stack,
   Spacer,
 } from "@chakra-ui/react";
-import { EditIcon, ViewIcon } from "@chakra-ui/icons";
-import { List, ListItem, ListItemText } from "@material-ui/core";
-import { selector, useRecoilState, useRecoilValueLoadable } from "recoil";
+import { EditIcon } from "@chakra-ui/icons";
+import { List } from "@material-ui/core";
+import {  useRecoilState } from "recoil";
 import { loginLevelState } from "./data/atomdata";
-import { useEmployeesContext } from "../context/employees_context";
-import { useLeavesContext } from "../context/leaves_context";
-import { leaves_url } from "../utils/constants";
+//import { useEmployeesContext } from "../context/employees_context";
+//import { useLeavesContext } from "../context/leaves_context";
 import { useLeaves } from "./leaves/useLeaves";
 
-const drawerWidth = 240;
+//const drawerWidth = 240;
 
 // const fetchExpensesDetails = selector({
 //   key: "fetchExpensesDetailsSelector",
@@ -42,15 +39,15 @@ const drawerWidth = 240;
 const LeaveTableViewStaff = () => {
   const classes = useStyles();
   const history = useHistory();
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-  const { leaves, filter, setFilter, setLeaveId } = useLeaves();
-  const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
-  const [userdata, setUserdata] = useState([]);
+  //const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+  const { leaves,  setFilter } = useLeaves();
+  const [loginLevel] = useRecoilState(loginLevelState);
+  //const [userdata, setUserdata] = useState([]);
   //const [userdata, setUserdata] = useRecoilState(userdatastate);
   //const ExpensesDetails = useRecoilValueLoadable(fetchExpensesDetails);
   //const { state, contents } = ExpensesDetails;
-  const { editEmployeeID } = useEmployeesContext();
-  const { leaves_loading, leaves_error, loadEmpLeaves } = useLeavesContext();
+  //const { editEmployeeID } = useEmployeesContext();
+  //const { leaves_loading, leaves_error, loadEmpLeaves } = useLeavesContext();
 
   useEffect(() => {
     setFilter(loginLevel.loginUserId);

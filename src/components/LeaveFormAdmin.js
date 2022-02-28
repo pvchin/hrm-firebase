@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import {
-  Button,
-  Icon,
+  //Button,
+  //Icon,
   TextField,
   Paper,
   Typography,
@@ -10,36 +10,34 @@ import {
 import { useRecoilState } from "recoil";
 import { loginLevelState } from "./data/atomdata";
 import { makeStyles } from "@material-ui/core/styles";
-import MenuItem from "@material-ui/core/MenuItem";
-import { useEmployeesContext } from "../context/employees_context";
 import { useLeavesContext } from "../context/leaves_context";
 import { Controller, useForm } from "react-hook-form";
 import { useCustomToast } from "../helpers/useCustomToast";
-import { useLeaves } from "./leaves/useLeaves";
+//import { useLeaves } from "./leaves/useLeaves";
 import { useAddLeaves } from "./leaves/useAddLeaves";
-import { useDeleteLeaves } from "./leaves/useDeleteLeaves";
+//import { useDeleteLeaves } from "./leaves/useDeleteLeaves";
 import { useUpdateLeaves } from "./leaves/useUpdateLeaves";
 
-const initial_state = {
-  name: "",
-  to_date: "",
-  from_date: "",
-  reason: "",
-  status: "Pending",
-  no_of_days: 0,
-  leave_bal: 0,
-};
+// const initial_state = {
+//   name: "",
+//   to_date: "",
+//   from_date: "",
+//   reason: "",
+//   status: "Pending",
+//   no_of_days: 0,
+//   leave_bal: 0,
+// };
 
 const LeaveForm = ({ formdata, setFormdata, handleDialogClose }) => {
   const classes = useStyles();
   const toast = useCustomToast()
-  const { leaves, filter, setFilter, setLeaveId } = useLeaves();
+  //const { leaves, filter, setFilter, setLeaveId } = useLeaves();
   const updateLeaves = useUpdateLeaves();
   const addLeaves = useAddLeaves();
-  const [state, setState] = useState(initial_state);
-  const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
+  //const [state, setState] = useState(initial_state);
+  const [loginLevel] = useRecoilState(loginLevelState);
   const { handleSubmit, control } = useForm();
-  const initialValues = Object.values(initial_state).join("");
+  //const initialValues = Object.values(initial_state).join("");
   const { isLeaveEditing, editLeaveID } = useLeavesContext();
 
   //console.log("leave", isLeaveEditing, formdata);

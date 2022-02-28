@@ -1,26 +1,25 @@
 import React, { useState, useEffect } from "react";
 import MaterialTable, { MTableToolbar } from "material-table";
-import { TextField, MenuItem, Button, Icon } from "@material-ui/core";
-import { Alert } from "@material-ui/lab";
+import { TextField, MenuItem } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useRecoilState } from "recoil";
 import { loginLevelState } from "./data/atomdata";
 import AddIcon from "@material-ui/icons/Add";
-import EditIcon from "@material-ui/icons/Edit";
+//import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import CheckIcon from "@material-ui/icons/Check";
 import SearchIcon from "@material-ui/icons/Search";
 import CheckCircleOutlineOutlinedIcon from "@material-ui/icons/CheckCircleOutlineOutlined";
 import ExpenseForm from "./ExpenseForm";
-import { useCustomToast } from "../helpers/useCustomToast";
+//import { useCustomToast } from "../helpers/useCustomToast";
 import { useExpensesContext } from "../context/expenses_context";
-import { useEmployeesContext } from "../context/employees_context";
+//import { useEmployeesContext } from "../context/employees_context";
 import { CustomDialog } from "../helpers/CustomDialog";
 import { AlertDialogBox } from "../helpers/AlertDialogBox";
 import { useExpenses } from "./expenses/useExpenses";
-import { useAddExpenses } from "./expenses/useAddExpenses";
+//import { useAddExpenses } from "./expenses/useAddExpenses";
 import { useDeleteExpenses } from "./expenses/useDeleteExpenses";
-import { useUpdateExpenses } from "./expenses/useUpdateExpenses";
+//import { useUpdateExpenses } from "./expenses/useUpdateExpenses";
 
 const initial_form = {
   name: "",
@@ -69,25 +68,25 @@ const columns = [
 
 export default function ExpenseTable() {
   const classes = useStyles();
-  const toast = useCustomToast();
-  const [isLoad, setIsLoad] = useState(false);
-  const { expenses, filter, setFilter, setExpenseId } = useExpenses();
-  const updateExpenses = useUpdateExpenses();
-  const addExpenses = useAddExpenses();
+  //const toast = useCustomToast();
+  //const [isLoad, setIsLoad] = useState(false);
+  const { expenses, setFilter, setExpenseId } = useExpenses();
+  //const updateExpenses = useUpdateExpenses();
+  //const addExpenses = useAddExpenses();
   const deleteExpenses = useDeleteExpenses();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isAlertOpen, setIsAlertOpen] = useState(false);
-  const [expensesdata, setExpensesdata] = useState([]);
-  const [alertSuccess, setAlertSuccess] = useState(false);
+  //const [expensesdata, setExpensesdata] = useState([]);
+  //const [alertSuccess, setAlertSuccess] = useState(false);
   const [formdata, setFormdata] = useState(initial_form);
   const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
-  const { editEmployeeID } = useEmployeesContext();
+  //const { editEmployeeID } = useEmployeesContext();
   const {
     //expenses,
     editExpenseID,
-    updateExpense,
-    addExpense,
-    deleteExpense,
+    //updateExpense,
+    //addExpense,
+    //deleteExpense,
     setEditExpenseID,
     setIsExpenseEditingOn,
     setIsExpenseEditingOff,

@@ -4,35 +4,33 @@ import { makeStyles } from "@material-ui/core/styles";
 import { useRecoilState } from "recoil";
 import * as emailjs from "emailjs-com";
 import { loginLevelState } from "./data/atomdata";
-import MenuItem from "@material-ui/core/MenuItem";
-import { useEmployeesContext } from "../context/employees_context";
 import { useExpensesContext } from "../context/expenses_context";
 import { Controller, useForm } from "react-hook-form";
 import { useCustomToast } from "../helpers/useCustomToast";
-import { useExpenses } from "./expenses/useExpenses";
+//import { useExpenses } from "./expenses/useExpenses";
 import { useAddExpenses } from "./expenses/useAddExpenses";
-import { useDeleteExpenses } from "./expenses/useDeleteExpenses";
+//import { useDeleteExpenses } from "./expenses/useDeleteExpenses";
 import { useUpdateExpenses } from "./expenses/useUpdateExpenses";
 
 const SERVICE_ID = process.env.REACT_APP_EMAILJS_SERVICEID;
 const TEMPLATE_ID = "template_1y8odlq";
 const USER_ID = process.env.REACT_APP_EMAILJS_USERID;
 
-const initial_values = {
-  name: "",
-  date: "",
-  purchased_date: "",
-  purchased_from: "",
-  description: "",
-  remark: "",
-  status: "Pending",
-  amount: 0,
-};
+// const initial_values = {
+//   name: "",
+//   date: "",
+//   purchased_date: "",
+//   purchased_from: "",
+//   description: "",
+//   remark: "",
+//   status: "Pending",
+//   amount: 0,
+//};
 
 const ExpenseForm = ({ formdata, setFormdata, handleDialogClose }) => {
   const classes = useStyles();
   const toast = useCustomToast();
-  const { expenses, filter, setFilter, setExpenseId } = useExpenses();
+  //const { expenses, filter, setFilter, setExpenseId } = useExpenses();
   const updateExpenses = useUpdateExpenses();
   const addExpenses = useAddExpenses();
   const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);

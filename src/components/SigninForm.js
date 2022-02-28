@@ -7,19 +7,17 @@ import {
   Button,
   Container,
   Divider,
-  Flex,
   FormControl,
   Heading,
   Image,
   Input,
   InputGroup,
-  InputLeftAddon,
   Stack,
   HStack,
   VStack,
   Wrap,
 } from "@chakra-ui/react";
-import { makeStyles } from "@material-ui/core/styles";
+//import { makeStyles } from "@material-ui/core/styles";
 import { Controller, useForm } from "react-hook-form";
 import { useCustomToast } from "../helpers/useCustomToast";
 import { useEmployees } from "./employees/useEmployees";
@@ -38,23 +36,23 @@ const initial_values = {
 
 const SigninForm = () => {
   //let history = useHistory();
-  const classes = useStyles();
+  //const classes = useStyles();
   const toast = useCustomToast();
-  const field_width = "40";
+  //const field_width = "40";
   //const { currentUser } = useAuthContext();
   const { employees } = useEmployees();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
-  const [state, setState] = useState(initial_values);
+  const [state] = useState(initial_values);
   const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
   const { setEditEmployeeID } = useEmployeesContext();
   const {
     handleSubmit,
     control,
-    register,
-    reset,
-    formState: { errors, isSubmitting },
+    //register,
+    //reset,
+    formState: { isSubmitting },
   } = useForm({ defaultValues: state });
 
   const handleLogin = async (values) => {
@@ -74,7 +72,6 @@ const SigninForm = () => {
   };
 
   const update_login = () => {
-   
     const emp = employees
       .filter((item) => item.email === email)
       .map((row) => {
@@ -319,22 +316,22 @@ const SigninForm = () => {
   );
 };
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    padding: theme.spacing(2),
+// const useStyles = makeStyles((theme) => ({
+//   root: {
+//     display: "flex",
+//     flexDirection: "column",
+//     justifyContent: "center",
+//     alignItems: "center",
+//     padding: theme.spacing(2),
 
-    "& .MuiTextField-root": {
-      margin: theme.spacing(1),
-      width: "600px",
-    },
-    "& .MuiButtonBase-root": {
-      margin: theme.spacing(2),
-    },
-  },
-}));
+//     "& .MuiTextField-root": {
+//       margin: theme.spacing(1),
+//       width: "600px",
+//     },
+//     "& .MuiButtonBase-root": {
+//       margin: theme.spacing(2),
+//     },
+//   },
+//}));
 
 export default SigninForm;

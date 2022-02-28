@@ -1,46 +1,43 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import clsx from "clsx";
+//import clsx from "clsx";
 import {
   Box,
   Grid,
   GridItem,
-  Icon,
-  Heading,
+    Heading,
   IconButton,
   Spacer,
   Stack,
 } from "@chakra-ui/react";
-import { EditIcon, EmailIcon, ViewIcon } from "@chakra-ui/icons";
+import { EditIcon, ViewIcon } from "@chakra-ui/icons";
 import { useHistory } from "react-router-dom";
-import { differenceInDays, addDays } from "date-fns";
-import { List, ListItem, ListItemText } from "@material-ui/core";
-import { selector, useRecoilState, useRecoilValueLoadable } from "recoil";
-import { loginLevelState } from "./data/atomdata";
+import { differenceInDays } from "date-fns";
+import { List } from "@material-ui/core";
+//import { useRecoilState } from "recoil";
+//import { loginLevelState } from "./data/atomdata";
 import { useEmployeesContext } from "../context/employees_context";
-import { useLeavesContext } from "../context/leaves_context";
-import { leaves_url } from "../utils/constants";
 import { useTrainings } from "./trainings/useTrainings";
 import { useEmployees } from "./employees/useEmployees";
 
-const drawerWidth = 240;
+//const drawerWidth = 240;
 
 const TrainingsTableViewAdmin = () => {
   const classes = useStyles();
   const history = useHistory();
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-  const { trainings, filter, setFilter, setTrainingId } = useTrainings();
-  const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
+  //const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+  const { trainings } = useTrainings();
+  //const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
   const today = Date().toLocaleString();
-  const { employees, setEmployeeId } = useEmployees();
+  const { setEmployeeId } = useEmployees();
   const {
-    editEmployeeID,
-    employees_loading,
+    //editEmployeeID,
+    //employees_loading,
     //deleteEmployee,
     //loadEmployees,
     setEditEmployeeID,
     setIsEditingOn,
-    setIsEditingOff,
+    //setIsEditingOff,
     resetSingleEmployee,
     resetEmployees,
     //getSingleEmployee,

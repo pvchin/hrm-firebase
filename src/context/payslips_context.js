@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useReducer } from "react";
+import React, { useContext,  useReducer } from "react";
 import axios from "axios";
 import reducer from "../reducers/payslips_reducer";
 import { payslips_url } from "../utils/constants";
@@ -16,7 +16,7 @@ import {
   SET_ISPAYSLIPEDITING_OFF,
   SET_PAYSLIP_PERIOD,
   SET_PAYSLIP_ENDMONTHDATE,
-  SET_SINGLEPAYSLIP,
+  //SET_SINGLEPAYSLIP,
   SET_PAYSLIPEARNING_AMOUNT,
   SET_PAYSLIPDEDUCTION_AMOUNT,
   GET_PAYSLIPS_BEGIN,
@@ -71,9 +71,9 @@ import {
   GET_PAYSLIPEARNINGS_BEGIN,
   GET_PAYSLIPEARNINGS_SUCCESS,
   GET_PAYSLIPEARNINGS_ERROR,
-  GET_SINGLE_PAYSLIPEARNING_BEGIN,
-  GET_SINGLE_PAYSLIPEARNING_SUCCESS,
-  GET_SINGLE_PAYSLIPEARNING_ERROR,
+  //GET_SINGLE_PAYSLIPEARNING_BEGIN,
+  //GET_SINGLE_PAYSLIPEARNING_SUCCESS,
+  //GET_SINGLE_PAYSLIPEARNING_ERROR,
   ADD_PAYSLIPEARNING_BEGIN,
   ADD_PAYSLIPEARNING_SUCCESS,
   ADD_PAYSLIPEARNING_ERROR,
@@ -86,9 +86,9 @@ import {
   GET_PAYSLIPDEDUCTIONS_BEGIN,
   GET_PAYSLIPDEDUCTIONS_SUCCESS,
   GET_PAYSLIPDEDUCTIONS_ERROR,
-  GET_SINGLE_PAYSLIPDEDUCTION_BEGIN,
-  GET_SINGLE_PAYSLIPDEDUCTION_SUCCESS,
-  GET_SINGLE_PAYSLIPDEDUCTION_ERROR,
+  //GET_SINGLE_PAYSLIPDEDUCTION_BEGIN,
+  //GET_SINGLE_PAYSLIPDEDUCTION_SUCCESS,
+  //GET_SINGLE_PAYSLIPDEDUCTION_ERROR,
   ADD_PAYSLIPDEDUCTION_BEGIN,
   ADD_PAYSLIPDEDUCTION_SUCCESS,
   ADD_PAYSLIPDEDUCTION_ERROR,
@@ -325,7 +325,7 @@ export const PayslipsProvider = ({ children }) => {
   };
 
   const addPayslip = async (data) => {
-    const { id, name, from_date, to_date, reason, no_of_days, status } = data;
+    //const { id, name, from_date, to_date, reason, no_of_days, status } = data;
     //
     dispatch({ type: ADD_PAYSLIP_BEGIN });
     try {
@@ -525,7 +525,7 @@ export const PayslipsProvider = ({ children }) => {
     }
   };
   const addPayslipEarning = async (data) => {
-    const { id, name, period, description, amount } = data;
+    //const { id, name, period, description, amount } = data;
     //
     dispatch({ type: ADD_PAYSLIPEARNING_BEGIN });
     try {
@@ -607,7 +607,7 @@ export const PayslipsProvider = ({ children }) => {
     }
   };
   const addPayslipDeduction = async (data) => {
-    const { id, name, period, description, amount } = data;
+    //const { id, name, period, description, amount } = data;
     //
     dispatch({ type: ADD_PAYSLIPDEDUCTION_BEGIN });
     try {

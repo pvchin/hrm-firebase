@@ -7,10 +7,10 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 // import Deposits from "./Deposits";
 // import Orders from "./Orders";
 
-import Appbanner from "./Appbanner";
+//import Appbanner from "./Appbanner";
 import Example from "./Example6";
 import SideDrawer from "./SideDrawer";
-import SingleEmployee from "./SingleEmployee";
+//import SingleEmployee from "./SingleEmployee";
 import SingleEmployeeStaff from "./SingleEmployeeStaff";
 import SingleLeave from "./SingleLeave";
 import SingleExpense from "./SingleExpense";
@@ -18,14 +18,14 @@ import SingleDailyAllowance from "./SingleDailyAllowance";
 import SingleDailyAllowsDetlsStaff from "./SingleDailyAllowsDetlsStaff";
 import BatchDailyAllowances from "./BatchDailyAllowances";
 import SinglePayslip from "./SinglePayslip";
-import Login from "./LoginForm";
-import Payrun from "./Payrun";
-import Payrunbatch from "./Payrunbatch";
+//import Login from "./LoginForm";
+//import Payrun from "./Payrun";
+//import Payrunbatch from "./Payrunbatch";
 
 import {
   Home,
-  AllEmployees,
-  Leave,
+  //AllEmployees,
+  //Leave,
   Hoc,
   LeaveStaff,
   TrainingsStaff,
@@ -33,11 +33,11 @@ import {
   PayslipStaff,
   BatchPayslips,
   Payroll,
-  Departments,
-  Designation,
-  Tables,
-  Clients,
-  Allowances,
+  //Departments,
+  //Designation,
+  //Tables,
+  //Clients,
+  //Allowances,
   DailyAllowancesStaff,
   // PrivateRoute,
   Error,

@@ -1,9 +1,9 @@
 import axios from "axios";
-import { selector, useRecoilValue, useSetRecoilState } from "recoil";
+import { selector } from "recoil";
 import {
   empidState,
   allowsPeriodState,
-  allowsDataDetlsState,
+  //allowsDataDetlsState,
 } from "./atomdata";
 import { departments_url } from "../../utils/constants";
 import {

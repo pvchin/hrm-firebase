@@ -1,47 +1,47 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import clsx from "clsx";
-import { useHistory } from "react-router-dom";
+//import clsx from "clsx";
+//import { useHistory } from "react-router-dom";
 import { Box, Stack } from "@chakra-ui/react";
-import { TextField, Grid, Paper, Container } from "@material-ui/core";
-import CardLayout from "../helpers/CardLayout";
+import {  Container } from "@material-ui/core";
+//import CardLayout from "../helpers/CardLayout";
 import CardLayout2 from "../helpers/CardLayout2";
-import CardLayout3 from "../helpers/CardLayout3";
+//import CardLayout3 from "../helpers/CardLayout3";
 import Copyright from "./Copyright";
 import { CustomDialog } from "../helpers/CustomDialog";
 import { useRecoilState } from "recoil";
 import { loginLevelState } from "./data/atomdata";
 
 import { useEmployeesContext } from "../context/employees_context";
-import { useLeavesContext } from "../context/leaves_context";
-import { useExpensesContext } from "../context/expenses_context";
-import { usePayslipsContext } from "../context/payslips_context";
+//import { useLeavesContext } from "../context/leaves_context";
+//import { useExpensesContext } from "../context/expenses_context";
+//import { usePayslipsContext } from "../context/payslips_context";
 import { useDailyAllowancesContext } from "../context/dailyallowances_context";
 import LeaveTableViewStaff from "./LeaveTableViewStaff";
 import TrainingsTableViewStaff from "./TrainingsTableViewStaff";
 import LeaveTableAdmin from "./LeaveTableManager";
 import ExpenseTableViewStaff from "./ExpenseTableViewStaff";
 import ExpenseTableAdmin from "./ExpenseTableAdmin";
-import PayslipTableViewStaff from "./PayslipTableViewStaff";
+//import PayslipTableViewStaff from "./PayslipTableViewStaff";
 import PayslipTableAdmin from "./PayslipTableAdmin";
-import DailyAllowancesTableViewStaff from "./DailyAllowancesTableViewStaff";
+//import DailyAllowancesTableViewStaff from "./DailyAllowancesTableViewStaff";
 import DailyAllowancesTableAdmin from "./DailyAllowancesTableAdmin";
-import OnLeavesViewStaff from "./OnLeavesViewStaff";
+//import OnLeavesViewStaff from "./OnLeavesViewStaff";
 import WPExpiryViewStaff from "./WPExpiryViewStaff";
-import { useEmployees } from "./employees/useEmployees";
-import { useSingleEmployee } from "./employees/useSingleEmployee";
+//import { useEmployees } from "./employees/useEmployees";
+//import { useSingleEmployee } from "./employees/useSingleEmployee";
 
 const drawerWidth = 240;
 
 const FILTERSTRING = "Pending";
 
 const HomeStaff = () => {
-  let history = useHistory();
+  //let history = useHistory();
   const classes = useStyles();
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-  const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
-  const { employees, setFilter, setEmployeeId } = useEmployees();
-  const { singleemployee, setSingleEmployeeId } = useSingleEmployee();
+  //const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+  const [loginLevel] = useRecoilState(loginLevelState);
+  //const { employees, setFilter, setEmployeeId } = useEmployees();
+  //const { singleemployee, setSingleEmployeeId } = useSingleEmployee();
   const [leavesdata, setLeavesdata] = useState([]);
   const [isLeaveDialogOpen, setIsLeaveDialogOpen] = useState(false);
   const [expensesdata, setExpensesdata] = useState([]);
@@ -52,52 +52,52 @@ const HomeStaff = () => {
   const [isDailyAllowancesDialogOpen, setIsDailyAllowancesDialogOpen] =
     useState(false);
 
-  const { leaves, loadPendingLeaves } = useLeavesContext();
-  const { expenses, loadPendingExpenses } = useExpensesContext();
-  const { payslips, loadPendingPayslips } = usePayslipsContext();
-  const { dailyallowances, loadPendingDailyAllowances } =
+  //const { leaves } = useLeavesContext();
+  //const { expenses } = useExpensesContext();
+  //const { payslips } = usePayslipsContext();
+  const {  loadPendingDailyAllowances } =
     useDailyAllowancesContext();
-  const { isEditing, setEditEmployeeID, setIsEditingOn } =
+  const {  setEditEmployeeID, setIsEditingOn } =
     useEmployeesContext();
 
-  const handleLeaveDialogOpen = () => {
-    setLeavesdata([]);
-    setLeavesdata([...leaves]);
-    setIsLeaveDialogOpen(true);
-  };
+  // const handleLeaveDialogOpen = () => {
+  //   setLeavesdata([]);
+  //   setLeavesdata([...leaves]);
+  //   setIsLeaveDialogOpen(true);
+  // };
 
   const handleLeaveDialogClose = () => {
     setIsLeaveDialogOpen(false);
     //loadPendingLeaves(FILTERSTRING);
   };
 
-  const handleExpenseDialogOpen = () => {
-    setExpensesdata([]);
-    setExpensesdata([...expenses]);
-    setIsExpenseDialogOpen(true);
-  };
+  // const handleExpenseDialogOpen = () => {
+  //   setExpensesdata([]);
+  //   setExpensesdata([...expenses]);
+  //   setIsExpenseDialogOpen(true);
+  // };
 
   const handleExpenseDialogClose = () => {
     setIsExpenseDialogOpen(false);
     //loadPendingExpenses(FILTERSTRING);
   };
 
-  const handlePayslipDialogOpen = () => {
-    setPayslipsdata([]);
-    setPayslipsdata([...payslips]);
-    setIsPayslipDialogOpen(true);
-  };
+  // const handlePayslipDialogOpen = () => {
+  //   setPayslipsdata([]);
+  //   setPayslipsdata([...payslips]);
+  //   setIsPayslipDialogOpen(true);
+  // };
 
   const handlePayslipDialogClose = () => {
     setIsPayslipDialogOpen(false);
     //loadPendingPayslips(FILTERSTRING);
   };
 
-  const handleDailyAllowancesDialogOpen = () => {
-    setDailyAllowancesdata([]);
-    setDailyAllowancesdata([...dailyallowances]);
-    setIsDailyAllowancesDialogOpen(true);
-  };
+  // const handleDailyAllowancesDialogOpen = () => {
+  //   setDailyAllowancesdata([]);
+  //   setDailyAllowancesdata([...dailyallowances]);
+  //   setIsDailyAllowancesDialogOpen(true);
+  // };
 
   const handleDailyAllowancesDialogClose = () => {
     setIsDailyAllowancesDialogOpen(false);

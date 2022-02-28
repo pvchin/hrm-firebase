@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useReducer } from "react";
+import React, { useContext,  useReducer } from "react";
 import axios from "axios";
 import reducer from "../reducers/employees_reducer";
 import { employees_url } from "../utils/constants";
@@ -7,7 +7,7 @@ import {
   SET_EDITEMPLOYEEID,
   SET_ISEDITING_ON,
   SET_ISEDITING_OFF,
-  SET_SINGLEEMPLOYEE,
+  //SET_SINGLEEMPLOYEE,
   GET_EMPLOYEES_BEGIN,
   GET_EMPLOYEES_SUCCESS,
   GET_EMPLOYEES_ERROR,
@@ -115,8 +115,8 @@ export const EmployeesProvider = ({ children }) => {
   };
 
   const addEmployee = async (data) => {
-    const { id, name, ic_no, email, age, gender } = data;
-    //
+    //const { id, name, ic_no, email, age, gender } = data;
+    
     dispatch({ type: ADD_EMPLOYEE_BEGIN });
     try {
       await fetch(employees_url, {

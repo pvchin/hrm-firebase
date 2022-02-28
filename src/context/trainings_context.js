@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useReducer } from "react";
+import React, { useContext,  useReducer } from "react";
 import axios from "axios";
 import reducer from "../reducers/trainings_reducer";
 import { trainings_url } from "../utils/constants";
@@ -7,7 +7,7 @@ import {
   SET_EDITTRAININGID,
   SET_ISTRAININGEDITING_ON,
   SET_ISTRAININGEDITING_OFF,
-  SET_SINGLETRAINING,
+  //SET_SINGLETRAINING,
   GET_TRAININGS_BEGIN,
   GET_TRAININGS_SUCCESS,
   GET_TRAININGS_ERROR,
@@ -27,7 +27,7 @@ import {
   UPDATE_TRAINING_SUCCESS,
   UPDATE_TRAINING_ERROR,
   RESET_SINGLE_TRAINING,
-  RESET_TABLES,
+  //RESET_TABLES,
 } from "../actions";
 
 const initialState = {
@@ -122,7 +122,7 @@ export const TrainingsProvider = ({ children }) => {
   };
 
   const addTraining = async (data) => {
-    const { id, name, from_date, to_date, reason, no_of_days, status } = data;
+   // const { id, name, from_date, to_date, reason, no_of_days, status } = data;
     //
     dispatch({ type: ADD_TRAINING_BEGIN });
     try {

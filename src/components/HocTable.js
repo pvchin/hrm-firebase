@@ -1,28 +1,25 @@
 import React, { useState, useEffect } from "react";
 import MaterialTable, { MTableToolbar } from "material-table";
 import { format } from "date-fns";
-import { TextField, MenuItem, Button, Icon } from "@material-ui/core";
-import { Select } from "@chakra-ui/react";
-import { Alert } from "@material-ui/lab";
 import { makeStyles } from "@material-ui/core/styles";
 import { useRecoilState } from "recoil";
 import { loginLevelState } from "./data/atomdata";
 import AddIcon from "@material-ui/icons/Add";
-import EditIcon from "@material-ui/icons/Edit";
+//import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import CheckIcon from "@material-ui/icons/Check";
 import SearchIcon from "@material-ui/icons/Search";
 import CheckCircleOutlineOutlinedIcon from "@material-ui/icons/CheckCircleOutlineOutlined";
-import { useCustomToast } from "../helpers/useCustomToast";
-import { useExpensesContext } from "../context/expenses_context";
+//import { useCustomToast } from "../helpers/useCustomToast";
+//import { useExpensesContext } from "../context/expenses_context";
 import HocForm from "./HocForm";
-import { useEmployeesContext } from "../context/employees_context";
+//import { useEmployeesContext } from "../context/employees_context";
 import { CustomDialog } from "../helpers/CustomDialog";
 import { AlertDialogBox } from "../helpers/AlertDialogBox";
 import { useHoc } from "./hoc/useHoc";
-import { useAddHoc } from "./hoc/useAddHoc";
+//import { useAddHoc } from "./hoc/useAddHoc";
 import { useDeleteHoc } from "./hoc/useDeleteHoc";
-import { useUpdateHoc } from "./hoc/useUpdateHoc";
+//import { useUpdateHoc } from "./hoc/useUpdateHoc";
 
 const columns = [
   {
@@ -146,18 +143,18 @@ const initial_form = {
 
 export default function HocTable() {
   const classes = useStyles();
-  const toast = useCustomToast();
-  const [isLoad, setIsLoad] = useState(false);
-  const { hoc, filter, setFilter, setHocId } = useHoc();
-  const updateHoc = useUpdateHoc();
-  const addHoc = useAddHoc();
+  //const toast = useCustomToast();
+  //const [isLoad, setIsLoad] = useState(false);
+  const { hoc, setHocId } = useHoc();
+  //const updateHoc = useUpdateHoc();
+  //const addHoc = useAddHoc();
   const deleteHoc = useDeleteHoc();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isAlertOpen, setIsAlertOpen] = useState(false);
-  const [hocdata, setHocdata] = useState([]);
-  const [alertSuccess, setAlertSuccess] = useState(false);
+  //const [hocdata, setHocdata] = useState([]);
+  //const [alertSuccess, setAlertSuccess] = useState(false);
   const [formdata, setFormdata] = useState(initial_form);
-  const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
+  const [loginLevel] = useRecoilState(loginLevelState);
   const [isEditId, setIsEditId] = useState("");
 
   useEffect(() => {

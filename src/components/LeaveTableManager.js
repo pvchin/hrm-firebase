@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import MaterialTable, { MTableToolbar } from "material-table";
-import { TextField, MenuItem, Button, Icon } from "@material-ui/core";
+import { TextField, MenuItem, Button } from "@material-ui/core";
 import * as emailjs from "emailjs-com";
 import { makeStyles } from "@material-ui/core/styles";
 import { useRecoilState } from "recoil";
@@ -97,12 +97,12 @@ const columns = [
 
 export default function LeaveTable({
   leavesdata,
-  setLeavesdata,
+  //setLeavesdata,
   handleDialogClose,
 }) {
   const classes = useStyles();
   const toast = useCustomToast();
-  const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
+  const [loginLevel] = useRecoilState(loginLevelState);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   const { employees } = useEmployees();
@@ -114,24 +114,24 @@ export default function LeaveTable({
     update_leave_error,
   } = useLeavesContext();
 
-  const { updateEmployee, update_employee_error } = useEmployeesContext();
+  const { updateEmployee } = useEmployeesContext();
 
   // useEffect(() => {
   //   loadLeaves();
   // }, []);
 
-  const handleLeaveFormDialogOpen = () => {
-    setIsDialogOpen(true);
-  };
+  // const handleLeaveFormDialogOpen = () => {
+  //   setIsDialogOpen(true);
+  // };
 
   const handleLeaveFormDialogClose = () => {
     setIsDialogOpen(false);
     loadLeaves();
   };
 
-  const handleLeaveFormAlertOpen = () => {
-    setIsAlertOpen(true);
-  };
+  // const handleLeaveFormAlertOpen = () => {
+  //   setIsAlertOpen(true);
+  // };
 
   const handleLeaveFormAlertClose = () => {
     setIsAlertOpen(false);
@@ -223,17 +223,17 @@ export default function LeaveTable({
     });
   };
 
-  const Save_LeaveData = () => {
-    leavesdata.forEach((data) => {
-      const { id } = data;
-      if (id) {
-        const { id, rec_id, tableData, ...fields } = data;
-        updateLeave({ id, ...fields });
-      }
-    });
+  // const Save_LeaveData = () => {
+  //   leavesdata.forEach((data) => {
+  //     const { id } = data;
+  //     if (id) {
+  //       const { id, rec_id, tableData, ...fields } = data;
+  //       updateLeave({ id, ...fields });
+  //     }
+  //   });
 
-    handleDialogClose();
-  };
+  //   handleDialogClose();
+  //};
 
   // if (expenses_loading) {
   //   return (

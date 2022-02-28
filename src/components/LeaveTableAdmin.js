@@ -4,7 +4,7 @@ import { TextField, MenuItem } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import AddIcon from "@material-ui/icons/Add";
 import VisibilityIcon from "@material-ui/icons/Visibility";
-import EditIcon from "@material-ui/icons/Edit";
+//import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import CheckIcon from "@material-ui/icons/Check";
 import SearchIcon from "@material-ui/icons/Search";
@@ -12,11 +12,11 @@ import LeaveFormAdmin from "./LeaveFormAdmin";
 import { CustomDialog } from "../helpers/CustomDialog";
 import { AlertDialogBox } from "../helpers/AlertDialogBox";
 import { useLeavesContext } from "../context/leaves_context";
-import { useEmployeesContext } from "../context/employees_context";
+//import { useEmployeesContext } from "../context/employees_context";
 import { useLeaves } from "./leaves/useLeaves";
-import { useAddLeaves } from "./leaves/useAddLeaves";
+//import { useAddLeaves } from "./leaves/useAddLeaves";
 import { useDeleteLeaves } from "./leaves/useDeleteLeaves";
-import { useUpdateLeaves } from "./leaves/useUpdateLeaves";
+//import { useUpdateLeaves } from "./leaves/useUpdateLeaves";
 
 const initial_form = {
   name: "",
@@ -87,20 +87,20 @@ const columns = [
 
 export default function LeaveTable() {
   const classes = useStyles();
-  const { leaves, filter, setFilter, setLeaveId } = useLeaves();
-  const updateLeaves = useUpdateLeaves();
-  const addLeaves = useAddLeaves();
+  const { leaves, setLeaveId } = useLeaves();
+  //const updateLeaves = useUpdateLeaves();
+  //const addLeaves = useAddLeaves();
   const deleteLeaves = useDeleteLeaves();
   const [formdata, setFormdata] = useState(initial_form);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isAlertOpen, setIsAlertOpen] = useState(false);
-  const { loadEmployees } = useEmployeesContext();
+  //const { loadEmployees } = useEmployeesContext();
   const {
     // leaves,
     editLeaveID,
-    leaves_loading,
-    deleteLeave,
-    loadLeaves,
+    //leaves_loading,
+    //deleteLeave,
+    //loadLeaves,
     getSingleLeave,
     setEditLeaveID,
     setIsLeaveEditingOn,
@@ -132,13 +132,13 @@ export default function LeaveTable() {
     //history.push("/singleleave");
   };
 
-  const delete_Leave = (data) => {
-    const { id } = data;
-    setEditLeaveID(id);
-    handleAlertOpen();
-    //deleteLeave(id);
-    //loadLeaves();
-  };
+  // const delete_Leave = (data) => {
+  //   const { id } = data;
+  //   setEditLeaveID(id);
+  //   handleAlertOpen();
+  //   //deleteLeave(id);
+  //   //loadLeaves();
+  // };
 
   const handleDialogOpen = () => {
     setIsDialogOpen(true);
@@ -148,9 +148,9 @@ export default function LeaveTable() {
     setIsDialogOpen(false);
   };
 
-  const handleAlertOpen = () => {
-    setIsAlertOpen(true);
-  };
+  // const handleAlertOpen = () => {
+  //   setIsAlertOpen(true);
+  // };
 
   const handleAlertClose = () => {
     setIsAlertOpen(false);

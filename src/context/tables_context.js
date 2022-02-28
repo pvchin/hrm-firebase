@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useReducer } from "react";
-import axios from "axios";
+import React, { useContext,  useReducer } from "react";
 import reducer from "../reducers/tables_reducer";
 import { allowances_url } from "../utils/constants";
 import { deductions_url } from "../utils/constants";
@@ -182,7 +181,7 @@ export const TablesProvider = ({ children }) => {
   };
 
   const addPayitem = async (data) => {
-    const { id, name } = data;
+    //const { id, name } = data;
     //
     dispatch({ type: ADD_PAYITEM_BEGIN });
     try {
@@ -242,7 +241,7 @@ export const TablesProvider = ({ children }) => {
   };
 
   const addAllowance = async (data) => {
-    const { id, name } = data;
+    //const { id, name } = data;
     //
     dispatch({ type: ADD_ALLOWANCE_BEGIN });
     try {
@@ -303,7 +302,7 @@ export const TablesProvider = ({ children }) => {
   };
 
   const addDeduction = async (data) => {
-    const { id, name } = data;
+    //const { id, name } = data;
     //
     dispatch({ type: ADD_DEDUCTION_BEGIN });
     try {
@@ -364,7 +363,7 @@ export const TablesProvider = ({ children }) => {
   };
 
   const addDepartment = async (data) => {
-    const { id, name } = data;
+    //const { id, name } = data;
     //
     dispatch({ type: ADD_DEPARTMENT_BEGIN });
     try {
@@ -425,7 +424,7 @@ export const TablesProvider = ({ children }) => {
   };
 
   const addDesignation = async (data) => {
-    const { id, name } = data;
+    //const { id, name } = data;
     //
     dispatch({ type: ADD_DESIGNATION_BEGIN });
     try {
@@ -497,7 +496,7 @@ export const TablesProvider = ({ children }) => {
   };
 
   const addFamily = async (data) => {
-    const { id, name } = data;
+    //const { id, name } = data;
 
     dispatch({ type: ADD_FAMILY_BEGIN });
     try {
@@ -569,7 +568,7 @@ export const TablesProvider = ({ children }) => {
   };
 
   const addEducation = async (data) => {
-    const { id, name } = data;
+    //const { id, name } = data;
 
     dispatch({ type: ADD_EDUCATION_BEGIN });
     try {
@@ -640,7 +639,7 @@ export const TablesProvider = ({ children }) => {
   };
 
   const addExperience = async (data) => {
-    const { id, name } = data;
+    //const { id, name } = data;
 
     dispatch({ type: ADD_EXPERIENCE_BEGIN });
     try {

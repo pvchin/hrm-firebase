@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
@@ -8,7 +8,7 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 
 //import { headExpenseTableCells } from "../utils/constants";
-import { useExpensesContext } from "../context/expenses_context";
+//import { useExpensesContext } from "../context/expenses_context";
 import HocTable from "../components/HocTable";
 
 const drawerWidth = 240;
@@ -16,7 +16,7 @@ const drawerWidth = 240;
 const HocPage = () => {
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-  const { loadExpenses, expenses_loading } = useExpensesContext();
+  
 
   return (
     <div>

@@ -2,18 +2,17 @@ import React, { useState, useEffect, useMemo } from "react";
 import MaterialTable from "material-table";
 import { useHistory } from "react-router-dom";
 import moment from "moment";
-import { TextField, MenuItem } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { GrFormView } from "react-icons/gr";
-import AddIcon from "@material-ui/icons/Add";
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
-import CheckIcon from "@material-ui/icons/Check";
-import SearchIcon from "@material-ui/icons/Search";
-import LeaveForm from "./LeaveForm";
-import { CustomDialog } from "../helpers/CustomDialog";
-import { AlertDialog } from "../helpers/AlertDialogBox";
-import { useExpensesPeriod } from "./expenses/useExpensesPeriod";
+//import AddIcon from "@material-ui/icons/Add";
+//import EditIcon from "@material-ui/icons/Edit";
+//import DeleteIcon from "@material-ui/icons/Delete";
+//import CheckIcon from "@material-ui/icons/Check";
+//import SearchIcon from "@material-ui/icons/Search";
+//import LeaveForm from "./LeaveForm";
+//import { CustomDialog } from "../helpers/CustomDialog";
+//import { AlertDialog } from "../helpers/AlertDialogBox";
+//import { useExpensesPeriod } from "./expenses/useExpensesPeriod";
 import { useEmployeesContext } from "../context/employees_context";
 import { useEmployees } from "./employees/useEmployees";
 import { useLeaves } from "./leaves/useLeaves";
@@ -92,21 +91,21 @@ export default function EmployeeTableLeaveView({ year }) {
   const { employees, setEmployeeId } = useEmployees();
   const { leaves } = useLeaves();
   const [empdata, setEmpData] = useState([]);
-  const currentyear = new Date().getFullYear();
-  const { expensesperiod, setExpPeriodYrId, setExpPeriodMthId } =
-    useExpensesPeriod();
+  //const currentyear = new Date().getFullYear();
+  // const { expensesperiod, setExpPeriodYrId, setExpPeriodMthId } =
+  //   useExpensesPeriod();
   const emp = employees.map((rec) => {
     return { ...rec, leave_total: 0, leave_taken: 0, leave_pending: 0 };
   });
 
   const {
-    editEmployeeID,
-    employees_loading,
+    //editEmployeeID,
+    //employees_loading,
     //deleteEmployee,
     //loadEmployees,
     setEditEmployeeID,
     setIsEditingOn,
-    setIsEditingOff,
+    //setIsEditingOff,
     resetSingleEmployee,
     resetEmployees,
     //getSingleEmployee,
@@ -130,14 +129,14 @@ export default function EmployeeTableLeaveView({ year }) {
         emp.forEach((rec, index) => {
           const {
             id,
-            name,
-            icno,
-            gender,
-            designation,
-            department,
-            leave_entitled,
-            leave_bf,
-            leave_cd,
+            //name,
+            //icno,
+            //gender,
+            //designation,
+            //department,
+            //leave_entitled,
+            //leave_bf,
+            //leave_cd,
           } = rec;
           // calculate leaves
           const leavedata = leaves

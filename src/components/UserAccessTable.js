@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import clsx from "clsx";
 import MaterialTable, { MTableToolbar } from "material-table";
 import { makeStyles } from "@material-ui/core/styles";
-import { Box, Button, Icon } from "@chakra-ui/react";
-import { useEmployeesContext } from "../context/employees_context";
-import { useTablesContext } from "../context/tables_context";
+import { Box } from "@chakra-ui/react";
 import { useEmployees } from "./employees/useEmployees";
 import { useUpdateEmployees } from "./employees/useUpdateEmployees";
 
@@ -45,8 +43,7 @@ export default function UserAccessTable() {
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   const { employees } = useEmployees();
   const updateEmployees = useUpdateEmployees();
-  const { editEmployeeID } = useEmployeesContext();
-
+  
   const update_rec = (data) => {
     const { id, rec_id, role, ...fields } = data;
     updateEmployees({ id, role: parseInt(role, 10), ...fields });

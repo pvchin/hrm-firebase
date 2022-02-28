@@ -1,37 +1,37 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { List, ListItem, ListItemText, Grid } from "@material-ui/core";
-import clsx from "clsx";
-import axios from "axios";
+import { List, Grid } from "@material-ui/core";
+//import clsx from "clsx";
+//import axios from "axios";
 
-import { useRecoilState } from "recoil";
-import { loginLevelState } from "./data/atomdata";
-import { onleaves_url } from "../utils/constants";
+//import { useRecoilState } from "recoil";
+//import { loginLevelState } from "./data/atomdata";
+//import { onleaves_url } from "../utils/constants";
 //
 
-const drawerWidth = 240;
+//const drawerWidth = 240;
 
-const columns = [
-  {
-    title: "Name",
-    field: "name",
-    editable: "never",
-  },
-  {
-    title: "From Data",
-    field: "from_date",
-    type: "date",
-    dateSetting: { locale: "en-GB" },
-    editable: "never",
-  },
-  {
-    title: "To Data",
-    field: "to_date",
-    type: "date",
-    dateSetting: { locale: "en-GB" },
-    editable: "never",
-  },
-];
+// const columns = [
+//   {
+//     title: "Name",
+//     field: "name",
+//     editable: "never",
+//   },
+//   {
+//     title: "From Data",
+//     field: "from_date",
+//     type: "date",
+//     dateSetting: { locale: "en-GB" },
+//     editable: "never",
+//   },
+//   {
+//     title: "To Data",
+//     field: "to_date",
+//     type: "date",
+//     dateSetting: { locale: "en-GB" },
+//     editable: "never",
+//   },
+//];
 
 // export const onleavesdatastate = atom({
 //   key: "onleavesdatastate",
@@ -52,10 +52,10 @@ const columns = [
 //   },
 // });
 
-const loadUsers = async () => {
-  const { data } = await axios.get(onleaves_url);
-  return data;
-};
+// const loadUsers = async () => {
+//   const { data } = await axios.get(onleaves_url);
+//   return data;
+//};
 //   await fetch("https://jsonplaceholder.typicode.com/users")
 //     .then((res) => (res.ok ? res : Promise.reject(res)))
 //     .then((res) => res.json());
@@ -63,7 +63,7 @@ const loadUsers = async () => {
 const OnLeavesView = () => {
   const classes = useStyles();
   //const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-  const [setUserdata] = useState([]);
+  //const [setUserdata] = useState([]);
 
   //const [userdata, setUserdata] = useRecoilState(userdatastate);
   //const onLeavesDetails = useRecoilValueLoadable(fetchOnLeavesDetails);

@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "react-query";
 import { jobhistory_url } from "../../utils/constants";
-import { useCustomToast } from "../../helpers/useCustomToast";
+//import { useCustomToast } from "../../helpers/useCustomToast";
 
 async function updateJobhistory(data) {
   const { id, ...fields } = data;
@@ -13,7 +13,7 @@ async function updateJobhistory(data) {
 
 export function useUpdateJobhistory(data) {
   const queryClient = useQueryClient();
-  const toast = useCustomToast();
+  //const toast = useCustomToast();
 
   const { mutate } = useMutation((data) => updateJobhistory(data), {
     onSuccess: () => {

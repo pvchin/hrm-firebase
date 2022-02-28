@@ -1,27 +1,27 @@
 import React, { useState, useEffect } from "react";
 import {
   Button,
-  ButtonGroup,
+  //ButtonGroup,
   Grid,
-  GridItem,
+  //GridItem,
   Icon,
-  Input,
+  //Input,
   TextField,
-  FormControlLabel,
+  //FormControlLabel,
   Divider,
-  ListSubheader,
-  MenuItem,
-  Select,
+  //ListSubheader,
+  //MenuItem,
+  //Select,
   NativeSelect,
   InputLabel,
 } from "@material-ui/core";
 import { Box, Checkbox, Heading, Text } from "@chakra-ui/react";
 import currency from "currency.js";
-import CurrencyTextField from "@unicef/material-ui-currency-textfield";
-import { Autocomplete } from "@material-ui/lab";
+//import CurrencyTextField from "@unicef/material-ui-currency-textfield";
+//import { Autocomplete } from "@material-ui/lab";
 import { makeStyles } from "@material-ui/core/styles";
 import { usePayslipsBatch } from "./payslips/usePayslipsBatch";
-import { useUpdatePayslips } from "./payslips/useUpdatePayslips";
+//import { useUpdatePayslips } from "./payslips/useUpdatePayslips";
 //import { usePayslipsContext } from "../context/payslips_context";
 import { useAllowances } from "./allowances/useAllowances";
 
@@ -99,17 +99,17 @@ const PayForm = ({
   loadFormdata,
   setLoadFormdata,
   payitems,
-  setLoadUpdatedata,
+  //setLoadUpdatedata,
   rowindex,
-  isCalc,
+  //isCalc,
   isStart,
-  setIsStart,
-  setIsCalc,
+  //setIsStart,
+  //setIsCalc,
   singlebatchpayslip,
 }) => {
   const classes = useStyles();
   const [state, setState] = useState(initial_state);
-  const { allowances } = useAllowances();
+  //const { allowances } = useAllowances();
   //const { payslipsbatch, psbpayrunId, setPSBPayrunId } = usePayslipsBatch();
   //const updatePayslips = useUpdatePayslips();
   //const { singlebatchpayslip } = usePayslipsContext();

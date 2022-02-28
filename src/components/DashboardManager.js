@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 // import Deposits from "./Deposits";
 // import Orders from "./Orders";
 
-import Appbanner from "./Appbanner";
+//import Appbanner from "./Appbanner";
 import Example from "./Example6";
 import SideDrawer from "./SideDrawer";
 import SingleEmployee from "./SingleEmployee";
@@ -30,7 +30,7 @@ import {
   Leave,
   Expenses,
   Payslip,
-  UserAccess,
+  //UserAccess,
   BatchPayslips,
   Payroll,
   Departments,

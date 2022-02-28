@@ -8,15 +8,15 @@ import {
   Divider,
 } from "@material-ui/core";
 import { Box, Heading } from "@chakra-ui/react";
-import * as emailjs from "emailjs-com";
-import { useRecoilState } from "recoil";
-import { loginLevelState } from "./data/atomdata";
+//import * as emailjs from "emailjs-com";
+//import { useRecoilState } from "recoil";
+//import { loginLevelState } from "./data/atomdata";
 import { makeStyles } from "@material-ui/core/styles";
-import { useCustomToast } from "../helpers/useCustomToast";
+//import { useCustomToast } from "../helpers/useCustomToast";
 import { Controller, useForm } from "react-hook-form";
 import { useEmployees } from "./employees/useEmployees";
 import { useAddEmployees } from "./employees/useAddEmployees";
-import { useEmployeesContext } from "../context/employees_context";
+//import { useEmployeesContext } from "../context/employees_context";
 
 const initial_state = {
   name: "",
@@ -25,27 +25,27 @@ const initial_state = {
 
 const EmployeeFormAdd = ({ onAddEmpFormClose }) => {
   const classes = useStyles();
-  const toast = useCustomToast();
+  //const toast = useCustomToast();
   const { employees } = useEmployees();
   const addEmployee = useAddEmployees();
   const [state, setState] = useState(initial_state);
   const [isExit, setIsExit] = useState(false);
-  const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
+  //const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
   const { handleSubmit, control } = useForm();
-  const initialValues = Object.values(initial_state).join("");
+  //const initialValues = Object.values(initial_state).join("");
 
-  const {
-    editEmployeeID,
-    employees_loading,
+  //const {
+    //editEmployeeID,
+    //employees_loading,
     //deleteEmployee,
     //loadEmployees,
-    setEditEmployeeID,
-    setIsEditingOn,
-    setIsEditingOff,
-    resetSingleEmployee,
-    resetEmployees,
+    //setEditEmployeeID,
+    //setIsEditingOn,
+    //setIsEditingOff,
+    //resetSingleEmployee,
+    //resetEmployees,
     //getSingleEmployee,
-  } = useEmployeesContext();
+  //} = useEmployeesContext();
 
   const onSubmit = (data) => {
     const { email } = data;

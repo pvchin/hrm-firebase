@@ -8,12 +8,12 @@ import CheckIcon from "@material-ui/icons/Check";
 import SearchIcon from "@material-ui/icons/Search";
 import BuildOutlinedIcon from "@material-ui/icons/BuildOutlined";
 import { useCustomToast } from "../helpers/useCustomToast";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { payrunState, payrunIdState, payrunStatusState } from "./data/atomdata";
 import { usePayslipsContext } from "../context/payslips_context";
-import { useExpensesContext } from "../context/expenses_context";
-import { useDailyAllowancesContext } from "../context/dailyallowances_context";
+//import { useExpensesContext } from "../context/expenses_context";
+//import { useDailyAllowancesContext } from "../context/dailyallowances_context";
 import { AlertDialogBox } from "../helpers/AlertDialogBox";
 import { usePayrun } from "./payrun/usePayrun";
 import { usePayslipsBatch } from "./payslips/usePayslipsBatch";
@@ -23,7 +23,7 @@ import { useUpdateExpenses } from "./expenses/useUpdateExpenses";
 import { useDailyAllowsPayrun } from "./dailyallows/useDailyAllowsPayrun";
 import { useUpdateDailyAllows } from "./dailyallows/useUpdateDailyAllows";
 
-const FILTERSTRING = "Pending";
+//const FILTERSTRING = "Pending";
 
 const columns = [
   // { title: "Period", field: "period" },
@@ -55,40 +55,40 @@ export default function PayslipTable() {
   const toast = useCustomToast();
   const classes = useStyles();
   const { payrun } = usePayrun();
-  const { payslipsbatch, psbpayrunId, setPSBPayrunId } = usePayslipsBatch();
+  const { payslipsbatch,  setPSBPayrunId } = usePayslipsBatch();
   const { expensespayrun, setExpPayrunId } = useExpensesPayrun();
   const { dailyallowspayrun, setDailyAllowsPayrunId } = useDailyAllowsPayrun();
   const updateExpenses = useUpdateExpenses();
   const deletePayrun = useDeletePayrun();
   const updateDailyAllows = useUpdateDailyAllows();
   const [input, setInput] = useRecoilState(payrunState);
-  const [isLoadInput, setIsLoadInput] = useState(false);
+  //const [isLoadInput, setIsLoadInput] = useState(false);
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   const [deletestate, setDeletestate] = useState({ id: "", payrun: "" });
-  const [payrunId, setPayrunId] = useRecoilState(payrunIdState);
-  const [payrunstatus, setPayrunStatus] = useRecoilState(payrunStatusState);
-  const { loadPeriodExpenses, periodexpenses, updateExpense } =
-    useExpensesContext();
-  const {
-    getSingleBatchDailyAllowance,
-    singlebatchdailyallowance,
-    updateDailyAllowance,
-    deleteDailyAllowance,
-  } = useDailyAllowancesContext();
+  const [setPayrunId] = useRecoilState(payrunIdState);
+  const [setPayrunStatus] = useRecoilState(payrunStatusState);
+  // const { loadPeriodExpenses, periodexpenses, updateExpense } =
+  //   useExpensesContext();
+  // const {
+  //   getSingleBatchDailyAllowance,
+  //   singlebatchdailyallowance,
+  //   updateDailyAllowance,
+  //   deleteDailyAllowance,
+  // } = useDailyAllowancesContext();
   const {
     //payrun,
-    getPayrun,
+    //getPayrun,
     payrun_loading,
     payrun_error,
     getSinglePayslip,
     setEditPayslipID,
     setIsPayslipEditingOn,
-    single_payslip,
+    //single_payslip,
     setPayslipPeriod,
     //deletePayrun,
     deletePayslip,
-    pending_payslips,
-    loadPendingPayslips,
+    //pending_payslips,
+    //loadPendingPayslips,
   } = usePayslipsContext();
 
   useEffect(() => {

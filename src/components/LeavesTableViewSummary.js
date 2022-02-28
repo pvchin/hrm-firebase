@@ -1,20 +1,19 @@
-import React, { useState, useEffect } from "react";
-import MaterialTable, { MTableToolbar } from "material-table";
-import { TextField, MenuItem } from "@material-ui/core";
+import React, {  useEffect } from "react";
+import MaterialTable  from "material-table";
 import { makeStyles } from "@material-ui/core/styles";
 import { Box, Button, HStack, Text } from "@chakra-ui/react";
-import AddIcon from "@material-ui/icons/Add";
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
-import CheckIcon from "@material-ui/icons/Check";
-import SearchIcon from "@material-ui/icons/Search";
-import LeaveForm from "./LeaveForm";
-import { CustomDialog } from "../helpers/CustomDialog";
-import { AlertDialog } from "../helpers/AlertDialogBox";
+//import AddIcon from "@material-ui/icons/Add";
+//import EditIcon from "@material-ui/icons/Edit";
+//import DeleteIcon from "@material-ui/icons/Delete";
+//import CheckIcon from "@material-ui/icons/Check";
+//import SearchIcon from "@material-ui/icons/Search";
+//import LeaveForm from "./LeaveForm";
+//import { CustomDialog } from "../helpers/CustomDialog";
+//import { AlertDialog } from "../helpers/AlertDialogBox";
 import { useLeavesPeriod } from "./leaves/useLeavesPeriod";
 import Export2Excel from "./ExportLeave2Excel";
 
-const FILTERSTRING = "Pending";
+//const FILTERSTRING = "Pending";
 
 const columns = [
   {

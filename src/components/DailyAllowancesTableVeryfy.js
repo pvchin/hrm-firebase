@@ -1,36 +1,35 @@
 import React, { useState, useEffect } from "react";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import MaterialTable, { MTableToolbar } from "material-table";
 import { makeStyles } from "@material-ui/core/styles";
-import { TextField, Icon, MenuItem } from "@material-ui/core";
+import { TextField, MenuItem } from "@material-ui/core";
 import { Button, HStack } from "@chakra-ui/react";
 import {
   useSetRecoilState,
   useRecoilValue,
   useRecoilState,
-  useRecoilValueLoadable,
+  ///useRecoilValueLoadable,
 } from "recoil";
 import {
   allowsPeriodState,
   allowsDataState,
   empidState,
 } from "./data/atomdata";
-import { fetchDailyAllowancesSelector } from "./data/selectordata";
+//import { fetchDailyAllowancesSelector } from "./data/selectordata";
 import AddIcon from "@material-ui/icons/Add";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import CheckIcon from "@material-ui/icons/Check";
 import SearchIcon from "@material-ui/icons/Search";
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+//import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { CustomDialog } from "../helpers/CustomDialog";
 import { useCustomToast } from "../helpers/useCustomToast";
-import { useDailyAllowancesContext } from "../context/dailyallowances_context";
 //import { useEmployeesContext } from "../context/employees_context";
 import DailyAllowsDetlsTable from "./DailyAllowsDetlsTable";
 import { useDailyAllowsStatus } from "./dailyallows/useDailyAllowsStatus";
 import { useUpdateDailyAllows } from "./dailyallows/useUpdateDailyAllows";
 
-const FILTERSTRING = "Submitted";
+//const FILTERSTRING = "Submitted";
 
 const columns = [
   {
@@ -69,45 +68,33 @@ const columns = [
 ];
 
 export default function DailyAllowancesTable() {
-  let history = useHistory();
+  //let history = useHistory();
   const toast = useCustomToast()
   const classes = useStyles();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [tmpallowsdata, setTmpallowsdata] = useState([]);
-  const allows_period = useRecoilValue(allowsPeriodState);
-  const allows_empid = useRecoilValue(empidState);
+  //const [tmpallowsdata, setTmpallowsdata] = useState([]);
+  //const allows_period = useRecoilValue(allowsPeriodState);
+  //const allows_empid = useRecoilValue(empidState);
   const [allowsdata, setAllowsdata] = useRecoilState(allowsDataState);
   const { dailyallowsstatus, setDailyAllowsStatusId } = useDailyAllowsStatus();
   const updateDailyAllows = useUpdateDailyAllows();
-  const setEmpID = useSetRecoilState(empidState);
-  const title = `Site Allowances (${allows_period})`;
-  const {
-    dailyallowances_loading,
-    singlebatch_dailyallowance,
-    singlebatch_dailyallowance_loading,
-    deleteDailyAllowance,
-    updateDailyAllowance,
-    setEditDailyAllowanceID,
-    setIsDailyAllowanceEditingOn,
-    setIsDailyAllowanceEditingOff,
-    resetSingleDailyAllowance,
-    dailyallowance_period,
-    getSingleBatchDailyAllowance,
-  } = useDailyAllowancesContext();
+  //const setEmpID = useSetRecoilState(empidState);
+  //const title = `Site Allowances (${allows_period})`;
+  
 
   useEffect(() => {
     setDailyAllowsStatusId("Submitted");
   }, []);
 
-  const Save_DailyAllowancesData = () => {
-    dailyallowsstatus.forEach((data) => {
-      const { id } = data;
-      if (id) {
-        const { id, rec_id, tableData, ...fields } = data;
-        updateDailyAllowance({ id, ...fields });
-      }
-    });
-  };
+  // const Save_DailyAllowancesData = () => {
+  //   dailyallowsstatus.forEach((data) => {
+  //     const { id } = data;
+  //     if (id) {
+  //       const { id, rec_id, tableData, ...fields } = data;
+  //       updateDailyAllowance({ id, ...fields });
+  //     }
+  //   });
+  // };
 
   const Verify_DailyAllowancesData = () => {
     dailyallowsstatus.forEach((rec) => {

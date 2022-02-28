@@ -4,16 +4,16 @@ import { TextField, MenuItem } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useRecoilState } from "recoil";
 import { loginLevelState } from "./data/atomdata";
-import AddIcon from "@material-ui/icons/Add";
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
-import CheckIcon from "@material-ui/icons/Check";
-import SearchIcon from "@material-ui/icons/Search";
-import LeaveForm from "./LeaveForm";
-import { CustomDialog } from "../helpers/CustomDialog";
-import { AlertDialog } from "../helpers/AlertDialogBox";
+//import AddIcon from "@material-ui/icons/Add";
+//import EditIcon from "@material-ui/icons/Edit";
+//import DeleteIcon from "@material-ui/icons/Delete";
+//import CheckIcon from "@material-ui/icons/Check";
+//import SearchIcon from "@material-ui/icons/Search";
+//import LeaveForm from "./LeaveForm";
+//import { CustomDialog } from "../helpers/CustomDialog";
+//import { AlertDialog } from "../helpers/AlertDialogBox";
 import { useLeavesContext } from "../context/leaves_context";
-import { useEmployeesContext } from "../context/employees_context";
+//import { useEmployeesContext } from "../context/employees_context";
 
 const FILTERSTRING = "Pending"
 
@@ -62,66 +62,52 @@ const columns = [
 
 export default function LeaveTableView() {
   const classes = useStyles();
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [isAlertOpen, setIsAlertOpen] = useState(false);
-   const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
-  const { loadEmployees } = useEmployeesContext();
+  //const [isDialogOpen, setIsDialogOpen] = useState(false);
+  //const [isAlertOpen, setIsAlertOpen] = useState(false);
+   const [loginLevel] = useRecoilState(loginLevelState);
+  //const { loadEmployees } = useEmployeesContext();
   const {
     leaves,
-    leaves_error,
-    editLeaveID,
-    leaves_loading,
-    deleteLeave,
+    //leaves_error,
+    //editLeaveID,
+    //leaves_loading,
+    //deleteLeave,
     loadPendingLeaves,
-    getSingleLeave,
-    setEditLeaveID,
-    setIsLeaveEditingOn,
-    setIsLeaveEditingOff,
-    resetSingleLeave,
+    //getSingleLeave,
+    //setEditLeaveID,
+    //setIsLeaveEditingOn,
+    //setIsLeaveEditingOff,
+    //resetSingleLeave,
   } = useLeavesContext();
 
   useEffect(() => {
     loadPendingLeaves(FILTERSTRING);
   }, []);
  
-  const handleDialogOpen = () => {
-    setIsDialogOpen(true);
-  };
+  // const handleDialogOpen = () => {
+  //   setIsDialogOpen(true);
+  // };
 
-  const handleDialogClose = () => {
-    setIsDialogOpen(false);
-    loadPendingLeaves(FILTERSTRING);
-  };
+  // const handleDialogClose = () => {
+  //   setIsDialogOpen(false);
+  //   loadPendingLeaves(FILTERSTRING);
+  //};
 
-  const handleAlertOpen = () => {
-    setIsAlertOpen(true);
-  };
+  // const handleAlertOpen = () => {
+  //   setIsAlertOpen(true);
+  // };
 
-  const handleAlertClose = () => {
-    setIsAlertOpen(false);
-  };
+  // const handleAlertClose = () => {
+  //   setIsAlertOpen(false);
+  //};
 
-  const handleOnDeleteConfirm = () => {
-    const id = editLeaveID;
-    deleteLeave(id);
-    loadPendingLeaves(FILTERSTRING);
-  };
+  // const handleOnDeleteConfirm = () => {
+  //   const id = editLeaveID;
+  //   deleteLeave(id);
+  //   loadPendingLeaves(FILTERSTRING);
+  // };
 
-  if (leaves_loading) {
-    return (
-      <div>
-        <h2>Loading...Leaves</h2>
-      </div>
-    );
-  }
-  if (leaves_error) {
-    return (
-      <div>
-        <h2>Internet connection problem!</h2>
-      </div>
-    )
-  }
-  console.log("approval", leaves)
+  
   return (
     <div className={classes.root}>
       {/* <h1>Expenses Claims Application</h1> */}

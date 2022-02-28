@@ -1,41 +1,39 @@
 import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { useHistory, Link } from "react-router-dom";
 import { Grid, ListItem, ListItemText } from "@material-ui/core";
-import { useSetRecoilState, useRecoilState } from "recoil";
-import { payPeriodEmpIdState, loginLevelState } from "./data/atomdata";
+import {  useRecoilState } from "recoil";
+import { loginLevelState } from "./data/atomdata";
 import { usePayslipsContext } from "../context/payslips_context";
-import { useEmployeesContext } from "../context/employees_context";
 
-const FILTERSTRING = "Pending";
+//const FILTERSTRING = "Pending";
 
-const columns = [
-  {
-    title: "Name",
-    field: "name",
-    editable: "never",
-  },
-  { title: "Period", field: "period", editable: "never" },
-  {
-    title: "Date",
-    field: "date",
-    type: "date",
-    dateSetting: { locale: "en-GB" },
-    editable: "never",
-  },
+// const columns = [
+//   {
+//     title: "Name",
+//     field: "name",
+//     editable: "never",
+//   },
+//   { title: "Period", field: "period", editable: "never" },
+//   {
+//     title: "Date",
+//     field: "date",
+//     type: "date",
+//     dateSetting: { locale: "en-GB" },
+//     editable: "never",
+//   },
 
-  { title: "Nett Pay", field: "nett_pay", type: "currency", editable: "never" },
-  // { title: "Bank Name", field: "bank_name" },
-  // { title: "Bank AC No", field: "bank_accno" },
-  { title: "Status", field: "status", editable: "never" },
-];
+//   { title: "Nett Pay", field: "nett_pay", type: "currency", editable: "never" },
+//   // { title: "Bank Name", field: "bank_name" },
+//   // { title: "Bank AC No", field: "bank_accno" },
+//   { title: "Status", field: "status", editable: "never" },
+// ];
 
 export default function PayslipTableVIewStaff() {
-  let history = useHistory();
+  //let history = useHistory();
   const classes = useStyles();
-  const setPayPeriodEmpId = useSetRecoilState(payPeriodEmpIdState);
-  const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
-  const { payslips, payslips_loading, payslips_error, loadEmpPayslips } =
+  //const setPayPeriodEmpId = useSetRecoilState(payPeriodEmpIdState);
+  const [loginLevel] = useRecoilState(loginLevelState);
+  const { payslips, payslips_loading, loadEmpPayslips } =
     usePayslipsContext();
 
   useEffect(() => {

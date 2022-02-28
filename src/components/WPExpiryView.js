@@ -1,36 +1,34 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import clsx from "clsx";
+//import clsx from "clsx";
 import axios from "axios";
-import MaterialTable from "material-table";
 import { Grid, List, ListItem, ListItemText } from "@material-ui/core";
 import { atom, selector, useRecoilValueLoadable } from "recoil";
 // import { useRecoilValue, useSetRecoilState, useRecoilState } from "recoil";
 // import { departmentsSelector } from "../helpers/Recoilhelpers";
 import { wpexpiry_url } from "../utils/constants";
-import { fetchDepartmentsSelector } from "./data/selectordata";
 
-const drawerWidth = 240;
+//const drawerWidth = 240;
 
-const columns = [
-  {
-    title: "Name",
-    field: "name",
-    editable: "never",
-  },
-  {
-    title: "Work Permit No",
-    field: "workpermitno",
-    editable: "never",
-  },
-  {
-    title: "Work Permit Expiry",
-    field: "workpermit_expirydate",
-    type: "date",
-    dateSetting: { locale: "en-GB" },
-    editable: "never",
-  },
-];
+// const columns = [
+//   {
+//     title: "Name",
+//     field: "name",
+//     editable: "never",
+//   },
+//   {
+//     title: "Work Permit No",
+//     field: "workpermitno",
+//     editable: "never",
+//   },
+//   {
+//     title: "Work Permit Expiry",
+//     field: "workpermit_expirydate",
+//     type: "date",
+//     dateSetting: { locale: "en-GB" },
+//     editable: "never",
+//   },
+// ];
 
 export const onleavesdatastate = atom({
   key: "onleavesdatastate",
@@ -42,7 +40,7 @@ const fetchWPExpiryDetails = selector({
   get: async ({ get }) => {
     try {
       const { data } = await axios.get(wpexpiry_url);
-      const wpexpirydata = data;
+      //const wpexpirydata = data;
 
       return data;
     } catch (error) {
@@ -53,8 +51,8 @@ const fetchWPExpiryDetails = selector({
 
 const WPExpiryView = () => {
   const classes = useStyles();
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-  const [userdata, setUserdata] = useState([]);
+  //const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+  //const [userdata, setUserdata] = useState([]);
   //const [userdata, setUserdata] = useRecoilState(userdatastate);
   const wpExpiryDetails = useRecoilValueLoadable(fetchWPExpiryDetails);
   const { state, contents } = wpExpiryDetails;

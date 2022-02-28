@@ -6,7 +6,7 @@ import axios from "axios";
 import clsx from "clsx";
 //import Table from "../helpers/TableContainer";
 import { Box, Image } from "@chakra-ui/react";
-import Paper from "@material-ui/core/Paper";
+//import Paper from "@material-ui/core/Paper";
 //import { Cloudinary, Transformation } from "@cloudinary/base";
 // import {Image ,
 //   AdvancedImage,
@@ -30,7 +30,7 @@ import Paper from "@material-ui/core/Paper";
 //import { compass } from "@cloudinary/base/qualifiers/gravity";
 //import { png } from "@cloudinary/base/qualifiers/format";
 
-const drawerWidth = 240;
+//const drawerWidth = 240;
 const SERVICE_ID = process.env.REACT_APP_EMAILJS_SERVICEID;
 const TEMPLATE_ID = "template_1y8odlq";
 const USER_ID = process.env.REACT_APP_EMAILJS_USERID;

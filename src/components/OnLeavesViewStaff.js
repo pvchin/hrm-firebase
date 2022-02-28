@@ -1,42 +1,41 @@
-import React, { useState, useEffect } from "react";
+import React, {  useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { List, ListItem, ListItemText, Grid } from "@material-ui/core";
-import clsx from "clsx";
-import axios from "axios";
+//import clsx from "clsx";
 //import { useAsync } from "react-async";
-import { selector, useRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { loginLevelState } from "./data/atomdata";
-import { leaves_url } from "../utils/constants";
+//import { leaves_url } from "../utils/constants";
 import { useLeavesContext } from "../context/leaves_context";
 
-const drawerWidth = 240;
+//const drawerWidth = 240;
 
-const columns = [
-  {
-    title: "Name",
-    field: "name",
-    editable: "never",
-  },
-  {
-    title: "From Data",
-    field: "from_date",
-    type: "date",
-    dateSetting: { locale: "en-GB" },
-    editable: "never",
-  },
-  {
-    title: "To Data",
-    field: "to_date",
-    type: "date",
-    dateSetting: { locale: "en-GB" },
-    editable: "never",
-  },
-  {
-    title: "Status",
-    field: "status",
-    editable: "never",
-  },
-];
+// const columns = [
+//   {
+//     title: "Name",
+//     field: "name",
+//     editable: "never",
+//   },
+//   {
+//     title: "From Data",
+//     field: "from_date",
+//     type: "date",
+//     dateSetting: { locale: "en-GB" },
+//     editable: "never",
+//   },
+//   {
+//     title: "To Data",
+//     field: "to_date",
+//     type: "date",
+//     dateSetting: { locale: "en-GB" },
+//     editable: "never",
+//   },
+//   {
+//     title: "Status",
+//     field: "status",
+//     editable: "never",
+//   },
+// ];
 
 // export const onleavesdatastate = atom({
 //   key: "onleavesdatastate",

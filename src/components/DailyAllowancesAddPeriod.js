@@ -8,38 +8,38 @@ import { Button, Paper, Grid, Icon, TextField } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
 import { useRecoilState } from "recoil";
 import { siteallowsState, loginLevelState } from "./data/atomdata";
-import { useDailyAllowancesContext } from "../context/dailyallowances_context";
+//import { useDailyAllowancesContext } from "../context/dailyallowances_context";
 import { useDailyAllows } from "./dailyallows/useDailyAllows";
 import { useAddDailyAllows } from "./dailyallows/useAddDailyAllows";
-import { useDailyAllowsDetls } from "./dailyallowsdetls/useDailyAllowsDetls";
+//import { useDailyAllowsDetls } from "./dailyallowsdetls/useDailyAllowsDetls";
 import { useAddDailyAllowsDetls } from "./dailyallowsdetls/useAddDailyAllowsDetls";
 
 //const drawerWidth = 240;
-const selectYear = [{ name: "2021" }, { name: "2022" }];
-const selectMonth = [
-  { name: "January" },
-  { name: "February" },
-  { name: "March" },
-  { name: "April" },
-  { name: "May" },
-  { name: "June" },
-];
+//const selectYear = [{ name: "2021" }, { name: "2022" }];
+// const selectMonth = [
+//   { name: "January" },
+//   { name: "February" },
+//   { name: "March" },
+//   { name: "April" },
+//   { name: "May" },
+//   { name: "June" },
+// ];
 
 const DailyAllowancesAddPeriod = ({ handleDialogClose }) => {
   let date = new Date();
-  let longMonth = date.toLocaleString("en-us", { month: "long" });
+  //let longMonth = date.toLocaleString("en-us", { month: "long" });
   //console.log("date", date, longMonth);
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   const toast = useCustomToast();
   const { dailyallows } = useDailyAllows();
-  const { dailyallowsdetls } = useDailyAllowsDetls();
+  //const { dailyallowsdetls } = useDailyAllowsDetls();
   const addDailyAllows = useAddDailyAllows();
   const addDailyAllowsDetls = useAddDailyAllowsDetls();
   const [input, setInput] = useRecoilState(siteallowsState);
   const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
-  const [allowsPeriod, setAllowsPeriod] = useState("");
-  const [alert, setAlert] = useState(false);
+  //const [allowsPeriod, setAllowsPeriod] = useState("");
+  //const [alert, setAlert] = useState(false);
   const [error, setError] = useState(false);
   // const { dailyallowances, addDailyAllowance, addDailyAllowsDetl } =
   //   useDailyAllowancesContext();

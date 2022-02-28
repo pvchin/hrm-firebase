@@ -1,26 +1,20 @@
 import React from "react";
 import {
-  Button,
-  Icon,
-  TextField,
-  Paper,
-  Typography,
-  Select,
+  
   Divider,
   Grid,
-  Toolbar,
-  Box,
+  
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { useHistory, Link } from "react-router-dom";
+//import { useHistory } from "react-router-dom";
 
-import { useDepartments } from "./departments/useDepartments";
-import { useDesignations } from "./designations/useDesignations";
-import { useAllowances } from "./allowances/useAllowances";
-import { useDeductions } from "./deductions/useDeductions";
-import { useCurrency } from "./currency/useCurrency";
+//import { useDepartments } from "./departments/useDepartments";
+//import { useDesignations } from "./designations/useDesignations";
+//import { useAllowances } from "./allowances/useAllowances";
+//import { useDeductions } from "./deductions/useDeductions";
+//import { useCurrency } from "./currency/useCurrency";
 
-import { useTablesContext } from "../context/tables_context";
+//import { useTablesContext } from "../context/tables_context";
 import UpdateAllowances from "./AllowancesTable";
 import UpdateDeductions from "./DeductionsTable";
 import UpdateDepartments from "./DepartmentsTable";
@@ -29,13 +23,9 @@ import UpdateInstitutes from "./InstitutesTable";
 import UpdateCurrency from "./CurrencyTable";
 
 const TablesUpdate = () => {
-  let history = useHistory();
+  
   const classes = useStyles();
-  const departments = useDepartments();
-  const deductions = useDeductions();
-  const allowances = useAllowances();
-  const currency = useCurrency();
-
+  
   return (
     <div>
       <Grid container alignItems="center" className={classes.grid}>

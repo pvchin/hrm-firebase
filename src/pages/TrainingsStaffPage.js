@@ -7,7 +7,6 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 
 import { headLeaveTableCells } from "../utils/constants";
-import TrainingsTableStaff from "../components/LeaveTableStaff";
 import EmpTrainings from "../components/EmpTrainings"
 
 const drawerWidth = 240;

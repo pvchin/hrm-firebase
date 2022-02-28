@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import MaterialTable from "material-table";
-import { Text } from "@chakra-ui/react";
 import clsx from "clsx";
 import { useHistory } from "react-router-dom";
 import {
@@ -21,31 +20,31 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-  Select,
+  //Select,
   useDisclosure,
 } from "@chakra-ui/react";
-import {
-  Input,
-  InputGroup,
-  InputLeftAddon,
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
-  NumberIncrementStepper,
-  NumberDecrementStepper,
-  Stack,
-} from "@chakra-ui/react";
+// import {
+//   Input,
+//   InputGroup,
+//   InputLeftAddon,
+//   NumberInput,
+//   NumberInputField,
+//   NumberInputStepper,
+//   NumberIncrementStepper,
+//   NumberDecrementStepper,
+//   Stack,
+//} from "@chakra-ui/react";
 import { useRecoilState } from "recoil";
 import { useEmployeesContext } from "../context/employees_context";
 import { usePayslipsContext } from "../context/payslips_context";
 import { useExpensesContext } from "../context/expenses_context";
 import { useDailyAllowancesContext } from "../context/dailyallowances_context";
 import { payrunState, payrunIdState } from "./data/atomdata";
-import { usePayrun } from "./payrun/usePayrun";
+//import { usePayrun } from "./payrun/usePayrun";
 import { useCurrency } from "./currency/useCurrency";
-import { useExpenses } from "./expenses/useExpenses";
+//import { useExpenses } from "./expenses/useExpenses";
 import UpdateCurrency from "./CurrencyTable";
-import { usePayslipsBatch } from "./payslips/usePayslipsBatch";
+//import { usePayslipsBatch } from "./payslips/usePayslipsBatch";
 
 //const drawerWidth = 240;
 
@@ -61,36 +60,36 @@ const columns = [
   },
 ];
 
-const selectmonths = [
-  { mth: "January" },
-  { mth: "February" },
-  { mth: "March" },
-  { mth: "April" },
-  { mth: "May" },
-  { mth: "June" },
-  { mth: "July" },
-  { mth: "August" },
-  { mth: "September" },
-  { mth: "October" },
-  { mth: "November" },
-  { mth: "December" },
-];
+// const selectmonths = [
+//   { mth: "January" },
+//   { mth: "February" },
+//   { mth: "March" },
+//   { mth: "April" },
+//   { mth: "May" },
+//   { mth: "June" },
+//   { mth: "July" },
+//   { mth: "August" },
+//   { mth: "September" },
+//   { mth: "October" },
+//   { mth: "November" },
+//   { mth: "December" },
+// ];
 
 const Payrun = () => {
   let history = useHistory();
-  let date = new Date();
-  let longMonth = date.toLocaleString("en-us", { month: "long" });
+  //let date = new Date();
+  //let longMonth = date.toLocaleString("en-us", { month: "long" });
 
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   //const { payrun } = usePayrun();
-  const { payslipsbatch, psbpayrunId, setPSBPayrunId } = usePayslipsBatch();
+  //const { payslipsbatch, psbpayrunId, setPSBPayrunId } = usePayslipsBatch();
   const { currency } = useCurrency();
   //const { expenses, setPayrunId } = useExpensesPayrun();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [loadPaybatch, setLoadPaybatch] = useState(false);
   const { loadEmployees, employees } = useEmployeesContext();
-  const { loadUnpaidExpenses, expenses, unpaidexpenses, updateExpense } =
+  const { loadUnpaidExpenses,  unpaidexpenses, updateExpense } =
     useExpensesContext();
   const { unpaiddailyallows, loadUnpaidDailyAllows, updateDailyAllowance } =
     useDailyAllowancesContext();
@@ -105,9 +104,9 @@ const Payrun = () => {
     setPayslipPeriod,
   } = usePayslipsContext();
   const [input, setInput] = useRecoilState(payrunState);
-  const [payrunId, setPayrunId] = useRecoilState(payrunIdState);
+  const [setPayrunId] = useRecoilState(payrunIdState);
   const [alert, setAlert] = useState(false);
-  const [error, setError] = useState(false);
+  const [error] = useState(false);
   const [errornoselect, setErrornoselect] = useState(false);
   const [isPayrunExist, setIsPayrunExist] = useState(false);
   const [isSubmit, setIsSubmit] = useState(false);
@@ -127,10 +126,10 @@ const Payrun = () => {
   }
 
   function formatPayrun() {
-    const yy =
-      input.fromdate.substring(0, 4) + "-" + input.fromdate.substring(5, 7);
-    const mm = input.fromdate.substring(5, 7);
-    const d = input.fromdate;
+    // const yy =
+    //   input.fromdate.substring(0, 4) + "-" + input.fromdate.substring(5, 7);
+    // const mm = input.fromdate.substring(5, 7);
+    // const d = input.fromdate;
   }
 
   const payrunExists = (data) => {
@@ -199,8 +198,8 @@ const Payrun = () => {
       tmptotalallows = 0,
       tmptotalTAP = 0,
       tmptotalSCP = 0,
-      tmpsiteallows = 0,
-      tmpexpsclaims = 0,
+      //tmpsiteallows = 0,
+      //tmpexpsclaims = 0,
       tmpnettpay = 0,
       tmpcurrrate = 0,
       tmpbasicsalarybnd = 0,

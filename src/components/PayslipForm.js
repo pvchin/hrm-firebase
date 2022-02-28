@@ -1,74 +1,69 @@
-import React, { useState, useReducer, useEffect, useRef } from "react";
+import React, { useState,  useEffect } from "react";
 import {
   Button,
   Icon,
   TextField,
-  Checkbox,
+  
   Paper,
   Typography,
-  Select,
+  
   Divider,
   Grid,
-  Toolbar,
-  Box,
+  
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import CardLayout from "../helpers/CardLayout";
 import CardLayout2 from "../helpers/CardLayout2";
 import { CustomDialog } from "../helpers/CustomDialog";
-import MenuItem from "@material-ui/core/MenuItem";
 import { Controller, useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
-import { useSetRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
 import {
   payPeriodState,
-  payPeriodEndMonthState,
+  //payPeriodEndMonthState,
   payPeriodEmpIdState,
-  payEarningDataState,
-  payDeductionDataState,
+  //payEarningDataState,
+  //payDeductionDataState,
 } from "./data/atomdata";
 
-import { useEmployeesContext } from "../context/employees_context";
 import { usePayslipsContext } from "../context/payslips_context";
-import { useTablesContext } from "../context/tables_context";
 import Payslip_ViewEarnings from "./Payslip_ViewEarnings";
 import Payslip_ViewDeductions from "./Payslip_ViewDeductions";
 import Payslip_Earnings from "./Payslip_Earnings";
 import Payslip_Deductions from "./Payslip_Deductions";
 
-const initial_values = {
-  name: "",
-  period: "",
-  date: "",
-  bank_name: "",
-  bank_acno: "",
-  status: "Pending",
-  total_earnings: 0,
-  total_deductions: 0,
-  tap_amount: 0,
-  scp_amount: 0,
-  basic_pay: 0,
-  nett_pay: 0,
-  tap_checkbox: true,
-};
+// const initial_values = {
+//   name: "",
+//   period: "",
+//   date: "",
+//   bank_name: "",
+//   bank_acno: "",
+//   status: "Pending",
+//   total_earnings: 0,
+//   total_deductions: 0,
+//   tap_amount: 0,
+//   scp_amount: 0,
+//   basic_pay: 0,
+//   nett_pay: 0,
+//   tap_checkbox: true,
+// };
 
 const PayslipForm = () => {
   let history = useHistory();
-  const [calc, setCalc] = useState(false);
-  const classes = useStyles();
+   const classes = useStyles();
   const {
-    isPayslipEditing,
+    //isPayslipEditing,
     single_payslip,
     updatePayslip,
-    addPayslip,
+    //addPayslip,
     editPayslipID,
-    loadPayslips,
+    //loadPayslips,
     getSinglePayslip,
     single_payslip_loading,
     single_payslip_error,
-    payslip_period,
-    payslip_earning_amount,
-    payslip_deduction_amount,
+    //payslip_period,
+    //payslip_earning_amount,
+    //payslip_deduction_amount,
     setPayslipEarningAmount,
     setPayslipDeductionAmount,
     payslipearnings,
@@ -76,14 +71,10 @@ const PayslipForm = () => {
     getSingleBatchPayslipEarnings,
     getSingleBatchPayslipDeductions,
   } = usePayslipsContext();
-  const { loadEmployees, employees } = useEmployeesContext();
-  const { loadAllowances, loadDeductions, allowances, deductions } =
-    useTablesContext();
+  
   const payPeriodEmpId = useRecoilValue(payPeriodEmpIdState);
   const payPeriod = useRecoilValue(payPeriodState);
-  const setPayEarningData = useSetRecoilState(payEarningDataState);
-  const setPayDeductionData = useSetRecoilState(payDeductionDataState);
-  const [earningsdata, setEarningsdata] = useState([]);
+    const [earningsdata, setEarningsdata] = useState([]);
   const [oldEarningsdata, setOldEarningsdata] = useState([]);
   const [deductionsdata, setDeductionsdata] = useState([]);
   const [oldDeductionsdata, setOldDeductionsdata] = useState([]);
@@ -98,7 +89,7 @@ const PayslipForm = () => {
     date,
     bank_name,
     bank_acno,
-    status,
+    //status,
     total_earnings,
     total_deductions,
     tap_amount,
@@ -108,9 +99,9 @@ const PayslipForm = () => {
     tap_checkbox,
   } = single_payslip;
 
-  useEffect(async () => {
-    getSinglePayslip(editPayslipID);
-  }, []);
+  useEffect(
+    getSinglePayslip(editPayslipID)
+  , []);
 
   // useEffect(() => {
   //   if (calc) {

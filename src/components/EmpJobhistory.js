@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import MaterialTable, { MTableToolbar } from "material-table";
 import { makeStyles } from "@material-ui/core/styles";
-import { Button, Icon, TextField, MenuItem, Select } from "@material-ui/core";
+import { TextField } from "@material-ui/core";
 import {
   Heading,
   Modal,
@@ -47,7 +47,7 @@ export default function Emp_Jobhistory({
 }) {
   const classes = useStyles();
   const { jobhistory, filter, setFilter, setJobId } = useJobhistory();
-  const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
+  //const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
   const updateJobhistory = useUpdateJobhistory();
   const addJobhistory = useAddJobhistory();
   const deleteJobhistory = useDeleteJobhistory();

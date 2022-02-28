@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useReducer } from "react";
+import React, { useContext, useReducer } from "react";
 import axios from "axios";
 import reducer from "../reducers/dailyallowances_reducer";
 import {
@@ -13,8 +13,8 @@ import {
   SET_ISDAILYALLOWANCEEDITING_ON,
   SET_ISDAILYALLOWANCEEDITING_OFF,
   SET_DAILYALLOWANCE_PERIOD,
-  SET_SINGLEDAILYALLOWANCE,
-  LOAD_DAILYALLOWANCES,
+  //SET_SINGLEDAILYALLOWANCE,
+  //LOAD_DAILYALLOWANCES,
   GET_DAILYALLOWANCES_BEGIN,
   GET_DAILYALLOWANCES_SUCCESS,
   GET_DAILYALLOWANCES_ERROR,
@@ -37,7 +37,7 @@ import {
   UPDATE_DAILYALLOWANCE_SUCCESS,
   UPDATE_DAILYALLOWANCE_ERROR,
   RESET_SINGLE_DAILYALLOWANCE,
-  LOAD_DAILYALLOWSDETLS,
+  //LOAD_DAILYALLOWSDETLS,
   SET_DAILYALLOWSDETL_PERIOD,
   GET_DAILYALLOWSDETLS_BEGIN,
   GET_DAILYALLOWSDETLS_SUCCESS,
@@ -234,17 +234,17 @@ export const DailyAllowancesProvider = ({ children }) => {
   };
 
   const addDailyAllowance = async (data) => {
-    const {
-      id,
-      name,
-      period,
-      location,
-      manager_name,
-      no_of_days,
-      amount,
-      status,
-    } = data;
-    //
+    // const {
+    //   id,
+    //   name,
+    //   period,
+    //   location,
+    //   manager_name,
+    //   no_of_days,
+    //   amount,
+    //   status,
+    // } = data;
+
     dispatch({ type: ADD_DAILYALLOWANCE_BEGIN });
     try {
       await fetch(dailyallowances_url, {
@@ -376,17 +376,17 @@ export const DailyAllowancesProvider = ({ children }) => {
   };
 
   const addDailyAllowsDetl = async (data) => {
-    const {
-      id,
-      name,
-      period,
-      location,
-      manager_name,
-      no_of_days,
-      amount,
-      status,
-    } = data;
-    //
+    // const {
+    //   id,
+    //   name,
+    //   period,
+    //   location,
+    //   manager_name,
+    //   no_of_days,
+    //   amount,
+    //   status,
+    //} = data;
+
     dispatch({ type: ADD_DAILYALLOWSDETL_BEGIN });
     try {
       await fetch(dailyallowsdetls_url, {
@@ -455,7 +455,6 @@ export const DailyAllowancesProvider = ({ children }) => {
         deleteDailyAllowsDetl,
         getSingleDailyAllowsDetl,
         getSingleBatchDailyAllowsDetl,
-        setDailyAllowsDetlPeriod,
         setDailyAllowsDetlPeriod,
       }}
     >

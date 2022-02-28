@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import MaterialTable, { MTableToolbar } from "material-table";
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField, Button, MenuItem, Icon } from "@material-ui/core";
@@ -8,9 +8,9 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import CheckIcon from "@material-ui/icons/Check";
 import SearchIcon from "@material-ui/icons/Search";
 import BuildOutlinedIcon from "@material-ui/icons/BuildOutlined";
-import { useHistory, Link } from "react-router-dom";
-import { useSetRecoilState, useRecoilValue } from "recoil";
-import { payPeriodEmpIdState } from "./data/atomdata";
+//import { useHistory } from "react-router-dom";
+//import { useSetRecoilState } from "recoil";
+//import { payPeriodEmpIdState } from "./data/atomdata";
 import { usePayslipsContext } from "../context/payslips_context";
 //import { useEmployeesContext } from "../context/employees_context";
 
@@ -105,25 +105,25 @@ const columns = [
 
 export default function PayslipTableAdmin({
   payslipsdata,
-  setPayslipsdata,
+  //setPayslipsdata,
   handleDialogClose,
 }) {
-  let history = useHistory();
+  //let history = useHistory();
   const classes = useStyles();
-  const setPayPeriodEmpId = useSetRecoilState(payPeriodEmpIdState);
-  const { updatePayrun, batchpayrun, update_payrun_loading, update_payrun_error } = usePayslipsContext();
+  //const setPayPeriodEmpId = useSetRecoilState(payPeriodEmpIdState);
+  const { updatePayrun, batchpayrun, update_payrun_error } = usePayslipsContext();
 
-  const Save_PayslipData = () => {
-    payslipsdata.forEach((data) => {
-      const { id } = data;
-      if (id) {
-        const { id, rec_id, tableData, ...fields } = data;
-        updatePayrun({ id, ...fields });
-      }
-    });
+  // const Save_PayslipData = () => {
+  //   payslipsdata.forEach((data) => {
+  //     const { id } = data;
+  //     if (id) {
+  //       const { id, rec_id, tableData, ...fields } = data;
+  //       updatePayrun({ id, ...fields });
+  //     }
+  //   });
 
-    handleDialogClose();
-  };
+  //   handleDialogClose();
+  // };
 
   const Approve_PayslipData = () => {
     batchpayrun.forEach((rec) => {

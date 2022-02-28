@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
-import { Loading } from "./components/app/Loading";
+//import { Loading } from "./components/app/Loading";
 import { RecoilRoot } from "recoil";
 //import { ApolloProvider } from "react-apollo";
 //import { ApolloClient } from "apollo-client";

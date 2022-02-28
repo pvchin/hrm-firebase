@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useReducer } from "react";
+import React, { useContext,  useReducer } from "react";
 import axios from "axios";
 import reducer from "../reducers/expenses_reducer";
 import { expenses_url } from "../utils/constants";
@@ -8,7 +8,7 @@ import {
   SET_EDITEXPENSEID,
   SET_ISEXPENSEEDITING_ON,
   SET_ISEXPENSEEDITING_OFF,
-  SET_SINGLEEXPENSE,
+  //SET_SINGLEEXPENSE,
   GET_EXPENSES_BEGIN,
   GET_EXPENSES_SUCCESS,
   GET_EXPENSES_ERROR,
@@ -164,8 +164,8 @@ export const ExpensesProvider = ({ children }) => {
   };
 
   const addExpense = async (data) => {
-    const { id, name, date, purchased_date, remark, amount, status } = data;
-    //
+    //const { id, name, date, purchased_date, remark, amount, status } = data;
+    
     dispatch({ type: ADD_EXPENSE_BEGIN });
     try {
       await fetch(expenses_url, {

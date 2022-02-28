@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import MaterialTable, { MTableToolbar } from "material-table";
 import { makeStyles } from "@material-ui/core/styles";
-import { Button, Icon, TextField, MenuItem } from "@material-ui/core";
+import {  TextField, MenuItem } from "@material-ui/core";
 import { useEmployeesContext } from "../context/employees_context";
 
 import { useFamily } from "./family/useFamily";
@@ -58,7 +58,7 @@ const columns = [
 
 export default function Emp_Family() {
   const classes = useStyles();
-  const { family, filter, setFilter, setFamilyId } = useFamily();
+  const { family,  setFamilyId } = useFamily();
   const updateFamily = useUpdateFamily();
   const addFamily = useAddFamily();
   const deleteFamily = useDeleteFamily();

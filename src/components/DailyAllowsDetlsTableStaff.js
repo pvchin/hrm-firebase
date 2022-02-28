@@ -1,25 +1,24 @@
 import React, { useState, useEffect } from "react";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import * as emailjs from "emailjs-com";
 import MaterialTable, { MTableToolbar } from "material-table";
 import { makeStyles } from "@material-ui/core/styles";
-import { useIsFetching } from "react-query";
+//import { useIsFetching } from "react-query";
 import { TextField, Icon, Grid, Button } from "@material-ui/core";
-import { Alert } from "@material-ui/lab";
-import { useDisclosure } from "@chakra-ui/react";
+//import { useDisclosure } from "@chakra-ui/react";
 import { useRecoilValue, useRecoilState } from "recoil";
 import { useCustomToast } from "../helpers/useCustomToast";
 import {
   loginLevelState,
   allowsDataState,
-  allowsDataDetlsState,
+  //allowsDataDetlsState,
   empidState,
   allowsPeriodState,
-  allowsDataIdState,
-  siteallowsTotalsState,
+  //allowsDataIdState,
+  //siteallowsTotalsState,
 } from "./data/atomdata";
 //import { useDailyAllowancesContext } from "../context/dailyallowances_context";
-import { useAddDailyAllowsDetls } from "./dailyallowsdetls/useAddDailyAllowsDetls";
+//import { useAddDailyAllowsDetls } from "./dailyallowsdetls/useAddDailyAllowsDetls";
 import { useUpdateDailyAllowsDetls } from "./dailyallowsdetls/useUpdateDailyAllowsDetls";
 import { useDeleteDailyAllowsDetls } from "./dailyallowsdetls/useDeleteDailyAllowsDetls";
 import { useDailyAllowsDetlsBatch } from "./dailyallowsdetls/useDailyAllowsDetlsBatch";
@@ -99,16 +98,16 @@ export default function DailyAllowsDetlsTableStaff() {
   let history = useHistory();
   const toast = useCustomToast();
   const classes = useStyles();
-  const isFetching = useIsFetching();
+  //const isFetching = useIsFetching();
   //const { dailyallowsdetls } = useDailyAllowsDetls()
-  const { dailyallows, dailyAllowsId, setDailyAllowsId } = useDailyAllows();
+  const { dailyallows,  setDailyAllowsId } = useDailyAllows();
   const {
     dailyallowsdetls,
     setDailyAllowsDetlsId,
     setDailyAllowsDetlsPeriod,
-    isLoading,
+    //isLoading,
   } = useDailyAllowsDetlsBatch();
-  const addDailyAllowsDetls = useAddDailyAllowsDetls();
+  //const addDailyAllowsDetls = useAddDailyAllowsDetls();
   const updateDailyAllowsDetls = useUpdateDailyAllowsDetls();
   const deleteDailyAllowsDetls = useDeleteDailyAllowsDetls();
   const updateDailyAllows = useUpdateDailyAllows();
@@ -118,24 +117,24 @@ export default function DailyAllowsDetlsTableStaff() {
   //console.log("detlstable", );
   //const [allowsDetlsdata, setAllowsDetilsdata] = useRecoilStateLoadable(fetchDailyAllowsDetlsSelector);
   const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
-  const [allowsDetlsdata, setAllowsDetlsdata] =
-    useRecoilState(allowsDataDetlsState);
+  // const [allowsDetlsdata, setAllowsDetlsdata] =
+  //   useRecoilState(allowsDataDetlsState);
   const allows_period = useRecoilValue(allowsPeriodState);
   const allows_empid = useRecoilValue(empidState);
-  const [siteallowsTotals, setSiteAllowsTotals] = useRecoilState(
-    siteallowsTotalsState
-  );
+  // const [siteallowsTotals, setSiteAllowsTotals] = useRecoilState(
+  //   siteallowsTotalsState
+  // );
   const [allowsdata, setAllowsdata] = useRecoilState(allowsDataState);
-  const [allowsdataId, setAllowsdataId] = useState(allowsDataIdState);
-  const [tabledeldata, setTableDelData] = useState({});
-  const [isCalc, setIsCalc] = useState(false);
-  const [isBuild, setIsBuild] = useState(false);
+  //const [allowsdataId, setAllowsdataId] = useState(allowsDataIdState);
+  //const [tabledeldata, setTableDelData] = useState({});
+  //const [isCalc, setIsCalc] = useState(false);
+  //const [isBuild, setIsBuild] = useState(false);
   const [totals, setTotals] = useState({ initial_totals });
   const [isSubmitAlertOpen, setIsSubmitAlertOpen] = useState(false);
   const [isExitAlertOpen, setIsExitAlertOpen] = useState(false);
-  const [dailyallowsdata, setDailyAllowsData] = useState({});
-  const totalsValues = Object.values(totals).join("");
-  const [isRowIndex, setIsRowIndex] = useState("");
+  //const [dailyallowsdata, setDailyAllowsData] = useState({});
+  //const totalsValues = Object.values(totals).join("");
+  //const [isRowIndex, setIsRowIndex] = useState("");
 
   // const {
   //   //dailyallowances,
@@ -197,16 +196,16 @@ export default function DailyAllowsDetlsTableStaff() {
     );
   };
 
-  const build_dailyallowsdata = () => {
-    const { id, jobbonus, perdiem } = dailyallowsdetls;
-    const data = dailyallowsdetls
-      .filter((r) => r.period === allows_period && r.empid === allows_empid)
-      .map((rec) => {
-        return rec.id, rec.jobbonus, rec.perdiem;
-      });
-    setDailyAllowsData(data);
-    console.log("dailydata", dailyallowsdata);
-  };
+  // const build_dailyallowsdata = () => {
+  //   const { id, jobbonus, perdiem } = dailyallowsdetls;
+  //   const data = dailyallowsdetls
+  //     .filter((r) => r.period === allows_period && r.empid === allows_empid)
+  //     .map((rec) => {
+  //       return rec.id, rec.jobbonus, rec.perdiem;
+  //     });
+  //   setDailyAllowsData(data);
+  //   console.log("dailydata", dailyallowsdata);
+  // };
 
   const update_AllowsDetls = (data, index) => {
     const allowsdata = dailyallowsdetls;
@@ -220,40 +219,40 @@ export default function DailyAllowsDetlsTableStaff() {
     //save_siteallows();
   };
 
-  const save_siteallows = () => {
-    const { id } = allowsdata;
+  // const save_siteallows = () => {
+  //   const { id } = allowsdata;
 
-    updateDailyAllows({
-      id: id,
-      ...allowsdata,
-      no_of_days: totals.totaldays,
-      amount: totals.totalamount,
-      totaljobbonus: totals.totalbonus,
-      totalperdiem: totals.totaldiem,
-    });
-  };
+  //   updateDailyAllows({
+  //     id: id,
+  //     ...allowsdata,
+  //     no_of_days: totals.totaldays,
+  //     amount: totals.totalamount,
+  //     totaljobbonus: totals.totalbonus,
+  //     totalperdiem: totals.totaldiem,
+  //   });
+  // };
 
-  const save_AllowsDetls = (e) => {
-    e.preventDefault();
-    // handle calc
-    //handle_calc();
+  // const save_AllowsDetls = (e) => {
+  //   e.preventDefault();
+  //   // handle calc
+  //   //handle_calc();
 
-    //save allows data details
-    const { id } = allowsdata;
+  //   //save allows data details
+  //   const { id } = allowsdata;
 
-    updateDailyAllows({
-      id: id,
-      ...allowsdata,
-      no_of_days: totals.totaldays,
-      amount: totals.totalamount,
-      totaljobbonus: totals.totalbonus,
-      totalperdiem: totals.totaldiem,
-    });
-    toast({
-      title: "Site Allowances table being saved!",
-      status: "success",
-    });
-  };
+  //   updateDailyAllows({
+  //     id: id,
+  //     ...allowsdata,
+  //     no_of_days: totals.totaldays,
+  //     amount: totals.totalamount,
+  //     totaljobbonus: totals.totalbonus,
+  //     totalperdiem: totals.totaldiem,
+  //   });
+  //   toast({
+  //     title: "Site Allowances table being saved!",
+  //     status: "success",
+  //   });
+  // };
 
   const submit_AllowsDetls = (e) => {
     e.preventDefault();
@@ -319,50 +318,50 @@ export default function DailyAllowsDetlsTableStaff() {
     setIsExitAlertOpen(false);
   };
 
-  const handle_calc = () => {
-    if (dailyallowsdetls) {
-      const totbonus = dailyallowsdetls
-        .filter((r) => r.period === allows_period && r.empid === allows_empid)
-        .reduce((acc, item) => {
-          if (isNaN(item.jobbonus)) {
-            return acc;
-          } else {
-            return acc + item.jobbonus;
-          }
-        }, 0);
-      const totdiem = dailyallowsdetls
-        .filter((r) => r.period === allows_period && r.empid === allows_empid)
-        .reduce((acc, item) => {
-          if (isNaN(item.perdiem)) {
-            return acc;
-          } else {
-            return acc + item.perdiem;
-          }
-        }, 0);
-      const totdays = dailyallowsdetls
-        .filter((r) => r.period === allows_period && r.empid === allows_empid)
-        .reduce((acc, item) => {
-          let val = 0;
-          if (item.jobbonus > 0 || item.perdiem > 0) {
-            val = 1;
-          } else {
-            val = 0;
-          }
-          return acc + val;
-        }, 0);
-      const total = totbonus + totdiem;
+  // const handle_calc = () => {
+  //   if (dailyallowsdetls) {
+  //     const totbonus = dailyallowsdetls
+  //       .filter((r) => r.period === allows_period && r.empid === allows_empid)
+  //       .reduce((acc, item) => {
+  //         if (isNaN(item.jobbonus)) {
+  //           return acc;
+  //         } else {
+  //           return acc + item.jobbonus;
+  //         }
+  //       }, 0);
+  //     const totdiem = dailyallowsdetls
+  //       .filter((r) => r.period === allows_period && r.empid === allows_empid)
+  //       .reduce((acc, item) => {
+  //         if (isNaN(item.perdiem)) {
+  //           return acc;
+  //         } else {
+  //           return acc + item.perdiem;
+  //         }
+  //       }, 0);
+  //     const totdays = dailyallowsdetls
+  //       .filter((r) => r.period === allows_period && r.empid === allows_empid)
+  //       .reduce((acc, item) => {
+  //         let val = 0;
+  //         if (item.jobbonus > 0 || item.perdiem > 0) {
+  //           val = 1;
+  //         } else {
+  //           val = 0;
+  //         }
+  //         return acc + val;
+  //       }, 0);
+  //     const total = totbonus + totdiem;
 
-      setTimeout(() => {
-        setTotals({
-          totalamount: total,
-          totalbonus: totbonus,
-          totaldiem: totdiem,
-          totaldays: totdays,
-        });
-      }, 3000);
-      console.log("calc", totdays, totals);
-    }
-  };
+  //     setTimeout(() => {
+  //       setTotals({
+  //         totalamount: total,
+  //         totalbonus: totbonus,
+  //         totaldiem: totdiem,
+  //         totaldays: totdays,
+  //       });
+  //     }, 3000);
+  //     console.log("calc", totdays, totals);
+  //   }
+  // };
 
   const handle_tempcalc = (allowsdata) => {
     if (allowsdata) {
@@ -422,29 +421,29 @@ export default function DailyAllowsDetlsTableStaff() {
     }
   };
 
-  const update_SiteAllowsTotals = () => {
-    setSiteAllowsTotals({
-      totalamount: totals.totalamount,
-      totalbonus: dailyallowsdetls.reduce((acc, item) => {
-        if (isNaN(item.jobbonus)) {
-          return acc;
-        } else {
-          return acc + item.jobbonus;
-        }
-      }, 0),
-      totaldiem: totals.totaldiem,
-      totaldays: dailyallowsdetls.reduce((acc, item) => {
-        let val = 0;
-        if (item.jobbonus > 0 || item.perdiem > 0) {
-          val = 1;
-        } else {
-          val = 0;
-        }
-        return acc + val;
-      }, 0),
-    });
-    console.log("update", siteallowsTotals);
-  };
+  // const update_SiteAllowsTotals = () => {
+  //   setSiteAllowsTotals({
+  //     totalamount: totals.totalamount,
+  //     totalbonus: dailyallowsdetls.reduce((acc, item) => {
+  //       if (isNaN(item.jobbonus)) {
+  //         return acc;
+  //       } else {
+  //         return acc + item.jobbonus;
+  //       }
+  //     }, 0),
+  //     totaldiem: totals.totaldiem,
+  //     totaldays: dailyallowsdetls.reduce((acc, item) => {
+  //       let val = 0;
+  //       if (item.jobbonus > 0 || item.perdiem > 0) {
+  //         val = 1;
+  //       } else {
+  //         val = 0;
+  //       }
+  //       return acc + val;
+  //     }, 0),
+  //   });
+  //   console.log("update", siteallowsTotals);
+  // };
 
   // const add_DailyAllowsDetl = async (data) => {
   //   console.log("add", data);

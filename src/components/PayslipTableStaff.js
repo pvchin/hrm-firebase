@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import MaterialTable, { MTableToolbar } from "material-table";
 import { makeStyles } from "@material-ui/core/styles";
 import AddIcon from "@material-ui/icons/Add";
@@ -7,18 +7,16 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import CheckIcon from "@material-ui/icons/Check";
 import SearchIcon from "@material-ui/icons/Search";
 import PrintIcon from "@material-ui/icons/Print";
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import BuildOutlinedIcon from "@material-ui/icons/BuildOutlined";
-import { useHistory, Link } from "react-router-dom";
-import { useRecoilState, useSetRecoilState, useRecoilValue } from "recoil";
+//import { useHistory } from "react-router-dom";
+import { useRecoilState } from "recoil";
 import {
-  payPeriodState,
-  payPeriodEndMonthState,
-  payPeriodEmpIdState,
+  //payPeriodState,
+  //payPeriodEndMonthState,
+  //payPeriodEmpIdState,
   loginLevelState,
 } from "./data/atomdata";
-import { usePayslipsContext } from "../context/payslips_context";
-import { useEmployeesContext } from "../context/employees_context";
+//import { usePayslipsContext } from "../context/payslips_context";
 import { usePayslips } from "./payslips/usePayslips";
 import { useEmployees } from "./employees/useEmployees";
 import PrintPayslip from "./PrintPayslip";
@@ -49,25 +47,24 @@ const columns = [
 ];
 
 export default function PayslipTable() {
-  let history = useHistory();
+  //let history = useHistory();
   const classes = useStyles();
-  const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
+  const [loginLevel] = useRecoilState(loginLevelState);
   const { employees } = useEmployees();
-  const [emp, setEmp] = useState();
-  const { payslips, setFilter } = usePayslips();
-  const setPayPeriodEmpId = useSetRecoilState(payPeriodEmpIdState);
-  const {
-    deletePayslip,
-    loadPayslips,
-    getSinglePayslip,
-    setEditPayslipID,
-    setIsPayslipEditingOn,
-    setIsPayslipEditingOff,
-    resetSinglePayslip,
-    payslip_period,
-    payslip_endmonthdate,
-  } = usePayslipsContext();
-  console.log("payslipstable", payslips)
+    const { payslips, setFilter } = usePayslips();
+  
+  //const {
+    //deletePayslip,
+    //loadPayslips,
+    //getSinglePayslip,
+    //setEditPayslipID,
+    //setIsPayslipEditingOn,
+    //setIsPayslipEditingOff,
+    //resetSinglePayslip,
+    //payslip_period,
+    //payslip_endmonthdate,
+  //} = usePayslipsContext();
+  //console.log("payslipstable", payslips)
   const exportPdfTable = ({ data, emp }) => {
     PrintPayslip({ data, emp });
   };
@@ -82,29 +79,29 @@ export default function PayslipTable() {
     exportPdfTable({ data, emp });
   };
 
-  const update_Payslip = async (data) => {
-    const { id } = data;
-    setPayPeriodEmpId(id); //save to recoil
-    setEditPayslipID(id);
-    setIsPayslipEditingOn();
-    getSinglePayslip(id);
-    history.push("/singlepayslip");
-  };
+  // const update_Payslip = async (data) => {
+  //   const { id } = data;
+  //   setPayPeriodEmpId(id); //save to recoil
+  //   setEditPayslipID(id);
+  //   setIsPayslipEditingOn();
+  //   getSinglePayslip(id);
+  //   history.push("/singlepayslip");
+  //};
 
-  const add_Payslip = async (data) => {
-    const { id } = data;
-    resetSinglePayslip();
-    setEditPayslipID("");
-    setIsPayslipEditingOff();
-    history.push("/singlepayslip");
-  };
+  // const add_Payslip = async (data) => {
+  //   const { id } = data;
+  //   resetSinglePayslip();
+  //   setEditPayslipID("");
+  //   setIsPayslipEditingOff();
+  //   history.push("/singlepayslip");
+  // };
 
-  const delete_Payslip = (data) => {
-    const { id } = data;
-    setEditPayslipID(id);
-    deletePayslip(id);
-    loadPayslips();
-  };
+  // const delete_Payslip = (data) => {
+  //   const { id } = data;
+  //   setEditPayslipID(id);
+  //   deletePayslip(id);
+  //   loadPayslips();
+  //};
 
   useEffect(() => {
     setFilter(loginLevel.loginUserId);

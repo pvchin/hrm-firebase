@@ -18,16 +18,16 @@ import MoneyIcon from "@material-ui/icons/Money";
 
 const MenuListItems = () => {
   const classes = useStyles();
-  const [openPay, setOpenPay] = useState(false);
-  const [openTable, setOpenTable] = useState(false);
+  //const [openPay, setOpenPay] = useState(false);
+  //const [openTable, setOpenTable] = useState(false);
 
-  const handleClickPay = () => {
-    setOpenPay(!openPay);
-  };
+  // const handleClickPay = () => {
+  //   setOpenPay(!openPay);
+  // };
 
-  const handleClickTable = () => {
-    setOpenTable(!openTable);
-  };
+  // const handleClickTable = () => {
+  //   setOpenTable(!openTable);
+  // };
 
   return (
     <div className={classes.content}>

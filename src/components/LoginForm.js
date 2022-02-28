@@ -1,40 +1,32 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Container,
-  Card,
-  CardContent,
-  CardHeader,
-  CardActions,
-  CardActionArea,
-  CardMedia,
-  Divider,
-  Typography,
-  Paper,
+ 
 } from "@material-ui/core";
-import { useRecoilState } from "recoil";
+//import { useRecoilState } from "recoil";
 
 import { makeStyles } from "@material-ui/core/styles";
 
-import img from "../assets/AppSutLogo.jpg";
+//import img from "../assets/AppSutLogo.jpg";
 import SigninForm from "./SigninForm";
-import DashboardAdmin from "./DashboardAdmin";
-import { loginLevelState } from "./data/atomdata";
+//import DashboardAdmin from "./DashboardAdmin";
+//import { loginLevelState } from "./data/atomdata";
 
 const LoginForm = () => {
   const classes = useStyles();
-  const [openDialog, setOpenDialog] = useState(true);
-  const [isLoading, setIsLoading] = useState(false);
-  const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
+  //const [openDialog, setOpenDialog] = useState(true);
+ // const [isLoading, setIsLoading] = useState(false);
+  //const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
 
-  const handleOpenDialog = () => {
-    setOpenDialog(true);
-  };
+  // const handleOpenDialog = () => {
+  //   setOpenDialog(true);
+  // };
 
-  const handleCloseDialog = () => {
-    setOpenDialog(false);
-    setIsLoading(true);
-    return <DashboardAdmin />;
-  };
+  // const handleCloseDialog = () => {
+  //   setOpenDialog(false);
+  //   setIsLoading(true);
+  //   return <DashboardAdmin />;
+  // };
 
   return (
     <Container className={classes.root}>

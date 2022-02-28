@@ -1,56 +1,54 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import clsx from "clsx";
-import axios from "axios";
+//import clsx from "clsx";
 import {
   Box,
   Grid,
   GridItem,
-  Icon,
   Heading,
   IconButton,
   Spacer,
   Stack,
 } from "@chakra-ui/react";
-import { EditIcon, EmailIcon, ViewIcon } from "@chakra-ui/icons";
+import { EditIcon } from "@chakra-ui/icons";
 import { useHistory } from "react-router-dom";
-import { differenceInDays, addDays } from "date-fns";
+import { differenceInDays } from "date-fns";
 import { useRecoilState } from "recoil";
-import { List, ListItem, ListItemText } from "@material-ui/core";
+import { List } from "@material-ui/core";
 import { loginLevelState } from "./data/atomdata";
 import { useEmployees } from "./employees/useEmployees";
-import { useUser } from "./user/useUser";
+//import { useUser } from "./user/useUser";
 
-const drawerWidth = 240;
+//const drawerWidth = 240;
 
-const columns = [
-  {
-    title: "Name",
-    field: "name",
-    editable: "never",
-  },
-  {
-    title: "Work Permit No",
-    field: "workpermitno",
-    editable: "never",
-  },
-  {
-    title: "Work Permit Expiry",
-    field: "workpermit_expirydate",
-    type: "date",
-    dateSetting: { locale: "en-GB" },
-    editable: "never",
-  },
-];
+// const columns = [
+//   {
+//     title: "Name",
+//     field: "name",
+//     editable: "never",
+//   },
+//   {
+//     title: "Work Permit No",
+//     field: "workpermitno",
+//     editable: "never",
+//   },
+//   {
+//     title: "Work Permit Expiry",
+//     field: "workpermit_expirydate",
+//     type: "date",
+//     dateSetting: { locale: "en-GB" },
+//     editable: "never",
+//   },
+// ];
 
 const WPExpiryViewStaff = () => {
   const classes = useStyles();
   const history = useHistory();
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-  const { employees, setFilter } = useEmployees();
-  const { user } = useUser();
-  const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
-  const [userdata, setUserdata] = useState([]);
+  //const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+  const { employees } = useEmployees();
+  //const { user } = useUser();
+  const [loginLevel] = useRecoilState(loginLevelState);
+  //const [userdata, setUserdata] = useState([]);
   const today = Date().toLocaleString();
 
   // useEffect(() => {

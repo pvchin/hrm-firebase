@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "react-query";
 import { dailyallowsdetls_url } from "../../utils/constants";
-import { useCustomToast } from "../../helpers/useCustomToast";
+//import { useCustomToast } from "../../helpers/useCustomToast";
 
 async function addDailyAllowsDetls(data) {
   await fetch(dailyallowsdetls_url, {
@@ -11,7 +11,7 @@ async function addDailyAllowsDetls(data) {
 
 export function useAddDailyAllowsDetls(data) {
   const queryClient = useQueryClient();
-  const toast = useCustomToast();
+  //const toast = useCustomToast();
 
   const { mutate } = useMutation((data) => addDailyAllowsDetls(data), {
     onSuccess: () => {

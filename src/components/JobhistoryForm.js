@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import //   Button,
 //   Icon,
 //   MenuItem,
@@ -9,86 +9,74 @@ import //   Button,
 //   Divider,
 "@material-ui/core";
 import {
-  AspectRatio,
+  //AspectRatio,
   Box,
   Button,
-  ButtonGroup,
-  Center,
+  //ButtonGroup,
+  //Center,
   Checkbox,
-  Container,
+  //Container,
   Divider,
-  Flex,
+  //Flex,
   FormControl,
-  FormLabel,
-  FormErrorMessage,
-  FormHelperText,
-  Grid,
-  GridItem,
+  //FormLabel,
+  //FormErrorMessage,
+  //FormHelperText,
+  //Grid,
+  //GridItem,
   Heading,
   HStack,
-  Icon,
-  IconButton,
-  Image,
+  //Icon,
+  //IconButton,
+  //Image,
   Input,
   InputGroup,
   InputLeftAddon,
-  InputLeftElement,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  Radio,
-  RadioGroup,
+  //InputLeftElement,
+  //Modal,
+  //ModalOverlay,
+  //ModalContent,
+  //ModalHeader,
+  //ModalFooter,
+  //ModalBody,
+  //ModalCloseButton,
+  //Radio,
+  //RadioGroup,
   Select,
-  SimpleGrid,
-  Stack,
-  StackDivider,
-  Text,
-  Tabs,
-  TabList,
-  TabPanels,
-  Tab,
-  TabPanel,
-  VStack,
-  Wrap,
-  WrapItem,
-  useRadio,
-  useRadioGroup,
-  useDisclosure,
-  useColorMode,
-  useColorModeValue,
-  useBreakpointValue,
+  //SimpleGrid,
+  //Stack,
+  //StackDivider,
+  //Text,
+  //Tabs,
+ 
 } from "@chakra-ui/react";
-import * as emailjs from "emailjs-com";
-import { useRecoilState } from "recoil";
-import { loginLevelState } from "./data/atomdata";
+//import * as emailjs from "emailjs-com";
+//import { useRecoilState } from "recoil";
+//import { loginLevelState } from "./data/atomdata";
 import { makeStyles } from "@material-ui/core/styles";
-import { useCustomToast } from "../helpers/useCustomToast";
-import { useEmployees } from "./employees/useEmployees";
+//import { useCustomToast } from "../helpers/useCustomToast";
+//import { useEmployees } from "./employees/useEmployees";
 import { useDepartments } from "./departments/useDepartments";
 import { useDesignations } from "./designations/useDesignations";
 import { useJobstatus } from "./jobstatus/useJobstatus";
 import { Controller, useForm } from "react-hook-form";
 
-const SERVICE_ID = process.env.REACT_APP_EMAILJS_SERVICEID;
-const TEMPLATE_ID = "template_1y8odlq";
-const USER_ID = process.env.REACT_APP_EMAILJS_USERID;
+//const SERVICE_ID = process.env.REACT_APP_EMAILJS_SERVICEID;
+//const TEMPLATE_ID = "template_1y8odlq";
+//const USER_ID = process.env.REACT_APP_EMAILJS_USERID;
 
-const initial_state = {
-  empid: "",
-  name: "",
-  designation: "",
-  department: "",
-  effectdate: "",
-  basicsalary: 0,
-  siteallows: 0,
-  remark: "",
-  status: "",
-  isresign: false,
-};
+// const initial_state = {
+//   empid: "",
+//   name: "",
+//   designation: "",
+//   department: "",
+//   effectdate: "",
+//   basicsalary: 0,
+//   siteallows: 0,
+//   remark: "",
+//   status: "",
+//   isresign: false,
+//};
 
 const JobhistoryForm = ({
   state,
@@ -98,15 +86,15 @@ const JobhistoryForm = ({
   update_Item,
   onJobClose,
 }) => {
-  const toast = useCustomToast();
+  //const toast = useCustomToast();
   const classes = useStyles();
   const field_width = "138";
-  const { employees } = useEmployees();
+  //const { employees } = useEmployees();
   const { departments } = useDepartments();
   const { designations } = useDesignations();
   const { jobstatus } = useJobstatus();
   const [isresign, setIsresign] = useState(false);
-  const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
+  //const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
   const { handleSubmit, control } = useForm({
     defaultValues: {
       ...state,

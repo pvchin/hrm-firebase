@@ -1,48 +1,48 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, {  useEffect } from "react";
 
 import MaterialTable, { MTableToolbar } from "material-table";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, Icon, TextField, MenuItem } from "@material-ui/core";
 
-import { useHistory, Link } from "react-router-dom";
-import { useSetRecoilState, useRecoilValue } from "recoil";
+//import { useHistory} from "react-router-dom";
+import {  useRecoilValue } from "recoil";
 import {
   payPeriodState,
-  payPeriodEndMonthState,
+  //payPeriodEndMonthState,
   payPeriodEmpIdState,
-  payEarningDataState,
+  //payEarningDataState,
 } from "./data/atomdata";
 import { usePayslipsContext } from "../context/payslips_context";
 import { useTablesContext } from "../context/tables_context";
 
 export default function Payslip_Earnings({
-  setCalc,
+  //setCalc,
   earningsdata,
   oldEarningsdata,
   setEarningsdata,
   handleDialogClose,
 }) {
-  let history = useHistory();
+  //let history = useHistory();
    const classes = useStyles();
   const payPeriodEmpId = useRecoilValue(payPeriodEmpIdState);
   const payPeriod = useRecoilValue(payPeriodState);
-  const payEarningData = useRecoilValue(payEarningDataState);
+  //const payEarningData = useRecoilValue(payEarningDataState);
   const {
-    payslipearnings,
-    payslip_earning_amount,
-    setPayslipEarningAmount,
+    //payslipearnings,
+    //payslip_earning_amount,
+    //setPayslipEarningAmount,
     addPayslipEarning,
     payslipearnings_loading,
     updatePayslipEarning,
     deletePayslipEarning,
-    updatePayslip,
-    editPayslipID,
+    //updatePayslip,
+    //editPayslipID,
     single_payslip,
     payslip_period,
     getSingleBatchPayslipEarnings,
   } = usePayslipsContext();
 
-  const { name, amount } = payslipearnings;
+  //const { name, amount } = payslipearnings;
   const { allowances } = useTablesContext();
 
   const columns = [
@@ -70,50 +70,50 @@ export default function Payslip_Earnings({
     getSingleBatchPayslipEarnings(single_payslip.empid, payslip_period);
   }, []);
 
-  const calc_Earning = (data) => {
-    const sum = data.reduce((a, v) => (a = a + v.amount), 0);
-    console.log("Earning", data);
-    setPayslipEarningAmount(sum);
-  };
+  // const calc_Earning = (data) => {
+  //   const sum = data.reduce((a, v) => (a = a + v.amount), 0);
+  //   console.log("Earning", data);
+  //   setPayslipEarningAmount(sum);
+  // };
 
-  const update_Payslip = () => {
-    const { rec_id, id, total_earnings, ...paydata } = single_payslip;
-    updatePayslip({
-      id: editPayslipID,
-      total_earnings: payslip_earning_amount,
-      ...paydata,
-    });
-    setCalc(true);
-  };
+  // const update_Payslip = () => {
+  //   const { rec_id, id, total_earnings, ...paydata } = single_payslip;
+  //   updatePayslip({
+  //     id: editPayslipID,
+  //     total_earnings: payslip_earning_amount,
+  //     ...paydata,
+  //   });
+  //   setCalc(true);
+  // };
 
-  const update_PayslipEarning = async (data) => {
-    const { id, rec_id, empid, ...fields } = data;
-    console.log("update", data);
-    updatePayslipEarning({ id: data.id, empid: empid, ...fields });
+  // const update_PayslipEarning = async (data) => {
+  //   const { id, rec_id, empid, ...fields } = data;
+  //   console.log("update", data);
+  //   updatePayslipEarning({ id: data.id, empid: empid, ...fields });
 
-    update_Payslip();
-    getSingleBatchPayslipEarnings(single_payslip.empid, payslip_period);
-  };
+  //   update_Payslip();
+  //   getSingleBatchPayslipEarnings(single_payslip.empid, payslip_period);
+  // };
 
-  const add_PayslipEarning = (data) => {
-    console.log("add", data);
-    const { description, amount } = data;
-    addPayslipEarning({
-      description: description,
-      amount: amount,
-      name: single_payslip.name,
-      empid: single_payslip.empid,
-      period: single_payslip.period,
-    });
+  // const add_PayslipEarning = (data) => {
+  //   console.log("add", data);
+  //   const { description, amount } = data;
+  //   addPayslipEarning({
+  //     description: description,
+  //     amount: amount,
+  //     name: single_payslip.name,
+  //     empid: single_payslip.empid,
+  //     period: single_payslip.period,
+  //   });
 
-    getSingleBatchPayslipEarnings(single_payslip.empid, payslip_period);
-  };
+  //   getSingleBatchPayslipEarnings(single_payslip.empid, payslip_period);
+  // };
 
-  const delete_PayslipEarning = (data) => {
-    const { id } = data;
-    deletePayslipEarning(id);
-    getSingleBatchPayslipEarnings(single_payslip.empid, payslip_period);
-  };
+  // const delete_PayslipEarning = (data) => {
+  //   const { id } = data;
+  //   deletePayslipEarning(id);
+  //   getSingleBatchPayslipEarnings(single_payslip.empid, payslip_period);
+  // };
 
   const Save_EarningsData = () => {
     // delete unwanted data

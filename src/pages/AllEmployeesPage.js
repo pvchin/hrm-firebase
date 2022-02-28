@@ -7,7 +7,7 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 
 import AllEmployeesTable from "../components/AllEmployeesTable";
-import { headEmployeesTableCells } from "../utils/constants";
+
 const drawerWidth = 240;
 
 const AllEmployees = () => {

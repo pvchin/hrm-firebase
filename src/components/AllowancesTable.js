@@ -36,7 +36,7 @@ export default function UpdateAllowances() {
   };
 
   useEffect(() => {
-    setPayItemId("Allowances");
+   setPayItemId("Allowances");
   }, []);
 
   return (

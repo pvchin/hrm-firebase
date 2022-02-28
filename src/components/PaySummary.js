@@ -1,48 +1,48 @@
-import React, { useState, useEffect, useRef, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import currency from "currency.js";
-import PrintPaySummary from "./PrintPaySummary";
+//import PrintPaySummary from "./PrintPaySummary";
 import {
   Box,
-  Heading,
-  Text,
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  chakra,
+  //Heading,
+  //Text,
+  //Table,
+  //Thead,
+  //Tbody,
+  //Tr,
+  //Th,
+  //Td,
+  //chakra,
 } from "@chakra-ui/react";
-import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
+//import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
 import MaterialTable from "material-table";
-import { Button, Icon, Grid, TextField } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import {  Grid, TextField } from "@material-ui/core";
+//import { makeStyles } from "@material-ui/core/styles";
 import { useRecoilState } from "recoil";
-import { formatPriceZero } from "../helpers/Utils";
-import { payrunState, payrunStatusState } from "./data/atomdata";
-import { usePayslipsContext } from "../context/payslips_context";
-import { ComponentToPrint } from "./ComponentToPrint";
-import PaySummaryTable from "./PaySummaryTable";
+//import { formatPriceZero } from "../helpers/Utils";
+import { payrunState } from "./data/atomdata";
+//import { usePayslipsContext } from "../context/payslips_context";
+//import { ComponentToPrint } from "./ComponentToPrint";
+//import PaySummaryTable from "./PaySummaryTable";
 
-const initial_state = [
-  {
-    totalwages: 0,
-    totaltap: 0,
-    totalscp: 0,
-    totalallows: 0,
-    totaldeducts: 0,
-    totalpayroll: 0,
-  },
-];
+// const initial_state = [
+//   {
+//     totalwages: 0,
+//     totaltap: 0,
+//     totalscp: 0,
+//     totalallows: 0,
+//     totaldeducts: 0,
+//     totalpayroll: 0,
+//   },
+// ];
 
 const PaySummary = ({ singlebatchpayslip }) => {
-  const classes = useStyles();
-  const componentRef = useRef();
-  const [state, setState] = useState(initial_state);
+  //const classes = useStyles();
+  //const componentRef = useRef();
+  //const [state, setState] = useState(initial_state);
   const [payrundata, setPayrundata] = useRecoilState(payrunState);
-  const [payrunstatus, setPayrunStatus] = useRecoilState(payrunStatusState);
+  //const [payrunstatus, setPayrunStatus] = useRecoilState(payrunStatusState);
   const [isCalc, setIsCalc] = useState(true);
-  const { payrun, updatePayrun, payslip_period } = usePayslipsContext();
+  //const { payrun, updatePayrun, payslip_period } = usePayslipsContext();
 
   const columns = [
     {
@@ -100,65 +100,65 @@ const PaySummary = ({ singlebatchpayslip }) => {
     },
   ];
 
-  const columns1 = [
-    {
-      Header: "Name",
-      accessor: "name",
-    },
-    {
-      Header: "Wages",
-      accessor: "wages_bnd",
-      isNumeric: true,
-      Cell: (props) => formatPriceZero(props.value),
-    },
+  // const columns1 = [
+  //   {
+  //     Header: "Name",
+  //     accessor: "name",
+  //   },
+  //   {
+  //     Header: "Wages",
+  //     accessor: "wages_bnd",
+  //     isNumeric: true,
+  //     Cell: (props) => formatPriceZero(props.value),
+  //   },
 
-    {
-      Header: "TAP Amount",
-      accessor: "tap_amount_bnd",
-      isNumeric: true,
-      Cell: (props) => formatPriceZero(props.value),
-    },
-    {
-      Header: "SCP Amount",
-      accessor: "scp_amount_bnd",
-      isNumeric: true,
-      Cell: (props) => formatPriceZero(props.value),
-    },
-    {
-      Header: "Site Allows",
-      accessor: "site_allows_bnd",
-      isNumeric: true,
-      Cell: (props) => formatPriceZero(props.value),
-    },
-    {
-      Header: "Exps Claims",
-      accessor: "expenses_claims_bnd",
-      isNumeric: true,
-      Cell: (props) => formatPriceZero(props.value),
-    },
-    {
-      Header: "Allowances",
-      accessor: "total_allowances_bnd",
-      isNumeric: true,
-      Cell: (props) => formatPriceZero(props.value),
-    },
-    {
-      Header: "Deductions",
-      accessor: "total_deductions_bnd",
-      isNumeric: true,
-      Cell: (props) => formatPriceZero(props.value),
-    },
-    {
-      Header: "Nett Pay",
-      accessor: "nett_pay_bnd",
-      isNumeric: true,
-      Cell: (props) => formatPriceZero(props.value),
-    },
-  ];
+  //   {
+  //     Header: "TAP Amount",
+  //     accessor: "tap_amount_bnd",
+  //     isNumeric: true,
+  //     Cell: (props) => formatPriceZero(props.value),
+  //   },
+  //   {
+  //     Header: "SCP Amount",
+  //     accessor: "scp_amount_bnd",
+  //     isNumeric: true,
+  //     Cell: (props) => formatPriceZero(props.value),
+  //   },
+  //   {
+  //     Header: "Site Allows",
+  //     accessor: "site_allows_bnd",
+  //     isNumeric: true,
+  //     Cell: (props) => formatPriceZero(props.value),
+  //   },
+  //   {
+  //     Header: "Exps Claims",
+  //     accessor: "expenses_claims_bnd",
+  //     isNumeric: true,
+  //     Cell: (props) => formatPriceZero(props.value),
+  //   },
+  //   {
+  //     Header: "Allowances",
+  //     accessor: "total_allowances_bnd",
+  //     isNumeric: true,
+  //     Cell: (props) => formatPriceZero(props.value),
+  //   },
+  //   {
+  //     Header: "Deductions",
+  //     accessor: "total_deductions_bnd",
+  //     isNumeric: true,
+  //     Cell: (props) => formatPriceZero(props.value),
+  //   },
+  //   {
+  //     Header: "Nett Pay",
+  //     accessor: "nett_pay_bnd",
+  //     isNumeric: true,
+  //     Cell: (props) => formatPriceZero(props.value),
+  //   },
+  // ];
 
-  const exportPdfTable = () => {
-    PrintPaySummary((singlebatchpayslip = { singlebatchpayslip }));
-  };
+  // const exportPdfTable = () => {
+  //   PrintPaySummary((singlebatchpayslip = { singlebatchpayslip }));
+  // };
 
   const handleCalcTotals = () => {
     const data = singlebatchpayslip;
@@ -226,10 +226,10 @@ const PaySummary = ({ singlebatchpayslip }) => {
     // );
   };
 
-  const handleSaveCalcTotals = (e) => {
-    e.preventDefault();
-    handleCalcTotals();
-  };
+  // const handleSaveCalcTotals = (e) => {
+  //   e.preventDefault();
+  //   handleCalcTotals();
+  //};
 
   useEffect(() => {
     handleCalcTotals();
@@ -609,110 +609,110 @@ const PaySummary = ({ singlebatchpayslip }) => {
   );
 };
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  button: {
-    margin: theme.spacing(1),
-  },
-  container: {
-    margin: 0,
-    padding: 0,
-    width: "80vw",
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fill,250px)",
-    gridAutoRows: "10px",
-    position: "absolute",
-    left: "50%",
-    transform: "translateX(-50%)",
-    justifyContent: "center",
-    backgroundColor: "primary",
-  },
-  fixedHeight: {
-    height: 800,
-  },
-  paper: {
-    padding: theme.spacing(10),
-    // display: "flex",
-    display: "flex",
-    overflow: "auto",
-    flexDirection: "column",
-    border: "1px solid",
-    width: "100%",
-    color: "primary",
-    bcakgroundColor: "black",
-  },
-  card: {
-    backgroundColor: "black",
-  },
-  section: {
-    width: "80vw",
-    margin: "1rem auto",
-    maxWidth: "var(--max-width)",
-  },
-  underline: {
-    width: "5rem",
-    height: "0.25rem",
-    marginBottom: "1.25rem",
-    background: "var(--clr-primary-5)",
-    marginLeft: "auto",
-    marginRight: "auto",
-  },
-  title: {
-    marginbottom: "4rem",
-    textAlign: "center",
-  },
-  jobscenter: {
-    width: "80vw",
-    margin: "0 auto",
-    maxWidth: "var(--max-width)",
-    flexDirection: "row",
-  },
-  btncontainer: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "center",
-    marginBottom: "4rem",
-    flexWrap: "wrap",
-  },
-  jobbtn: {
-    background: "transparent",
-    borderColor: "transparent",
-    textTransform: "capitalize",
-    fontSize: "1.25rem",
-    letterSpacing: "var(--spacing)",
-    margin: "0 0.5rem",
-    transition: "var(--transition)",
-    cursor: "pointer",
-    padding: "0.25rem 0",
-    lineHeight: "1",
-    outlineColor: "var(--clr-primary-10)",
-    "&:hover": {
-      color: "var(--clr-primary-5)",
-      boxShadow: "0 2px var(--clr-primary-5)",
-    },
-  },
-  activebtn: {
-    color: "var(--clr-primary-5)",
-    boxShadow: "0 2px var(--clr-primary-5)",
-  },
-  jobinfo: {
-    fontWeight: "400",
-  },
-  divider: {
-    // Theme Color, or use css color in quote
-    background: "white",
-  },
-  textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: 350,
-  },
-  divContainer: {
-    display: "flex",
-    flexDirection: "row",
-  },
-}));
+// const useStyles = makeStyles((theme) => ({
+//   root: {
+//     flexGrow: 1,
+//   },
+//   button: {
+//     margin: theme.spacing(1),
+//   },
+//   container: {
+//     margin: 0,
+//     padding: 0,
+//     width: "80vw",
+//     display: "grid",
+//     gridTemplateColumns: "repeat(auto-fill,250px)",
+//     gridAutoRows: "10px",
+//     position: "absolute",
+//     left: "50%",
+//     transform: "translateX(-50%)",
+//     justifyContent: "center",
+//     backgroundColor: "primary",
+//   },
+//   fixedHeight: {
+//     height: 800,
+//   },
+//   paper: {
+//     padding: theme.spacing(10),
+//     // display: "flex",
+//     display: "flex",
+//     overflow: "auto",
+//     flexDirection: "column",
+//     border: "1px solid",
+//     width: "100%",
+//     color: "primary",
+//     bcakgroundColor: "black",
+//   },
+//   card: {
+//     backgroundColor: "black",
+//   },
+//   section: {
+//     width: "80vw",
+//     margin: "1rem auto",
+//     maxWidth: "var(--max-width)",
+//   },
+//   underline: {
+//     width: "5rem",
+//     height: "0.25rem",
+//     marginBottom: "1.25rem",
+//     background: "var(--clr-primary-5)",
+//     marginLeft: "auto",
+//     marginRight: "auto",
+//   },
+//   title: {
+//     marginbottom: "4rem",
+//     textAlign: "center",
+//   },
+//   jobscenter: {
+//     width: "80vw",
+//     margin: "0 auto",
+//     maxWidth: "var(--max-width)",
+//     flexDirection: "row",
+//   },
+//   btncontainer: {
+//     display: "flex",
+//     flexDirection: "row",
+//     justifyContent: "center",
+//     marginBottom: "4rem",
+//     flexWrap: "wrap",
+//   },
+//   jobbtn: {
+//     background: "transparent",
+//     borderColor: "transparent",
+//     textTransform: "capitalize",
+//     fontSize: "1.25rem",
+//     letterSpacing: "var(--spacing)",
+//     margin: "0 0.5rem",
+//     transition: "var(--transition)",
+//     cursor: "pointer",
+//     padding: "0.25rem 0",
+//     lineHeight: "1",
+//     outlineColor: "var(--clr-primary-10)",
+//     "&:hover": {
+//       color: "var(--clr-primary-5)",
+//       boxShadow: "0 2px var(--clr-primary-5)",
+//     },
+//   },
+//   activebtn: {
+//     color: "var(--clr-primary-5)",
+//     boxShadow: "0 2px var(--clr-primary-5)",
+//   },
+//   jobinfo: {
+//     fontWeight: "400",
+//   },
+//   divider: {
+//     // Theme Color, or use css color in quote
+//     background: "white",
+//   },
+//   textField: {
+//     marginLeft: theme.spacing(1),
+//     marginRight: theme.spacing(1),
+//     width: 350,
+//   },
+//   divContainer: {
+//     display: "flex",
+//     flexDirection: "row",
+//   },
+// }));
 
 export default PaySummary;

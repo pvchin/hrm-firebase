@@ -6,7 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import * as emailjs from "emailjs-com";
 import AddIcon from "@material-ui/icons/Add";
 import VisibilityIcon from "@material-ui/icons/Visibility";
-import EditIcon from "@material-ui/icons/Edit";
+//import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import CheckIcon from "@material-ui/icons/Check";
 import SearchIcon from "@material-ui/icons/Search";
@@ -17,10 +17,10 @@ import { CustomDialog } from "../helpers/CustomDialog";
 import { useCustomToast } from "../helpers/useCustomToast";
 import { AlertDialogBox } from "../helpers/AlertDialogBox";
 import { useLeavesContext } from "../context/leaves_context";
-import { useEmployeesContext } from "../context/employees_context";
-import { useLeaves } from "./leaves/useLeaves";
+//import { useEmployeesContext } from "../context/employees_context";
+//import { useLeaves } from "./leaves/useLeaves";
 import { useLeavesStatus } from "./leaves/useLeavesStatus";
-import { useAddLeaves } from "./leaves/useAddLeaves";
+//import { useAddLeaves } from "./leaves/useAddLeaves";
 import { useDeleteLeaves } from "./leaves/useDeleteLeaves";
 import { useUpdateLeaves } from "./leaves/useUpdateLeaves";
 import { useEmployees } from "./employees/useEmployees";
@@ -104,24 +104,24 @@ export default function LeaveTableApproval() {
   const { employees } = useEmployees();
   const { leavesstatus, setLeaveStatusId } = useLeavesStatus();
   const updateLeaves = useUpdateLeaves();
-  const addLeaves = useAddLeaves();
+  //const addLeaves = useAddLeaves();
   const deleteLeaves = useDeleteLeaves();
   const [formdata, setFormdata] = useState(initial_form);
-  const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
+  const [loginLevel] = useRecoilState(loginLevelState);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   const [isUpdate, setIsUpdate] = useState(true);
   const {
     // leaves,
     editLeaveID,
-    leaves_loading,
-    deleteLeave,
-    loadLeaves,
-    getSingleLeave,
-    setEditLeaveID,
-    setIsLeaveEditingOn,
-    setIsLeaveEditingOff,
-    resetSingleLeave,
+    //leaves_loading,
+    //deleteLeave,
+    //loadLeaves,
+    //getSingleLeave,
+    //setEditLeaveID,
+    //setIsLeaveEditingOn,
+    //setIsLeaveEditingOff,
+    //resetSingleLeave,
   } = useLeavesContext();
 
   useEffect(() => {
@@ -156,17 +156,17 @@ export default function LeaveTableApproval() {
   //   //loadLeaves();
   // };
 
-  const handleDialogOpen = () => {
-    setIsDialogOpen(true);
-  };
+  // const handleDialogOpen = () => {
+  //   setIsDialogOpen(true);
+  // };
 
   const handleDialogClose = () => {
     setIsDialogOpen(false);
   };
 
-  const handleAlertOpen = () => {
-    setIsAlertOpen(true);
-  };
+  // const handleAlertOpen = () => {
+  //   setIsAlertOpen(true);
+  // };
 
   const handleAlertClose = () => {
     setIsAlertOpen(false);

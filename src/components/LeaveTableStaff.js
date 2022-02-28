@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import MaterialTable, { MTableToolbar } from "material-table";
-import { TextField, MenuItem, Button, Icon } from "@material-ui/core";
+import { TextField, MenuItem } from "@material-ui/core";
 import {
   Box,
   Heading,
@@ -8,8 +8,7 @@ import {
   GridItem,
   HStack,
   Select,
-  SimpleGrid,
-  Text,
+    Text,
 } from "@chakra-ui/react";
 import { makeStyles } from "@material-ui/core/styles";
 import { useRecoilState } from "recoil";
@@ -22,14 +21,14 @@ import SearchIcon from "@material-ui/icons/Search";
 import LeaveForm from "./LeaveForm";
 import { CustomDialog } from "../helpers/CustomDialog";
 import { AlertDialogBox } from "../helpers/AlertDialogBox";
-import CustomAlertDialog from "../helpers/CustomAlertDialog";
+//import CustomAlertDialog from "../helpers/CustomAlertDialog";
 import { useLeavesContext } from "../context/leaves_context";
-import { useEmployeesContext } from "../context/employees_context";
+//import { useEmployeesContext } from "../context/employees_context";
 import { useLeaves } from "./leaves/useLeaves";
-import { useAddLeaves } from "./leaves/useAddLeaves";
+//import { useAddLeaves } from "./leaves/useAddLeaves";
 import { useDeleteLeaves } from "./leaves/useDeleteLeaves";
-import { useUpdateLeaves } from "./leaves/useUpdateLeaves";
-import { useSingleEmployee } from "./employees/useSingleEmployee";
+//import { useUpdateLeaves } from "./leaves/useUpdateLeaves";
+//import { useSingleEmployee } from "./employees/useSingleEmployee";
 
 const initial_form = {
   name: "",
@@ -129,29 +128,29 @@ const columns = [
 
 export default function LeaveTableStaff() {
   const classes = useStyles();
-  const { singleemployee, setSingleEmployeeId } = useSingleEmployee();
+  //const { singleemployee, setSingleEmployeeId } = useSingleEmployee();
   const { leaves, setLeaveYr, setLeaveId } = useLeaves();
-  const updateLeaves = useUpdateLeaves();
-  const addLeaves = useAddLeaves();
+  //const updateLeaves = useUpdateLeaves();
+  //const addLeaves = useAddLeaves();
   const deleteLeaves = useDeleteLeaves();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isAlertOpen, setIsAlertOpen] = useState(false);
-  const [alertSuccess, setAlertSuccess] = useState(false);
-  const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
+  //const [alertSuccess, setAlertSuccess] = useState(false);
+  const [loginLevel] = useRecoilState(loginLevelState);
   const [formdata, setFormdata] = useState(initial_form);
   const [leavestate, setLeaveState] = useState({});
   const [isLoad, setIsLoad] = useState(true);
-  const { editEmployeeID } = useEmployeesContext();
+  //const { editEmployeeID } = useEmployeesContext();
   const {
     editLeaveID,
     setEditLeaveID,
     setIsLeaveEditingOn,
     setIsLeaveEditingOff,
   } = useLeavesContext();
-  const [isOpen, setIsOpen] = React.useState(false);
-  const [isLeaveYear, setLeaveYear] = useState(true);
-  const onClose = () => setIsOpen(false);
-  const cancelRef = React.useRef();
+  //const [isOpen, setIsOpen] = React.useState(false);
+  //const [isLeaveYear, setLeaveYear] = useState(true);
+  //const onClose = () => setIsOpen(false);
+  //const cancelRef = React.useRef();
   const [selectleaveyear, setSelectLeaveYear] = useState("");
   const currentyear = new Date().getFullYear();
   //const YEAR = new Date().getFullYear();
@@ -246,9 +245,9 @@ export default function LeaveTableStaff() {
     // }
   };
 
-  const handleAlertOpen = () => {
-    setIsAlertOpen(true);
-  };
+  // const handleAlertOpen = () => {
+  //   setIsAlertOpen(true);
+  // };
 
   const handleAlertClose = () => {
     setIsAlertOpen(false);

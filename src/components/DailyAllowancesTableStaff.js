@@ -2,10 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import MaterialTable, { MTableToolbar } from "material-table";
 import { makeStyles } from "@material-ui/core/styles";
-import { TextField, Icon, Button, MenuItem } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
-import { useCustomToast } from "../helpers/useCustomToast";
-import { useSetRecoilState, useRecoilValue, useRecoilState } from "recoil";
+//import { useCustomToast } from "../helpers/useCustomToast";
+import { useRecoilState } from "recoil";
 import {
   allowsPeriodState,
   allowsDataState,
@@ -25,8 +24,8 @@ import { useDailyAllowancesContext } from "../context/dailyallowances_context";
 import DailyAllowancesAddPeriod from "./DailyAllowancesAddPeriod";
 import DailyAllowsDetlsTableStaff from "./DailyAllowsDetlsTableStaff";
 import { useDailyAllows } from "./dailyallows/useDailyAllows";
-import { useAddDailyAllows } from "./dailyallows/useAddDailyAllows";
-import { useUpdateDailyAllows } from "./dailyallows/useUpdateDailyAllows";
+//import { useAddDailyAllows } from "./dailyallows/useAddDailyAllows";
+//import { useUpdateDailyAllows } from "./dailyallows/useUpdateDailyAllows";
 import { useDeleteDailyAllows } from "./dailyallows/useDeleteDailyAllows";
 import { useDeleteDailyAllowsDetls } from "./dailyallowsdetls/useDeleteDailyAllowsDetls";
 import { useDailyAllowsDetlsBatch } from "./dailyallowsdetls/useDailyAllowsDetlsBatch";
@@ -34,25 +33,25 @@ import { useDailyAllowsDetlsBatch } from "./dailyallowsdetls/useDailyAllowsDetls
 export default function DailyAllowancesTableStaff() {
   let history = useHistory();
   const classes = useStyles();
-  const toast = useCustomToast();
+  //const toast = useCustomToast();
   const { dailyallows, dailyAllowsId, setDailyAllowsId } = useDailyAllows();
   const { dailyallowsdetls, setDailyAllowsDetlsId, setDailyAllowsDetlsPeriod } =
     useDailyAllowsDetlsBatch();
-  const addDailyAllows = useAddDailyAllows();
-  const updateDailyAllows = useUpdateDailyAllows();
+  //const addDailyAllows = useAddDailyAllows();
+  //const updateDailyAllows = useUpdateDailyAllows();
   const deleteDailyAllows = useDeleteDailyAllows();
   const deleteDailyAllowsDetls = useDeleteDailyAllowsDetls();
   const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
   const [isAddPeriodDialogOpen, setIsAddPeriodDialogOpen] = useState(false);
-  const [tmpallowsdata, setTmpallowsdata] = useState([]);
+  //const [tmpallowsdata, setTmpallowsdata] = useState([]);
   const [allowsdata, setAllowsdata] = useRecoilState(allowsDataState);
   const [isDeleteAlertOpen, setIsDeleteAlertOpen] = useState(false);
-  const [allowsDetlsdata, setAllowsDetlsdata] =
+  // const [allowsDetlsdata, setAllowsDetlsdata] =
     useRecoilState(allowsDataDetlsState);
   const [allows_period, setAllows_period] = useRecoilState(allowsPeriodState);
   const [allows_empid, setAllows_empid] = useRecoilState(empidState);
   const [allowsdataId, setAllowsdataId] = useState(allowsDataIdState);
-  const [toLoadDetls, setToLoadDetls] = useState(false);
+  //const [toLoadDetls, setToLoadDetls] = useState(false);
   const [error, setError] = useState("");
   const [deletestate, setDeletestate] = useState({
     id: "",
@@ -62,12 +61,12 @@ export default function DailyAllowancesTableStaff() {
   const [isAllowsDetlDialogOpen, setIsAllowsDetlDialogOpen] = useState(false);
   const title = `Site Allowances`;
   const {
-    loadEmpDailyAllowances,
+    //loadEmpDailyAllowances,
     loadEmpDailyAllowsDetls,
-    dailyallowances_loading,
-    dailyallowances_error,
-    updateDailyAllowance,
-    getSingleBatchDailyAllowsDetl,
+    //dailyallowances_loading,
+    //dailyallowances_error,
+    //updateDailyAllowance,
+    //getSingleBatchDailyAllowsDetl,
   } = useDailyAllowancesContext();
 
   useEffect(() => {
@@ -136,16 +135,16 @@ export default function DailyAllowancesTableStaff() {
     // },
   ];
 
-  const Save_DailyAllowancesData = () => {
-    dailyallows.forEach((data) => {
-      const { id } = data;
-      if (id) {
-        const { id, rec_id, tableData, ...fields } = data;
-        updateDailyAllowance({ id, ...fields });
-      }
-    });
-    //handleDialogClose();
-  };
+  // const Save_DailyAllowancesData = () => {
+  //   dailyallows.forEach((data) => {
+  //     const { id } = data;
+  //     if (id) {
+  //       const { id, rec_id, tableData, ...fields } = data;
+  //       updateDailyAllowance({ id, ...fields });
+  //     }
+  //   });
+  //   //handleDialogClose();
+  //};
 
   const update_SiteAllowsDetl = (data) => {
     const {
@@ -230,9 +229,9 @@ export default function DailyAllowancesTableStaff() {
     setIsAddPeriodDialogOpen(false);
   };
 
-  const handleAllowsDetlDialogOpen = () => {
-    setIsAllowsDetlDialogOpen(true);
-  };
+  // const handleAllowsDetlDialogOpen = () => {
+  //   setIsAllowsDetlDialogOpen(true);
+  // };
 
   const handleAllowsDetlDialogClose = () => {
     //settoLoad(true);

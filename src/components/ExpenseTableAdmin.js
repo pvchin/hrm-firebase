@@ -3,14 +3,14 @@ import MaterialTable, { MTableToolbar } from "material-table";
 import { TextField, MenuItem, Button, Icon } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import AddIcon from "@material-ui/icons/Add";
-import EditIcon from "@material-ui/icons/Edit";
+//import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import CheckIcon from "@material-ui/icons/Check";
 import SearchIcon from "@material-ui/icons/Search";
 import CheckCircleOutlineOutlinedIcon from "@material-ui/icons/CheckCircleOutlineOutlined";
 import ExpenseForm from "./ExpenseForm";
 import { useExpensesContext } from "../context/expenses_context";
-import { useEmployeesContext } from "../context/employees_context";
+//import { useEmployeesContext } from "../context/employees_context";
 import { CustomDialog } from "../helpers/CustomDialog";
 import { AlertDialogBox } from "../helpers/AlertDialogBox";
 
@@ -64,15 +64,15 @@ export default function ExpenseTable({
   handleDialogClose,
 }) {
   const classes = useStyles();
-  const [isLoad, setIsLoad] = useState(false);
+  //const [isLoad, setIsLoad] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isAlertOpen, setIsAlertOpen] = useState(false);
-  const { loadEmployees } = useEmployeesContext();
+  //const { loadEmployees } = useEmployeesContext();
   const {
     editExpenseID,
     updateExpense,
     update_expense_error,
-    expenses_loading,
+    //expenses_loading,
     deleteExpense,
     loadPendingExpenses,
   } = useExpensesContext();
@@ -95,18 +95,18 @@ export default function ExpenseTable({
   //   }
   // }, [isLoad]);
 
-  const handleExpenseFormDialogOpen = () => {
-    setIsDialogOpen(true);
-  };
+  // const handleExpenseFormDialogOpen = () => {
+  //   setIsDialogOpen(true);
+  // };
 
   const handleExpenseFormDialogClose = () => {
     setIsDialogOpen(false);
     loadPendingExpenses(FILTERSTRING);
   };
 
-  const handleExpenseFormAlertOpen = () => {
-    setIsAlertOpen(true);
-  };
+  // const handleExpenseFormAlertOpen = () => {
+  //   setIsAlertOpen(true);
+  // };
 
   const handleExpenseFormAlertClose = () => {
     setIsAlertOpen(false);
@@ -118,17 +118,17 @@ export default function ExpenseTable({
     loadPendingExpenses(FILTERSTRING);
   };
 
-  const Save_ExpenseData = () => {
-    expensesdata.forEach((data) => {
-      const { id } = data;
-      if (id) {
-        const { id, rec_id, tableData, ...fields } = data;
-        updateExpense({ id, ...fields });
-      }
-    });
+  // const Save_ExpenseData = () => {
+  //   expensesdata.forEach((data) => {
+  //     const { id } = data;
+  //     if (id) {
+  //       const { id, rec_id, tableData, ...fields } = data;
+  //       updateExpense({ id, ...fields });
+  //     }
+  //   });
 
-    handleDialogClose();
-  };
+  //   handleDialogClose();
+  // };
 
   const Approve_ExpenseData = () => {
     expensesdata.forEach((rec) => {
