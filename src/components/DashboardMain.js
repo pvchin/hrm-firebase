@@ -11,7 +11,7 @@ import { Flex } from "@chakra-ui/react";
 
 import Appbanner from "./Appbanner";
 //import Example from "./Example6";
-import SideDrawer from "./SideDrawer";
+//import SideDrawer from "./SideDrawer";
 //import SingleEmployee from "./SingleEmployee";
 //import SingleLeave from "./SingleLeave";
 //import SingleExpense from "./SingleExpense";

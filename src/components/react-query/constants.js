@@ -31,6 +31,7 @@ export const queryKeys = {
   user: "user",
   currency: "currency",
   hoc: "hoc",
+  hocperiod: "hocperiod",
   hoclookup: "hoclookup",
   hoclocation: "hoclocation",
   hoccategory: "hoccategory",

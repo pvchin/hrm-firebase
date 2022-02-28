@@ -1,37 +1,39 @@
-import React from "react";
+import React, { useEffect} from "react";
 //import ReactExport from "react-export-excel";
 import ReactExport from "react-data-export";
 //import { ExcelFile, ExcelSheet } from "react-export-excel";
 import { Button } from "@chakra-ui/react";
+import { format } from "date-fns";
 
 const ExcelFile = ReactExport.ExcelFile;
 const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
 const ExcelColumn = ReactExport.ExcelFile.ExcelColumn;
 
-const ExportLeave2Excel = ({ filename, dataset, title }) => {
-  const cols1 = [
-    {
-      title: "Findings",
-      width: { wch: 68 },
-      style: {
-        font: { sz: "9", bold: true },
-        fill: { patternType: "solid", fgColor: { rgb: "FF00FF00" } },
-        alignment: {
-          wrapText: true,
-          horizontal: "center",
-          vertical: "top",
-        },
-      },
-    },
-  ];
-  const data1 = [{}];
-  const cols = [
+const months = [
+  { name: "January", value: "1" },
+  { name: "February", value: "2" },
+  { name: "March", value: "3" },
+  { name: "April", value: "4" },
+  { name: "May", value: "5" },
+  { name: "June", value: "6" },
+  { name: "July", value: "7" },
+  { name: "August", value: "8" },
+  { name: "September", value: "9" },
+  { name: "October", value: "10" },
+  { name: "November", value: "11" },
+  { name: "December", value: "12" },
+];
+
+const Export2Excel = ({ filename, dataset , title }) => {
+  
+  const hoccols = [
     {
       title: "What is/are the findings?",
       width: { wch: 34 },
       style: {
         font: { sz: "9", bold: true },
-        fill: { patternType: "solid", fgColor: { rgb: "FF00FF00" } },
+        //fill: { patternType: "solid", fgColor: { rgb: "#F5FFFA" } },
+        //fill: { patternType: "solid", fgColor: { rgb: "#F5FFFA" } },
         alignment: {
           wrapText: true,
           horizontal: "center",
@@ -44,7 +46,7 @@ const ExportLeave2Excel = ({ filename, dataset, title }) => {
       width: { wch: 34 },
       style: {
         font: { sz: "9", bold: true },
-        fill: { patternType: "solid", fgColor: { rgb: "FF00FF00" } },
+        //fill: { patternType: "solid", fgColor: { rgb: "#F5FFFA" } },
         alignment: {
           wrapText: true,
           horizontal: "center",
@@ -57,7 +59,7 @@ const ExportLeave2Excel = ({ filename, dataset, title }) => {
       width: { wch: 14 },
       style: {
         font: { sz: "9", bold: true },
-        fill: { patternType: "solid", fgColor: { rgb: "FF00FF00" } },
+        //fill: { patternType: "solid", fgColor: { rgb: "FF00FF00" } },
         alignment: {
           wrapText: true,
           horizontal: "center",
@@ -70,7 +72,7 @@ const ExportLeave2Excel = ({ filename, dataset, title }) => {
       width: { wch: 18 },
       style: {
         font: { sz: "9", bold: true },
-        fill: { patternType: "solid", fgColor: { rgb: "FF00FF00" } },
+        //fill: { patternType: "solid", fgColor: { rgb: "FF00FF00" } },
         alignment: {
           wrapText: true,
           horizontal: "center",
@@ -83,7 +85,7 @@ const ExportLeave2Excel = ({ filename, dataset, title }) => {
       width: { wch: 28 },
       style: {
         font: { sz: "9", bold: true },
-        fill: { patternType: "solid", fgColor: { rgb: "FF00FF00" } },
+        //fill: { patternType: "solid", fgColor: { rgb: "FF00FF00" } },
         alignment: {
           wrapText: true,
           horizontal: "center",
@@ -96,7 +98,124 @@ const ExportLeave2Excel = ({ filename, dataset, title }) => {
       width: { wch: 18 },
       style: {
         font: { sz: "9", bold: true },
-        fill: { patternType: "solid", fgColor: { rgb: "FF00FF00" } },
+        //fill: { patternType: "solid", fgColor: { rgb: "FF00FF00" } },
+        alignment: {
+          wrapText: true,
+          horizontal: "center",
+          vertical: "top",
+        },
+      },
+    },
+    {
+      title: "Why Details",
+      width: { wch: 28 },
+      style: {
+        font: { sz: "9", bold: true },
+        //fill: { patternType: "solid", fgColor: { rgb: "FF00FF00" } },
+        alignment: {
+          wrapText: true,
+          horizontal: "center",
+          vertical: "top",
+        },
+      },
+    },
+    {
+      title: "Did a conversation take place?",
+      width: { wch: 18 },
+      style: {
+        font: { sz: "9", bold: true },
+        //fill: { patternType: "solid", fgColor: { rgb: "FF00FF00" } },
+        alignment: {
+          wrapText: true,
+          horizontal: "center",
+          vertical: "top",
+        },
+      },
+    },
+    {
+      title: "Was there an agreed remedial/corrective or preventive action? ",
+      width: { wch: 28 },
+      style: {
+        font: { sz: "9", bold: true },
+        //fill: { patternType: "solid", fgColor: { rgb: "FF00FF00" } },
+        alignment: {
+          wrapText: true,
+          horizontal: "center",
+          vertical: "top",
+        },
+      },
+    },
+    {
+      title: "Follow-up required?",
+      width: { wch: 18 },
+      style: {
+        font: { sz: "9", bold: true },
+        //fill: { patternType: "solid", fgColor: { rgb: "FF00FF00" } },
+        alignment: {
+          wrapText: true,
+          horizontal: "center",
+          vertical: "top",
+        },
+      },
+    },
+    {
+      title: "Work Related?",
+      width: { wch: 18 },
+      style: {
+        font: { sz: "9", bold: true },
+        //fill: { patternType: "solid", fgColor: { rgb: "FF00FF00" } },
+        alignment: {
+          wrapText: true,
+          horizontal: "center",
+          vertical: "top",
+        },
+      },
+    },
+    {
+      title: "Raised By",
+      width: { wch: 28 },
+      style: {
+        font: { sz: "9", bold: true },
+        //fill: { patternType: "solid", fgColor: { rgb: "FF00FF00" } },
+        alignment: {
+          wrapText: true,
+          horizontal: "center",
+          vertical: "top",
+        },
+      },
+    },
+    {
+      title: "Raised On",
+      width: { wch: 18 },
+      style: {
+        font: { sz: "9", bold: true },
+        //fill: { patternType: "solid", fgColor: { rgb: "FF00FF00" } },
+        alignment: {
+          wrapText: true,
+          horizontal: "center",
+          vertical: "top",
+        },
+      },
+    },
+    {
+      title: "Company",
+      width: { wch: 28 },
+      style: {
+        font: { sz: "9", bold: true },
+        //fill: { patternType: "solid", fgColor: { rgb: "FF00FF00" } },
+        alignment: {
+          wrapText: true,
+          horizontal: "center",
+          vertical: "top",
+        },
+      },
+    },
+    {
+      title: "Location",
+      width: { wch: 28 },
+      style: {
+        font: { sz: "9", bold: true },
+        //fill: { patternType: "solid", fgColor: { rgb: "FF00FF00" } },
         alignment: {
           wrapText: true,
           horizontal: "center",
@@ -109,7 +228,7 @@ const ExportLeave2Excel = ({ filename, dataset, title }) => {
   const hocdata = dataset.map((rec, index) => {
     return [
       {
-        value: rec.findings,
+        value: rec.findings ? rec.findings : "",
         style: {
           font: { sz: "9" },
           alignment: {
@@ -120,7 +239,7 @@ const ExportLeave2Excel = ({ filename, dataset, title }) => {
         },
       },
       {
-        value: rec.risks,
+        value: rec.risks ? rec.risks : "",
         style: {
           font: { sz: "9" },
           alignment: {
@@ -131,7 +250,7 @@ const ExportLeave2Excel = ({ filename, dataset, title }) => {
         },
       },
       {
-        value: rec.category,
+        value: rec.category ? rec.category : "",
         style: {
           font: { sz: "9" },
           alignment: {
@@ -142,7 +261,7 @@ const ExportLeave2Excel = ({ filename, dataset, title }) => {
         },
       },
       {
-        value: rec.what,
+        value: rec.what ? rec.what : "",
         style: {
           font: { sz: "9" },
           alignment: {
@@ -153,7 +272,7 @@ const ExportLeave2Excel = ({ filename, dataset, title }) => {
         },
       },
       {
-        value: rec.what_details,
+        value: rec.what_details ? rec.what_details : "",
         style: {
           font: { sz: "9" },
           alignment: {
@@ -164,7 +283,7 @@ const ExportLeave2Excel = ({ filename, dataset, title }) => {
         },
       },
       {
-        value: rec.why,
+        value: rec.why ? rec.why : "",
         style: {
           font: { sz: "9" },
           alignment: {
@@ -174,49 +293,138 @@ const ExportLeave2Excel = ({ filename, dataset, title }) => {
           },
         },
       },
-    ];
-  });
-
-  const hocdata1 = dataset.map((rec) => {
-    return [
       {
-        value: rec.findings,
+        value: rec.why_details ? rec.why_details : "",
+        style: {
+          font: { sz: "9" },
+          alignment: {
+            wrapText: true,
+            horizontal: "center",
+            vertical: "top",
+          },
+        },
       },
       {
-        value: rec.risks,
+        value: rec.discussion ? rec.discussion : "",
+        style: {
+          font: { sz: "9" },
+          alignment: {
+            wrapText: true,
+            horizontal: "center",
+            vertical: "top",
+          },
+        },
       },
       {
-        value: rec.category,
+        value: rec.action ? rec.action : "",
+        style: {
+          font: { sz: "9" },
+          alignment: {
+            wrapText: true,
+            horizontal: "center",
+            vertical: "top",
+          },
+        },
       },
       {
-        value: rec.what,
+        value: rec.isfollowup ? rec.isfollowup : "",
+        style: {
+          font: { sz: "9" },
+          alignment: {
+            wrapText: true,
+            horizontal: "center",
+            vertical: "top",
+          },
+        },
       },
       {
-        value: rec.what_details,
+        value: rec.isworkrelated ? rec.isworkrelated : "",
+        style: {
+          font: { sz: "9" },
+          alignment: {
+            wrapText: true,
+            horizontal: "center",
+            vertical: "top",
+          },
+        },
+      },
+      {
+        value: rec.raisedby ? rec.raisedby : "",
+        style: {
+          font: { sz: "9" },
+          alignment: {
+            wrapText: true,
+            horizontal: "center",
+            vertical: "top",
+          },
+        },
+      },
+      {
+        value: rec.raisedon ? rec.raisedon : "",
+        style: {
+          font: { sz: "9" },
+          alignment: {
+            wrapText: true,
+            horizontal: "center",
+            vertical: "top",
+          },
+        },
+      },
+      {
+        value: rec.company ? rec.company : "",
+        style: {
+          font: { sz: "9" },
+          alignment: {
+            wrapText: true,
+            horizontal: "center",
+            vertical: "top",
+          },
+        },
+      },
+      {
+        value: rec.location ? rec.location : "",
+        style: {
+          font: { sz: "9" },
+          alignment: {
+            wrapText: true,
+            horizontal: "center",
+            vertical: "top",
+          },
+        },
       },
     ];
   });
 
   const multiDataSet = [
+    // {
+    //   columns: cols1,
+    //   data: [],
+    // },
     {
-      columns: cols1,
-      data: [],
-    },
-    {
-      columns: cols,
+      columns: hoccols,
       data: hocdata,
     },
   ];
-
-  console.log("hocdata", cols, hocdata);
+ 
   return (
     // <ExcelFile element={<Button>Export to Excel</Button>} filename={filename}>
     //   <ExcelSheet dataSet={multiDataSet1} name="Organization" />
     // </ExcelFile>
 
-    <ExcelFile element={<Button>Export to Excel</Button>} filename={filename}>
-      <ExcelSheet dataSet={multiDataSet} name="HOC" />
+    <ExcelFile
+      element={
+        <Button colorScheme="teal" variant="solid">
+          Download
+        </Button>
+      }
+      filename={filename}
+    >
+      <ExcelSheet dataSet={multiDataSet} name={title} />
     </ExcelFile>
+
+    // <ExcelFile filename={filename}>
+    //   <ExcelSheet dataSet={multiDataSet} name="HOC" />
+    // </ExcelFile>
 
     // <ExcelFile element={<Button>Export to Excel</Button>} filename={filename}>
     //   <ExcelSheet data={dataset} name={title}>
@@ -231,4 +439,4 @@ const ExportLeave2Excel = ({ filename, dataset, title }) => {
   );
 };
 
-export default ExportLeave2Excel;
+export default Export2Excel;

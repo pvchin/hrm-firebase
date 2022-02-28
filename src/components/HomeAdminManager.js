@@ -2,14 +2,23 @@ import React, { useState, useEffect } from "react";
 //import { makeStyles } from "@material-ui/core/styles";
 //import clsx from "clsx";
 //import dayjs from "dayjs";
+import moment from "moment";
+
 import {
   Box,
-  //Button,
+  Button,
   Container,
   Divider,
   //Grid,
   Heading,
   HStack,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
   Select,
   SimpleGrid,
   Tabs,
@@ -18,6 +27,7 @@ import {
   Tab,
   TabPanel,
   Text,
+  useDisclosure,
 } from "@chakra-ui/react";
 //import CardLayout from "../helpers/CardLayout";
 //import CardLayout2 from "../helpers/CardLayout2";
@@ -41,8 +51,9 @@ import PayslipTableViewSummary from "./PayslipTableViewSummary";
 import LeavesTableApproval from "./LeaveTableApproval";
 //import ExportLeave2Excel from "./ExportLeave2Excel";
 //import ExportHoc2Excel from "./ExportHoc2Excel";
-//import Export2Excel from "./Export2Excel"
-//import { useHoc } from "./hoc/useHoc";
+import Export2Excel from "./Export2Excel";
+import Export2ExcelDialog from "./Export2ExcelDialog";
+import { useHoc } from "./hoc/useHoc";
 
 //const drawerWidth = 240;
 
@@ -428,6 +439,14 @@ import LeavesTableApproval from "./LeaveTableApproval";
 //   },
 // ];
 
+const initial_exp2excel = {
+  year: "",
+  month: "",
+   type: "",
+  title: "",
+  filename: "",
+};
+
 const HomeAdminManager = () => {
   //const classes = useStyles();
   //const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
@@ -438,10 +457,29 @@ const HomeAdminManager = () => {
   const [selectsiteallowsyear, setSelectSiteAllowsYear] = useState("");
   const [selectpayrollyear, setSelectPayrollYear] = useState("");
   const [selecthocyear, setSelectHocYear] = useState("");
+  const [exp2excelstate, setExp2excelstate] = useState(initial_exp2excel);
   const currentyear = new Date().getFullYear();
   const currentmonth = new Date().getMonth();
-   //const { hoc, filter, setFilter, setHocId } = useHoc();
+  const { hoc, filter, setFilter, setHocId } = useHoc();
+  const {
+    isOpen: isExport2ExcelOpen,
+    onOpen: onExport2ExcelOpen,
+    onClose: onExport2ExcelClose,
+  } = useDisclosure();
 
+  const handleExportHoc2Excel = () => {
+    setExp2excelstate(
+      (prev) =>
+        (prev = {
+          year: currentyear,
+          month: currentmonth,
+          type: "HOC",
+          title: "Hoc",
+          filename: "hoc",
+        })
+    );
+    onExport2ExcelOpen();
+  };
   // const Build_ExpData = () => {
   //   const currentmonth = new Date().getMonth();
 
@@ -511,7 +549,9 @@ const HomeAdminManager = () => {
                         <Tab>Details</Tab>
                       </TabList> */}
                       <TabPanels>
-                        <TabPanel><EmployeeTableLeaveView /></TabPanel>
+                        <TabPanel>
+                          <EmployeeTableLeaveView />
+                        </TabPanel>
                       </TabPanels>
                     </Tabs>
                   </Box>
@@ -1172,13 +1212,13 @@ const HomeAdminManager = () => {
                           <option value="2022">2022</option>
                         </Select>
                         <Box size="xl" py={2}>
-                          <Text fontSize="lg">
-                            {/* <Export2Excel
-                              filename="hoc"
-                              dataset={hoc}
-                              title="Hoc"
-                            /> */}
-                          </Text>
+                          <Button
+                            colorScheme="teal"
+                            variant="solid"
+                            onClick={() => handleExportHoc2Excel()}
+                          >
+                            Export To Excel
+                          </Button>
                         </Box>
                       </HStack>
                     </Box>
@@ -1304,6 +1344,26 @@ const HomeAdminManager = () => {
             </TabPanel>
           </TabPanels>
         </Tabs>
+        <Modal
+          closeOnOverlayClick={false}
+          isOpen={isExport2ExcelOpen}
+          onClose={onExport2ExcelClose}
+          size="md"
+        >
+          <ModalOverlay />
+          <ModalContent>
+            {/* <ModalHeader>Product Form</ModalHeader> */}
+            <ModalCloseButton />
+            <ModalBody>
+              <Export2ExcelDialog
+                state={exp2excelstate}
+                setState={setExp2excelstate}
+                dataset={hoc}
+                onClose={onExport2ExcelClose}
+              />
+            </ModalBody>
+          </ModalContent>
+        </Modal>
       </Box>
     </Container>
   );
