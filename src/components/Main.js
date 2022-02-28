@@ -19,7 +19,7 @@ const Main = () => {
   //const { currentUser } = useAuthContext();
   //const [role, setRole] = useState("");
   const SwitchCase = () => {
-    console.log(loginLevel);
+    //onsole.log(loginLevel);
     switch (loginLevel.loginLevel) {
       case "Staff":
         return <DashboardStaff />;

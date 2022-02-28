@@ -32,29 +32,28 @@ import DashboardDirector from "./DashboardDirector";
 //import SingleEmployeeStaff from "./SingleEmployeeStaff";
 //import SingleDailyAllowsDetlsStaff from "./SingleDailyAllowsDetlsStaff";
 
-import {
-  //Home,
-  //AllEmployees,
-  //Leave,
-  //DailyAllowancesStaff,
-  //Expenses,
-  //Hoc,
-  //LeaveStaff,
-  //Payslip,
-  //BatchPayslips,
-  //Payroll,
-  //PayslipStaff,
-  //TrainingsStaff,
-  //ExpensesStaff,
-  //Departments,
-  //Designation,
-  //Tables,
-  //Clients,
-  //Allowances,
-  //DailyAllowances,
-  // PrivateRoute,
-  //Error,
-} from "../pages";
+import //Home,
+//AllEmployees,
+//Leave,
+//DailyAllowancesStaff,
+//Expenses,
+//Hoc,
+//LeaveStaff,
+//Payslip,
+//BatchPayslips,
+//Payroll,
+//PayslipStaff,
+//TrainingsStaff,
+//ExpensesStaff,
+//Departments,
+//Designation,
+//Tables,
+//Clients,
+//Allowances,
+//DailyAllowances,
+// PrivateRoute,
+//Error,
+"../pages";
 
 const drawerWidth = 0;
 
@@ -95,9 +94,9 @@ export default function DashboardMain() {
           handleSelect={handleSelect}
           open={open}
           setLogin={setLogin}
-          title="HRMS V1.4 - AppSmiths Sutera Sdn Bhd"
+          title="HRMS V1.5 - AppSmiths Sutera Sdn Bhd"
         />
-       
+
         <Flex>
           {select === "Staff" && (
             <DashboardStaff
