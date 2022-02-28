@@ -56,7 +56,7 @@ export default function DailyAllowancesTable() {
     setIsDailyAllowanceEditingOn,
     setIsDailyAllowanceEditingOff,
     resetSingleDailyAllowance,
-    dailyallowance_period,
+    //dailyallowance_period,
     getSingleBatchDailyAllowance,
   } = useDailyAllowancesContext();
 

@@ -104,7 +104,7 @@ const Payrun = () => {
     setPayslipPeriod,
   } = usePayslipsContext();
   const [input, setInput] = useRecoilState(payrunState);
-  const [setPayrunId] = useRecoilState(payrunIdState);
+  const [payrunid, setPayrunId] = useRecoilState(payrunIdState);
   const [alert, setAlert] = useState(false);
   const [error] = useState(false);
   const [errornoselect, setErrornoselect] = useState(false);

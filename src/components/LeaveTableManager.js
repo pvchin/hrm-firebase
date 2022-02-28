@@ -102,7 +102,7 @@ export default function LeaveTable({
 }) {
   const classes = useStyles();
   const toast = useCustomToast();
-  const [loginLevel] = useRecoilState(loginLevelState);
+  const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   const { employees } = useEmployees();

@@ -79,7 +79,7 @@ export default function ExpenseTable() {
 
   useEffect(() => {
     setExpensesdata(expenses);
-    console.log(expensesdata)
+    //console.log(expensesdata)
   }, []);
 
   // useEffect(() => {

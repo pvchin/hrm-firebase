@@ -39,23 +39,13 @@ const columns = [
 export default function Emp_ViewFamily() {
   const classes = useStyles();
   const { editEmployeeID } = useEmployeesContext();
-  const {
-    singlebatch_training,
-    getSingleBatchTraining,
-    singlebatch_training_loading,
-  } = useTrainingsContext();
+  const { singlebatch_training, getSingleBatchTraining } =
+    useTrainingsContext();
 
   useEffect(() => {
     getSingleBatchTraining(editEmployeeID);
   }, []);
 
-  if (singlebatch_training_loading) {
-    return (
-      <div>
-        <h2>Loading...Trainings</h2>
-      </div>
-    );
-  }
   return (
     <div className={classes.root}>
       <div style={{ maxWidth: "100%", paddingTop: "5px" }}>

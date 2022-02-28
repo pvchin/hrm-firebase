@@ -49,7 +49,7 @@ const columns = [
 export default function PayslipTable() {
   //let history = useHistory();
   const classes = useStyles();
-  const [loginLevel] = useRecoilState(loginLevelState);
+  const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
   const { employees } = useEmployees();
     const { payslips, setFilter } = usePayslips();
   

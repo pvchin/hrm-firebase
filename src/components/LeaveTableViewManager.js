@@ -64,7 +64,7 @@ export default function LeaveTableView() {
   const classes = useStyles();
   //const [isDialogOpen, setIsDialogOpen] = useState(false);
   //const [isAlertOpen, setIsAlertOpen] = useState(false);
-   const [loginLevel] = useRecoilState(loginLevelState);
+   const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
   //const { loadEmployees } = useEmployeesContext();
   const {
     leaves,

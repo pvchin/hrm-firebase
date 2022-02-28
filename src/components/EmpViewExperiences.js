@@ -41,7 +41,7 @@ export default function Emp_Experiences({
   const {
     loadSingleBatchExperience,
     singlebatchexperience,
-    singlebatch_experience_loading,
+    
   } = useTablesContext();
 
   useEffect(() => {
@@ -49,13 +49,7 @@ export default function Emp_Experiences({
     loadSingleBatchExperience(editEmployeeID);
   }, []);
 
-  if (singlebatch_experience_loading) {
-    return (
-      <div>
-        <h2>Loading...Experience</h2>
-      </div>
-    );
-  }
+  
   return (
     <div className={classes.root}>
       <div style={{ maxWidth: "100%", paddingTop: "5px" }}>

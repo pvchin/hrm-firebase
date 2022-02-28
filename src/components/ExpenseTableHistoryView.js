@@ -35,11 +35,11 @@ const columns = [
 
 export default function ExpenseTableHistoryView() {
   const classes = useStyles();
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [isAlertOpen, setIsAlertOpen] = useState(false);
-  const { loadEmployees } = useEmployeesContext();
+  //const [isDialogOpen, setIsDialogOpen] = useState(false);
+  //const [isAlertOpen, setIsAlertOpen] = useState(false);
+  //const { loadEmployees } = useEmployeesContext();
   const { expensesstatus, setExpStatusId } = useExpensesStatus();
-  const { expensesperiod, setExpPeriodId } = useExpensesPeriod();
+  //const { expensesperiod, setExpPeriodId } = useExpensesPeriod();
 
   
   return (

@@ -35,7 +35,7 @@ const LeaveForm = ({ formdata, setFormdata, handleDialogClose }) => {
   const updateLeaves = useUpdateLeaves();
   const addLeaves = useAddLeaves();
   //const [state, setState] = useState(initial_state);
-  const [loginLevel] = useRecoilState(loginLevelState);
+  const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
   const { handleSubmit, control } = useForm();
   //const initialValues = Object.values(initial_state).join("");
   const { isLeaveEditing, editLeaveID } = useLeavesContext();

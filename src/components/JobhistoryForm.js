@@ -101,7 +101,7 @@ const JobhistoryForm = ({
     },
   });
 
-  console.log("jobstate",state)  
+  //console.log("jobstate",state)  
   const onSubmit = (values) => {
     if (statustype === "edit") {
       update_Item(values);

@@ -60,64 +60,51 @@ const columns = [
 
 export default function LeaveTableView() {
   const classes = useStyles();
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [isAlertOpen, setIsAlertOpen] = useState(false);
-  const { loadEmployees } = useEmployeesContext();
+  //const [isDialogOpen, setIsDialogOpen] = useState(false);
+  //const [isAlertOpen, setIsAlertOpen] = useState(false);
+  //const { loadEmployees } = useEmployeesContext();
   const {
     leaves,
-    leaves_error,
-    editLeaveID,
-    leaves_loading,
-    deleteLeave,
+    //eaves_error,
+    //editLeaveID,
+    //leaves_loading,
+    //deleteLeave,
     loadPendingLeaves,
-    getSingleLeave,
-    setEditLeaveID,
-    setIsLeaveEditingOn,
-    setIsLeaveEditingOff,
-    resetSingleLeave,
+    //getSingleLeave,
+    //setEditLeaveID,
+    //setIsLeaveEditingOn,
+    //setIsLeaveEditingOff,
+    //resetSingleLeave,
   } = useLeavesContext();
 
   useEffect(() => {
     loadPendingLeaves(FILTERSTRING);
   }, []);
  
-  const handleDialogOpen = () => {
-    setIsDialogOpen(true);
-  };
+  // const handleDialogOpen = () => {
+  //   setIsDialogOpen(true);
+  // };
 
-  const handleDialogClose = () => {
-    setIsDialogOpen(false);
-    loadPendingLeaves(FILTERSTRING);
-  };
+  // const handleDialogClose = () => {
+  //   setIsDialogOpen(false);
+  //   loadPendingLeaves(FILTERSTRING);
+  // };
 
-  const handleAlertOpen = () => {
-    setIsAlertOpen(true);
-  };
+  // const handleAlertOpen = () => {
+  //   setIsAlertOpen(true);
+  // };
 
-  const handleAlertClose = () => {
-    setIsAlertOpen(false);
-  };
+  // const handleAlertClose = () => {
+  //   setIsAlertOpen(false);
+  // };
 
-  const handleOnDeleteConfirm = () => {
-    const id = editLeaveID;
-    deleteLeave(id);
-    loadPendingLeaves(FILTERSTRING);
-  };
+  // const handleOnDeleteConfirm = () => {
+  //   const id = editLeaveID;
+  //   deleteLeave(id);
+  //   loadPendingLeaves(FILTERSTRING);
+  // };
 
-  if (leaves_loading) {
-    return (
-      <div>
-        <h2>Loading...Leaves</h2>
-      </div>
-    );
-  }
-  if (leaves_error) {
-    return (
-      <div>
-        <h2>Internet connection problem!</h2>
-      </div>
-    )
-  }
+  
   return (
     <div className={classes.root}>
       {/* <h1>Expenses Claims Application</h1> */}

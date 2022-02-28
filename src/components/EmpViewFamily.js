@@ -33,20 +33,14 @@ export default function Emp_ViewFamily() {
   const {
     loadSingleBatchFamily,
      singlebatchfamily,
-     singlebatch_family_loading,
+     
   } = useTablesContext();
 
   useEffect(() => {
     loadSingleBatchFamily(editEmployeeID);
   }, []);
   
-  if (singlebatch_family_loading) {
-    return (
-      <div>
-        <h2>Loading...Family</h2>
-      </div>
-    );
-  }
+  
   return (
     <div className={classes.root}>
       <div style={{ maxWidth: "100%", paddingTop: "5px" }}>

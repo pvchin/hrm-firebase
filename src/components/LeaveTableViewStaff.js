@@ -41,7 +41,7 @@ const LeaveTableViewStaff = () => {
   const history = useHistory();
   //const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   const { leaves,  setFilter } = useLeaves();
-  const [loginLevel] = useRecoilState(loginLevelState);
+  const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
   //const [userdata, setUserdata] = useState([]);
   //const [userdata, setUserdata] = useRecoilState(userdatastate);
   //const ExpensesDetails = useRecoilValueLoadable(fetchExpensesDetails);

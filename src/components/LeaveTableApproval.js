@@ -107,7 +107,7 @@ export default function LeaveTableApproval() {
   //const addLeaves = useAddLeaves();
   const deleteLeaves = useDeleteLeaves();
   const [formdata, setFormdata] = useState(initial_form);
-  const [loginLevel] = useRecoilState(loginLevelState);
+  const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   const [isUpdate, setIsUpdate] = useState(true);

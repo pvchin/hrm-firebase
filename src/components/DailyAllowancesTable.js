@@ -6,14 +6,14 @@ import {
   useSetRecoilState,
   useRecoilValue,
   useRecoilState,
-  useRecoilValueLoadable,
+  //useRecoilValueLoadable,
 } from "recoil";
 import {
   allowsPeriodState,
   allowsDataState,
   empidState,
 } from "./data/atomdata";
-import { fetchDailyAllowancesSelector } from "./data/selectordata";
+//import { fetchDailyAllowancesSelector } from "./data/selectordata";
 import { useCustomToast } from "../helpers/useCustomToast";
 import AddIcon from "@material-ui/icons/Add";
 import EditIcon from "@material-ui/icons/Edit";
@@ -43,12 +43,12 @@ const columns = [
 export default function DailyAllowancesTable() {
   let history = useHistory();
   const classes = useStyles();
-  const toast = useCustomToast()
+  //const toast = useCustomToast()
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [tmpallowsdata, setTmpallowsdata] = useState([]);
+  //const [tmpallowsdata, setTmpallowsdata] = useState([]);
   const allows_period = useRecoilValue(allowsPeriodState);
-  const allows_empid = useRecoilValue(empidState);
-  const { dailyallows, setFilter } = useDailyAllows();
+  //const allows_empid = useRecoilValue(empidState);
+  //const { dailyallows, setFilter } = useDailyAllows();
   const [allowsdata, setAllowsdata] = useRecoilState(allowsDataState);
   const setEmpID = useSetRecoilState(empidState);
   const title = `Site Allowances (${allows_period})`;
@@ -60,7 +60,7 @@ export default function DailyAllowancesTable() {
     setIsDailyAllowanceEditingOn,
     setIsDailyAllowanceEditingOff,
     resetSingleDailyAllowance,
-    dailyallowance_period,
+    //dailyallowance_period,
     getSingleBatchDailyAllowance,
   } = useDailyAllowancesContext();
 

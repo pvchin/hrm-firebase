@@ -136,7 +136,7 @@ export default function LeaveTableStaff() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   //const [alertSuccess, setAlertSuccess] = useState(false);
-  const [loginLevel] = useRecoilState(loginLevelState);
+  const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
   const [formdata, setFormdata] = useState(initial_form);
   const [leavestate, setLeaveState] = useState({});
   const [isLoad, setIsLoad] = useState(true);

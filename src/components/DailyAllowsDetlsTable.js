@@ -18,7 +18,7 @@ import {
 } from "./data/atomdata";
 //import { fetchDailyAllowsDetlsSelector } from "./data/selectordata";
 import { useDailyAllowancesContext } from "../context/dailyallowances_context";
-//import { useDailyAllowsDetlsBatch } from "./dailyallowsdetls/useDailyAllowsDetlsBatch";
+import { useDailyAllowsDetlsBatch } from "./dailyallowsdetls/useDailyAllowsDetlsBatch";
 import { useDailyAllows } from "./dailyallows/useDailyAllows";
 
 const columns = [

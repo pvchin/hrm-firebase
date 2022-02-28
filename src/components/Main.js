@@ -15,7 +15,7 @@ import { loginLevelState } from "./data/atomdata";
 
 const Main = () => {
   //const history = useHistory();
-  const [loginLevel] = useRecoilState(loginLevelState);
+  const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
   //const { currentUser } = useAuthContext();
   //const [role, setRole] = useState("");
   const SwitchCase = () => {

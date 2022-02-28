@@ -19,7 +19,7 @@ export default function Emp_Training({
   handleDialogClose,
 }) {
   const classes = useStyles();
-  const { trainings, filter, setFilter, setTrainingId } = useTrainings();
+  const { trainings,  setTrainingId } = useTrainings();
   const { institutes } = useInstitutes();
   const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
   const updateTrainings = useUpdateTrainings();

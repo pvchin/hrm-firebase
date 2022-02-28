@@ -186,7 +186,7 @@ const Payrunbatch = () => {
   const { loadPayitems, payitems } = useTablesContext();
   const [payrundata, setPayrundata] = useRecoilState(payrunState);
   const [payrunId] = useRecoilState(payrunIdState);
-  const  [setPayrunStatus] = useRecoilState(payrunStatusState);
+  const  [payrunstatus, setPayrunStatus] = useRecoilState(payrunStatusState);
   const [loadFormdata, setLoadFormdata] = useState(false);
   const [loadUpdatedata, setLoadUpdatedata] = useState(false);
   const [formdata, setFormdata] = useState(initial_formdata);
@@ -289,7 +289,7 @@ const Payrunbatch = () => {
   const saveIndividualPayslips = () => {
     singlebatchpayslip.forEach((rec) => {
       const { id, rec_id, tableData, ...fields } = rec;
-      console.log("updatepayslip", rec);
+      //console.log("updatepayslip", rec);
       updatePayslip({ id, ...fields });
     });
   };

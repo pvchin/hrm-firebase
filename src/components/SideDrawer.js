@@ -29,7 +29,7 @@ const drawerWidth = 240;
 
 const SideDrawer = ({ HandleDrawerOpen, handleDrawerClose, open }) => {
   const classes = useStyles();
-  const [loginLevel] = useRecoilState(loginLevelState);
+  const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
 
   const SwitchCase = () => {
   

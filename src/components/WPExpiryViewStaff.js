@@ -47,7 +47,7 @@ const WPExpiryViewStaff = () => {
   //const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   const { employees } = useEmployees();
   //const { user } = useUser();
-  const [loginLevel] = useRecoilState(loginLevelState);
+  const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
   //const [userdata, setUserdata] = useState([]);
   const today = Date().toLocaleString();
 

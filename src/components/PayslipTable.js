@@ -65,8 +65,8 @@ export default function PayslipTable() {
   //const [isLoadInput, setIsLoadInput] = useState(false);
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   const [deletestate, setDeletestate] = useState({ id: "", payrun: "" });
-  const [setPayrunId] = useRecoilState(payrunIdState);
-  const [setPayrunStatus] = useRecoilState(payrunStatusState);
+  const [payrunId, setPayrunId] = useRecoilState(payrunIdState);
+  const [payrunstatus, setPayrunStatus] = useRecoilState(payrunStatusState);
   // const { loadPeriodExpenses, periodexpenses, updateExpense } =
   //   useExpensesContext();
   // const {

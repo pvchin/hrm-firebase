@@ -25,7 +25,7 @@ const TrainingsTableViewStaff = () => {
   const history = useHistory();
   //const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   const { trainings,  setFilter } = useTrainings();
-  const [loginLevel] = useRecoilState(loginLevelState);
+  const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
   const today = Date().toLocaleString();
 
   useEffect(() => {

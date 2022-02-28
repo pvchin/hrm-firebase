@@ -24,16 +24,16 @@ const SERVICE_ID = process.env.REACT_APP_EMAILJS_SERVICEID;
 const TEMPLATE_ID = "template_1y8odlq";
 const USER_ID = process.env.REACT_APP_EMAILJS_USERID;
 
-const initial_state = {
-  name: "",
-  to_date: "",
-  from_date: "",
-  reason: "",
-  status: "Pending",
-  no_of_days: 0,
-  leave_bal: 0,
-  reporting_email: "",
-};
+// const initial_state = {
+//   name: "",
+//   to_date: "",
+//   from_date: "",
+//   reason: "",
+//   status: "Pending",
+//   no_of_days: 0,
+//   leave_bal: 0,
+//   reporting_email: "",
+// };
 
 const LeaveForm = ({
   formdata,
@@ -48,7 +48,7 @@ const LeaveForm = ({
   const updateLeaves = useUpdateLeaves();
   const addLeaves = useAddLeaves();
   //const [state, setState] = useState(initial_state);
-  const [loginLevel] = useRecoilState(loginLevelState);
+  const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
   const { handleSubmit, control } = useForm();
   //const initialValues = Object.values(initial_state).join("");
   const { isLeaveEditing, editLeaveID } = useLeavesContext();

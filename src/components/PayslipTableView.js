@@ -1,18 +1,18 @@
 import React, { useEffect } from "react";
-import MaterialTable, { MTableToolbar } from "material-table";
+import MaterialTable from "material-table";
 import { makeStyles } from "@material-ui/core/styles";
-import { useHistory, Link } from "react-router-dom";
-import { useSetRecoilState, useRecoilValue } from "recoil";
-import {
-  payPeriodState,
-  payPeriodEndMonthState,
-  payPeriodEmpIdState,
-} from "./data/atomdata";
-import { usePayslipsContext } from "../context/payslips_context";
-import { useEmployeesContext } from "../context/employees_context";
+//import { useHistory } from "react-router-dom";
+//import { useSetRecoilState } from "recoil";
+//import {
+  //payPeriodState,
+  //payPeriodEndMonthState,
+  //payPeriodEmpIdState,
+//} from "./data/atomdata";
+//import { usePayslipsContext } from "../context/payslips_context";
+//import { useEmployeesContext } from "../context/employees_context";
 import { usePayrunStatus} from "./payrun/usePayrunStatus"
 
-const FILTERSTRING = "Pending";
+//const FILTERSTRING = "Pending";
 
 const columns = [
   // { title: "Period", field: "period" },
@@ -41,11 +41,11 @@ const columns = [
 
 
 export default function PayslipTableVIew({status}) {
-  let history = useHistory();
+  //let history = useHistory();
   const classes = useStyles();
-  const setPayPeriodEmpId = useSetRecoilState(payPeriodEmpIdState);
-  const { payrun, getPayrun,payrun_loading, loadPendingPayslips } =
-    usePayslipsContext();
+  //const setPayPeriodEmpId = useSetRecoilState(payPeriodEmpIdState);
+  // const { payrun, getPayrun,payrun_loading, loadPendingPayslips } =
+  //   usePayslipsContext();
   //const { loadEmployees, employees } = useEmployeesContext();
   const { payrunstatus, setPayrunStatusId} = usePayrunStatus()
   

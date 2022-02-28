@@ -36,7 +36,7 @@ const HocForm = ({ formdata, setFormdata, handleDialogClose, isEditId }) => {
   const { hoclocation, setHoclocationId } = useHoclocation();
   const updateHoc = useUpdateHoc();
   const addHoc = useAddHoc();
-  const [loginLevel] = useRecoilState(loginLevelState);
+  const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
   const [category, setCategory] = useState("" || formdata.category);
   const [whatstatus, setWhatstatus] = useState("" || formdata.what);
   const [whystatus, setWhystatus] = useState("" || formdata.why);

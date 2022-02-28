@@ -32,28 +32,15 @@ export default function PayslipTableVIewStaff() {
   //let history = useHistory();
   const classes = useStyles();
   //const setPayPeriodEmpId = useSetRecoilState(payPeriodEmpIdState);
-  const [loginLevel] = useRecoilState(loginLevelState);
-  const { payslips, payslips_loading, loadEmpPayslips } =
+  const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
+  const { payslips,  loadEmpPayslips } =
     usePayslipsContext();
 
   useEffect(() => {
     loadEmpPayslips(loginLevel.loginUserId);
   }, []);
 
-  if (payslips_loading) {
-    return (
-      <div>
-        <h2>Loading.....Payslips</h2>
-      </div>
-    );
-  }
-  if (payslips_loading) {
-    return (
-      <div>
-        <h2>Internet connections problem!</h2>
-      </div>
-    );
-  }
+  
   return (
     <div className={classes.root}>
       <Grid container direction="row">

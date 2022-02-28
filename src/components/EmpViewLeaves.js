@@ -38,20 +38,13 @@ const columns = [
 export default function Emp_ViewFamily() {
   const classes = useStyles();
   const { editEmployeeID } = useEmployeesContext();
-  const { singlebatch_leave, getSingleBatchLeave, singlebatch_leave_loading } =
+  const { singlebatch_leave, getSingleBatchLeave } =
     useLeavesContext();
 
   useEffect(() => {
     getSingleBatchLeave(editEmployeeID);
   }, []);
 
-  if (singlebatch_leave_loading) {
-    return (
-      <div>
-        <h2>Loading...Leaves</h2>
-      </div>
-    );
-  }
   return (
     <div className={classes.root}>
       <div style={{ maxWidth: "100%", paddingTop: "5px" }}>

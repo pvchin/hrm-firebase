@@ -84,8 +84,8 @@ export default function PayslipTableVIew() {
   const {
     batchpayrun,
     getBatchPayrun,
-    batchpayrun_loading,
-    batchpayrun_error,
+    //batchpayrun_loading,
+    //batchpayrun_error,
     //loadPendingPayslips,
   } = usePayslipsContext();
   //const { loadEmployees, employees } = useEmployeesContext();
@@ -94,20 +94,7 @@ export default function PayslipTableVIew() {
     getBatchPayrun(FILTERSTRING);
   }, []);
 
-  if (batchpayrun_loading) {
-    return (
-      <div>
-        <h2>Loading.....Payslips</h2>
-      </div>
-    );
-  }
-  if (batchpayrun_error) {
-    return (
-      <div>
-        <h2>Internet connection problem!</h2>
-      </div>
-    );
-  }
+  
   return (
     <div className={classes.root}>
       <div style={{ maxWidth: "100%", paddingTop: "5px" }}>

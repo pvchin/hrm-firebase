@@ -154,7 +154,7 @@ export default function HocTable() {
   //const [hocdata, setHocdata] = useState([]);
   //const [alertSuccess, setAlertSuccess] = useState(false);
   const [formdata, setFormdata] = useState(initial_form);
-  const [loginLevel] = useRecoilState(loginLevelState);
+  const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
   const [isEditId, setIsEditId] = useState("");
 
   useEffect(() => {
