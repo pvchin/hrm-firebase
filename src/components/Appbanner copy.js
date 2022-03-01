@@ -77,8 +77,7 @@ const Appbanner = ({
           >
             <Heading size="sm">Staff</Heading>
           </Button>
-          {(loginLevel.loginRole === 2 ||
-            loginLevel.loginUserId === "admin") && (
+          {loginLevel.loginRole > 1 && loginLevel.loginRole !== 3 && (
             <Button
               colorScheme="white"
               aria-label="Admin"
@@ -90,8 +89,7 @@ const Appbanner = ({
               <Heading size="sm">Admin</Heading>
             </Button>
           )}
-          {(loginLevel.loginRole === 3 ||
-            loginLevel.loginUserId === "admin") && (
+          {loginLevel.loginRole > 2 && (
             <Button
               colorScheme="white"
               aria-label="Ops Supervisor"
@@ -103,8 +101,7 @@ const Appbanner = ({
               <Heading size="sm">Ops Supervisor</Heading>
             </Button>
           )}
-          {(loginLevel.loginRole === 4 ||
-            loginLevel.loginUserId === "admin") && (
+          {loginLevel.loginRole > 3 && (
             <Button
               colorScheme="white"
               aria-label="Admin Manager"
@@ -116,8 +113,7 @@ const Appbanner = ({
               <Heading size="sm">Admin Manager</Heading>
             </Button>
           )}
-          {(loginLevel.loginRole === 5 ||
-            loginLevel.loginUserId === "admin") && (
+          {loginLevel.loginRole > 4 && (
             <Button
               colorScheme="white"
               aria-label="Manager"
@@ -129,8 +125,7 @@ const Appbanner = ({
               <Heading size="sm">Manager</Heading>
             </Button>
           )}
-          {(loginLevel.loginRole === 6 ||
-            loginLevel.loginUserId === "admin") && (
+          {loginLevel.loginRole > 5 && (
             <Button
               colorScheme="white"
               aria-label="Director"
