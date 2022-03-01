@@ -11,7 +11,6 @@ import { Box, Button, HStack, Text } from "@chakra-ui/react";
 //import { CustomDialog } from "../helpers/CustomDialog";
 //import { AlertDialog } from "../helpers/AlertDialogBox";
 import { useLeavesPeriod } from "./leaves/useLeavesPeriod";
-import Export2Excel from "./ExportLeave2Excel";
 
 //const FILTERSTRING = "Pending";
 
