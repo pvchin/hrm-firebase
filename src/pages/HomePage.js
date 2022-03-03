@@ -8,6 +8,8 @@ import HomeAdminManager from "../components/HomeAdminManager";
 import HomeManager from "../components/HomeManager";
 import HomeDirector from "../components/HomeDirector";
 
+//const HomeStaff = React.lazy(() => import("../components/HomeStaff"));
+
 const HomePage = () => {
   // const classes = useStyles();
   // const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
