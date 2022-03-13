@@ -490,7 +490,7 @@ const Payrun = () => {
                     name="payfreq"
                     value={input.payfreq}
                     onChange={(e) => handleChange(e)}
-                    Select
+                    select
                   >
                     {/* <MenuItem value="Weekly">Weekly</MenuItem> */}
                     <option value="Monthly">Monthly</option>

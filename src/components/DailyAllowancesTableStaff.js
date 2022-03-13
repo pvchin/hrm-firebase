@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import MaterialTable, { MTableToolbar } from "material-table";
 import { makeStyles } from "@material-ui/core/styles";
-import { Alert } from "@material-ui/lab";
+import { useCustomToast } from "../helpers/useCustomToast";
+//import { Alert } from "@material-ui/lab";
 //import { useCustomToast } from "../helpers/useCustomToast";
 import { useRecoilState } from "recoil";
 import {
@@ -32,6 +33,7 @@ import { useDailyAllowsDetlsBatch } from "./dailyallowsdetls/useDailyAllowsDetls
 
 export default function DailyAllowancesTableStaff() {
   let history = useHistory();
+   const toast = useCustomToast();
   const classes = useStyles();
   //const toast = useCustomToast();
   const { dailyallows, dailyAllowsId, setDailyAllowsId } = useDailyAllows();
@@ -147,6 +149,7 @@ export default function DailyAllowancesTableStaff() {
   //};
 
   const update_SiteAllowsDetl = (data) => {
+  
     const {
       id,
       empid,
@@ -312,10 +315,10 @@ export default function DailyAllowancesTableStaff() {
 
                 <div style={{ padding: "5px 10px" }}>
                   {error && (
-                    <Alert severity="error" onClose={() => setError(false)}>
-                      Period already existed!
-                    </Alert>
-                  )}
+                    toast({
+                      title: "Period already existed!",
+                      status: "warning",
+                    }))}
                 </div>
               </div>
             ),
