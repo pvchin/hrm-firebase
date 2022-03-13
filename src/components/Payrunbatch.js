@@ -53,7 +53,7 @@ import { usePayslipsBatch } from "./payslips/usePayslipsBatch";
 import { useUpdatePayslips } from "./payslips/useUpdatePayslips";
 import { usePayslipsContext } from "../context/payslips_context";
 import { useTablesContext } from "../context/tables_context";
-import {  useRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import {
   payrunState,
   //paydataState,
@@ -187,7 +187,7 @@ const Payrunbatch = () => {
   const { loadPayitems, payitems } = useTablesContext();
   const [payrundata, setPayrundata] = useRecoilState(payrunState);
   const [payrunId] = useRecoilState(payrunIdState);
-  const  [payrunstatus, setPayrunStatus] = useRecoilState(payrunStatusState);
+  const [payrunstatus, setPayrunStatus] = useRecoilState(payrunStatusState);
   const [loadFormdata, setLoadFormdata] = useState(false);
   const [loadUpdatedata, setLoadUpdatedata] = useState(false);
   const [formdata, setFormdata] = useState(initial_formdata);
@@ -236,6 +236,10 @@ const Payrunbatch = () => {
   //   e.preventDefault();
   //   setShowSumm(!showSumm);
   // };
+
+  const sleep = (time) => {
+    return new Promise((resolve) => setTimeout(resolve, time));
+  };
 
   const handlePrintSummary = (e) => {
     e.preventDefault();
@@ -292,6 +296,7 @@ const Payrunbatch = () => {
       const { id, rec_id, tableData, ...fields } = rec;
       //console.log("updatepayslip", rec);
       updatePayslip({ id, ...fields });
+      sleep(1000);
     });
   };
 
