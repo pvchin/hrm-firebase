@@ -306,16 +306,18 @@ const Payrunbatch = () => {
   };
 
   const saveIndividualPayslips = () => {
-    singlebatchpayslip.forEach((rec) => {
-      if (rec.tableData.checked) {
-        const { id, rec_id, tableData, ...fields } = rec;
-        console.log("updatepayslip", rec);
-        updatePayslip({ id, ...fields });
-        //uncheck
-        const data = rec;
-        data.tableData.checked = false;
-      }
-    });
+    if (payrundata.status === "Pending") {
+      singlebatchpayslip.forEach((rec) => {
+        if (rec.tableData.checked) {
+          const { id, rec_id, tableData, ...fields } = rec;
+          console.log("updatepayslip", rec);
+          updatePayslip({ id, ...fields });
+          //uncheck
+          const data = rec;
+          data.tableData.checked = false;
+        }
+      });
+    }
   };
 
   const calcPayrunTotals = () => {
