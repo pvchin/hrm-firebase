@@ -197,7 +197,6 @@ const Payrunbatch = () => {
   const [isCalc, setIsCalc] = useState(false);
   const [isStart, setIsStart] = useState(true);
   const [isShow, setIsShow] = useState(false);
-  const [isUpdPayslip, setIsUpdPayslip] = useState(false);
   const [tabno, setTabno] = useState(0);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const singlebatchpayslip = payslipsbatch;
@@ -227,19 +226,6 @@ const Payrunbatch = () => {
     calcPayrunTotals();
     setIsCalc(false);
   }, [isCalc]);
-
-  useEffect(() => {
-    saveIndividualPayslips();
-    setIsUpdPayslip(false);
-  }, [isUpdPayslip]);
-
-  useEffect(() => {
-    if (tabno === 1) {
-      setIsShow(true);
-    } else {
-      setIsShow(false);
-    }
-  }, [tabno]);
 
   // useEffect(() => {
   //   handleEmpButtonClick(0);
@@ -307,14 +293,10 @@ const Payrunbatch = () => {
 
   const saveIndividualPayslips = () => {
     singlebatchpayslip.forEach((rec) => {
-      if (rec.tableData.checked) {
-        const { id, rec_id, tableData, ...fields } = rec;
-        console.log("updatepayslip", rec);
-        updatePayslip({ id, ...fields });
-        //uncheck
-        const data = rec;
-        data.tableData.checked = false;
-      }
+      const { id, rec_id, tableData, ...fields } = rec;
+      //console.log("updatepayslip", rec);
+      updatePayslip({ id, ...fields });
+      sleep(1000);
     });
   };
 
@@ -447,7 +429,6 @@ const Payrunbatch = () => {
     setFormdata((prev) => (prev = { ...initial_formdata, ...paydata }));
     //setFormdata({ ...initial_formdata, ...paydata });
     setLoadFormdata(true);
-    setIsUpdPayslip(true);
   };
 
   const handleTabChange = (index) => {
@@ -457,6 +438,14 @@ const Payrunbatch = () => {
     }
     setIsShow(false);
   };
+
+  useEffect(() => {
+    if (tabno === 1) {
+      setIsShow(true);
+    } else {
+      setIsShow(false);
+    }
+  }, [tabno]);
 
   const SentEmailModal = () => {
     return (
