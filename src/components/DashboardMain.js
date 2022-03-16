@@ -1,62 +1,85 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import { Redirect, useHistory } from "react-router-dom";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Navigate } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { Flex } from "@chakra-ui/react";
-// import Chart from "./Chart";
-// import Deposits from "./Deposits";
-// import Orders from "./Orders";
 
 import Appbanner from "./Appbanner";
 import Example from "./Example6";
 import SideDrawer from "./SideDrawer";
-import SingleEmployee from "./SingleEmployee";
-import SingleLeave from "./SingleLeave";
+//import SingleEmployee from "./SingleEmployee";
+//import SingleLeave from "./SingleLeave";
 import SingleExpense from "./SingleExpense";
 import SingleDailyAllowance from "./SingleDailyAllowance";
 import SingleDailyAllowsDetls from "./SingleDailyAllowsDetls";
-import BatchDailyAllowances from "./BatchDailyAllowances";
-import SinglePayslip from "./SinglePayslip";
+//import BatchDailyAllowances from "./BatchDailyAllowances";
+//import SinglePayslip from "./SinglePayslip";
 import { loginLevelState } from "./data/atomdata";
 import Login from "./LoginForm";
 import Payrun from "./Payrun";
-import Payrunbatch from "./Payrunbatch";
+//import Payrunbatch from "./Payrunbatch";
 import SingleEmployeeStaff from "./SingleEmployeeStaff";
 import SingleDailyAllowsDetlsStaff from "./SingleDailyAllowsDetlsStaff";
 import ApprovalManager from "./ApprovalManager";
 import UserAccessTable from "./UserAccessTable";
 
 import {
-  Home,
-  AllEmployees,
-  Leave,
-  DailyAllowancesStaff,
-  Expenses,
-  Hoc,
-  LeaveStaff,
-  Payslip,
-  BatchPayslips,
-  Payroll,
-  PayslipStaff,
-  TrainingsStaff,
-  ExpensesStaff,
-  Departments,
-  Designation,
-  Tables,
-  Clients,
-  Allowances,
-  DailyAllowances,
+  //Home,
+  //AllEmployees,
+  //Leave,
+  //DailyAllowancesStaff,
+  //Expenses,
+  //Hoc,
+  //LeaveStaff,
+  //Payslip,
+  //BatchPayslips,
+  //Payroll,
+  //PayslipStaff,
+  //TrainingsStaff,
+  //ExpensesStaff,
+  //Departments,
+  //Designation,
+  //Tables,
+  //Allowances,
+  //DailyAllowances,
   PrivateRoute,
   Error,
 } from "../pages";
+
+const Home = React.lazy(() => import("../pages/HomePage"));
+const AllEmployees = React.lazy(() => import("../pages/AllEmployeesPage"));
+const Hoc = React.lazy(() => import("../pages/HocPage"));
+const Leave = React.lazy(() => import("../pages/LeavePage"));
+const Expenses = React.lazy(() => import("../pages/ExpensesPage"));
+const DailyAllowancesStaff = React.lazy(() =>
+  import("../pages/DailyAllowancesStaffPage")
+);
+const LeaveStaff = React.lazy(() => import("../pages/LeaveStaffPage"));
+const Payroll = React.lazy(() => import("../pages/PayrollPage"));
+const Payslip = React.lazy(() => import("../pages/PayslipPage"));
+const BatchPayslips = React.lazy(() => import("../pages/BatchPayslipsPage"));
+const PayslipStaff = React.lazy(() => import("../pages/PayslipStaffPage"));
+const TrainingsStaff = React.lazy(() => import("../pages/TrainingsStaffPage"));
+const ExpensesStaff = React.lazy(() => import("../pages/ExpensesStaffPage"));
+const Departments = React.lazy(() => import("../pages/DepartmentsPage"));
+const Designation = React.lazy(() => import("../pages/DesignationPage"));
+const Allowances = React.lazy(() => import("../pages/AllowancesPage"));
+const DailyAllowances = React.lazy(() =>
+  import("../pages/DailyAllowancesPage")
+);
+const Tables = React.lazy(() => import("../pages/TablesPage"));
+const SingleEmployee = React.lazy(() => import("./SingleEmployee"));
+const SingleLeave = React.lazy(() => import("./SingleLeave"));
+const SinglePayslip = React.lazy(() => import("./SinglePayslip"));
+const Payrunbatch = React.lazy(() => import("./Payrunbatch"));
+const BatchDailyAllowances = React.lazy(() => import("./BatchDailyAllowances"));
 
 const drawerWidth = 0;
 
 export default function DashboardMain() {
   const classes = useStyles();
-  const history = useHistory();
   const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
   const [open, setOpen] = React.useState(true);
   const [login, setLogin] = React.useState(true);
@@ -73,7 +96,7 @@ export default function DashboardMain() {
   const handleSelect = (title) => {
     setLoginLevel({ ...loginLevel, loginLevel: title });
     setSelect(title);
-    <Redirect to="/" />;
+    <Navigate to="/" />;
   };
 
   //  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
@@ -84,461 +107,332 @@ export default function DashboardMain() {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <Router>
-        <Appbanner
-          handleDrawerOpen={handleDrawerOpen}
-          handleDrawerClose={handleDrawerClose}
-          handleSelect={handleSelect}
-          open={open}
-          setLogin={setLogin}
-          title="HRMS V1.6 - AppSmiths Sutera Sdn Bhd"
-        />
-        <SideDrawer
-          handleDrawerOpen={handleDrawerOpen}
-          handleDrawerClose={handleDrawerClose}
-          open={open}
-        />
-        <Flex>
-          {select === "Staff" && (
-            // <DashboardStaff
-            //   open={open}
-            //   handleDrawerOpen={handleDrawerOpen}
-            //   handleDrawerClose={handleDrawerClose}
-            // />
-            <Switch>
-              <Route exact path="/">
+      {/* <Router> */}
+      <Appbanner
+        handleDrawerOpen={handleDrawerOpen}
+        handleDrawerClose={handleDrawerClose}
+        handleSelect={handleSelect}
+        open={open}
+        setLogin={setLogin}
+        title="HRMS V1.5 - AppSmiths Sutera Sdn Bhd"
+      />
+      <SideDrawer
+        handleDrawerOpen={handleDrawerOpen}
+        handleDrawerClose={handleDrawerClose}
+        open={open}
+      />
+      <Flex>
+        <Routes>
+          <Route
+            exact
+            path="/"
+            element={
+              <React.Suspense fallback={<>...</>}>
                 <Home />
-              </Route>
-              <Route exact path="/payroll">
-                <Payroll />
-              </Route>
-              <Route exact path="/payslips">
+              </React.Suspense>
+            }
+          />
+          <Route
+            exact
+            path="/payslipstaff"
+            element={
+              <React.Suspense fallback={<>...</>}>
                 <PayslipStaff />
-              </Route>
-              <Route exact path="/singlepayslip">
+              </React.Suspense>
+            }
+          />
+          <Route
+            exact
+            path="/singlepayslip"
+            element={
+              <React.Suspense fallback={<>...</>}>
                 <SinglePayslip />
-              </Route>
-              <Route exact path="/batchpayslips">
-                <BatchPayslips />
-              </Route>
-              <Route exact path="/leave">
+              </React.Suspense>
+            }
+          />
+          <Route
+            exact
+            path="/leavestaff"
+            element={
+              <React.Suspense fallback={<>...</>}>
                 <LeaveStaff />
-              </Route>
-              <Route exact path="/hoc">
-                <Hoc />
-              </Route>
-              <Route exact path="/trainings">
+              </React.Suspense>
+            }
+          />
+          <Route
+            exact
+            path="/trainingsstaff"
+            element={
+              <React.Suspense fallback={<>...</>}>
                 <TrainingsStaff />
-              </Route>
-
-              <Route exact path="/dailyallowances">
+              </React.Suspense>
+            }
+          />
+          <Route
+            exact
+            path="/dailyallowancesstaff"
+            element={
+              <React.Suspense fallback={<>...</>}>
                 <DailyAllowancesStaff />
-              </Route>
-              <Route exact path="/singledailyallowsdetlstable">
+              </React.Suspense>
+            }
+          />
+          <Route
+            exact
+            path="/singledailyallowsdetlsstaff"
+            element={
+              <React.Suspense fallback={<>...</>}>
                 <SingleDailyAllowsDetlsStaff />
-              </Route>
-              <Route exact path="/expenses">
+              </React.Suspense>
+            }
+          ></Route>
+          <Route
+            exact
+            path="/expensesstaff"
+            element={
+              <React.Suspense fallback={<>...</>}>
                 <ExpensesStaff />
-              </Route>
-              <Route exact path="/example">
-                <Example />
-              </Route>
-              <Route exact path="/singleemployee">
+              </React.Suspense>
+            }
+          />
+          <Route
+            exact
+            path="/singleemployeestaff"
+            element={
+              <React.Suspense fallback={<>...</>}>
                 <SingleEmployeeStaff />
-              </Route>
-              <Route exact path="/singleleave">
+              </React.Suspense>
+            }
+          />
+          <Route
+            exact
+            path="/singleleave"
+            element={
+              <React.Suspense fallback={<>...</>}>
                 <SingleLeave />
-              </Route>
-              <Route exact path="/singleexpense">
+              </React.Suspense>
+            }
+          />
+          <Route
+            exact
+            path="/singleexpense"
+            element={
+              <React.Suspense fallback={<>...</>}>
                 <SingleExpense />
-              </Route>
-              <Route exact path="/singledailyallowance">
+              </React.Suspense>
+            }
+          />
+          <Route
+            exact
+            path="/singledailyallowance"
+            element={
+              <React.Suspense fallback={<>...</>}>
                 <SingleDailyAllowance />
-              </Route>
-              <Route exact path="/batchdailyallowances">
-                <BatchDailyAllowances />
-              </Route>
-              <Route exact path="/error">
-                <Error />
-              </Route>
-              <Route path="*">
-                <Error />
-              </Route>
-            </Switch>
-          )}
-          {select === "Admin" && (
-            // <DashboardAdmin
-            //   open={open}
-            //   handleDrawerOpen={handleDrawerOpen}
-            //   handleDrawerClose={handleDrawerClose}
-            // />
-            <Switch>
-              <Route exact path="/">
-                <Home />
-              </Route>
-              <Route exact path="/allemployees">
-                <AllEmployees />
-              </Route>
+              </React.Suspense>
+            }
+          />
+          <Route
+            exact
+            path="/singledailyallowsdetls"
+            element={
+              <React.Suspense fallback={<>...</>}>
+                <SingleDailyAllowsDetls />
+              </React.Suspense>
+            }
+          />
+          <Route
+            exact
+            path="/departments"
+            element={
+              <React.Suspense fallback={<>...</>}>
+                <Departments />
+              </React.Suspense>
+            }
+          />
+          <Route
+            exact
+            path="/designation"
+            element={
+              <React.Suspense fallback={<>...</>}>
+                <Designation />
+              </React.Suspense>
+            }
+          />
+          <Route
+            exact
+            path="/tables"
+            element={
+              <React.Suspense fallback={<>...</>}>
+                <Tables />
+              </React.Suspense>
+            }
+          />
+          <Route
+            exact
+            path="/allowances"
+            element={
+              <React.Suspense fallback={<>...</>}>
+                <Allowances />
+              </React.Suspense>
+            }
+          />
+          <Route
+            exact
+            path="/hoc"
+            element={
+              <React.Suspense fallback={<>...</>}>
+                <Hoc />
+              </React.Suspense>
+            }
+          />
+          <Route
+            exact
+            path="/example"
+            element={
+              <React.Suspense fallback={<>...</>}>
+                <Example />
+              </React.Suspense>
+            }
+          />
 
-              <Route exact path="/departments">
-                <Departments />
-              </Route>
-              <Route exact path="/designation">
-                <Designation />
-              </Route>
-              <Route exact path="/tables">
-                <Tables />
-              </Route>
-              <Route exact path="/allowances">
-                <Allowances />
-              </Route>
-              <Route exact path="/clients">
-                <Clients />
-              </Route>
-              <Route exact path="/example">
-                <Example />
-              </Route>
-              <Route exact path="/singleemployee">
-                <SingleEmployee />
-              </Route>
-              <Route exact path="/singleleave">
-                <SingleLeave />
-              </Route>
-              <Route exact path="/singleexpense">
-                <SingleExpense />
-              </Route>
-              <Route exact path="/error">
-                <Error />
-              </Route>
-              <Route exact path="/leave">
+          <Route
+            exact
+            path="/leave"
+            element={
+              <React.Suspense fallback={<>...</>}>
                 <Leave />
-              </Route>
-              <Route path="*">
-                <Error />
-              </Route>
-            </Switch>
+              </React.Suspense>
+            }
+          />
+          <Route
+            exact
+            path="/payroll"
+            element={
+              <React.Suspense fallback={<>...</>}>
+                <Payroll />
+              </React.Suspense>
+            }
+          />
+          <Route
+            exact
+            path="/batchpayslips"
+            element={
+              <React.Suspense fallback={<>...</>}>
+                <BatchPayslips />
+              </React.Suspense>
+            }
+          />
+          <Route
+            exact
+            path="/expenses"
+            element={
+              <React.Suspense fallback={<>...</>}>
+                <Expenses />
+              </React.Suspense>
+            }
+          />
+          <Route
+            exact
+            path="/batchdailyallowances"
+            element={
+              <React.Suspense fallback={<>...</>}>
+                <BatchDailyAllowances />
+              </React.Suspense>
+            }
+          />
+          {loginLevel.loginRole > 1 && (
+            <Route
+              exact
+              path="/singleemployee"
+              element={
+                <React.Suspense fallback={<>...</>}>
+                  <SingleEmployee />
+                </React.Suspense>
+              }
+            />
           )}
-          {select === "OpsSpvr" && (
-            // <DashboardOpsSpvr
-            //   open={open}
-            //   handleDrawerOpen={handleDrawerOpen}
-            //   handleDrawerClose={handleDrawerClose}
-            // />
-            <Switch>
-              <Route exact path="/">
-                <Home />
-              </Route>
-              <Route exact path="/allemployees">
-                <AllEmployees />
-              </Route>
 
-              <Route exact path="/departments">
-                <Departments />
-              </Route>
-              <Route exact path="/designation">
-                <Designation />
-              </Route>
-              <Route exact path="/tables">
-                <Tables />
-              </Route>
-              <Route exact path="/allowances">
-                <Allowances />
-              </Route>
-              <Route exact path="/clients">
-                <Clients />
-              </Route>
-              <Route exact path="/example">
-                <Example />
-              </Route>
-              <Route exact path="/singleemployee">
-                <SingleEmployee />
-              </Route>
-              <Route exact path="/singleleave">
-                <SingleLeave />
-              </Route>
-              <Route exact path="/singleexpense">
-                <SingleExpense />
-              </Route>
-              <Route exact path="/error">
-                <Error />
-              </Route>
-              <Route exact path="/leave">
-                <Leave />
-              </Route>
-              <Route path="*">
-                <Error />
-              </Route>
-            </Switch>
+          {loginLevel.loginRole > 1 && loginLevel.loginRole !== 3 && (
+            <Route
+              exact
+              path="/allemployees"
+              element={
+                <React.Suspense fallback={<>...</>}>
+                  <AllEmployees />
+                </React.Suspense>
+              }
+            />
           )}
-          {select === "AdminManager" && (
-            // <DashboardAdminManager
-            //   open={open}
-            //   handleDrawerOpen={handleDrawerOpen}
-            //   handleDrawerClose={handleDrawerClose}
-            // />
-            <Switch>
-              <Route exact path="/">
-                <Home />
-              </Route>
-              <Route exact path="/allemployees">
-                <AllEmployees />
-              </Route>
-              <Route exact path="/payroll">
-                <Payroll />
-              </Route>
-              <Route exact path="/payslip">
-                <Payslip />
-              </Route>
-              <Route exact path="/singlepayslip">
-                <SinglePayslip />
-              </Route>
-              <Route exact path="/batchpayslips">
-                <BatchPayslips />
-              </Route>
-              <Route exact path="/leave">
-                <Leave />
-              </Route>
-              <Route exact path="/payrun">
-                <Payrun />
-              </Route>
-              <Route exact path="/payrunbatch">
-                <Payrunbatch />
-              </Route>
-              <Route exact path="/dailyallowances">
+          {loginLevel.loginRole > 2 && (
+            <Route
+              exact
+              path="/payslip"
+              element={
+                <React.Suspense fallback={<>...</>}>
+                  <Payslip />
+                </React.Suspense>
+              }
+            />
+          )}
+          {loginLevel.loginRole > 2 && (
+            <Route
+              exact
+              path="/payrun"
+              element={
+                <React.Suspense fallback={<>...</>}>
+                  <Payrun />
+                </React.Suspense>
+              }
+            />
+          )}
+          {loginLevel.loginRole > 2 && (
+            <Route
+              exact
+              path="/payrunbatch"
+              element={
+                <React.Suspense fallback={<>...</>}>
+                  <Payrunbatch />
+                </React.Suspense>
+              }
+            />
+          )}
+
+          {/* <Route
+            exact
+            path="/dailyallowances"
+            element={
+              <React.Suspense fallback={<>...</>}>
                 <DailyAllowances />
-              </Route>
-              <Route exact path="/singledailyallowsdetlstable">
-                <SingleDailyAllowsDetls />
-              </Route>
-              <Route exact path="/expenses">
-                <Expenses />
-              </Route>
-              <Route exact path="/departments">
-                <Departments />
-              </Route>
-              <Route exact path="/designation">
-                <Designation />
-              </Route>
-              <Route exact path="/tables">
-                <Tables />
-              </Route>
-              <Route exact path="/allowances">
-                <Allowances />
-              </Route>
-              <Route exact path="/clients">
-                <Clients />
-              </Route>
-              <Route exact path="/example">
-                <Example />
-              </Route>
-              <Route exact path="/singleemployee">
-                <SingleEmployee />
-              </Route>
-              <Route exact path="/singleleave">
-                <SingleLeave />
-              </Route>
-              <Route exact path="/singleexpense">
-                <SingleExpense />
-              </Route>
-              <Route exact path="/singledailyallowance">
-                <SingleDailyAllowance />
-              </Route>
-              <Route exact path="/batchdailyallowances">
-                <BatchDailyAllowances />
-              </Route>
-              <Route exact path="/error">
-                <Error />
-              </Route>
-              <Route path="*">
-                <Error />
-              </Route>
-            </Switch>
+              </React.Suspense>
+            }
+          /> */}
+          {loginLevel.loginRole > 3 && (
+            <Route
+              exact
+              path="/approvalmanager"
+              element={
+                <React.Suspense fallback={<>...</>}>
+                  <ApprovalManager />
+                </React.Suspense>
+              }
+            />
           )}
-          {select === "Manager" && (
-            // <DashboardManager
-            //   open={open}
-            //   handleDrawerOpen={handleDrawerOpen}
-            //   handleDrawerClose={handleDrawerClose}
-            // />
-            <Switch>
-              <Route exact path="/">
-                <Home />
-              </Route>
-              {/* <Route exact path="/home">
-              <Home />
-            </Route> */}
-              <Route exact path="/allemployees">
-                <AllEmployees />
-              </Route>
-              <Route exact path="/payroll">
-                <Payroll />
-              </Route>
-              <Route exact path="/payslip">
-                <Payslip />
-              </Route>
-              <Route exact path="/singlepayslip">
-                <SinglePayslip />
-              </Route>
-              <Route exact path="/batchpayslips">
-                <BatchPayslips />
-              </Route>
-              <Route exact path="/approval">
-                <ApprovalManager />
-              </Route>
-              <Route exact path="/leave">
-                <Leave />
-              </Route>
-              <Route exact path="/payrun">
-                <Payrun />
-              </Route>
-              <Route exact path="/payrunbatch">
-                <Payrunbatch />
-              </Route>
-              <Route exact path="/dailyallowances">
-                <DailyAllowances />
-              </Route>
-              <Route exact path="/singledailyallowsdetlstable">
-                <SingleDailyAllowsDetls />
-              </Route>
-              <Route exact path="/expenses">
-                <Expenses />
-              </Route>
-              <Route exact path="/departments">
-                <Departments />
-              </Route>
-              <Route exact path="/useraccess">
-                <UserAccessTable />
-              </Route>
-              <Route exact path="/designation">
-                <Designation />
-              </Route>
-              <Route exact path="/tables">
-                <Tables />
-              </Route>
-              <Route exact path="/allowances">
-                <Allowances />
-              </Route>
-              <Route exact path="/clients">
-                <Clients />
-              </Route>
-              <Route exact path="/example">
-                <Example />
-              </Route>
-              <Route exact path="/singleemployee">
-                <SingleEmployee />
-              </Route>
-              <Route exact path="/singleleave">
-                <SingleLeave />
-              </Route>
-              <Route exact path="/singleexpense">
-                <SingleExpense />
-              </Route>
-              <Route exact path="/singledailyallowance">
-                <SingleDailyAllowance />
-              </Route>
-              <Route exact path="/batchdailyallowances">
-                <BatchDailyAllowances />
-              </Route>
-              <Route exact path="/error">
-                <Error />
-              </Route>
-              <Route path="*">
-                <Error />
-              </Route>
-            </Switch>
+          {loginLevel.loginRole > 3 && (
+            <Route
+              exact
+              path="/useraccesstable"
+              element={
+                <React.Suspense fallback={<>...</>}>
+                  <UserAccessTable />
+                </React.Suspense>
+              }
+            />
           )}
-          {select === "Director" && (
-            // <DashboardDirector
-            //   open={open}
-            //   handleDrawerOpen={handleDrawerOpen}
-            //   handleDrawerClose={handleDrawerClose}
-            // />
-            <Switch>
-              <Route exact path="/">
-                <Home />
-              </Route>
-              <Route exact path="/allemployees">
-                <AllEmployees />
-              </Route>
-              <Route exact path="/payroll">
-                <Payroll />
-              </Route>
-              <Route exact path="/payslip">
-                <Payslip />
-              </Route>
-              <Route exact path="/singlepayslip">
-                <SinglePayslip />
-              </Route>
-              <Route exact path="/batchpayslips">
-                <BatchPayslips />
-              </Route>
-              <Route exact path="/approval">
-                <ApprovalManager />
-              </Route>
-              <Route exact path="/leave">
-                <Leave />
-              </Route>
-              <Route exact path="/payrun">
-                <Payrun />
-              </Route>
-              <Route exact path="/payrunbatch">
-                <Payrunbatch />
-              </Route>
-              <Route exact path="/dailyallowances">
-                <DailyAllowances />
-              </Route>
-              <Route exact path="/singledailyallowsdetlstable">
-                <SingleDailyAllowsDetls />
-              </Route>
-              <Route exact path="/expenses">
-                <Expenses />
-              </Route>
-              <Route exact path="/departments">
-                <Departments />
-              </Route>
-              <Route exact path="/useraccess">
-                <UserAccessTable />
-              </Route>
-              <Route exact path="/designation">
-                <Designation />
-              </Route>
-              <Route exact path="/tables">
-                <Tables />
-              </Route>
-              <Route exact path="/allowances">
-                <Allowances />
-              </Route>
-              <Route exact path="/clients">
-                <Clients />
-              </Route>
-              <Route exact path="/example">
-                <Example />
-              </Route>
-              <Route exact path="/singleemployee">
-                <SingleEmployee />
-              </Route>
-              <Route exact path="/singleleave">
-                <SingleLeave />
-              </Route>
-              <Route exact path="/singleexpense">
-                <SingleExpense />
-              </Route>
-              <Route exact path="/singledailyallowance">
-                <SingleDailyAllowance />
-              </Route>
-              <Route exact path="/batchdailyallowances">
-                <BatchDailyAllowances />
-              </Route>
-              <Route exact path="/error">
-                <Error />
-              </Route>
-              <Route path="*">
-                <Error />
-              </Route>
-            </Switch>
-          )}
-        </Flex>
-      </Router>
+          <Route exact path="/error" element={<Error />}></Route>
+          <Route path="*" element={<Error />}></Route>
+        </Routes>
+      </Flex>
+      {/* </Router> */}
     </div>
   );
 }

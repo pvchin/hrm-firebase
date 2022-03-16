@@ -1025,9 +1025,9 @@ const EmployeeForm = () => {
         </Paper>
       </form>
 
-      <Grid xs={12}>
+      {/* <Grid xs={12}>
         <EmpJobhistory />
-      </Grid>
+      </Grid> */}
       <Grid xs={12}>
         <EmpFamily />
       </Grid>

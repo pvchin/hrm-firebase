@@ -29,369 +29,39 @@ import {
 //import BarChart from "../helpers/BarChart";
 //import BarChartStack from "../helpers/BarChartStack";
 
-import EmployeeTableLeaveView from "./EmployeeTableLeaveView";
-import ExpensesTableViewSummary from "./ExpenseTableViewSummary";
+//import EmployeeTableLeaveView from "./EmployeeTableLeaveView";
+//import ExpensesTableViewSummary from "./ExpenseTableViewSummary";
 //import ExpenseSummaryTableView from "./ExpensesSummaryTableView";
-import LeavesTableViewSummary from "./LeavesTableViewSummary";
-import HocTableViewSummary from "./HocTableViewSummary";
+//import LeavesTableViewSummary from "./LeavesTableViewSummary";
+//import HocTableViewSummary from "./HocTableViewSummary";
 //import SummaryTableView from "../helpers/SummaryTableView";
-import DailyAllowanceTableViewSummary from "./DailyAllowancesTableViewSummary";
-import PayslipTableViewSummary from "./PayslipTableViewSummary";
+//import DailyAllowanceTableViewSummary from "./DailyAllowancesTableViewSummary";
+//import PayslipTableViewSummary from "./PayslipTableViewSummary";
 //import PayslipSummaryTableView from "./PayslipSummaryTableView";
-import LeavesTableApproval from "./LeaveTableApproval";
+//import LeavesTableApproval from "./LeaveTableApproval";
 //import { useExpensesPeriod } from "./expenses/useExpensesPeriod";
-
-// const LeavesTableViewSummary = React.lazy(() =>
-//   import("./LeavesTableViewSummary")
-// );
+const LeaveTableApproval = React.lazy(() => import("./LeaveTableApproval"));
+const EmployeeTableLeaveView = React.lazy(() =>
+  import("./EmployeeTableLeaveView")
+);
+const ExpenseTableViewSummary = React.lazy(() =>
+  import("./ExpenseTableViewSummary")
+);
+const PayslipTableViewSummary = React.lazy(() =>
+  import("./PayslipTableViewSummary")
+);
+const DailyAllowancesTableViewSummary = React.lazy(() =>
+  import("./DailyAllowancesTableViewSummary")
+);
+const HocTableViewSummary = React.lazy(() => import("./HocTableViewSummary"));
+const LeavesTableViewSummary = React.lazy(() =>
+  import("./LeavesTableViewSummary")
+);
+const Export2ExcelDialog = React.lazy(() => import("./Export2ExcelDialog"));
 
 const drawerWidth = 240;
 
 //const FILTERSTRING = "Pending";
-
-// const months = [
-//   "Jan",
-//   "Feb",
-//   "Mar",
-//   "Apr",
-//   "May",
-//   "Jun",
-//   "Jul",
-//   "Aug",
-//   "Sep",
-//   "Oct",
-//   "Nov",
-//   "Dec",
-// ];
-// const monthsname = [
-//   "jan",
-//   "feb",
-//   "mar",
-//   "apr",
-//   "may",
-//   "jun",
-//   "jul",
-//   "aug",
-//   "sep",
-//   "oct",
-//   "nov",
-//   "dec",
-// ];
-
-// const expchartdata = {
-//   labels: [
-//     "January",
-//     "February",
-//     "March",
-//     "April",
-//     "May",
-//     "June",
-//     "July",
-//     "August",
-//     "September",
-//     "October",
-//     "November",
-//     "December",
-//   ],
-//   datasets: [
-//     {
-//       label: "Expenses",
-//       backgroundColor: "rgba(75,192,192,1)",
-//       borderColor: "rgba(0,0,0,1)",
-//       borderWidth: 2,
-//       data: [65, 59, 80, 81, 56, 50, 60, 40, 70, 60, 50, 60],
-//     },
-//   ],
-// };
-
-// const sitechartdata = {
-//   labels: [
-//     "January",
-//     "February",
-//     "March",
-//     "April",
-//     "May",
-//     "June",
-//     "July",
-//     "August",
-//     "September",
-//     "October",
-//     "November",
-//     "December",
-//   ],
-//   datasets: [
-//     {
-//       label: "Expenses",
-//       backgroundColor: "rgba(75,192,192,1)",
-//       borderColor: "rgba(0,0,0,1)",
-//       borderWidth: 2,
-//       data: [
-//         25000, 39000, 20000, 21000, 26000, 20000, 20000, 20000, 22000, 20000,
-//         25000, 20000,
-//       ],
-//     },
-//   ],
-// };
-
-// const paychartdata = {
-//   labels: [
-//     "January",
-//     "February",
-//     "March",
-//     "April",
-//     "May",
-//     "June",
-//     "July",
-//     "August",
-//     "September",
-//     "October",
-//     "November",
-//     "December",
-//   ],
-//   datasets: [
-//     {
-//       label: "Expenses",
-//       backgroundColor: "rgba(75,192,192,1)",
-//       borderColor: "rgba(0,0,0,1)",
-//       borderWidth: 2,
-//       data: [
-//         65000, 59000, 80000, 81000, 56000, 50000, 60000, 70000, 72000, 60000,
-//         55000, 60000,
-//       ],
-//     },
-//   ],
-// };
-
-// const columns = [
-//   {
-//     title: "January",
-//     field: "jan",
-//   },
-//   {
-//     title: "February",
-//     field: "feb",
-//   },
-//   {
-//     title: "March",
-//     field: "mar",
-//   },
-//   {
-//     title: "April",
-//     field: "apr",
-//   },
-//   {
-//     title: "May",
-//     field: "may",
-//   },
-//   {
-//     title: "June",
-//     field: "jun",
-//   },
-//   {
-//     title: "July",
-//     field: "jul",
-//   },
-//   {
-//     title: "August",
-//     field: "aug",
-//   },
-//   {
-//     title: "September",
-//     field: "sep",
-//   },
-//   {
-//     title: "October",
-//     field: "oct",
-//   },
-//   {
-//     title: "November",
-//     field: "nov",
-//   },
-//   {
-//     title: "December",
-//     field: "dec",
-//   },
-// ];
-
-// const data = [
-//   {
-//     jan: 80,
-//     feb: 90,
-//     mar: 78,
-//     apr: 63,
-//     may: 55,
-//     jun: 60,
-//     jul: 55,
-//     aug: 65,
-//     sep: 70,
-//     oct: 58,
-//     nov: 60,
-//     dec: 62,
-//   },
-// ];
-
-// const paysummcolumns = [
-//   {
-//     title: "Category",
-//     field: "category",
-//   },
-//   {
-//     title: "Jan",
-//     field: "jan",
-//   },
-//   {
-//     title: "Feb",
-//     field: "feb",
-//   },
-//   {
-//     title: "Mar",
-//     field: "mar",
-//   },
-//   {
-//     title: "Apr",
-//     field: "apr",
-//   },
-//   {
-//     title: "May",
-//     field: "may",
-//   },
-//   {
-//     title: "Jun",
-//     field: "jun",
-//   },
-//   {
-//     title: "Jul",
-//     field: "jul",
-//   },
-//   {
-//     title: "Aug",
-//     field: "aug",
-//   },
-//   {
-//     title: "Sep",
-//     field: "sep",
-//   },
-//   {
-//     title: "Oct",
-//     field: "oct",
-//   },
-//   {
-//     title: "Nov",
-//     field: "nov",
-//   },
-//   {
-//     title: "Dec",
-//     field: "dec",
-//   },
-// ];
-
-// const paysummdata = [
-//   {
-//     category: "Basic Salary",
-//     jan: 80,
-//     feb: 90,
-//     mar: 78,
-//     apr: 63,
-//     may: 55,
-//     jun: 60,
-//     jul: 55,
-//     aug: 65,
-//     sep: 70,
-//     oct: 58,
-//     nov: 60,
-//     dec: 62,
-//   },
-//   {
-//     category: "TAP/SCP",
-//     jan: 80,
-//     feb: 90,
-//     mar: 78,
-//     apr: 63,
-//     may: 55,
-//     jun: 60,
-//     jul: 55,
-//     aug: 65,
-//     sep: 70,
-//     oct: 58,
-//     nov: 60,
-//     dec: 62,
-//   },
-//   {
-//     category: "Site Allowances",
-//     jan: 80,
-//     feb: 90,
-//     mar: 78,
-//     apr: 63,
-//     may: 55,
-//     jun: 60,
-//     jul: 55,
-//     aug: 65,
-//     sep: 70,
-//     oct: 58,
-//     nov: 60,
-//     dec: 62,
-//   },
-//   {
-//     category: "Expenses Claims",
-//     jan: 80,
-//     feb: 90,
-//     mar: 78,
-//     apr: 63,
-//     may: 55,
-//     jun: 60,
-//     jul: 55,
-//     aug: 65,
-//     sep: 70,
-//     oct: 58,
-//     nov: 60,
-//     dec: 62,
-//   },
-//   {
-//     category: "Allowances",
-//     jan: 80,
-//     feb: 90,
-//     mar: 78,
-//     apr: 63,
-//     may: 55,
-//     jun: 60,
-//     jul: 55,
-//     aug: 65,
-//     sep: 70,
-//     oct: 58,
-//     nov: 60,
-//     dec: 62,
-//   },
-//   {
-//     category: "Deductions",
-//     jan: 80,
-//     feb: 90,
-//     mar: 78,
-//     apr: 63,
-//     may: 55,
-//     jun: 60,
-//     jul: 55,
-//     aug: 65,
-//     sep: 70,
-//     oct: 58,
-//     nov: 60,
-//     dec: 62,
-//   },
-//   {
-//     category: "Totals",
-//     jan: 80,
-//     feb: 90,
-//     mar: 78,
-//     apr: 63,
-//     may: 55,
-//     jun: 60,
-//     jul: 55,
-//     aug: 65,
-//     sep: 70,
-//     oct: 58,
-//     nov: 60,
-//     dec: 62,
-//   },
-// ];
 
 const initial_expdata = [
   {
@@ -750,7 +420,7 @@ const HomeManager = () => {
                   <ExpenseSummaryTableView year={currentyear} />
                 </TabPanel> */}
                         <TabPanel>
-                          <ExpensesTableViewSummary
+                          <ExpenseTableViewSummary
                             year={
                               selectexpenseyear
                                 ? selectexpenseyear
@@ -760,7 +430,7 @@ const HomeManager = () => {
                           />
                         </TabPanel>
                         <TabPanel>
-                          <ExpensesTableViewSummary
+                          <ExpenseTableViewSummary
                             year={
                               selectexpenseyear
                                 ? selectexpenseyear
@@ -770,7 +440,7 @@ const HomeManager = () => {
                           />
                         </TabPanel>
                         <TabPanel>
-                          <ExpensesTableViewSummary
+                          <ExpenseTableViewSummary
                             year={
                               selectexpenseyear
                                 ? selectexpenseyear
@@ -780,7 +450,7 @@ const HomeManager = () => {
                           />
                         </TabPanel>
                         <TabPanel>
-                          <ExpensesTableViewSummary
+                          <ExpenseTableViewSummary
                             year={
                               selectexpenseyear
                                 ? selectexpenseyear
@@ -790,7 +460,7 @@ const HomeManager = () => {
                           />
                         </TabPanel>
                         <TabPanel>
-                          <ExpensesTableViewSummary
+                          <ExpenseTableViewSummary
                             year={
                               selectexpenseyear
                                 ? selectexpenseyear
@@ -800,7 +470,7 @@ const HomeManager = () => {
                           />
                         </TabPanel>
                         <TabPanel>
-                          <ExpensesTableViewSummary
+                          <ExpenseTableViewSummary
                             year={
                               selectexpenseyear
                                 ? selectexpenseyear
@@ -810,7 +480,7 @@ const HomeManager = () => {
                           />
                         </TabPanel>
                         <TabPanel>
-                          <ExpensesTableViewSummary
+                          <ExpenseTableViewSummary
                             year={
                               selectexpenseyear
                                 ? selectexpenseyear
@@ -820,7 +490,7 @@ const HomeManager = () => {
                           />
                         </TabPanel>
                         <TabPanel>
-                          <ExpensesTableViewSummary
+                          <ExpenseTableViewSummary
                             year={
                               selectexpenseyear
                                 ? selectexpenseyear
@@ -830,7 +500,7 @@ const HomeManager = () => {
                           />
                         </TabPanel>
                         <TabPanel>
-                          <ExpensesTableViewSummary
+                          <ExpenseTableViewSummary
                             year={
                               selectexpenseyear
                                 ? selectexpenseyear
@@ -840,7 +510,7 @@ const HomeManager = () => {
                           />
                         </TabPanel>
                         <TabPanel>
-                          <ExpensesTableViewSummary
+                          <ExpenseTableViewSummary
                             year={
                               selectexpenseyear
                                 ? selectexpenseyear
@@ -850,7 +520,7 @@ const HomeManager = () => {
                           />
                         </TabPanel>
                         <TabPanel>
-                          <ExpensesTableViewSummary
+                          <ExpenseTableViewSummary
                             year={
                               selectexpenseyear
                                 ? selectexpenseyear
@@ -860,7 +530,7 @@ const HomeManager = () => {
                           />
                         </TabPanel>
                         <TabPanel>
-                          <ExpensesTableViewSummary
+                          <ExpenseTableViewSummary
                             year={
                               selectexpenseyear
                                 ? selectexpenseyear
@@ -948,7 +618,7 @@ const HomeManager = () => {
                   <SummaryTableView columns={columns} data={data} />
                 </TabPanel> */}
                         <TabPanel>
-                          <DailyAllowanceTableViewSummary
+                          <DailyAllowancesTableViewSummary
                             year={
                               selectsiteallowsyear
                                 ? selectsiteallowsyear
@@ -958,7 +628,7 @@ const HomeManager = () => {
                           />
                         </TabPanel>
                         <TabPanel>
-                          <DailyAllowanceTableViewSummary
+                          <DailyAllowancesTableViewSummary
                             year={
                               selectsiteallowsyear
                                 ? selectsiteallowsyear
@@ -968,7 +638,7 @@ const HomeManager = () => {
                           />
                         </TabPanel>
                         <TabPanel>
-                          <DailyAllowanceTableViewSummary
+                          <DailyAllowancesTableViewSummary
                             year={
                               selectsiteallowsyear
                                 ? selectsiteallowsyear
@@ -978,7 +648,7 @@ const HomeManager = () => {
                           />
                         </TabPanel>
                         <TabPanel>
-                          <DailyAllowanceTableViewSummary
+                          <DailyAllowancesTableViewSummary
                             year={
                               selectsiteallowsyear
                                 ? selectsiteallowsyear
@@ -988,7 +658,7 @@ const HomeManager = () => {
                           />
                         </TabPanel>
                         <TabPanel>
-                          <DailyAllowanceTableViewSummary
+                          <DailyAllowancesTableViewSummary
                             year={
                               selectsiteallowsyear
                                 ? selectsiteallowsyear
@@ -998,7 +668,7 @@ const HomeManager = () => {
                           />
                         </TabPanel>
                         <TabPanel>
-                          <DailyAllowanceTableViewSummary
+                          <DailyAllowancesTableViewSummary
                             year={
                               selectsiteallowsyear
                                 ? selectsiteallowsyear
@@ -1008,7 +678,7 @@ const HomeManager = () => {
                           />
                         </TabPanel>
                         <TabPanel>
-                          <DailyAllowanceTableViewSummary
+                          <DailyAllowancesTableViewSummary
                             year={
                               selectsiteallowsyear
                                 ? selectsiteallowsyear
@@ -1018,7 +688,7 @@ const HomeManager = () => {
                           />
                         </TabPanel>
                         <TabPanel>
-                          <DailyAllowanceTableViewSummary
+                          <DailyAllowancesTableViewSummary
                             year={
                               selectsiteallowsyear
                                 ? selectsiteallowsyear
@@ -1028,7 +698,7 @@ const HomeManager = () => {
                           />
                         </TabPanel>
                         <TabPanel>
-                          <DailyAllowanceTableViewSummary
+                          <DailyAllowancesTableViewSummary
                             year={
                               selectsiteallowsyear
                                 ? selectsiteallowsyear
@@ -1038,7 +708,7 @@ const HomeManager = () => {
                           />
                         </TabPanel>
                         <TabPanel>
-                          <DailyAllowanceTableViewSummary
+                          <DailyAllowancesTableViewSummary
                             year={
                               selectsiteallowsyear
                                 ? selectsiteallowsyear
@@ -1048,7 +718,7 @@ const HomeManager = () => {
                           />
                         </TabPanel>
                         <TabPanel>
-                          <DailyAllowanceTableViewSummary
+                          <DailyAllowancesTableViewSummary
                             year={
                               selectsiteallowsyear
                                 ? selectsiteallowsyear
@@ -1058,7 +728,7 @@ const HomeManager = () => {
                           />
                         </TabPanel>
                         <TabPanel>
-                          <DailyAllowanceTableViewSummary
+                          <DailyAllowancesTableViewSummary
                             year={
                               selectsiteallowsyear
                                 ? selectsiteallowsyear
@@ -1290,7 +960,7 @@ const HomeManager = () => {
                 borderRadius="lg"
                 overflow="scroll"
               >
-                <LeavesTableApproval />
+                <LeaveTableApproval />
               </Box>
             </TabPanel>
           </TabPanels>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 //import { makeStyles } from "@material-ui/core/styles";
 //import clsx from "clsx";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import * as emailjs from "emailjs-com";
 import MaterialTable, { MTableToolbar } from "material-table";
 import { FiSave, FiCheckCircle, FiMail } from "react-icons/fi";
@@ -161,7 +161,7 @@ const columns = [
 ];
 
 const Payrunbatch = () => {
-  let history = useHistory();
+  let navigate = useNavigate();
   //const classes = useStyles();
   const toast = useCustomToast();
   //const componentRef = useRef();
@@ -302,7 +302,7 @@ const Payrunbatch = () => {
       title: "Changes have been saved!",
       status: "success",
     });
-    history.push("/payslip");
+    navigate("/payslip");
   };
 
   const saveIndividualPayslips = () => {
@@ -415,7 +415,7 @@ const Payrunbatch = () => {
       totalsitesallows: payrundata.totalsiteallows,
       totalexpensesclaims: payrundata.totalexpensesclaims,
     });
-    history.push("/payslip");
+    navigate("/payslip");
   };
 
   const handleVerifyPayslips = (e) => {

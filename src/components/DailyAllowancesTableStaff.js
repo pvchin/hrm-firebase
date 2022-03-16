@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import MaterialTable, { MTableToolbar } from "material-table";
 import { makeStyles } from "@material-ui/core/styles";
 import { useCustomToast } from "../helpers/useCustomToast";
@@ -32,7 +32,7 @@ import { useDeleteDailyAllowsDetls } from "./dailyallowsdetls/useDeleteDailyAllo
 import { useDailyAllowsDetlsBatch } from "./dailyallowsdetls/useDailyAllowsDetlsBatch";
 
 export default function DailyAllowancesTableStaff() {
-  let history = useHistory();
+  let navigate = useNavigate();
    const toast = useCustomToast();
   const classes = useStyles();
   //const toast = useCustomToast();
@@ -180,7 +180,7 @@ export default function DailyAllowancesTableStaff() {
     });
 
     //setIsAllowsDetlDialogOpen(true);
-    history.push("/singledailyallowsdetlstable");
+    navigate("/singledailyallowsdetlsstaff");
   };
 
   const delete_SiteAllows = (data) => {

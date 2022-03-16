@@ -10,12 +10,6 @@ import DashboardIcon from "@material-ui/icons/Dashboard";
 import FlightIcon from "@material-ui/icons/Flight";
 import PeopleIcon from "@material-ui/icons/People";
 import LayersIcon from "@material-ui/icons/Layers";
-//import MonetizationOnIcon from "@material-ui/icons/MonetizationOn";
-//import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-//import MoneyIcon from "@material-ui/icons/Money";
-// import Collapse from "@material-ui/core/Collapse";
-// import ExpandLess from "@material-ui/icons/ExpandLess";
-// import ExpandMore from "@material-ui/icons/ExpandMore";
 
 const MenuListItems = () => {
   const classes = useStyles();
