@@ -276,31 +276,6 @@ const ExpenseForm = ({ formdata, setFormdata, handleDialogClose }) => {
               //rules={{ required: "Status is required" }}
             />
           </div>
-          <div>
-            <Controller
-              name="status"
-              control={control}
-              defaultValue="Pending"
-              render={({
-                field: { onChange, value },
-                fieldState: { error },
-              }) => {
-                return (
-                  <TextField
-                    label="Attachment"
-                    id="margin-normal=attachment"
-                    name="attachment"
-                    className={classes.textField}
-                    onChange={onChange}
-                    error={!!error}
-                    helperText={error ? error.message : null}
-                   
-                  ></TextField>
-                );
-              }}
-              //rules={{ required: "Status is required" }}
-            />
-          </div>
 
           <div>
             <Button
