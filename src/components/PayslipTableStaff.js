@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import MaterialTable, { MTableToolbar } from "material-table";
 import { makeStyles } from "@material-ui/core/styles";
 import AddIcon from "@material-ui/icons/Add";
@@ -55,18 +55,19 @@ export default function PayslipTable() {
   const classes = useStyles();
   const [loginLevel, setLoginLevel] = useRecoilState(loginLevelState);
   const { employees } = useEmployees();
-    const { payslips, setFilter } = usePayslips();
-  
+  const { payslips, setPayslipId } = usePayslips();
+  const [isLoad, setIsLoad] = useState(true);
+
   //const {
-    //deletePayslip,
-    //loadPayslips,
-    //getSinglePayslip,
-    //setEditPayslipID,
-    //setIsPayslipEditingOn,
-    //setIsPayslipEditingOff,
-    //resetSinglePayslip,
-    //payslip_period,
-    //payslip_endmonthdate,
+  //deletePayslip,
+  //loadPayslips,
+  //getSinglePayslip,
+  //setEditPayslipID,
+  //setIsPayslipEditingOn,
+  //setIsPayslipEditingOff,
+  //resetSinglePayslip,
+  //payslip_period,
+  //payslip_endmonthdate,
   //} = usePayslipsContext();
   //console.log("payslipstable", payslips)
   const exportPdfTable = ({ data, emp }) => {
@@ -108,8 +109,9 @@ export default function PayslipTable() {
   //};
 
   useEffect(() => {
-    setFilter(loginLevel.loginUserId);
-  }, []);
+    setPayslipId(loginLevel.loginUserId);
+    setIsLoad(true);
+  }, [isLoad]);
 
   return (
     <div className={classes.root}>
@@ -117,9 +119,11 @@ export default function PayslipTable() {
         <MaterialTable
           columns={columns}
           //data={payslips}
-          data={payslips.sort((a, b) =>
-            a.payrun > b.payrun ? -1 : b.payrun > a.payrun ? 1 : 0
-          )}
+          data={payslips
+            .filter((r) => r.empid === loginLevel.loginUserId)
+            .sort((a, b) =>
+              a.payrun > b.payrun ? -1 : b.payrun > a.payrun ? 1 : 0
+            )}
           title="Payslips"
           icons={{
             Add: (props) => <AddIcon />,
