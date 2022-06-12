@@ -38,19 +38,12 @@ module.exports = async (event) => {
   }
 
   if (m) {
-    const hoc1 = await table
+    const hoc = await table
       .select({
-        view: "viewbypositiveact",
+        view: "sortedview",
         filterByFormula: `AND(MONTH(raisedon)=${m},YEAR(raisedon)=${y})`,
       })
       .firstPage();
-    const hoc2 = await table
-      .select({
-        view: "viewbyunsafe",
-        filterByFormula: `AND(MONTH(raisedon)=${m},YEAR(raisedon)=${y})`,
-      })
-      .firstPage();
-    const hoc = [...hoc1, ...hoc2];
     const formattedHoc = hoc.map((rec) => ({
       id: rec.id,
       ...rec.fields,

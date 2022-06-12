@@ -132,7 +132,9 @@ export default function HocTableViewSummary({ year, month }) {
       <Box maxW="100%" pt="5px" overflow="scroll">
         <MaterialTable
           columns={columns}
-          data={hocperiod}
+          data={hocperiod.sort((a, b) =>
+            a.raisedon < b.raisedon ? 1 : b.raisedon < a.raisedon ? -1 : 0
+          )}
           title="HOC History"
           options={{
             filtering: false,
