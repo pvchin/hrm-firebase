@@ -153,7 +153,9 @@ export default function ExpenseTable() {
       <div style={{ maxWidth: "100%", paddingTop: "5px" }}>
         <MaterialTable
           columns={columns}
-          data={expenses}
+          data={expenses.sort((a, b) =>
+            a.date < b.date ? 1 : b.date < a.date ? -1 : 0
+          )}
           title="Expenses Claims Application"
           icons={{
             Add: (props) => <AddIcon />,

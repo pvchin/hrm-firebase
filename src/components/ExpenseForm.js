@@ -3,6 +3,8 @@ import { Button, Icon, TextField, Paper, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useRecoilState } from "recoil";
 import * as emailjs from "emailjs-com";
+import currency from "currency.js";
+import CurrencyTextField from "@unicef/material-ui-currency-textfield";
 import { loginLevelState } from "./data/atomdata";
 import { useExpensesContext } from "../context/expenses_context";
 import { Controller, useForm } from "react-hook-form";
@@ -204,16 +206,35 @@ const ExpenseForm = ({ formdata, setFormdata, handleDialogClose }) => {
                 fieldState: { error },
               }) => {
                 return (
-                  <TextField
+                  // <TextField
+                  //   label="Amount"
+                  //   type="number"
+                  //   id="standard-number1"
+                  //   name="amount"
+                  //   defaultValue={formdata.amount}
+                  //   className={classes.textField}
+                  //   onChange={(e) => {
+                  //     onChange(parseFloat(e.target.value),10);
+                  //   }}
+                  //   error={!!error}
+                  //   helperText={error ? error.message : null}
+                  // />
+                  <CurrencyTextField
                     label="Amount"
-                    type="number"
-                    id="standard-number1"
-                    name="amount"
-                    defaultValue={formdata.amount}
+                    variant="standard"
+                    value={formdata.amount}
+                    currencySymbol="$"
+                    outputFormat="string"
+                    decimalCharacter="."
+                    digitGroupSeparator=","
+                    decimalPlaces="2"
                     className={classes.textField}
+                    id="standard-basicsalary"
+                    name="amount"
+                    style={{ width: 100}}
                     //onChange={onChange}
                     onChange={(e) => {
-                      onChange(parseInt(e.target.value, 10));
+                      onChange(parseFloat(currency(e.target.value), 10));
                     }}
                     error={!!error}
                     helperText={error ? error.message : null}
@@ -276,7 +297,7 @@ const ExpenseForm = ({ formdata, setFormdata, handleDialogClose }) => {
               //rules={{ required: "Status is required" }}
             />
           </div>
-          <div>
+          {/* <div>
             <Controller
               name="status"
               control={control}
@@ -300,7 +321,7 @@ const ExpenseForm = ({ formdata, setFormdata, handleDialogClose }) => {
               }}
               //rules={{ required: "Status is required" }}
             />
-          </div>
+          </div> */}
 
           <div>
             <Button
