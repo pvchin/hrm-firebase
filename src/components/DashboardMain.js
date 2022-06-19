@@ -7,47 +7,38 @@ import { useRecoilState } from "recoil";
 import { Flex } from "@chakra-ui/react";
 
 import Appbanner from "./Appbanner";
-import Example from "./Example6";
 import SideDrawer from "./SideDrawer";
+//import Example from "./Example6";
 //import SingleEmployee from "./SingleEmployee";
 //import SingleLeave from "./SingleLeave";
-import SingleExpense from "./SingleExpense";
-import SingleDailyAllowance from "./SingleDailyAllowance";
-import SingleDailyAllowsDetls from "./SingleDailyAllowsDetls";
+//import SingleExpense from "./SingleExpense";
+//import SingleDailyAllowance from "./SingleDailyAllowance";
+//import SingleDailyAllowsDetls from "./SingleDailyAllowsDetls";
 //import BatchDailyAllowances from "./BatchDailyAllowances";
 //import SinglePayslip from "./SinglePayslip";
 import { loginLevelState } from "./data/atomdata";
 import Login from "./LoginForm";
-import Payrun from "./Payrun";
+//import Payrun from "./Payrun";
 //import Payrunbatch from "./Payrunbatch";
-import SingleEmployeeStaff from "./SingleEmployeeStaff";
-import SingleDailyAllowsDetlsStaff from "./SingleDailyAllowsDetlsStaff";
-import ApprovalManager from "./ApprovalManager";
-import UserAccessTable from "./UserAccessTable";
+//import SingleEmployeeStaff from "./SingleEmployeeStaff";
+//import SingleDailyAllowsDetlsStaff from "./SingleDailyAllowsDetlsStaff";
+//import ApprovalManager from "./ApprovalManager";
+//import UserAccessTable from "./UserAccessTable";
 
-import {
-  //Home,
-  //AllEmployees,
-  //Leave,
-  //DailyAllowancesStaff,
-  //Expenses,
-  //Hoc,
-  //LeaveStaff,
-  //Payslip,
-  //BatchPayslips,
-  //Payroll,
-  //PayslipStaff,
-  //TrainingsStaff,
-  //ExpensesStaff,
-  //Departments,
-  //Designation,
-  //Tables,
-  //Allowances,
-  //DailyAllowances,
-  PrivateRoute,
-  Error,
-} from "../pages";
-
+import { PrivateRoute, Error } from "../pages";
+const Example = React.lazy(() => import("./Example6"));
+const SingleExpense = React.lazy(() => import("./SingleExpense"));
+const SingleDailyAllowance = React.lazy(() => import("./SingleDailyAllowance"));
+const SingleDailyAllowsDetls = React.lazy(() =>
+  import("./SingleDailyAllowsDetls")
+);
+const Payrun = React.lazy(() => import("./Payrun"));
+const SingleEmployeeStaff = React.lazy(() => import("./SingleEmployeeStaff"));
+const SingleDailyAllowsDetlsStaff = React.lazy(() =>
+  import("./SingleDailyAllowsDetlsStaff")
+);
+const ApprovalManager = React.lazy(() => import("./ApprovalManager"));
+const UserAccessTable = React.lazy(() => import("./UserAccessTable"));
 const Home = React.lazy(() => import("../pages/HomePage"));
 const AllEmployees = React.lazy(() => import("../pages/AllEmployeesPage"));
 const Hoc = React.lazy(() => import("../pages/HocPage"));
