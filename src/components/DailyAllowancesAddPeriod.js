@@ -31,7 +31,7 @@ const DailyAllowancesAddPeriod = ({ handleDialogClose }) => {
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   const toast = useCustomToast();
-  const { dailyallows } = useDailyAllows();
+  const { dailyallows, setDailyAllowsId } = useDailyAllows();
   //const { dailyallowsdetls } = useDailyAllowsDetls();
   const addDailyAllows = useAddDailyAllows();
   const addDailyAllowsDetls = useAddDailyAllowsDetls();
@@ -56,6 +56,7 @@ const DailyAllowancesAddPeriod = ({ handleDialogClose }) => {
       manager: loginLevel.reporting_to,
       client: "",
     });
+    setDailyAllowsId(loginLevel.loginUserId);
   }, []);
 
   // const periodExists = (data) => {
@@ -72,6 +73,7 @@ const DailyAllowancesAddPeriod = ({ handleDialogClose }) => {
     const existdata = dailyallows.filter((rec) =>
       rec.period.toLowerCase().match(data.substring(0, 8))
     );
+    console.log("existdata", existdata);
     if (existdata.length > 0) {
       existdata.forEach((rec) => {
         const fromday = parseInt(rec.period.substring(8, 10));
