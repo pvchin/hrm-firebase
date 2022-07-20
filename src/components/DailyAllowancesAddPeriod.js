@@ -73,7 +73,7 @@ const DailyAllowancesAddPeriod = ({ handleDialogClose }) => {
     const existdata = dailyallows.filter((rec) =>
       rec.period.toLowerCase().match(data.substring(0, 8))
     );
-    console.log("existdata", existdata);
+    //console.log("existdata", existdata);
     if (existdata.length > 0) {
       existdata.forEach((rec) => {
         const fromday = parseInt(rec.period.substring(8, 10));
@@ -100,7 +100,7 @@ const DailyAllowancesAddPeriod = ({ handleDialogClose }) => {
       input.todate.substring(8, 10);
 
     const isExist = periodExists(period);
-    console.log("isexist", isExist);
+    //console.log("isexist", isExist);
     if (isExist) {
       toast({
         title: "Site Allowance period is existed!",

@@ -55,7 +55,7 @@ export default function PayslipTable() {
   const toast = useCustomToast();
   const classes = useStyles();
   const { payrun } = usePayrun();
-  const { payslipsbatch,  setPSBPayrunId } = usePayslipsBatch();
+  const { payslipsbatch, setPSBPayrunId } = usePayslipsBatch();
   const { expensespayrun, setExpPayrunId } = useExpensesPayrun();
   const { dailyallowspayrun, setDailyAllowsPayrunId } = useDailyAllowsPayrun();
   const updateExpenses = useUpdateExpenses();
@@ -255,7 +255,7 @@ export default function PayslipTable() {
               },
             }),
             (rowData) => ({
-              disabled: rowData.status !== "Pending",
+              disabled: rowData.status === "Approved",
               icon: "delete",
               tooltip: "Delete Record",
               position: "row",
