@@ -237,166 +237,166 @@ const PrintPayslip = ({ data, emp }) => {
           },
         ],
       },
-      // {
-      //   columns: [
-      //     {
-      //       width: 90,
-      //       text: "\n",
-      //     },
-      //     {
-      //       width: 20,
-      //       text: "",
-      //     },
-      //     {
-      //       width: "200",
-      //       text: "",
-      //     },
-      //     {
-      //       width: "*",
-      //       text: "",
-      //     },
-      //   ],
-      // },
-      // {
-      //   columns: [
-      //     {
-      //       width: 90,
-      //       text: "Emp No ",
-      //     },
-      //     {
-      //       width: 20,
-      //       text: ":",
-      //     },
-      //     {
-      //       width: "200",
-      //       text: empno,
-      //     },
-      //     {
-      //       width: "*",
-      //       text: "",
-      //     },
-      //   ],
-      // },
-      // {
-      //   columns: [
-      //     {
-      //       width: 90,
-      //       text: "Name ",
-      //     },
-      //     {
-      //       width: 20,
-      //       text: ":",
-      //     },
-      //     {
-      //       width: 200,
-      //       text: name,
-      //     },
-      //     {
-      //       width: "*",
-      //       text: "",
-      //     },
-      //   ],
-      // },
-      // {
-      //   columns: [
-      //     {
-      //       width: 90,
-      //       text: "I/C No ",
-      //     },
-      //     {
-      //       width: 20,
-      //       text: ":",
-      //     },
-      //     {
-      //       width: 200,
-      //       text: ic_no,
-      //     },
-      //     {
-      //       width: "*",
-      //       text: "",
-      //     },
-      //   ],
-      // },
-      // {
-      //   columns: [
-      //     {
-      //       width: 90,
-      //       text: "Designation ",
-      //     },
-      //     {
-      //       width: 20,
-      //       text: ":",
-      //     },
-      //     {
-      //       width: 200,
-      //       text: designation,
-      //     },
-      //     {
-      //       width: "*",
-      //       text: "",
-      //     },
-      //   ],
-      // },
-      // {
-      //   columns: [
-      //     {
-      //       width: 90,
-      //       text: "Bank A/C No ",
-      //     },
-      //     {
-      //       width: 20,
-      //       text: ":",
-      //     },
-      //     {
-      //       width: 200,
-      //       text: bank_acno,
-      //     },
-      //     {
-      //       width: "*",
-      //       text: "",
-      //     },
-      //   ],
-      // },
-      // {
-      //   columns: [
-      //     {
-      //       width: 90,
-      //       text: "TAP No ",
-      //     },
-      //     {
-      //       width: 20,
-      //       text: ":",
-      //     },
-      //     {
-      //       width: 200,
-      //       text: tap_acno,
-      //     },
-      //     {
-      //       width: "*",
-      //       text: "",
-      //     },
-      //   ],
-      // },
-      // {
-      //   columns: [
-      //     {
-      //       width: 90,
-      //       text: "SCP No ",
-      //     },
-      //     {
-      //       width: 20,
-      //       text: ":",
-      //     },
-      //     {
-      //       width: 200,
-      //       text: scp_acno,
-      //     },
-      //     {
-      //       width: "*",
-      //       text: "",
-      //     },
-      //   ],
-      // },
+      {
+        columns: [
+          {
+            width: 90,
+            text: "\n",
+          },
+          {
+            width: 20,
+            text: "",
+          },
+          {
+            width: "200",
+            text: "",
+          },
+          {
+            width: "*",
+            text: "",
+          },
+        ],
+      },
+      {
+        columns: [
+          {
+            width: 90,
+            text: "Emp No ",
+          },
+          {
+            width: 20,
+            text: ":",
+          },
+          {
+            width: "200",
+            text: empno,
+          },
+          {
+            width: "*",
+            text: "",
+          },
+        ],
+      },
+      {
+        columns: [
+          {
+            width: 90,
+            text: "Name ",
+          },
+          {
+            width: 20,
+            text: ":",
+          },
+          {
+            width: 200,
+            text: name,
+          },
+          {
+            width: "*",
+            text: "",
+          },
+        ],
+      },
+      {
+        columns: [
+          {
+            width: 90,
+            text: "I/C No ",
+          },
+          {
+            width: 20,
+            text: ":",
+          },
+          {
+            width: 200,
+            text: ic_no,
+          },
+          {
+            width: "*",
+            text: "",
+          },
+        ],
+      },
+      {
+        columns: [
+          {
+            width: 90,
+            text: "Designation ",
+          },
+          {
+            width: 20,
+            text: ":",
+          },
+          {
+            width: 200,
+            text: designation,
+          },
+          {
+            width: "*",
+            text: "",
+          },
+        ],
+      },
+      {
+        columns: [
+          {
+            width: 90,
+            text: "Bank A/C No ",
+          },
+          {
+            width: 20,
+            text: ":",
+          },
+          {
+            width: 200,
+            text: bank_acno,
+          },
+          {
+            width: "*",
+            text: "",
+          },
+        ],
+      },
+      {
+        columns: [
+          {
+            width: 90,
+            text: "TAP No ",
+          },
+          {
+            width: 20,
+            text: ":",
+          },
+          {
+            width: 200,
+            text: tap_acno,
+          },
+          {
+            width: "*",
+            text: "",
+          },
+        ],
+      },
+      {
+        columns: [
+          {
+            width: 90,
+            text: "SCP No ",
+          },
+          {
+            width: 20,
+            text: ":",
+          },
+          {
+            width: 200,
+            text: scp_acno,
+          },
+          {
+            width: "*",
+            text: "",
+          },
+        ],
+      },
       // {
       //   text: [
       //     { text: "Emp No : " + empno + "\n", style: "text" },
@@ -406,93 +406,92 @@ const PrintPayslip = ({ data, emp }) => {
       //   ],
       // },
 
-      // {
-      //   table: {
-      //     headerRows: 1,
-      //     widths: ["97%"],
-      //     body: [[""], [""]],
-      //   },
-      //   layout: "headerLineOnly",
-      // },
-      // {
-      //   style: "tableExample",
-      //   table: {
-      //     widths: [150, 80, 150, 80],
-      //     body: [
-      //       [
-      //         { alignment: "left", text: "Earnings" },
-      //         { alignment: "right", text: "Amount" },
-      //         { alignment: "left", text: "Deductions" },
-      //         { alignment: "right", text: "Amount" },
-      //       ],
-      //       [
-      //         {
-      //           stack: [
-      //             {
-      //               type: "none",
-      //               fontSize: 12,
-      //               ul: earningsdesp,
-      //             },
-      //           ],
-      //         },
-      //         {
-      //           stack: [
-      //             {
-      //               type: "none",
-      //               fontSize: 12,
-      //               alignment: "right",
-      //               ul: earningsamt,
-      //             },
-      //           ],
-      //         },
-      //         {
-      //           stack: [
-      //             {
-      //               type: "none",
-      //               fontSize: 12,
-      //               ul: deductionsdesp,
-      //             },
-      //           ],
-      //         },
-      //         {
-      //           stack: [
-      //             {
-      //               type: "none",
-      //               fontSize: 12,
-      //               alignment: "right",
-      //               ul: deductionsamt,
-      //             },
-      //           ],
-      //         },
-      //       ],
-      //       [
-      //         { alignment: "left", text: "Total Earnings" },
-      //         { alignment: "right", text: formatPrice(totalEarnings) },
-      //         { alignment: "left", text: "Total Deductions" },
-      //         { alignment: "right", text: formatPriceZero(totalDeductions) },
-      //       ],
-      //       [
-      //         { alignment: "left", text: "" },
-      //         { alignment: "right", text: "" },
-      //         { alignment: "left", text: "Nett Pay" },
-      //         { alignment: "right", text: formatPrice(data.rowData.nett_pay) },
-      //       ],
-      //     ],
-      //   },
-      // },
-
+      {
+        table: {
+          headerRows: 1,
+          widths: ["97%"],
+          body: [[""], [""]],
+        },
+        layout: "headerLineOnly",
+      },
       {
         style: "tableExample",
         table: {
-          widths: [480, 80],
+          widths: [150, 80, 150, 80],
           body: [
             [
-              { alignment: "left", text: "Nettpay" },
+              { alignment: "left", text: "Earnings" },
               { alignment: "right", text: "Amount" },
+              { alignment: "left", text: "Deductions" },
+              { alignment: "right", text: "Amount" },
+            ],
+            [
+              {
+                stack: [
+                  {
+                    type: "none",
+                    fontSize: 12,
+                    ul: earningsdesp,
+                  },
+                ],
+              },
+              {
+                stack: [
+                  {
+                    type: "none",
+                    fontSize: 12,
+                    alignment: "right",
+                    ul: earningsamt,
+                  },
+                ],
+              },
+              {
+                stack: [
+                  {
+                    type: "none",
+                    fontSize: 12,
+                    ul: deductionsdesp,
+                  },
+                ],
+              },
+              {
+                stack: [
+                  {
+                    type: "none",
+                    fontSize: 12,
+                    alignment: "right",
+                    ul: deductionsamt,
+                  },
+                ],
+              },
+            ],
+            [
+              { alignment: "left", text: "Total Earnings" },
+              { alignment: "right", text: formatPrice(totalEarnings) },
+              { alignment: "left", text: "Total Deductions" },
+              { alignment: "right", text: formatPriceZero(totalDeductions) },
+            ],
+            [
+              { alignment: "left", text: "" },
+              { alignment: "right", text: "" },
+              { alignment: "left", text: "Nett Pay" },
+              { alignment: "right", text: formatPrice(data.rowData.nett_pay) },
             ],
           ],
         },
       },
+      // {
+      //   style: "tableExample",
+      //   table: {
+      //     widths: [480, 80],
+      //     body: [
+      //       [
+      //         { alignment: "left", text: "Nettpay" },
+      //         { alignment: "right", text: "Amount" },
+      //       ],
+      //     ],
+      //   },
+      // },
       { text: footer + "\n", style: "footer" },
     ],
     styles: {
