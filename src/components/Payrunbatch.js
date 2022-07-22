@@ -43,8 +43,8 @@ import {
   //WrapItem,
   useDisclosure,
 } from "@chakra-ui/react";
-import PayForm from "./PayForm";
-import PaySummary from "./PaySummary";
+//import PayForm from "./PayForm";
+//import PaySummary from "./PaySummary";
 import PrintPaySummary from "./PrintPaySummary";
 import { useEmployees } from "./employees/useEmployees";
 import { usePayrun } from "./payrun/usePayrun";
@@ -63,6 +63,10 @@ import {
 //import { useRecoilValue } from "recoil";
 
 //const drawerWidth = 240;
+const PayForm = React.lazy(() => import("./PayForm"));
+const PaySummary = React.lazy(() => import("./PaySummary"));
+//const PrintPaySummary = React.lazy(() => import("./PrintPaySummary"));
+
 const SERVICE_ID = process.env.REACT_APP_EMAILJS_SERVICEID;
 const TEMPLATE_ID = "template_1y8odlq";
 const USER_ID = process.env.REACT_APP_EMAILJS_USERID;

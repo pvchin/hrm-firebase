@@ -105,7 +105,7 @@ export default function DashboardMain() {
         handleSelect={handleSelect}
         open={open}
         setLogin={setLogin}
-        title="HRMS V1.6 - AppSmiths Sutera Sdn Bhd"
+        title="HRMS V1.7 - AppSmiths Sutera Sdn Bhd"
       />
       <SideDrawer
         handleDrawerOpen={handleDrawerOpen}

@@ -5,6 +5,7 @@ import { useRecoilState } from "recoil";
 import * as emailjs from "emailjs-com";
 import axios from "axios";
 import currency from "currency.js";
+import pdfMake from "pdfmake/build/pdfmake";
 import CurrencyTextField from "@unicef/material-ui-currency-textfield";
 //import { Box, Grid, GridItem, Heading } from "@chakra-ui/react";
 import {
@@ -221,12 +222,20 @@ const ExpenseForm = ({ formdata, setFormdata, handleDialogClose }) => {
     handleDialogClose();
   };
 
-  const handleViewImage = ({ preview, name }) => {
+  const handleViewImage = ({ preview, name, type }) => {
     const newImage = { url: preview, name: name };
     const oldImage = image.url;
     setImage((prev) => newImage);
-
+    console.log("type", preview);
     onViewImageOpen();
+    // if (type !== "pdf") {
+    //   console.log("image");
+    //   onViewImageOpen();
+    // } else {
+    //   var win = window.open("", "_blank");
+    //   console.log("pdf");
+    //   pdfMake.createPdf(preview).open({}, win);
+    // }
   };
 
   useEffect(() => {
@@ -598,6 +607,7 @@ const ExpenseForm = ({ formdata, setFormdata, handleDialogClose }) => {
                               handleViewImage({
                                 preview: file.preview,
                                 name: file.name,
+                                type: file.preview.split(".").pop(),
                               })
                             }
                           />

@@ -24,6 +24,7 @@ import PrintPayslip from "./PrintPayslip";
 // const PrintPayslip = React.lazy(() =>
 //   import("./PrintPayslip")
 // );
+//const PrintPayslip = React.lazy(() => import("./PrintPayslip"));
 
 const columns = [
   {
