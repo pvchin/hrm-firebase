@@ -227,15 +227,37 @@ const ExpenseForm = ({ formdata, setFormdata, handleDialogClose }) => {
     const oldImage = image.url;
     setImage((prev) => newImage);
     console.log("type", preview);
-    onViewImageOpen();
-    // if (type !== "pdf") {
-    //   console.log("image");
-    //   onViewImageOpen();
-    // } else {
-    //   var win = window.open("", "_blank");
-    //   console.log("pdf");
-    //   pdfMake.createPdf(preview).open({}, win);
-    // }
+    //onViewImageOpen();
+    if (type !== "pdf") {
+      console.log("image");
+      onViewImageOpen();
+    } else {
+      var docDefinition = {
+        content: [
+          { text: "This is a header", style: "header" },
+          "No styling here, this is a standard paragraph",
+          { text: "Another text", style: "anotherStyle" },
+          {
+            text: "Multiple styles applied",
+            style: ["header", "anotherStyle"],
+          },
+        ],
+
+        styles: {
+          header: {
+            fontSize: 22,
+            bold: true,
+          },
+          anotherStyle: {
+            italics: true,
+            alignment: "right",
+          },
+        },
+      };
+      var win = window.open("", "_blank");
+      console.log("pdf");
+      pdfMake.createPdf(docDefinition).download(preview);
+    }
   };
 
   useEffect(() => {
