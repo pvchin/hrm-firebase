@@ -23,6 +23,13 @@ export function useUpdatePayslips(data) {
       //   status: "success",
       // });
     },
+    onErrot: () => {
+      toast({
+        title:
+          "Payslip record saving error! Pls check your internet connection",
+        status: "warning",
+      });
+    },
   });
 
   return mutate;

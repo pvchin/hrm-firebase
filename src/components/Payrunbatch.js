@@ -65,7 +65,7 @@ import {
 //const drawerWidth = 240;
 //const PayForm = React.lazy(() => import("./PayForm"));
 //const PaySummary = React.lazy(() => import("./PaySummary"));
-//const PrintPaySummary = React.lazy(() => import("./PrintPaySummary"));
+//const module = await import("./PrintPaySummary"));
 
 const SERVICE_ID = process.env.REACT_APP_EMAILJS_SERVICEID;
 const TEMPLATE_ID = "template_1y8odlq";
