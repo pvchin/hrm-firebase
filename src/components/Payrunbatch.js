@@ -224,7 +224,7 @@ const Payrunbatch = () => {
 
   useEffect(() => {
     setPSBPayrunId(payslip_period);
-    //setIsCalc(true);
+    setIsCalc(true);
   }, [psbpayrunId]);
 
   useEffect(() => {
@@ -232,10 +232,10 @@ const Payrunbatch = () => {
     setIsCalc(false);
   }, [isCalc]);
 
-  useEffect(() => {
-    saveIndividualPayslips();
-    setIsUpdPayslip(false);
-  }, [isUpdPayslip]);
+  // useEffect(() => {
+  //   saveIndividualPayslips();
+  //   setIsUpdPayslip(false);
+  // }, [isUpdPayslip]);
 
   useEffect(() => {
     if (tabno === 1) {
@@ -264,11 +264,10 @@ const Payrunbatch = () => {
     if (payrundata.status === "Verified" || payrundata.status === "Approved") {
       exportPdfTable(singlebatchpayslip);
     } else {
-      
       //**
       // save individual payslips
       //saveIndividualPayslips();
-      
+
       // save payrun
       updatePayrun({
         id: payrunId,
@@ -301,9 +300,9 @@ const Payrunbatch = () => {
     //   });
     // }
 
-    //** 
+    //**
     // save individual payslips
-    //saveIndividualPayslips();
+    saveIndividualPayslips();
 
     //update payrun
     handleSavePayrun();
@@ -318,15 +317,15 @@ const Payrunbatch = () => {
     if (payrundata.status === "Pending") {
       singlebatchpayslip.forEach((rec) => {
         const { id, rec_id, tableData, ...fields } = rec;
-        //updatePayslip({ id, ...fields });
-        if (rec.tableData.checked) {
-          const { id, rec_id, tableData, ...fields } = rec;
-          console.log("updatepayslip", rec);
-          updatePayslip({ id, ...fields });
-          //uncheck
-          const data = rec;
-          data.tableData.checked = false;
-        }
+        updatePayslip({ id, ...fields });
+        // if (rec.tableData.checked) {
+        //   const { id, rec_id, tableData, ...fields } = rec;
+        //   console.log("updatepayslip", rec);
+        //   updatePayslip({ id, ...fields });
+        //   //uncheck
+        //   const data = rec;
+        //   data.tableData.checked = false;
+        // }
       });
     }
   };
@@ -437,7 +436,7 @@ const Payrunbatch = () => {
     //**
     // save individual payslips
     //saveIndividualPayslips();
-    
+
     // save payrun
     updatePayrun({
       id: payrunId,
@@ -463,7 +462,8 @@ const Payrunbatch = () => {
     setFormdata((prev) => (prev = { ...initial_formdata, ...paydata }));
     //setFormdata({ ...initial_formdata, ...paydata });
     setLoadFormdata(true);
-    setIsUpdPayslip(true);
+    //**
+    //setIsUpdPayslip(true);
   };
 
   const handleTabChange = (index) => {
