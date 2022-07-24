@@ -306,10 +306,10 @@ const Payrunbatch = () => {
 
     //update payrun
     handleSavePayrun();
-    toast({
-      title: "Changes have been saved!",
-      status: "success",
-    });
+    // toast({
+    //   title: "Changes have been saved!",
+    //   status: "success",
+    // });
     navigate("/payslip");
   };
 
