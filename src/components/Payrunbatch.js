@@ -232,10 +232,10 @@ const Payrunbatch = () => {
     setIsCalc(false);
   }, [isCalc]);
 
-  // useEffect(() => {
-  //   saveIndividualPayslips();
-  //   setIsUpdPayslip(false);
-  // }, [isUpdPayslip]);
+  useEffect(() => {
+    saveIndividualPayslips();
+    setIsUpdPayslip(false);
+  }, [isUpdPayslip]);
 
   useEffect(() => {
     if (tabno === 1) {
@@ -266,7 +266,7 @@ const Payrunbatch = () => {
     } else {
       //**
       // save individual payslips
-      //saveIndividualPayslips();
+      saveIndividualPayslips();
 
       // save payrun
       updatePayrun({
@@ -317,15 +317,18 @@ const Payrunbatch = () => {
     if (payrundata.status === "Pending") {
       singlebatchpayslip.forEach((rec) => {
         const { id, rec_id, tableData, ...fields } = rec;
-        updatePayslip({ id, ...fields });
-        // if (rec.tableData.checked) {
-        //   const { id, rec_id, tableData, ...fields } = rec;
-        //   console.log("updatepayslip", rec);
+        // const timer = setTimeout(() => {
+        //   console.log("This will run after 1 second!");
         //   updatePayslip({ id, ...fields });
-        //   //uncheck
-        //   const data = rec;
-        //   data.tableData.checked = false;
-        // }
+        // }, 300);
+        if (rec.tableData.checked) {
+          const { id, rec_id, tableData, ...fields } = rec;
+          console.log("updatepayslip", rec);
+          updatePayslip({ id, ...fields });
+          //uncheck
+          const data = rec;
+          data.tableData.checked = false;
+        }
       });
     }
   };
@@ -463,7 +466,7 @@ const Payrunbatch = () => {
     //setFormdata({ ...initial_formdata, ...paydata });
     setLoadFormdata(true);
     //**
-    //setIsUpdPayslip(true);
+    setIsUpdPayslip(true);
   };
 
   const handleTabChange = (index) => {
