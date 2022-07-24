@@ -473,6 +473,7 @@ const Payrunbatch = () => {
     setTabno(index);
     if (index === 1) {
       calcPayrunTotals();
+      setIsUpdPayslip(true);
     }
     setIsShow(false);
   };
