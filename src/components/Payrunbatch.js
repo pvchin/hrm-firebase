@@ -266,7 +266,7 @@ const Payrunbatch = () => {
     } else {
       //**
       // save individual payslips
-      saveIndividualPayslips();
+      //saveIndividualPayslips();
 
       // save payrun
       updatePayrun({
@@ -316,7 +316,7 @@ const Payrunbatch = () => {
   const saveIndividualPayslips = () => {
     if (payrundata.status === "Pending") {
       singlebatchpayslip.forEach((rec) => {
-        const { id, rec_id, tableData, ...fields } = rec;
+        //const { id, rec_id, tableData, ...fields } = rec;
         // const timer = setTimeout(() => {
         //   console.log("This will run after 1 second!");
         //   updatePayslip({ id, ...fields });
@@ -435,7 +435,7 @@ const Payrunbatch = () => {
     e.preventDefault();
     setPayrundata((prev) => (prev = { ...payrundata, status: "Verified" }));
     setPayrunStatus("Verified");
-
+    console.log("Verify", payrundata);
     //**
     // save individual payslips
     //saveIndividualPayslips();
