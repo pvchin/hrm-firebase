@@ -222,11 +222,11 @@ const ExpenseForm = ({ formdata, setFormdata, handleDialogClose }) => {
     handleDialogClose();
   };
 
- const handleViewImage = ({ preview, name }) => {
-   const newImage = { url: preview, name: name };
-   setImage((prev) => newImage);
-   onViewImageOpen();
- };
+  const handleViewImage = ({ preview, name }) => {
+    const newImage = { url: preview, name: name };
+    setImage((prev) => newImage);
+    onViewImageOpen();
+  };
 
   useEffect(() => {
     if (isExpenseEditing) {
@@ -443,7 +443,7 @@ const ExpenseForm = ({ formdata, setFormdata, handleDialogClose }) => {
                 <Controller
                   name="status"
                   control={control}
-                  defaultValue="Pending"
+                  defaultValue={formdata.status}
                   render={({
                     field: { onChange, value },
                     fieldState: { error },
@@ -453,7 +453,7 @@ const ExpenseForm = ({ formdata, setFormdata, handleDialogClose }) => {
                         label="Status"
                         id="margin-normal6"
                         name="status"
-                        defaultValue="Pending"
+                        defaultValue={formdata.status}
                         className={classes.textField}
                         onChange={onChange}
                         error={!!error}
