@@ -89,7 +89,10 @@ const ExpenseForm = ({ formdata, setFormdata, handleDialogClose }) => {
               (prev = [
                 ...files,
                 ...[
-                  { name: res.data.original_filename, preview: res.data.url },
+                  {
+                    name: res.data.original_filename,
+                    preview: res.data.secure_url,
+                  },
                 ],
               ])
           );
@@ -126,7 +129,7 @@ const ExpenseForm = ({ formdata, setFormdata, handleDialogClose }) => {
       })
         .then((res) => {
           setFilename((prev) => (prev = res.data.public_id));
-          console.log(res.data.public_id);
+          //console.log(res.data.public_id);
           //console.log("filename", filename);
         })
         .catch((err) => console.log(err));
@@ -145,7 +148,7 @@ const ExpenseForm = ({ formdata, setFormdata, handleDialogClose }) => {
 
     emailjs.send(SERVICE_ID, TEMPLATE_ID, emaildata, USER_ID).then(
       function (response) {
-        console.log(response.status, response.text);
+        //console.log(response.status, response.text);
         toast({
           title: `Email has sent successfully to ${emaildata.to_email}!`,
           status: "success",
@@ -207,8 +210,7 @@ const ExpenseForm = ({ formdata, setFormdata, handleDialogClose }) => {
           url: rec.preview,
           type: rec.preview.split(".").pop(),
         };
-        console.log("addattach", newData);
-        addExpensesAttachment(newData);
+         addExpensesAttachment(newData);
       });
     }
 
@@ -451,7 +453,9 @@ const ExpenseForm = ({ formdata, setFormdata, handleDialogClose }) => {
                 <Controller
                   name="status"
                   control={control}
-                  defaultValue={formdata.status === "Pending" ? "Pending" : formdata.status}
+                  defaultValue={
+                    formdata.status === "Pending" ? "Pending" : formdata.status
+                  }
                   render={({
                     field: { onChange, value },
                     fieldState: { error },
@@ -461,7 +465,11 @@ const ExpenseForm = ({ formdata, setFormdata, handleDialogClose }) => {
                         label="Status"
                         id="margin-normal6"
                         name="status"
-                        defaultValue={formdata.status === "Pending" ? "Pending" : formdata.status}
+                        defaultValue={
+                          formdata.status === "Pending"
+                            ? "Pending"
+                            : formdata.status
+                        }
                         className={classes.textField}
                         onChange={onChange}
                         error={!!error}

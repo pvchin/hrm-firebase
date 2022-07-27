@@ -81,8 +81,8 @@ const ExpenseForm = ({ formdata, setFormdata, handleDialogClose }) => {
     },
   });
 
-  console.log("formdata", formdata);
-  console.log("files", files);
+  //console.log("formdata", formdata);
+  //console.log("files", files);
 
   const onDrop = (acceptedFiles) => {
     acceptedFiles.forEach((file) => {
@@ -163,7 +163,7 @@ const ExpenseForm = ({ formdata, setFormdata, handleDialogClose }) => {
 
     emailjs.send(SERVICE_ID, TEMPLATE_ID, emaildata, USER_ID).then(
       function (response) {
-        console.log(response.status, response.text);
+        //console.log(response.status, response.text);
         toast({
           title: `Email has sent successfully to ${emaildata.to_email}!`,
           status: "success",
@@ -181,7 +181,7 @@ const ExpenseForm = ({ formdata, setFormdata, handleDialogClose }) => {
 
   const onSubmit = (data, e) => {
     e.preventDefault();
-    console.log("onSubmit", isExpenseEditing);
+    //console.log("onSubmit", isExpenseEditing);
     let newData = {
       ...data,
       attachment1_name: files.length >= 1 ? files[0].name : "",
@@ -194,11 +194,11 @@ const ExpenseForm = ({ formdata, setFormdata, handleDialogClose }) => {
     console.log("newdata", newData);
     console.log("isEditing", isExpenseEditing);
     if (isExpenseEditing) {
-      console.log("edit");
+      //console.log("edit");
       const { rec_id, tableData, ...editData } = newData;
       updateExpenses({ id: editExpenseID, ...editData });
     } else {
-      console.log("new");
+      //console.log("new");
       addExpenses({
         ...newData,
         empid: loginLevel.loginUserId,
@@ -239,9 +239,7 @@ const ExpenseForm = ({ formdata, setFormdata, handleDialogClose }) => {
             preview: rec.url,
           };
         });
-
-      console.log("data", newData);
-
+      
       setFiles(newData);
     } else {
       setFiles([]);

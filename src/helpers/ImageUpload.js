@@ -144,7 +144,7 @@ const ImageUpload = ({ files, setFiles, onDrop }) => {
 
   const Thumbs = () => {
     return files.map((file) => {
-      console.log("filename", file.name);
+      
       <Box
         display="inline-flex"
         w="100%"

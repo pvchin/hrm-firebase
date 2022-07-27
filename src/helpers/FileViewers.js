@@ -17,7 +17,6 @@ const FileViewers = (image) => {
     <Container overflow maxW="6xl">
       <FileViewer
         fileType={image.imagefile.url.split(".").pop()}
-        //preview.split(".").pop();
         filePath={image.imagefile.url}
         errorComponent={CustomErrorComponent}
         onError={onError}
