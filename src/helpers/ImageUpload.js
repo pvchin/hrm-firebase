@@ -18,7 +18,6 @@ import {
   ModalCloseButton,
   useDisclosure,
 } from "@chakra-ui/react";
-import pdfMake from "pdfmake/build/pdfmake";
 import { FiEye, FiTrash2 } from "react-icons/fi";
 import { useRecoilState } from "recoil";
 import { viewImageState } from "../components/data/atomdata";
