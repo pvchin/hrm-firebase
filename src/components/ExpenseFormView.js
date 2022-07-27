@@ -36,7 +36,8 @@ import { useAddExpenses } from "./expenses/useAddExpenses";
 import { useDeleteExpenses } from "./expenses/useDeleteExpenses";
 import { useUpdateExpenses } from "./expenses/useUpdateExpenses";
 import { useExpensesAttachments } from "./expensesattachments/useExpensesAttachments";
-import ImageUpload from "../helpers/ImageUpload";
+
+const FileViewers = React.lazy(() => import("../helpers/FileViewers"));
 
 const SERVICE_ID = process.env.REACT_APP_EMAILJS_SERVICEID;
 const TEMPLATE_ID = "template_1y8odlq";
@@ -222,43 +223,11 @@ const ExpenseForm = ({ formdata, setFormdata, handleDialogClose }) => {
     handleDialogClose();
   };
 
-  const handleViewImage = ({ preview, name, type }) => {
-    const newImage = { url: preview, name: name };
-    const oldImage = image.url;
-    setImage((prev) => newImage);
-    console.log("type", preview);
-    //onViewImageOpen();
-    if (type !== "pdf") {
-      console.log("image");
-      onViewImageOpen();
-    } else {
-      var docDefinition = {
-        content: [
-          { text: "This is a header", style: "header" },
-          "No styling here, this is a standard paragraph",
-          { text: "Another text", style: "anotherStyle" },
-          {
-            text: "Multiple styles applied",
-            style: ["header", "anotherStyle"],
-          },
-        ],
-
-        styles: {
-          header: {
-            fontSize: 22,
-            bold: true,
-          },
-          anotherStyle: {
-            italics: true,
-            alignment: "right",
-          },
-        },
-      };
-      var win = window.open("", "_blank");
-      console.log("pdf");
-      pdfMake.createPdf(docDefinition).download(preview);
-    }
-  };
+ const handleViewImage = ({ preview, name }) => {
+   const newImage = { url: preview, name: name };
+   setImage((prev) => newImage);
+   onViewImageOpen();
+ };
 
   useEffect(() => {
     if (isExpenseEditing) {
@@ -294,7 +263,7 @@ const ExpenseForm = ({ formdata, setFormdata, handleDialogClose }) => {
                 <Controller
                   name="name"
                   control={control}
-                  defaultValue={loginLevel.loginUser}
+                  defaultValue={formdata.name}
                   render={({
                     field: { onChange, value },
                     fieldState: { error },
@@ -304,7 +273,7 @@ const ExpenseForm = ({ formdata, setFormdata, handleDialogClose }) => {
                         label="Name"
                         id="margin-normal1"
                         name="name"
-                        defaultValue={loginLevel.loginUser}
+                        defaultValue={formdata.name}
                         className={classes.textField}
                         onChange={onChange}
                         error={!!error}
@@ -652,30 +621,24 @@ const ExpenseForm = ({ formdata, setFormdata, handleDialogClose }) => {
         closeOnOverlayClick={false}
         isOpen={isViewImageOpen}
         onClose={onViewImageClose}
-        size="2xl"
+        size="3xl"
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Your images</ModalHeader>
+          <ModalHeader>{image.name}</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
             <Box
               display="inline-flex"
               w="100%"
-              h="auto"
+              h="800"
               mb={8}
               mr={8}
               p={4}
               border="1px solid #eaeaea"
               borderRadius={2}
             >
-              <Image
-                src={image.url}
-                alt={image.name}
-                display="block"
-                w="auto"
-                h="100%"
-              />
+              <FileViewers imagefile={image} />
             </Box>
           </ModalBody>
 

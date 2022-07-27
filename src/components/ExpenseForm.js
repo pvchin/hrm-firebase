@@ -451,7 +451,7 @@ const ExpenseForm = ({ formdata, setFormdata, handleDialogClose }) => {
                 <Controller
                   name="status"
                   control={control}
-                  defaultValue="Pending"
+                  defaultValue={formdata.status === "Pending" ? "Pending" : formdata.status}
                   render={({
                     field: { onChange, value },
                     fieldState: { error },
@@ -461,7 +461,7 @@ const ExpenseForm = ({ formdata, setFormdata, handleDialogClose }) => {
                         label="Status"
                         id="margin-normal6"
                         name="status"
-                        defaultValue="Pending"
+                        defaultValue={formdata.status === "Pending" ? "Pending" : formdata.status}
                         className={classes.textField}
                         onChange={onChange}
                         error={!!error}
@@ -559,17 +559,19 @@ const ExpenseForm = ({ formdata, setFormdata, handleDialogClose }) => {
                 />
               </div> */}
 
-              <div>
-                <Button
-                  type="submit"
-                  variant="contained"
-                  color="primary"
-                  className={classes.button}
-                  //onClick={() => handleSubmit(onSubmit)()}
-                >
-                  Save <Icon className={classes.rightIcon}>send</Icon>
-                </Button>
-              </div>
+              {formdata.status === "Pending" && (
+                <div>
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                    className={classes.button}
+                    //onClick={() => handleSubmit(onSubmit)()}
+                  >
+                    Save <Icon className={classes.rightIcon}>send</Icon>
+                  </Button>
+                </div>
+              )}
             </GridItem>
             <GridItem colSpan={2}>
               <ImageUpload files={files} setFiles={setFiles} onDrop={onDrop} />

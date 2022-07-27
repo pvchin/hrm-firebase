@@ -194,7 +194,7 @@ export default function ExpenseTable() {
           // }}
           actions={[
             (rowData) => ({
-              disabled: rowData.status !== "Pending",
+              //disabled: rowData.status !== "Pending",
               icon: "edit",
               tooltip: "Edit Record",
               onClick: (event, rowData) => {

@@ -23,6 +23,8 @@ import { FiEye, FiTrash2 } from "react-icons/fi";
 import { useRecoilState } from "recoil";
 import { viewImageState } from "../components/data/atomdata";
 
+const FileViewers = React.lazy(() => import("../helpers/FileViewers"));
+
 const baseStyle = {
   flex: 1,
   display: "flex",
@@ -125,15 +127,8 @@ const ImageUpload = ({ files, setFiles, onDrop }) => {
     const oldImage = image.url;
     setImage((prev) => newImage);
     const type = preview.split(".").pop();
-     onViewImageOpen();
-  //   if (type !== "pdf") {
-  //     console.log("image");
-  //     onViewImageOpen();
-  //   } else {
-  //     var win = window.open("", "_blank");
-  //     console.log("pdf");
-  //     pdfMake.createPfg(preview).open({}, win);
-  //   }
+    onViewImageOpen();
+  
   };
 
   // const thumbs = files.map((file) => (
@@ -257,30 +252,24 @@ const ImageUpload = ({ files, setFiles, onDrop }) => {
         closeOnOverlayClick={false}
         isOpen={isViewImageOpen}
         onClose={onViewImageClose}
-        size="2xl"
+        size="3xl"
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Your images</ModalHeader>
+          <ModalHeader>{image.name}</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
             <Box
               display="inline-flex"
               w="100%"
-              h="auto"
+              h="800"
               mb={8}
               mr={8}
               p={4}
               border="1px solid #eaeaea"
               borderRadius={2}
             >
-              <Image
-                src={image.url}
-                alt={image.name}
-                display="block"
-                w="auto"
-                h="100%"
-              />
+              <FileViewers imagefile={image} />
             </Box>
           </ModalBody>
 
