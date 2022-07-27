@@ -9327,11 +9327,6 @@ lodash@^3.5.0:
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-3.10.1.tgz#5bf45e8e49ba4189e17d482789dfd15bd140b7b6"
   integrity sha512-9mDDwqVIma6OZX79ZlDACZl8sBm0TEnkf99zV3iMA4GzkIT/9hiqP5mY0HoT1iNLCrKc/R1HByV+yJfRWVJryQ==
 
-logging-library@^0.5.0:
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/logging-library/-/logging-library-0.5.0.tgz#038a7536d58f1877f9b1e52777766e4017289f0f"
-  integrity sha512-c9o2h++qNxmv3sVpigNiz8qy5X4vkpfAWQv9xeFQIJ1IPoUvNnsh1+stlAz0e4jDtUlqtVXycwQkUVGKb7lNSQ==
-
 loglevel@^1.6.8:
   version "1.7.1"
   resolved "https://registry.npmjs.org/loglevel/-/loglevel-1.7.1.tgz"

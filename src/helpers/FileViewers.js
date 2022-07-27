@@ -1,6 +1,5 @@
 import React from "react";
 import { Container } from "@chakra-ui/react";
-import logger from "logging-library";
 import FileViewer from "react-file-viewer";
 import { CustomErrorComponent } from "custom-error";
 
