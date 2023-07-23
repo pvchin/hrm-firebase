@@ -70,7 +70,6 @@ const HocTableViewSummary = React.lazy(() => import("./HocTableViewSummary"));
 const LeavesTableViewSummary = React.lazy(() =>
   import("./LeavesTableViewSummary")
 );
-<<<<<<< HEAD
 //const Export2ExcelDialog = React.lazy(() => import("./Export2ExcelDialog"));
 const ExportHoc2ExcelDialog = React.lazy(() =>
   import("./ExportHoc2ExcelDialog")
@@ -81,11 +80,6 @@ const ExportLeave2ExcelDialog = React.lazy(() =>
 const ExportExpense2ExcelDialog = React.lazy(() =>
   import("./ExportExpense2ExcelDialog")
 );
-=======
-const Export2ExcelHOCDialog = React.lazy(() => import("./Export2ExcelHOCDialog"));
-const Export2ExcelLeavesDialog = React.lazy(() => import("./Export2ExcelLeavesDialog"));
-const Export2ExcelExpensesDialog = React.lazy(() => import("./Export2ExcelExpensesDialog"));
->>>>>>> 5fb457ee39b1a3391e39c68ad7528024e273d507
 //const drawerWidth = 240;
 
 //const FILTERSTRING = "Pending";
@@ -111,14 +105,15 @@ const HomeAdminManager = () => {
   const [exp2excelstate, setExp2excelstate] = useState(initial_exp2excel);
   const currentyear = new Date().getFullYear();
   const currentmonth = new Date().getMonth();
-<<<<<<< HEAD
   const { periods } = usePeriods();
-  const { hoc, filter, setFilter, setHocId } = useHoc();
-=======
-  const { periods} = usePeriods()
   //const { hoc, filter, setFilter, setHocId } = useHoc();
->>>>>>> 5fb457ee39b1a3391e39c68ad7528024e273d507
   const {
+    isOpen: isExport2ExcelOpen,
+    onOpen: onExport2ExcelOpen,
+    onClose: onExport2ExcelClose,
+  } = useDisclosure();
+
+  /*  const {
     isOpen: isExport2ExcelHOCOpen,
     onOpen: onExport2ExcelHOCOpen,
     onClose: onExport2ExcelHOCClose,
@@ -132,7 +127,7 @@ const HomeAdminManager = () => {
     isOpen: isExport2ExcelExpensesOpen,
     onOpen: onExport2ExcelExpensesOpen,
     onClose: onExport2ExcelExpensesClose,
-  } = useDisclosure();
+  } = useDisclosure(); */
 
   const handleExportHoc2Excel = () => {
     setExp2excelstate(
@@ -145,13 +140,8 @@ const HomeAdminManager = () => {
           filename: "hoc",
         })
     );
-    onExport2ExcelHOCOpen();
+    onExport2ExcelOpen();
   };
-<<<<<<< HEAD
-
-=======
-  
->>>>>>> 5fb457ee39b1a3391e39c68ad7528024e273d507
   const handleExportLeave2Excel = () => {
     setExp2excelstate(
       (prev) =>
@@ -161,16 +151,10 @@ const HomeAdminManager = () => {
           type: "Leave",
           title: "Leave",
           filename: "leave",
-<<<<<<< HEAD
           dataset: "leaves",
         })
     );
     onExport2ExcelOpen();
-=======
-        })
-    );
-    onExport2ExcelLeavesOpen();
->>>>>>> 5fb457ee39b1a3391e39c68ad7528024e273d507
   };
 
   const handleExportExpense2Excel = () => {
@@ -182,16 +166,10 @@ const HomeAdminManager = () => {
           type: "Expense",
           title: "Expense",
           filename: "expense",
-<<<<<<< HEAD
           dataset: "expenses",
         })
     );
     onExport2ExcelOpen();
-=======
-        })
-    );
-    onExport2ExcelExpensesOpen();
->>>>>>> 5fb457ee39b1a3391e39c68ad7528024e273d507
   };
 
   useEffect(() => {
@@ -1067,15 +1045,14 @@ const HomeAdminManager = () => {
         </Tabs>
         <Modal
           closeOnOverlayClick={false}
-          isOpen={isExport2ExcelHOCOpen}
-          onClose={onExport2ExcelHOCClose}
+          isOpen={isExport2ExcelOpen}
+          onClose={onExport2ExcelClose}
           size="md"
         >
           <ModalOverlay />
           <ModalContent>
             <ModalCloseButton />
             <ModalBody>
-<<<<<<< HEAD
               {exp2excelstate.type === "HOC" && (
                 <ExportHoc2ExcelDialog
                   state={exp2excelstate}
@@ -1100,52 +1077,6 @@ const HomeAdminManager = () => {
                   onClose={onExport2ExcelClose}
                 />
               )}
-=======
-              <Export2ExcelHOCDialog
-                state={exp2excelstate}
-                setState={setExp2excelstate}
-                //dataset={hoc}
-                onClose={onExport2ExcelHOCClose}
-              />
-            </ModalBody>
-          </ModalContent>
-        </Modal>
-        <Modal
-          closeOnOverlayClick={false}
-          isOpen={isExport2ExcelLeavesOpen}
-          onClose={onExport2ExcelLeavesClose}
-          size="md"
-        >
-          <ModalOverlay />
-          <ModalContent>
-            <ModalCloseButton />
-            <ModalBody>
-              <Export2ExcelLeavesDialog
-                state={exp2excelstate}
-                setState={setExp2excelstate}
-                //dataset={hoc}
-                onClose={onExport2ExcelLeavesClose}
-              />
-            </ModalBody>
-          </ModalContent>
-        </Modal>
-        <Modal
-          closeOnOverlayClick={false}
-          isOpen={isExport2ExcelExpensesOpen}
-          onClose={onExport2ExcelExpensesClose}
-          size="md"
-        >
-          <ModalOverlay />
-          <ModalContent>
-            <ModalCloseButton />
-            <ModalBody>
-              <Export2ExcelExpensesDialog
-                state={exp2excelstate}
-                setState={setExp2excelstate}
-                //dataset={hoc}
-                onClose={onExport2ExcelExpensesClose}
-              />
->>>>>>> 5fb457ee39b1a3391e39c68ad7528024e273d507
             </ModalBody>
           </ModalContent>
         </Modal>

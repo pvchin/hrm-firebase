@@ -192,13 +192,13 @@ const PayForm = ({
       return false;
     }
     wages = isNaN(state.wages) || state.wages === undefined ? 0 : state.wages;
-    totalTAP = state.tap_checkbox ? Math.ceil(wages * 0.05) : 0;
-    totalSCP = state.tap_checkbox
+    totalTAP = state.tap_checkbox ? Math.ceil(wages * 0.085) : 0;
+    /*  totalSCP = state.tap_checkbox
       ? Math.round((wages + Number.EPSILON) * 0.035 * 100) / 100
-      : 0;
-    if (totalSCP > 98) {
+      : 0; */
+    /*   if (totalSCP > 98) {
       totalSCP = 98;
-    }
+    } */
     //console.log("scp", totalSCP);
     siteallows = parseFloat(isNaN(state.site_allows) ? 0 : state.site_allows);
     expsclaims = parseFloat(

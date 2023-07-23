@@ -60,7 +60,6 @@ import { useLeaves } from "./leaves/useLeaves";
 //const CardLayout = React.lazy(() => import("../helpers/CardLayout"));
 //const CardLayout2 = React.lazy(() => import("../helpers/CardLayout2"));
 //const CardLayout3 = React.lazy(() => import("../helpers/CardLayout3"));
-<<<<<<< HEAD
 //const Export2ExcelDialog = React.lazy(() => import("./Export2ExcelDialog"));
 const ExportHoc2ExcelDialog = React.lazy(() =>
   import("./ExportHoc2ExcelDialog")
@@ -68,10 +67,6 @@ const ExportHoc2ExcelDialog = React.lazy(() =>
 const ExportLeave2ExcelDialog = React.lazy(() =>
   import("./ExportLeave2ExcelDialog")
 );
-=======
-const Export2ExcelHOCDialog = React.lazy(() => import("./Export2ExcelHOCDialog"));
-const Export2ExcelLeavesDialog = React.lazy(() => import("./Export2ExcelLeavesDialog"));
->>>>>>> 5fb457ee39b1a3391e39c68ad7528024e273d507
 
 const drawerWidth = 240;
 
@@ -111,15 +106,10 @@ const EmployeeView = () => {
   const [selecthocyear, setSelectHocYear] = useState("");
   const currentyear = new Date().getFullYear();
   const currentmonth = new Date().getMonth();
-<<<<<<< HEAD
   const { periods } = usePeriods();
   const { hoc, setHocId } = useHoc();
   const { leaves, setLeaveId } = useLeaves();
 
-=======
-  const { periods} = usePeriods()
-  const { hoc } = useHoc();
->>>>>>> 5fb457ee39b1a3391e39c68ad7528024e273d507
   const {
     isOpen: isExport2ExcelHOCOpen,
     onOpen: onExport2ExcelHOCOpen,
@@ -187,7 +177,7 @@ const EmployeeView = () => {
           dataset: "hoc",
         })
     );
-    onExport2ExcelOpen();
+    onExport2ExcelHOCOpen();
   };
 
   const handleExportLeave2Excel = () => {
@@ -205,7 +195,7 @@ const EmployeeView = () => {
     onExport2ExcelHOCOpen();
   };
 
-  const handleExportLeave2Excel = () => {
+  /* const handleExportLeave2Excel = () => {
     setExp2excelstate(
       (prev) =>
         (prev = {
@@ -217,7 +207,7 @@ const EmployeeView = () => {
         })
     );
     onExport2ExcelLeavesOpen();
-  };
+  }; */
 
   useEffect(() => {
     setSelectLeaveYear(currentyear);
@@ -337,7 +327,6 @@ const EmployeeView = () => {
                               })}
                             </Select>
                             <Box size="xl" py={2}>
-<<<<<<< HEAD
                               <Button
                                 colorScheme="teal"
                                 variant="solid"
@@ -346,16 +335,6 @@ const EmployeeView = () => {
                                 Export To Excel
                               </Button>
                             </Box>
-=======
-                          <Button
-                            colorScheme="teal"
-                            variant="solid"
-                            onClick={() => handleExportLeave2Excel()}
-                          >
-                            Export To Excel
-                          </Button>
-                        </Box>
->>>>>>> 5fb457ee39b1a3391e39c68ad7528024e273d507
                           </HStack>
                         </Box>
                       </HStack>
@@ -766,13 +745,12 @@ const EmployeeView = () => {
           <ModalContent>
             <ModalCloseButton />
             <ModalBody>
-<<<<<<< HEAD
               {exp2excelstate.type === "HOC" && (
                 <ExportHoc2ExcelDialog
                   state={exp2excelstate}
                   setState={setExp2excelstate}
                   dataset={exp2excelstate.dataset}
-                  onClose={onExport2ExcelClose}
+                  onClose={onExport2ExcelHOCClose}
                 />
               )}
               {exp2excelstate.type === "Leave" && (
@@ -780,7 +758,7 @@ const EmployeeView = () => {
                   state={exp2excelstate}
                   setState={setExp2excelstate}
                   dataset={exp2excelstate.dataset}
-                  onClose={onExport2ExcelClose}
+                  onClose={onExport2ExcelLeavesClose}
                 />
               )}
               {/*   {exp2excelstate.type === "Expense" && (
@@ -791,33 +769,6 @@ const EmployeeView = () => {
                   onClose={onExport2ExcelClose}
                 />
               )} */}
-=======
-              <Export2ExcelHOCDialog
-                state={exp2excelstate}
-                setState={setExp2excelstate}
-                dataset={hoc}
-                onClose={onExport2ExcelHOCClose}
-              />
-            </ModalBody>
-          </ModalContent>
-        </Modal>
-        <Modal
-          closeOnOverlayClick={false}
-          isOpen={isExport2ExcelLeavesOpen}
-          onClose={onExport2ExcelLeavesClose}
-          size="md"
-        >
-          <ModalOverlay />
-          <ModalContent>
-            <ModalCloseButton />
-            <ModalBody>
-              <Export2ExcelLeavesDialog
-                state={exp2excelstate}
-                setState={setExp2excelstate}
-                dataset={hoc}
-                onClose={onExport2ExcelLeavesClose}
-              />
->>>>>>> 5fb457ee39b1a3391e39c68ad7528024e273d507
             </ModalBody>
           </ModalContent>
         </Modal>

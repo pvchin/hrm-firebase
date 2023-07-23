@@ -40,7 +40,7 @@ import {
   //Text,
   //Tabs,
 } from "@chakra-ui/react";
-import { useLeavesPeriod } from "./leaves/useLeavesPeriod";
+import { useHocPeriod } from "./hoc/useHocPeriod";
 import { usePeriods } from "./periods/usePeriods";
 //import Export2Excel from "./Export2Excel";
 
@@ -51,7 +51,7 @@ import { usePeriods } from "./periods/usePeriods";
 //   filename: "",
 //};
 
-const Export2Excel = React.lazy(() => import("./Export2Excel"));
+const ExportHoc2Excel = React.lazy(() => import("./ExportHoc2Excel"));
 
 const months = [
   { name: "January", value: 1 },
@@ -71,8 +71,7 @@ const months = [
 const Export2ExcelDialog = ({ state, setState, dataset, onClose }) => {
   const field_width = "138";
   const [isLoad, setIsload] = useState(true);
-  const { leaveperiod, setLeavePeriodYrId, setLeavePeriodMthId } =
-    useLeavesPeriod();
+  const { hocperiod, setHocPeriodYrId, setHocPeriodMthId } = useHocPeriod();
   const { periods } = usePeriods();
 
   const handleChange = (evt) => {
@@ -94,8 +93,8 @@ const Export2ExcelDialog = ({ state, setState, dataset, onClose }) => {
   };
 
   useEffect(() => {
-    setLeavePeriodYrId(state.year);
-    setLeavePeriodMthId(state.month);
+    setHocPeriodYrId(state.year);
+    setHocPeriodMthId(state.month);
     setIsload(false);
   }, [isLoad]);
 
@@ -229,9 +228,9 @@ const Export2ExcelDialog = ({ state, setState, dataset, onClose }) => {
       </div>
       <Divider />
       <Box p={2}>
-        <Export2Excel
+        <ExportHoc2Excel
           filename={state.filename}
-          dataset={leaveperiod}
+          dataset={hocperiod}
           title={state.title}
         />
       </Box>

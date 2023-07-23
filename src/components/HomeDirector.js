@@ -58,7 +58,6 @@ const HocTableViewSummary = React.lazy(() => import("./HocTableViewSummary"));
 const LeavesTableViewSummary = React.lazy(() =>
   import("./LeavesTableViewSummary")
 );
-<<<<<<< HEAD
 //const Export2ExcelDialog = React.lazy(() => import("./Export2ExcelDialog"));
 const ExportHoc2ExcelDialog = React.lazy(() =>
   import("./ExportHoc2ExcelDialog")
@@ -69,9 +68,6 @@ const ExportLeave2ExcelDialog = React.lazy(() =>
 const ExportExpense2ExcelDialog = React.lazy(() =>
   import("./ExportExpense2ExcelDialog")
 );
-=======
-//const Export2ExcelDialog = React.lazy(() => import("./Export2ExcelHOCDialog"));
->>>>>>> 5fb457ee39b1a3391e39c68ad7528024e273d507
 
 const drawerWidth = 240;
 

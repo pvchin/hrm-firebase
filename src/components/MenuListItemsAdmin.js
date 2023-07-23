@@ -20,11 +20,7 @@ import PeopleIcon from "@material-ui/icons/People";
 import LayersIcon from "@material-ui/icons/Layers";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
-<<<<<<< HEAD
 import { Construction } from "@material-ui/icons";
-=======
-//import { Construction } from "@material-ui/icons"
->>>>>>> 5fb457ee39b1a3391e39c68ad7528024e273d507
 import { MdHandyman } from "react-icons/md";
 
 const MenuListItems = () => {
@@ -161,30 +157,17 @@ const MenuListItems = () => {
       </Collapse>
       <ListItem button onClick={handleClickUtility}>
         <ListItemIcon className={classes.itemIcon}>
-<<<<<<< HEAD
           <MdHandyman size="25" />
-=======
-          <MdHandyman size="25"/>
->>>>>>> 5fb457ee39b1a3391e39c68ad7528024e273d507
         </ListItemIcon>
         <ListItemText primary="Utilities" className={classes.item} />
         {openUtilities ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <Collapse in={openUtilities} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-<<<<<<< HEAD
           <Link to="/convertemail">
             <ListItem button className={classes.nested}>
               <ListItemIcon></ListItemIcon>
               <ListItemText primary="Convert EMails" className={classes.item} />
-=======
-          <Link to="/emailconversion">
-            <ListItem button className={classes.nested}>
-              <ListItemIcon></ListItemIcon>
-              <ListItemText primary="Convert EMail" 
-                className={classes.item} 
-              />
->>>>>>> 5fb457ee39b1a3391e39c68ad7528024e273d507
             </ListItem>
           </Link>
         </List>

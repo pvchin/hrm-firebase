@@ -22,11 +22,7 @@ import PrivateRoute from "./PrivateRoute";
 import Clients from "./ClientsPage";
 import HOCUpdTables from "./HOCUpdTablesPage";
 import LeavesBFTable from "./LeavesBFTablePage";
-<<<<<<< HEAD
 import ConvertEmpEmail from "./ConvertEmpEmailPage";
-=======
-import EmailConversion from "./EmailConversionPage";
->>>>>>> 5fb457ee39b1a3391e39c68ad7528024e273d507
 import Error from "./ErrorPage";
 
 export {
@@ -52,7 +48,6 @@ export {
   DailyAllowances,
   DailyAllowancesStaff,
   LeavesBFTable,
-  EmailConversion,
   Clients,
   Allowances,
   PrivateRoute,

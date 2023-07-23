@@ -28,11 +28,7 @@
     "moment": "^2.29.1",
     "moment-range": "^4.0.2",
     "nanoid": "^4.0.0",
-<<<<<<< HEAD
     "netlify-cli": "^15.6.0",
-=======
-    "netlify-cli": "3.29.10",
->>>>>>> 5fb457ee39b1a3391e39c68ad7528024e273d507
     "pdfmake": "^0.2.5",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",

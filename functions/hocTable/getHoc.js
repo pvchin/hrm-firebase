@@ -2,7 +2,7 @@ const { table } = require("./airtable-hoc");
 const formattedReturn = require("../formattedReturn");
 
 module.exports = async (event) => {
-  const { id, fv,fi, m, y, all } = event.queryStringParameters;
+  const { id, fv, fi, m, y, all } = event.queryStringParameters;
   //const { id, filterValue, filterField } = event.queryStringParameters;
 
   if (id) {
@@ -63,7 +63,6 @@ module.exports = async (event) => {
     return formattedReturn(500, {});
   }
 
-<<<<<<< HEAD
   if (m) {
     const hoc1 = await table
       .select({
@@ -103,14 +102,6 @@ module.exports = async (event) => {
   if (all) {
     let recordsArray = [];
     await table
-=======
-  try {
-    if (fi) {
-      // const { id, linkid, ...fields } = JSON.parse(event.body);
-      // console.log(linkid);
-      let recordsArray = []
-      await table
->>>>>>> 5fb457ee39b1a3391e39c68ad7528024e273d507
       .select({
         maxRecords: 10000,
         view: "sortedview",
@@ -127,70 +118,6 @@ module.exports = async (event) => {
       });
 
     //console.log('all', recordsArray)
-<<<<<<< HEAD
-=======
-    const formattedHoc = recordsArray.map((rec) => ({
-      id: rec.id,
-      ...rec.fields,
-    }));
-
-    return formattedReturn(200, formattedHoc);
-    }
-  } catch (err) {
-    console.error(err);
-    return formattedReturn(500, {});
-  }
-
-
-  if (m) {
-    let recordsArray = []
-    await table
-    .select({
-      maxRecords: 10000,
-      view: "sortedview",
-      filterByFormula: `AND(MONTH(raisedon)=${m},YEAR(raisedon)=${y})`,
-      
-    })
-    .eachPage((records, fetchNewPage) => {
-      recordsArray = [...recordsArray, ...records];
-
-      fetchNewPage();
-    })
-    .catch((error) => {
-      console.error(error);
-      return false;
-    });
-
-  //console.log('all', recordsArray)
-  const formattedHoc = recordsArray.map((rec) => ({
-    id: rec.id,
-    ...rec.fields,
-  }));
-
-  return formattedReturn(200, formattedHoc);
-  }
-
-  
-  if (y) {
-    let recordsArray = []
-    await table
-      .select({
-        maxRecords: 10000,
-        view: "sortedview",
-        filterByFormula: `YEAR(raisedon) = '${y}'`,
-      })
-      .eachPage((records, fetchNewPage) => {
-        recordsArray = [...recordsArray, ...records];
-
-        fetchNewPage();
-      })
-      .catch((error) => {
-        console.error(error);
-        return false;
-      });
-
-    //console.log('all', recordsArray)
->>>>>>> 5fb457ee39b1a3391e39c68ad7528024e273d507
     const formattedHoc = recordsArray.map((rec) => ({
       id: rec.id,
       ...rec.fields,

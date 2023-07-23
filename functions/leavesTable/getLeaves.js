@@ -79,19 +79,11 @@ module.exports = async (event) => {
   }
 
   if (al) {
-<<<<<<< HEAD
-    /*  const leaves = await table
-=======
-    //const leaves = await table
-    let recordsArray = [];
-    await table
->>>>>>> 5fb457ee39b1a3391e39c68ad7528024e273d507
+    /* const leaves = await table
       .select({
-        maxRecords: 10000,
         view: "leavesview",
         filterByFormula: `YEAR(from_date) = '${al}'`,
       })
-<<<<<<< HEAD
       .firstPage(); */
     let recordsArray = [];
     await table
@@ -100,8 +92,6 @@ module.exports = async (event) => {
         view: "leavesview",
         filterByFormula: `YEAR(from_date) = '${al}'`,
       })
-=======
->>>>>>> 5fb457ee39b1a3391e39c68ad7528024e273d507
       .eachPage((records, fetchNewPage) => {
         recordsArray = [...recordsArray, ...records];
 
@@ -122,10 +112,6 @@ module.exports = async (event) => {
 
   try {
     //const leaves = await table.select({ view: "sortedview" }).firstPage();
-<<<<<<< HEAD
-
-=======
->>>>>>> 5fb457ee39b1a3391e39c68ad7528024e273d507
     let recordsArray = [];
     await table
       .select({
@@ -141,10 +127,6 @@ module.exports = async (event) => {
         console.error(error);
         return false;
       });
-<<<<<<< HEAD
-=======
-
->>>>>>> 5fb457ee39b1a3391e39c68ad7528024e273d507
     const formattedLeaves = recordsArray.map((leave) => ({
       id: leave.id,
       ...leave.fields,
