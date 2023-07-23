@@ -699,7 +699,7 @@ const EmployeeForm = () => {
                   }) => {
                     return (
                       <TextField
-                        label="TAP Ac No"
+                        label="SPK Ac No"
                         id="standard-tapacno"
                         name="tap_acno"
                         defaultValue={tap_acno}
@@ -713,7 +713,7 @@ const EmployeeForm = () => {
                   //rules={{ required: "Email is required" }}
                 />
 
-                <Controller
+                {/* <Controller
                   name="scp_acno"
                   control={control}
                   defaultValue={scp_acno}
@@ -735,7 +735,7 @@ const EmployeeForm = () => {
                     );
                   }}
                   //rules={{ required: "Email is required" }}
-                />
+                /> */}
               </div>
               <div>
                 <Controller

@@ -151,7 +151,7 @@ const EmployeeForm = () => {
         id: editEmployeeID,
         ...data,
         reporting_email: reportemail,
-        empid: editEmployeeID
+        empid: editEmployeeID,
       });
     } else {
       addEmployees({ ...data, reporting_email: reportemail });
@@ -649,7 +649,7 @@ const EmployeeForm = () => {
                             }}
                           />
                         }
-                        label="TAP/SCP Contribution"
+                        label="SPK Contribution"
                       />
                     );
                   }}
@@ -667,7 +667,7 @@ const EmployeeForm = () => {
                   }) => {
                     return (
                       <TextField
-                        label="TAP Ac No"
+                        label="SPK Ac No"
                         id="standard-tapno"
                         name="tap_acno"
                         defaultValue={tap_acno}
@@ -681,7 +681,7 @@ const EmployeeForm = () => {
                   //rules={{ required: "Email is required" }}
                 />
 
-                <Controller
+                {/*  <Controller
                   name="scp_acno"
                   control={control}
                   defaultValue={scp_acno}
@@ -703,7 +703,7 @@ const EmployeeForm = () => {
                     );
                   }}
                   //rules={{ required: "Email is required" }}
-                />
+                /> */}
               </div>
               <div>
                 <Controller
