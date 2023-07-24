@@ -192,7 +192,10 @@ const PayForm = ({
       return false;
     }
     wages = isNaN(state.wages) || state.wages === undefined ? 0 : state.wages;
-    totalTAP = state.tap_checkbox ? Math.ceil(wages * 0.085) : 0;
+    //totalTAP = state.tap_checkbox ? Math.ceil(wages * 0.085) : 0;
+    totalTAP = state.tap_checkbox
+      ? Math.round((wages + Number.EPSILON) * 0.085 * 100) / 100
+      : 0;
     /*  totalSCP = state.tap_checkbox
       ? Math.round((wages + Number.EPSILON) * 0.035 * 100) / 100
       : 0; */

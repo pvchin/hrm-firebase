@@ -278,7 +278,10 @@ const Payrun = () => {
 
           //console.log("USD", table, basic_salary, tmpbasicsalary);
           //tmptotalallows = allows + exp;
-          tmptotalTAP = tap_checkbox ? Math.ceil(tmpbasicsalary * 0.085) : 0;
+          //tmptotalTAP = tap_checkbox ? Math.ceil(tmpbasicsalary * 0.085) : 0;
+          tmptotalTAP = tap_checkbox
+            ? Math.round((tmpbasicsalary + Number.EPSILON) * 0.085 * 100) / 100
+            : 0;
           tmptotalSCP = 0;
           /*  tmptotalSCP = tap_checkbox
             ? Math.round((tmpbasicsalary + Number.EPSILON) * 0.035 * 100) / 100
