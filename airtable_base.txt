@@ -1,0 +1,46 @@
+airtable_base
+- allowances
+- currency
+- family
+- deductions
+- departments
+- designations
+- educations
+- experiences
+- institutes
+- jobhistory
+- jobstatus
+- trainings
+- employees
+- groups
+- payrun
+- payslips
+- payslip_deductions
+- payslip_earnings
+- payslip_items
+- payitems
+- periods
+- expenses
+- expenses_attachments
+- leaves
+- leavestypes
+- yearendleavebal
+
+airtable_ext
+- hoccategory
+- hoclocation
+- hoclookup
+- hoc
+- hocwhatdetails
+- hocwhattable
+- hocwhydetails
+- hocwhy
+
+
+airtable_siteext
+- dailyallowances
+- dailyallowancesdetls
+
+airtable_sitehistext
+- dailyallowancesdetls (< 2023)
+

@@ -1,4 +1,4 @@
-import React, {  useEffect, useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import MaterialTable, { MTableToolbar } from "material-table";
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField, MenuItem } from "@material-ui/core";
@@ -34,6 +34,8 @@ export default function Emp_Training({
   //   //singlebatch_training_loading,
   // } = useTrainingsContext();
 
+  console.log("institutes", institutes);
+
   const columns = useMemo(
     () => [
       {
@@ -48,7 +50,8 @@ export default function Emp_Training({
             select
           >
             <MenuItem value="">None</MenuItem>
-            {institutes.length > 0 &&
+            {institutes &&
+              institutes.length > 0 &&
               institutes.map((r) => {
                 return <MenuItem value={r.name}>{r.name}</MenuItem>;
               })}

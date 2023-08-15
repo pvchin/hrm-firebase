@@ -31,6 +31,7 @@ import WPExpiryViewStaff from "./WPExpiryViewStaff";
 //import { useEmployees } from "./employees/useEmployees";
 //import { useSingleEmployee } from "./employees/useSingleEmployee";
 import { useLeavesPeriod } from "./leaves/useLeavesPeriod";
+import { useInstitutes } from "./institutes/useInstitutes";
 
 const drawerWidth = 240;
 const YEAR = new Date().getFullYear();
@@ -53,6 +54,7 @@ const HomeStaff = () => {
   const [dailyallowancesdata, setDailyAllowancesdata] = useState([]);
   const [isDailyAllowancesDialogOpen, setIsDailyAllowancesDialogOpen] =
     useState(false);
+  const { institutes } = useInstitutes();
 
   //const { leaves } = useLeavesContext();
   //const { expenses } = useExpensesContext();
