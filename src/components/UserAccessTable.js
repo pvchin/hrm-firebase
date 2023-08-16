@@ -48,7 +48,7 @@ export default function UserAccessTable() {
   );
 
   const update_rec = (data) => {
-    const { id, rec_id, role, ...fields } = data;
+    const { id, rec_id, role, calculation, ...fields } = data;
     updateEmployees({ id, role: parseInt(role, 10), ...fields });
   };
 
