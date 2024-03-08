@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useMemo } from "react";
 import MaterialTable, { MTableToolbar } from "material-table";
 import { makeStyles } from "@material-ui/core/styles";
-import { format } from "date-fns";
 import AddIcon from "@material-ui/icons/Add";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -24,7 +23,6 @@ import { useEmployees } from "./employees/useEmployees";
 import PrintPayslip from "./PrintPayslip";
 import PrintPaysliptap from "./PrintPaysliptap";
 import { OLDPAYRUN } from "../utils/constants";
-import { PayslipStaff } from "../pages";
 
 // const PrintPayslip = React.lazy(() =>
 //   import("./PrintPayslip")
@@ -40,9 +38,6 @@ export default function PayslipTable() {
   const { payslips, setPayslipId } = usePayslips();
   const [isLoad, setIsLoad] = useState(true);
   const [payhist, setPayHist] = useState([]);
-  const today = format(new Date(), "yyyy/MM/dd");
-  const currentpayrun = today.substring(0, 4) + "-" + today.substring(5, 7);
-  console.log("payrun", currentpayrun);
 
   const columns = useMemo(
     () => [
@@ -71,12 +66,7 @@ export default function PayslipTable() {
       { title: "Nett Pay", field: "nett_pay_bnd", type: "currency" },
       // { title: "Bank Name", field: "bank_name" },
       // { title: "Bank AC No", field: "bank_accno" },
-      {
-        title: "Status",
-        field: "payrun",
-        render: (rowData) =>
-          rowData.payrun === currentpayrun ? "Pending" : "Approved",
-      },
+      { title: "Status", field: "status" },
     ],
     []
   );
@@ -124,22 +114,14 @@ export default function PayslipTable() {
   //   loadPayslips();
   //};
 
-  /* const buildPayHist = () => {
-    console.log("payslips", payslips);
-    const paydata = payslips
-      .filter((r) => r.empid === loginLevel.loginUserId)
-      .map((rec) => {
-        return { ...rec };
-      });
-    setPayHist((prev) => paydata);
-    console.log("paydata", paydata);
-    setIsLoad(false);
-  }; */
+  const buildPayHist = () => {
+    buildPayHist = { ...payslips };
+  };
 
   useEffect(() => {
     setPayslipId(loginLevel.loginUserId);
-    //buildPayHist();
-    setIsLoad(false);
+    buildPayHist();
+    //setIsLoad(false);
   }, [isLoad]);
 
   return (
