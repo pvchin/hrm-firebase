@@ -43,18 +43,6 @@ export default function PayslipTable() {
   const today = format(new Date(), "yyyy/MM/dd");
   const currentpayrun = today.substring(0, 4) + "-" + today.substring(5, 7);
 
-  console.log("payrun", payrun);
-
-  const paydata = payslips
-    .filter((r) => r.empid === loginLevel.loginUserId)
-    .map((rec) => {
-      const payrunstatus = payrun.filter((pr) => pr.payrun === rec.payrun);
-
-      return { ...rec, paystatus: payrunstatus[0].status };
-    });
-
-  console.log("paydata", paydata);
-
   const columns = useMemo(
     () => [
       {
@@ -82,13 +70,12 @@ export default function PayslipTable() {
       { title: "Nett Pay", field: "nett_pay_bnd", type: "currency" },
       // { title: "Bank Name", field: "bank_name" },
       // { title: "Bank AC No", field: "bank_accno" },
-      { title: "Status", field: "paystatus" },
-      /*  {
+      {
         title: "Status",
         field: "payrun",
         render: (rowData) =>
           rowData.payrun === currentpayrun ? "Pending" : "Approved",
-      }, */
+      },
     ],
     []
   );
@@ -159,12 +146,12 @@ export default function PayslipTable() {
       <div style={{ maxWidth: "100%", paddingTop: "5px" }}>
         <MaterialTable
           columns={columns}
-          data={paydata}
-          /*  data={payslips
+          //data={paydata}
+          data={payslips
             .filter((r) => r.empid === loginLevel.loginUserId)
             .sort((a, b) =>
               a.payrun > b.payrun ? -1 : b.payrun > a.payrun ? 1 : 0
-            )} */
+            )}
           title="Payslips"
           icons={{
             Add: (props) => <AddIcon />,
